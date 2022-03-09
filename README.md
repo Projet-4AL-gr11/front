@@ -1,3 +1,30 @@
+#Projet Front 4AL gr11
+
+###Réalisé par:
+####DIONE Mouhamadou
+####BENABDELOUHAB Ahmedine
+####BRIAND Thibaud
+
+## Description de l'application
+
+
+## Règles de commit
+On ne push sur main que des version fonctionnel du code. Que des versions "A rendre" du code.
+
+On fait ce que l'on veut sur nos propre branch mais on cré des "Merge request" quand on push sur dev ou main.
+
+Pour créer une nouvelle branch, partez toujours de main et nommé là de cette manière:
+/votre_nom/ce_que_vous_faites
+
+exemple:
+
+  [TYPE_DE_COMMIT] ACTION_REALISE
+
+Les Types de commit:
+  [Add] -> Ajout de fonctionnalité
+  [Fix] -> Fix d'erreurs
+  [Ref] -> Refacto de code
+
 # Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
