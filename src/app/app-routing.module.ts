@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {AuthGuardService} from "./services/auth/auth-guard.service";
+import {NegateAuthGuardService} from "./services/auth/negate-auth-guard.service";
+import {HomeComponent} from "./components/page_/home/home.component";
 
 
 const routes: Routes = [
-  {path: "home", loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)},
-  {path: "login", loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)},
-  {path: "register", loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule)},
-  {path: "profile", loadChildren: () => import('./components/profile/profile.module').then(m => m.ProfileModule)},
-  {path: "code", loadChildren: () => import('./components/code/code.module').then(m => m.CodeModule)},
-  {path: "social", loadChildren: () => import('./components/social/social.module').then(m => m.SocialModule)},
+  {path: "", loadChildren: () => import('./components/page_/home/home.module').then(m => m.HomeModule)},
+  {path: "home", loadChildren: () => import('./components/page_/home/home.module').then(m => m.HomeModule)},
+  {path: "login", loadChildren: () => import('./components/page_/auth_/login/login.module').then(m => m.LoginModule), canActivate: [NegateAuthGuardService]},
+  {path: "register", loadChildren: () => import('./components/page_/auth_/register/register.module').then(m => m.RegisterModule), canActivate: [NegateAuthGuardService]},
+  {path: "code", loadChildren: () => import('./components/page_/code/code.module').then(m => m.CodeModule), canActivate: [AuthGuardService]},
+  {path: "social", loadChildren: () => import('./components/page_/social/social.module').then(m => m.SocialModule),canActivate: [AuthGuardService]},
+  {path: '**', redirectTo: "/"},
+  {path: "profile", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
 ];
 
 @NgModule({
