@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  name: "2FastHand",
+  domain: "localhost",
+  apiBaseUrl: "http://localhost:4500/bsn",
+  backBaseUrl: "http://localhost:4250/"
 };
 
 /*
