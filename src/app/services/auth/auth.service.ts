@@ -96,6 +96,7 @@ export class AuthService {
       .pipe(map(user => {
         console.log(environment.domain)
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
       }));
@@ -108,6 +109,7 @@ export class AuthService {
     })
       .pipe(map(user => {
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
       }));
@@ -136,5 +138,9 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const id = this.getCurrentUserId();
     return id !== null && id !== undefined && id !== "";
+  }
+
+  public getCurrentUsername(): string {
+    return this.cookieService.get('username');
   }
 }
