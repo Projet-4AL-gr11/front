@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.error = true;
       }
     }).finally(() => {
-      this.router.navigate(['/']).then();
+      this.router.navigate(['/timeline']).then();
     });
   }
 

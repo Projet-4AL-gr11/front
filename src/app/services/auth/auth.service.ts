@@ -87,11 +87,11 @@ export class AuthService {
       }));
   }
 
-  public register(mail: string, username: string, password: string) {
+  public register(email: string, username: string, password: string) {
     return this.http.post<User>(`${environment.apiBaseUrl}/auth/register`, {
       username,
       password,
-      mail
+      email
     })
       .pipe(map(user => {
         console.log(environment.domain)
