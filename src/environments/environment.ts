@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   name: "2FastHand",
   domain: "localhost",
-  apiBaseUrl: "http://localhost:4500/bsn",
-  backBaseUrl: "http://localhost:4250/"
+  apiBaseUrl: "http://localhost:3000",
 };
 
 /*

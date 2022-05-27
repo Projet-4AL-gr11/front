@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {AuthGuardService} from "./services/auth/auth-guard.service";
 import {NegateAuthGuardService} from "./services/auth/negate-auth-guard.service";
 import {HomeComponent} from "./components/page_/home/home.component";
+import {TimelineComponent} from "./components/page_/timeline/timeline.component";
 
 
 const routes: Routes = [
-  {path: "", loadChildren: () => import('./components/page_/home/home.module').then(m => m.HomeModule)},
+  {path: "", component: HomeComponent, canActivate: [AuthGuardService]},
+  {path: "timeline", component: TimelineComponent},
   {path: "home", loadChildren: () => import('./components/page_/home/home.module').then(m => m.HomeModule)},
   {path: "login", loadChildren: () => import('./components/page_/auth_/login/login.module').then(m => m.LoginModule), canActivate: [NegateAuthGuardService]},
   {path: "register", loadChildren: () => import('./components/page_/auth_/register/register.module').then(m => m.RegisterModule), canActivate: [NegateAuthGuardService]},
