@@ -18,7 +18,7 @@ export class PostService {
   }
 
   getTimeline( limit: number, offset: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getTimeline?=${offset}&=${limit}`);
+    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getTimeline/${offset}/${limit}`);
   }
 
   getPostLikes(postId: string): Observable<User[]> {

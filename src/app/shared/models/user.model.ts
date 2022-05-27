@@ -15,6 +15,7 @@ export class User {
   bio?: string;
   isBlocked: boolean;
   blocksCurrentUser: boolean;
+  currentHashedRefreshToken: string;
   userType: UserType;
   friendshipStatus: FriendRequestStatus;
   friends?: User[];

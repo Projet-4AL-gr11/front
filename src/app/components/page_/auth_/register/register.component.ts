@@ -38,8 +38,8 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('confirmPassword');
   }
 
-  get mail() {
-    return this.registerForm.get('mail');
+  get email() {
+    return this.registerForm.get('email');
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
   onSubmitForm() {
     this.submitted = true;
     const formValue = this.registerForm.value;
-    firstValueFrom(this._authService.register(formValue.mail, formValue.username, formValue.password))
+    firstValueFrom(this._authService.register(formValue.email, formValue.username, formValue.password))
       .catch(error => {
         this.submitted = false;
         if (error.status === 401) {
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.pattern("^(?=.+[0-9])(?=.+[a-z])(?=.+[A-Z])(?=.+[*.!@$%^&(){}[_\\]:;<>,.?/~_+\\-=|]).{8,32}$")]],
       confirmPassword: ['', [Validators.required]],
-      mail: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]]
     }, {validators: this.samePasswordValidator});
   }
 }
