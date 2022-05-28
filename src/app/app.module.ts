@@ -28,6 +28,9 @@ import { PostShareCardComponent } from './components/card_/post-share-card/post-
 import { TimelineComponent } from './components/page_/timeline/timeline.component';
 import {VirtualScrollerModule} from "@iharbeck/ngx-virtual-scroller";
 import {HttpClientModule} from "@angular/common/http";
+import { ButtonCreatePostComponent } from './components/button-create-post/button-create-post.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -53,7 +56,8 @@ import {HttpClientModule} from "@angular/common/http";
     FontAwesomeModule,
     PickerModule,
     VirtualScrollerModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
@@ -63,8 +67,11 @@ import {HttpClientModule} from "@angular/common/http";
     DialogCreatePostComponent,
     PostShareCardComponent,
     TimelineComponent,
+    ButtonCreatePostComponent,
   ],
-  providers: [],
+  providers: [
+    MatSnackBar
+  ],
   exports: [
   ],
   bootstrap: [AppComponent]
