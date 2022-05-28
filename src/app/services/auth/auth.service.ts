@@ -97,6 +97,7 @@ export class AuthService {
         console.log(environment.domain)
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        this.cookieService.set('refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
       }));
@@ -108,6 +109,7 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
+        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
@@ -139,7 +141,7 @@ export class AuthService {
     return id !== null && id !== undefined && id !== "";
   }
 
-  public getCurrentUsername(): string {
-    return this.cookieService.get('username');
+  getToken() {
+    return this.cookieService.get('refresh');
   }
 }
