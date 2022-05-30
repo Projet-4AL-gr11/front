@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  {path: "home", loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+  {path: "", loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   {path: "login", loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   {path: "register", loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
   {path: "profile", loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)},
   {path: "code", loadChildren: () => import('./code/code.module').then(m => m.CodeModule)},
   {path: "social", loadChildren: () => import('./social/social.module').then(m => m.SocialModule)},
+  {path: "leaderboard", loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},
 ];
 
 @NgModule({

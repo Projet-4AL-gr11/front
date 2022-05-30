@@ -10,6 +10,7 @@ import {RegisterModule} from "./register/register.module";
 import {ProfileModule} from "./profile/profile.module";
 import {CodeModule} from "./code/code.module";
 import {SocialModule} from "./social/social.module";
+import {LeaderboardModule} from "./leaderboard/leaderboard.module";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {SocialModule} from "./social/social.module";
     ProfileModule,
     SocialModule,
     CodeModule,
+    LeaderboardModule,
     SharedModule,
     //
     AppRoutingModule
