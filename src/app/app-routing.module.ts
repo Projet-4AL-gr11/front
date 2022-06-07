@@ -8,15 +8,16 @@ import {LoginComponent} from "./components/page_/auth_/login/login.component";
 
 
 const routes: Routes = [
+  {path: "", loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+  {path: "login", loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
+  {path: "register", loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
+  {path: "profile", loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)},
+  {path: "code", loadChildren: () => import('./code/code.module').then(m => m.CodeModule)},
+  {path: "social", loadChildren: () => import('./social/social.module').then(m => m.SocialModule)},
+  {path: "leaderboard", loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},
   {path: "", component: LoginComponent},
-  {path: "timeline", component: TimelineComponent, canActivate: [AuthGuardService]},
-  {path: "home", loadChildren: () => import('./components/page_/home/home.module').then(m => m.HomeModule)},
-  {path: "login", loadChildren: () => import('./components/page_/auth_/login/login.module').then(m => m.LoginModule), canActivate: [NegateAuthGuardService]},
-  {path: "register", loadChildren: () => import('./components/page_/auth_/register/register.module').then(m => m.RegisterModule), canActivate: [NegateAuthGuardService]},
-  {path: "code", loadChildren: () => import('./components/page_/code/code.module').then(m => m.CodeModule), canActivate: [AuthGuardService]},
-  {path: "social", loadChildren: () => import('./components/page_/social/social.module').then(m => m.SocialModule),canActivate: [AuthGuardService]},
-  {path: '**', redirectTo: "/"},
   {path: "profile", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
+  {path: '**', redirectTo: "/"},
 ];
 
 @NgModule({

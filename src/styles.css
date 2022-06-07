@@ -2,3 +2,21 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.flex-1 {
+  flex: 1;
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.main-2 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

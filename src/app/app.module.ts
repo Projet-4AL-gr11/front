@@ -4,6 +4,11 @@ import { AppComponent } from './app.component';
 import {HomeModule} from "./components/page_/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {SharedModule} from "./shared/shared.module";
+import {RegisterModule} from "./register/register.module";
+import {ProfileModule} from "./profile/profile.module";
+import {CodeModule} from "./code/code.module";
+import {SocialModule} from "./social/social.module";
+import {LeaderboardModule} from "./leaderboard/leaderboard.module";
 import {LoginModule} from "./components/page_/auth_/login/login.module";
 import {RegisterModule} from "./components/page_/auth_/register/register.module";
 import {ProfileModule} from "./components/page_/profile/profile.module";
@@ -41,6 +46,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     ProfileModule,
     SocialModule,
     CodeModule,
+    LeaderboardModule,
     SharedModule,
     AppRoutingModule,
     MatToolbarModule,
