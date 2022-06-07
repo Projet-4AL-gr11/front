@@ -26,6 +26,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log("bonjour")
     this.getMorePosts();
   }
 

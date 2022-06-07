@@ -111,6 +111,7 @@ export class AuthService {
       .pipe(map(user => {
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
       }));
@@ -143,5 +144,9 @@ export class AuthService {
 
   getToken() {
     return this.cookieService.get('refresh');
+  }
+
+  getCurrentUsername() {
+    return this.cookieService.get('username');
   }
 }
