@@ -1,0 +1,63 @@
+<h1 class="update-event-title" mat-dialog-title>Modification du profil</h1>
+<mat-divider></mat-divider>
+<form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
+  <div mat-dialog-content>
+    <div class="grid-update-user">
+      <div class="form-field-update-profilePicture">
+        <p> Photo de Profil</p>
+        <div class="mr-2">
+          <a (click)="profilePictureInput.click()">
+            <img
+              [src]="updatedProfilePictureURL || (data.user?.profilePicture?.link | imageUrl:undefined:undefined:false) || '../../../../assets/images/no-image.png'"
+              alt="" class="rounded-circle"
+              height="150px"
+              style="object-fit: cover"
+              width="150px">
+            <input #profilePictureInput (change)="onProfilePictureSelected()" formControlName="profilePicture" hidden id="profilePicture" type="file">
+          </a>
+        </div>
+      </div>
+      <mat-divider class="mat-divider-1"></mat-divider>
+      <div class="form-field-update-bannerPicture">
+        <p> Photo de Bannière</p>
+        <a (click)="profileBannerInput.click()">
+          <img [src]="updatedBannerPictureURL || (data.user?.bannerPicture?.link | imageUrl:undefined:undefined:false) || '../../../../assets/images/no-image.png'" alt=""
+               class="rounded"
+               height="300px" style="object-fit: cover" width="100%">
+          <input #profileBannerInput (change)="onProfileBannerSelected()" formControlName="bannerPicture" hidden id="bannerPicture" type="file">
+        </a>
+      </div>
+      <mat-divider class="mat-divider-2"></mat-divider>
+      <div class="form-field-update-username">
+        <mat-form-field appearance="fill">
+          <mat-label>username</mat-label>
+          <input formControlName="username" matInput name="username" placeholder="username" required>
+        </mat-form-field>
+      </div>
+      <div class="form-field-update-email">
+        <mat-form-field>
+          <mat-label>Mail</mat-label>
+          <input formControlName="email" matInput name="email" placeholder="Mail" required>
+        </mat-form-field>
+      </div>
+      <div class="form-field-update-bio">
+        <mat-form-field>
+          <mat-label>Bio</mat-label>
+          <textarea formControlName="bio" class="textarea-description" matInput
+                    name="bio" placeholder="Ex. Je suis..."></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions>
+    <div class="grid-button-update-user">
+      <div class="button-cancel">
+        <button (click)="onNoClick()" mat-button type="button">Annuler</button>
+      </div>
+      <div class="button-send">
+        <button class="button-send" mat-raised-button type="submit">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+<h1 class="dialog-title-create-group" mat-dialog-title>Créer un nouveau group</h1>
+<mat-divider></mat-divider>
+<form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
+  <div mat-dialog-content>
+    <div class="create-group-grid">
+      <div class="form-field-name-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom du group</mat-label>
+          <input formControlName="name" matInput name="name"
+                 placeholder="Nom du group" required>
+        </mat-form-field>
+
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="dialog-actions-create-group" mat-dialog-actions>
+    <div class="button-grid-create-group">
+      <div class="button-cancel">
+        <button (click)="dialogRef.close()" mat-button type="button">Annuler</button>
+      </div>
+      <div class="button-send">
+        <button class="button-send" mat-raised-button type="submit">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</form>

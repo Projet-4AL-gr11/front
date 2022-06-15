@@ -26,6 +26,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {RouterModule} from "@angular/router";
 import {DialogModule} from "./components/dialog_/dialog.module";
+import {TestModule} from "./components/page_/test/test.module";
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import {DialogModule} from "./components/dialog_/dialog.module";
     LeaderboardModule,
     SharedModule,
     DialogModule,
-    AppRoutingModule,
+    TestModule,
     ReactiveFormsModule,
     FormsModule,
     PickerModule,
@@ -55,7 +56,9 @@ import {DialogModule} from "./components/dialog_/dialog.module";
     MatDialogModule,
     MatButtonModule,
     MatTooltipModule,
-    RouterModule
+    RouterModule,
+    //
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
