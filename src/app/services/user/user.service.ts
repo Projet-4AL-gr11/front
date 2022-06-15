@@ -5,13 +5,14 @@ import {environment} from "../../../environments/environment";
 import {User} from "../../shared/models/user.model";
 import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
+import {MediaService} from "../media/media.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private mediaService: MediaService) { }
 
   sendReport(id: string, report: Report) {
     return this.http.put<any>(`${environment.apiBaseUrl}/report/user`, report)
@@ -53,10 +54,10 @@ export class UserService {
       formData.append("bio", user.value.bio);
     }
     if (updatedProfilePicture !== null) {
-      formData.append("profilePicture", updatedProfilePicture);
+      this.mediaService.saveProfilePicture(updatedProfilePicture);
     }
     if (updatedBannerPicture !== null) {
-      formData.append("bannerPicture", updatedBannerPicture);
+      this.mediaService.saveBannerPicture(updatedBannerPicture);
     }
     return this.http.put<User>(`${environment.apiBaseUrl}/user/`, formData);
   }

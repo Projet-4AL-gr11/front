@@ -8,13 +8,14 @@ import {AuthService} from "../auth/auth.service";
 import {User} from "../../shared/models/user.model";
 import {FormGroup} from "@angular/forms";
 import {Group} from "../../shared/models/group.model";
+import {MediaService} from "../media/media.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) { }
 
  // Get
   getEventById(id: string): Observable<Event> {
@@ -59,7 +60,7 @@ export class EventService {
   }
 
   // TODO: Mettre en place l'ajout d'exercise
-  createEvent(newEvent: FormGroup, file: File, group: Group): Observable<any> {
+  createEvent(newEvent: FormGroup, group: Group): Observable<any> {
     let formData = new FormData();
     formData.append("name", newEvent.value.name);
     formData.append("description", newEvent.value.description);
@@ -70,9 +71,6 @@ export class EventService {
     formData.append("languages", newEvent.value.languages)
     if (group) {
       formData.append("group", group.id);
-    }
-    if (file) {
-      formData.append("event_media", file);
     }
     return this.http.post<Event>(`${environment.apiBaseUrl}/event/`, formData);
   }
@@ -92,7 +90,7 @@ export class EventService {
       formData.append("group", group.id);
     }
     if (file) {
-      formData.append("event_media", file);
+      this.mediaService.saveEventPicture(group.id, file);
     }
     return this.http.put<Event>(`${environment.apiBaseUrl}/event/`, formData);
   }

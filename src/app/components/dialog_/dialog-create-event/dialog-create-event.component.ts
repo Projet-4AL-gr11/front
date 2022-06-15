@@ -18,8 +18,6 @@ import {Group} from "../../../shared/models/group.model";
 export class DialogCreateEventComponent implements OnInit {
   languages: Language[];
   limitParticipant = new FormControl(2, Validators.min(2));
-  media: File;
-  mediaURL: string;
   newEventForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<DialogCreateEventComponent>,
@@ -34,7 +32,6 @@ export class DialogCreateEventComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.media = null;
     this.updateData();
     this.initializeFormGroup();
   }
@@ -48,7 +45,7 @@ export class DialogCreateEventComponent implements OnInit {
     }
     if (this.newEventForm.valid){
         firstValueFrom(
-          this._eventService.createEvent(this.newEventForm, this.media, this.data?.group))
+          this._eventService.createEvent(this.newEventForm, this.data?.group))
           .then(() => this.dialogRef.close());
     }
 
@@ -56,27 +53,6 @@ export class DialogCreateEventComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-
-  onPictureSelected() {
-    const inputNode: any = document.querySelector('#picture');
-    if (typeof (FileReader) !== 'undefined') {
-
-      const reader = new FileReader();
-      reader.readAsDataURL(inputNode.files[0]);
-      reader.onload = (e: any) => {
-        const file: string = e.target.result
-        if (file.match(/image\/*/) === null) {
-          console.log('invalid file input');
-          return;
-        }
-        if (typeof file === "string") {
-          this.mediaURL = file;
-          this.media = inputNode.files[0];
-        }
-      };
-    }
   }
 
   private getAllLanguage() {
@@ -115,7 +91,6 @@ export class DialogCreateEventComponent implements OnInit {
       endDate: new FormControl('', [
         Validators.required
       ]),
-      picture: new FormControl('',[])
     })
   }
 }

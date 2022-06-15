@@ -26,6 +26,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TimelineModule} from "./components/page_/timeline/timeline.module";
+import { DialogCreateGroupComponent } from './components/dialog_/dialog-create-group/dialog-create-group.component';
+import { DialogUpdateGroupComponent } from './components/dialog_/dialog-update-group/dialog-update-group.component';
+import {MatSelectModule} from "@angular/material/select";
+import { UserCardComponent } from './components/card_/user-card/user-card.component';
+import { EventCardComponent } from './components/card_/event-card/event-card.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -47,7 +53,14 @@ import {TimelineModule} from "./components/page_/timeline/timeline.module";
     HttpClientModule,
     BrowserAnimationsModule,
     TimelineModule,
-    ProfileModule
+    ProfileModule,
+    MatDividerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatTooltipModule
   ],
   declarations: [
     AppComponent,

@@ -18,6 +18,7 @@ import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
 import {Post} from "../../../shared/models/post.model";
 import {DialogUpdateUserComponent} from "../../dialog_/dialog-update-user/dialog-update-user.component";
 import {DialogCreateEventComponent} from "../../dialog_/dialog-create-event/dialog-create-event.component";
+import {DialogCreateGroupComponent} from "../../dialog_/dialog-create-group/dialog-create-group.component";
 
 @Component({
   selector: 'app-profile',
@@ -110,6 +111,17 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  async showDialogCreateGroup() {
+    const dialogRef = this.dialogUpdateUser.open(DialogCreateGroupComponent, {
+      width: '600px',
+      data: {user: this.user}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.updateUser(this.user.id)
+    })
+  }
+
   removeFriend() {
     firstValueFrom(this._friendshipService.removeFriendship(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
   }
@@ -148,5 +160,9 @@ export class ProfileComponent implements OnInit {
   triggerGetMore($event) {
     if ($event.endIndex !== this.user.createdPosts.length - 1 || this.loading) return;
     this.getMorePosts();
+  }
+
+  sendJoinGroup(groupId: string, userId: string) {
+    this._groupService.sendGroupRequest(groupId, userId);
   }
 }

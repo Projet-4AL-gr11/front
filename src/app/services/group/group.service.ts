@@ -4,13 +4,16 @@ import {Report} from "../../shared/models/report.model";
 import {environment} from "../../../environments/environment";
 import {Group} from "../../shared/models/group.model";
 import {throwError} from "rxjs";
+import {User} from "../../shared/models/user.model";
+import {FormGroup} from "@angular/forms";
+import {MediaService} from "../media/media.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private mediaService: MediaService) { }
 
   sendReport(id: string, report: Report) {
     return this.http.put<any>(`${environment.apiBaseUrl}/report/group`, report)
@@ -44,14 +47,24 @@ export class GroupService {
     return this.http.put(`${environment.apiBaseUrl}/group/removeFollower/${groupId}`, null);
   }
 
-  createGroup(){
-    // TODO: createGroup()
-    return Error("not implemented");
+  createGroup(user: User, form: FormGroup){
+    const formData = new FormData();
+    formData.append("userId", user.id);
+    if (form.value.name != null){
+      formData.append("name", form.value.name)
+    }
+    return this.http.post(`${environment.apiBaseUrl}/group/`, formData);
   }
 
-  updateGroup(){
-    // TODO: updateGroup()
-    return Error("not implemented");
+  updateGroup(group: Group, form: FormGroup, picture: File) {
+    const formData = new FormData();
+    if (form.value.name != null){
+      formData.append("name", form.value.name)
+    }
+    if (picture != null) {
+      this.mediaService.saveGroupPicture(group.id, picture);
+    }
+    return this.http.put(`${environment.apiBaseUrl}/group/${group.id}`, formData);
   }
 
   removeGroup(groupId: string){
@@ -80,5 +93,17 @@ export class GroupService {
 
   giveGroupOwnership(groupId: string, userId: string) {
     return this.http.put(`${environment.apiBaseUrl}/group/giveGroupOwnership/${groupId}`, userId);
+  }
+
+  sendGroupRequest(groupId: string, userId: string) {
+    return this.http.put(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, userId);
+  }
+
+  acceptGroupRequest(groupId: string, userId: string) {
+    return this.http.put(`${environment.apiBaseUrl}/group/acceptGroupRequest/${groupId}`, userId);
+  }
+
+  cancelGroupRequest(groupId: string, userId: string) {
+    return this.http.put(`${environment.apiBaseUrl}/group/cancelGroupRequest/${groupId}`, userId);
   }
 }

@@ -19,8 +19,8 @@ export class Event {
   user: User;
   participants: User[];
   posts: Post[];
-  isMember: boolean = false;
-  isOwner: boolean = false;
+  isMember: Boolean = false;
+  isOwner: Boolean = false;
   exercises: Exercise[];
   eventRanking: EventRanking[];
 }

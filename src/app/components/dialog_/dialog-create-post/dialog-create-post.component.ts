@@ -37,15 +37,6 @@ export class DialogCreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addEmoji($event: any) {
-    if (this.text === undefined) {
-      this.text = $event.emoji.native;
-      return;
-    }
-    this.text = [this.text.slice(0, this.caretPosition), $event.emoji.native, this.text.slice(this.caretPosition)].join('');
-    this.caretPosition += $event.emoji.native.length;
-  }
-
   sendPost() {
     if (this.text === undefined && this.text === '' && this.medias.length <= 0 && this.data.sharesPost === undefined && this.data.sharedEvent === undefined) {
       this._snackBar.open("Vous ne pouvez créer un poste s'il est vide.", "Fermer");
