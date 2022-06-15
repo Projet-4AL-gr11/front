@@ -19,6 +19,9 @@ export class DialogCreateEventComponent implements OnInit {
   languages: Language[];
   limitParticipant = new FormControl(2, Validators.min(2));
   newEventForm: FormGroup;
+  picture: File;
+  pictureURL: string;
+  mediaURL: string;
 
   constructor(public dialogRef: MatDialogRef<DialogCreateEventComponent>,
               private _eventService: EventService,
@@ -34,6 +37,26 @@ export class DialogCreateEventComponent implements OnInit {
   ngOnInit(): void {
     this.updateData();
     this.initializeFormGroup();
+  }
+
+  onPictureSelected() {
+    const inputNode: any = document.querySelector('#picture');
+    if (typeof (FileReader) !== 'undefined') {
+
+      const reader = new FileReader();
+      reader.readAsDataURL(inputNode.files[0]);
+      reader.onload = (e: any) => {
+        const file: string = e.target.result
+        if (file.match(/image\/*/) === null) {
+          console.log('invalid file input');
+          return;
+        }
+        if (typeof file === "string") {
+          this.pictureURL = file;
+          this.picture = inputNode.files[0];
+        }
+      };
+    }
   }
 
   onClickSubmit() {

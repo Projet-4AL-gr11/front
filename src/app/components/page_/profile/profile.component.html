@@ -108,13 +108,13 @@
         <mat-tab-group mat-align-tabs="center" style="min-height: 100%">
           <mat-tab label="Post">
             <div #divContent style="height: 450px">
-              <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)"
-                                [enableUnequalChildrenSizes]="true" [items]="user.createdPosts"
-                                [parentScroll]="divContent" childHeight="1" class="w-100 h-100">
-                <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
-                  <app-post (onDelete)="removePost($event)" [post]="post"></app-post>
-                </div>
-              </virtual-scroller>
+<!--              <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)"-->
+<!--                                [enableUnequalChildrenSizes]="true" [items]="user.createdPosts"-->
+<!--                                [parentScroll]="divContent" childHeight="1" class="w-100 h-100">-->
+<!--                <div *ngFor="let post of scroll.viewPortItems" class="mt-3">-->
+<!--                  <app-post (onDelete)="removePost($event)" [post]="post"></app-post>-->
+<!--                </div>-->
+<!--              </virtual-scroller>-->
             </div>
           </mat-tab>
           <mat-tab label="Amis">

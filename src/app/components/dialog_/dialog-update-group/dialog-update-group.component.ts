@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {GroupService} from "../../../services/group/group.service";
-import {User} from "../../../shared/models/user.model";
 import {firstValueFrom} from "rxjs";
 import {Group} from "../../../shared/models/group.model";
 

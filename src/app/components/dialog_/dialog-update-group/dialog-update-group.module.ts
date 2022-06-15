@@ -1,5 +1,4 @@
 import {NgModule} from "@angular/core";
-import {DialogCreatePostComponent} from "../dialog-create-post/dialog-create-post.component";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
@@ -10,10 +9,11 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {DialogUpdateGroupComponent} from "./dialog-update-group.component";
 
 @NgModule({
   declarations: [
-    DialogCreatePostComponent,
+    DialogUpdateGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import {MatInputModule} from "@angular/material/input";
     MatInputModule,
   ],
   exports: [
-    DialogCreatePostComponent,
+    DialogUpdateGroupComponent,
   ]
 })
 export class DialogCreatePostModule { }

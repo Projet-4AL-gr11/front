@@ -1,11 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
 import {User} from "../../../shared/models/user.model";
 import {GroupService} from "../../../services/group/group.service";
-import {Group} from "../../../shared/models/group.model";
-import {DialogCreateGroupModule} from "./dialog-create-group.module";
 import {firstValueFrom} from "rxjs";
 
 @Component({
