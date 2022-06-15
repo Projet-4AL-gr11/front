@@ -26,12 +26,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TimelineModule} from "./components/page_/timeline/timeline.module";
-import {PostModule} from "./components/card_/post/post.module";
-import {PostShareCardModule} from "./components/card_/post-share-card/post-share-card.module";
-import {PipesModules} from "./pipes/pipes.modules";
-import {DialogCreatePostModule} from "./components/dialog_/dialog-create-post/dialog-create-post.module";
-import {DialogReportModule} from "./components/dialog_/dialog-report/dialog-report.module";
-import {ButtonCreatePostModule} from "./components/button-create-post/button-create-post.module";
 
 @NgModule({
   imports: [
@@ -45,15 +39,7 @@ import {ButtonCreatePostModule} from "./components/button-create-post/button-cre
     LeaderboardModule,
     SharedModule,
     AppRoutingModule,
-    MatToolbarModule,
-    MatRippleModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
     FormsModule,
     FontAwesomeModule,
     PickerModule,
@@ -61,6 +47,7 @@ import {ButtonCreatePostModule} from "./components/button-create-post/button-cre
     HttpClientModule,
     BrowserAnimationsModule,
     TimelineModule,
+    ProfileModule
   ],
   declarations: [
     AppComponent,

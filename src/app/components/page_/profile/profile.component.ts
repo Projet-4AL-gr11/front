@@ -12,6 +12,12 @@ import {MatDialog} from "@angular/material/dialog";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
+import {PostService} from "../../../services/post/post.service";
+import {DialogReportComponent} from "../../dialog_/dialog-report/dialog-report.component";
+import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
+import {Post} from "../../../shared/models/post.model";
+import {DialogUpdateUserComponent} from "../../dialog_/dialog-update-user/dialog-update-user.component";
+import {DialogCreateEventComponent} from "../../dialog_/dialog-create-event/dialog-create-event.component";
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +43,7 @@ export class ProfileComponent implements OnInit {
     private _eventService: EventService,
     public _authService: AuthService,
     public _groupService: GroupService,
+    public _postService: PostService,
     public dialog: MatDialog,
     public dialogReport: MatDialog,
     public dialogCreateEvent: MatDialog,
@@ -59,7 +66,87 @@ export class ProfileComponent implements OnInit {
     firstValueFrom(this._eventService.getEventParticipation()).then(eventParticipation =>this.user.eventsParticipation=eventParticipation);
     firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked =>this.user.isBlocked=isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus =>this.user.friendshipStatus=friendshipStatus);
-    firstValueFrom(this._groupService.whereIsAdmin(id).toPromise().then(administratedGroup =>this.user.administratedGroup=administratedGroup);
+    firstValueFrom(this._groupService.getGroupsWhereUserIsAdmin(id)).then(administratedGroup =>this.user.administratedGroup.push(administratedGroup));
   }
 
+  getMorePosts() {
+    this.loading = true;
+    firstValueFrom(this._postService.getUserTimeline(this.user.id, this.limit, this.offset))
+      .then(posts => {
+        this.user.createdPosts = this.user.createdPosts.concat(posts);
+        this.offset += this.limit;
+        if (posts.length > 0) {
+          this.loading = false;
+        }
+      });
+  }
+
+  showDialogueReport() {
+    const dialogRef = this.dialogReport.open(DialogReportComponent, {
+      width: '500px',
+      data: {id: this.user.id, reportType: ReportTypeEnum.USER}
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+  }
+
+  showDialogueCreateEvent() {
+    const dialogRef = this.dialogCreateEvent.open(DialogCreateEventComponent, {
+      width: '600px',
+      data: {group: null}
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+  }
+
+  async showDialogUpdateUser() {
+    const dialogRef = this.dialogUpdateUser.open(DialogUpdateUserComponent, {
+      width: '600px',
+      data: {user: this.user}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.updateUser(this.user.id)
+    })
+  }
+
+  removeFriend() {
+    firstValueFrom(this._friendshipService.removeFriendship(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
+  }
+
+  askFriend() {
+    firstValueFrom(this._friendshipService.sendFriendRequest(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.PENDING);
+  }
+
+  cancelRequest() {
+    firstValueFrom(this._friendshipService.cancelFriendRequest(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
+  }
+
+  delFriendshipRequest() {
+    firstValueFrom(this._friendshipService.rejectFriendRequest(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
+
+  }
+
+  acceptFriendship() {
+    firstValueFrom(this._friendshipService.acceptFriendship(this.user.id)).then(() => this.user.friendshipStatus = FriendRequestStatus.BEFRIENDED);
+  }
+
+  blockUser() {
+    firstValueFrom(this._userService.blockUser(this.user.id))
+      .then(() => this.user.isBlocked = true);
+  }
+
+  unblockUser() {
+    firstValueFrom(this._userService.unblockUser(this.user.id))
+      .then(() => this.user.isBlocked = false);
+  }
+
+  removePost($event: Post) {
+    this.user.createdPosts = this.user.createdPosts.filter(post => post.id !== $event.id);
+  }
+
+  triggerGetMore($event) {
+    if ($event.endIndex !== this.user.createdPosts.length - 1 || this.loading) return;
+    this.getMorePosts();
+  }
 }

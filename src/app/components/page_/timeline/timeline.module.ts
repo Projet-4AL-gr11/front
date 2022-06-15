@@ -6,6 +6,7 @@ import {TimelineComponent} from "./timeline.component";
 import {SharedModule} from "../../../shared/shared.module";
 import {PostModule} from "../../card_/post/post.module";
 import {ButtonCreatePostModule} from "../../button-create-post/button-create-post.module";
+import {PostShareCardModule} from "../../card_/post-share-card/post-share-card.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ButtonCreatePostModule} from "../../button-create-post/button-create-pos
     VirtualScrollerModule,
     SharedModule,
     PostModule,
-    ButtonCreatePostModule
+    ButtonCreatePostModule,
+    PostShareCardModule
   ],
   exports: [
     TimelineComponent,

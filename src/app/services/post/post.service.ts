@@ -80,4 +80,8 @@ export class PostService {
   getAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${environment.apiBaseUrl}/post`);
   }
+
+  getUserTimeline(id: string, limit: number, offset: number) {
+    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getTimeline/${offset}/${limit}`);
+  }
 }
