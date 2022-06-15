@@ -31,4 +31,5 @@ export class User {
   groups: Group[];
   leaderboards: Leaderboard[];
   eventRankings: EventRanking[];
+  administratedGroup: Group[];
 }

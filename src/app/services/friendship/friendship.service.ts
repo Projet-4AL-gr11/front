@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FriendRequest} from "../../shared/models/friend_request.model";
 import {environment} from "../../../environments/environment";
+import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class FriendshipService {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/received-friendship-request`)
   }
 
-  statusFriendship(userId: string) {
-    return this.http.get(`${environment.apiBaseUrl}/friendship/${userId}/friendship-status`)
+  statusFriendship(userId: string): Observable<FriendRequestStatus> {
+    return this.http.get<FriendRequestStatus>(`${environment.apiBaseUrl}/friendship/${userId}/friendship-status`)
   }
 }
