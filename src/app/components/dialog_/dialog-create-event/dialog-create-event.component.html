@@ -1,0 +1,95 @@
+<h1 *ngIf="data.group != null" class="create-event-title" mat-dialog-title>Création d'un événement
+  par {{data.group.name}}</h1>
+<h1 *ngIf="data.group === null" class="create-event-title" mat-dialog-title>Création d'un événement
+  par {{(_authService.user|async).username}}</h1>
+<mat-divider></mat-divider>
+<form [formGroup]="newEventForm" (ngSubmit)="onClickSubmit()">
+  <div mat-dialog-content>
+    <div class="create-event-grid">
+      <div class="form-field-name-event">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom de l'Évènement</mat-label>
+          <input  matInput name="name" placeholder="Nom de l'Évènement" formControlName="name" required>
+        </mat-form-field>
+      </div>
+      <div class="form-field-participant-limit">
+        <mat-form-field appearance="fill">
+          <mat-label>Limite de participants</mat-label>
+          <input formControlName="participationLimit" matInput min="2" name="participantsLimit"
+                 placeholder="Ex. 30" required type="number">
+          <mat-error *ngIf="limitParticipant.invalid">Min: 2</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field-date-picker-start">
+        <mat-form-field appearance="fill">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [matDatepicker]="pickerFrom">
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-field-date-picker-end">
+        <mat-form-field appearance="fill">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [matDatepicker]="pickerTo">
+          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #pickerTo>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-field-languages">
+      <mat-form-field appearance="fill">
+        <mat-label>Languages</mat-label>
+        <mat-select formControlName="languages" matNativeControl name="languages" required>
+          <section class="example-section">
+            <mat-checkbox *ngFor="let language of languages"
+                        value="{{language.id}}">{{language.name}}
+            </mat-checkbox>
+          </section>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="form-field-description">
+      <mat-form-field>
+        <mat-label>Description de l'Évènement</mat-label>
+        <textarea formControlName="description" class="textarea-description" matInput
+                  name="description" placeholder="Ex. L'Évènement se ..."></textarea>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="form-field-create-picture">
+      <a (click)="pictureInput.click()">
+        <img [src]="mediaURL || '../../../../assets/images/no-image.png'" alt=""
+             class="rounded"
+             height="300px"
+             style="object-fit: cover" width="100%">
+      </a>
+      <input #pictureInput (change)="onPictureSelected()" formControlName="picture" hidden id="picture"
+             name="picture"
+             type="file">
+    </div>
+  </div>
+  <!-- TODO : Ajouter la selection des exercises -->
+  <mat-divider></mat-divider>
+  <div class="dialog-actions-create-event" mat-dialog-actions>
+    <div class="button-grid-create-event">
+      <div class="button-cancel">
+        <button (click)="onNoClick()" mat-button type="button">Annuler</button>
+      </div>
+      <div class="button-send">
+        <button class="button-send" mat-raised-button type="submit">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</form>
