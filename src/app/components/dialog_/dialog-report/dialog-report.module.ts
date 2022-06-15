@@ -23,8 +23,7 @@ import {MatButtonModule} from "@angular/material/button";
     ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
-    MatButtonModule
-
+    MatButtonModule,
   ],
   exports: [
     DialogReportComponent,

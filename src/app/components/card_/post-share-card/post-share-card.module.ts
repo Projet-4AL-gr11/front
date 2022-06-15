@@ -14,7 +14,7 @@ import {PipesModules} from "../../../pipes/pipes.modules";
     CommonModule,
     RouterModule,
     FontAwesomeModule,
-    PipesModules
+    PipesModules,
   ],
   exports: [
     PostShareCardComponent,
