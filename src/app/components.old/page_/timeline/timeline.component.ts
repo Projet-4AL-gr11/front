@@ -4,7 +4,7 @@ import {environment} from "../../../../environments/environment";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {Title} from "@angular/platform-browser";
-import {Post} from "../../../shared/models/post.model";
+import {Post} from "../../../components/shared/models/post.model";
 import {firstValueFrom} from "rxjs";
 
 @Component({

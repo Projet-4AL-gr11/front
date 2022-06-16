@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Language} from "../../shared/models/language.model";
+import {Language} from "../../components/shared/models/language.model";
 import {environment} from "../../../environments/environment";
 import {FormGroup} from "@angular/forms";
 

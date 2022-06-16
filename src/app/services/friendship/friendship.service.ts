@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {FriendRequest} from "../../shared/models/friend_request.model";
+import {FriendRequest} from "../../components/shared/models/friend_request.model";
 import {environment} from "../../../environments/environment";
-import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
+import {FriendRequestStatus} from "../../components/shared/enum/friendship_request_status.enum";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Event} from "../../../shared/models/event.model";
+import {Event} from "../../shared/models/event.model";
 import {faCheckCircle, faClock, faTags, faUser} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {EventService} from "../../../services/event/event.service";

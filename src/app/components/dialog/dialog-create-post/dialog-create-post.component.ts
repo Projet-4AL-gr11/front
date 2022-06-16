@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {faCalendarAlt, faImage, faSmile, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Post} from "../../../shared/models/post.model";
-import {Event} from "../../../shared/models/event.model";
+import {Post} from "../../shared/models/post.model";
+import {Event} from "../../shared/models/event.model";
 import {AuthService} from "../../../services/auth/auth.service";
 import {PostService} from "../../../services/post/post.service";
 import {MatSnackBar} from "@angular/material/snack-bar";

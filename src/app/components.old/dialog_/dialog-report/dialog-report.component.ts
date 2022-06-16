@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Report} from "../../../shared/models/report.model";
+import {Report} from "../../../components/shared/models/report.model";
 import {PostService} from "../../../services/post/post.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
+import {ReportTypeEnum} from "../../../components/shared/enum/report_type.enum";
 import {CommentService} from "../../../services/comment/comment.service";
 import {UserService} from "../../../services/user/user.service";
 import {ExerciseService} from "../../../services/exercise/exercise.service";

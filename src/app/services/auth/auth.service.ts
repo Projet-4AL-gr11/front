@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, map, Observable, timer} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {User} from "../../shared/models/user.model";
+import {User} from "../../components/shared/models/user.model";
 import {HttpClient} from "@angular/common/http";
-import {FriendRequest} from "../../shared/models/friend_request.model";
-import {Event} from "../../shared/models/event.model";
-import {Group} from "../../shared/models/group.model";
+import {FriendRequest} from "../../components/shared/models/friend_request.model";
+import {Event} from "../../components/shared/models/event.model";
+import {Group} from "../../components/shared/models/group.model";
 import {CookieService} from "ngx-cookie-service";
 
 @Injectable({

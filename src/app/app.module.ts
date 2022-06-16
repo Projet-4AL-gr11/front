@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
-import {SharedModule} from "./shared/shared.module";
 import {LeaderboardModule} from "./leaderboard/leaderboard.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
 import {CodeModule} from "./components/page/code/code.module";
@@ -26,6 +25,7 @@ import {RouterModule} from "@angular/router";
 import {DialogModule} from "./components/dialog/dialog.module";
 import {TestModule} from "./components/page/test/test.module";
 import {AuthModule} from "./components/page/auth/auth.module";
+import {SharedModule} from "./components/shared/shared.module";
 
 @NgModule({
   imports: [

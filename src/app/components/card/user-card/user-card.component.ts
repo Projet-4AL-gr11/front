@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../../shared/models/user.model";
+import {User} from "../../shared/models/user.model";
 import {faCheckCircle, faUserPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {FriendRequestStatus} from "../../../shared/enum/friendship_request_status.enum";
+import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
 import {FriendshipService} from "../../../services/friendship/friendship.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {MatDialog} from "@angular/material/dialog";

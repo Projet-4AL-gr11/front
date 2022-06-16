@@ -3,8 +3,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../../services/auth/auth.service";
 import {PostService} from "../../../services/post/post.service";
 import {firstValueFrom, Subscription, take, timer} from "rxjs";
-import {Post} from "../../../shared/models/post.model";
-import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
+import {Post} from "../../shared/models/post.model";
+import {ReportTypeEnum} from "../../shared/enum/report_type.enum";
 import {MediaService} from "../../../services/media/media.service";
 import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {

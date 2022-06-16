@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
-import {User} from "../../../shared/models/user.model";
+import {User} from "../../../components/shared/models/user.model";
 import {environment} from "../../../../environments/environment";
 
 @Component({

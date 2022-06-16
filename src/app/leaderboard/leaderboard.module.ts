@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LeaderboardRoutingModule } from './leaderboard-routing.module';
 import { LeaderboardComponent } from './leaderboard.component';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from "../components/shared/shared.module";
 
 
 @NgModule({

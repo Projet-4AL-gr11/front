@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Report} from "../../shared/models/report.model";
+import {Report} from "../../components/shared/models/report.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {User} from "../../shared/models/user.model";
+import {User} from "../../components/shared/models/user.model";
 import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {MediaService} from "../media/media.service";

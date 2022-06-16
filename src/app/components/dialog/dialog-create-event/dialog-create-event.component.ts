@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Language} from "../../../shared/models/language.model";
+import {Language} from "../../shared/models/language.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {EventService} from "../../../services/event/event.service";
@@ -8,7 +8,7 @@ import {LanguageService} from "../../../services/language/language.service";
 import {GroupService} from "../../../services/group/group.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
-import {Group} from "../../../shared/models/group.model";
+import {Group} from "../../shared/models/group.model";
 
 @Component({
   selector: 'app-dialog-create-event',

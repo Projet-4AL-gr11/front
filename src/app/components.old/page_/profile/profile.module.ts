@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import {ProfileComponent} from "./profile.component";
-import {SharedModule} from "../../../shared/shared.module";
 import {PostShareCardModule} from "../../card_/post-share-card/post-share-card.module";
 import {MatTabsModule} from "@angular/material/tabs";
 import {VirtualScrollerModule} from "@iharbeck/ngx-virtual-scroller";
@@ -14,7 +13,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
 import {PostModule} from "../../card_/post/post.module";
 import {UserCardModule} from "../../card_/user-card/user-card.module";
-import {DialogModule} from "../../dialog_/dialog.module";
+import {SharedModule} from "../../../components/shared/shared.module";
 
 
 @NgModule({
@@ -22,7 +21,6 @@ import {DialogModule} from "../../dialog_/dialog.module";
     ProfileComponent,
   ],
   imports: [
-    // DialogModule,
     CommonModule,
     ProfileRoutingModule,
     SharedModule,

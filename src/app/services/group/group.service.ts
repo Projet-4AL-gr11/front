@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Report} from "../../shared/models/report.model";
+import {Report} from "../../components/shared/models/report.model";
 import {environment} from "../../../environments/environment";
-import {Group} from "../../shared/models/group.model";
+import {Group} from "../../components/shared/models/group.model";
 import {throwError} from "rxjs";
-import {User} from "../../shared/models/user.model";
+import {User} from "../../components/shared/models/user.model";
 import {FormGroup} from "@angular/forms";
 import {MediaService} from "../media/media.service";
 
