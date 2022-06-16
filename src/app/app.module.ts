@@ -1,15 +1,13 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import {HomeModule} from "./components/page_/home/home.module";
+import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {SharedModule} from "./shared/shared.module";
 import {LeaderboardModule} from "./leaderboard/leaderboard.module";
-import {LoginModule} from "./components/page_/auth_/login/login.module";
-import {RegisterModule} from "./components/page_/auth_/register/register.module";
-import {ProfileModule} from "./components/page_/profile/profile.module";
-import {CodeModule} from "./components/page_/code/code.module";
-import {SocialModule} from "./components/page_/social/social.module";
+import {ProfileModule} from "./components/page/profile/profile.module";
+import {CodeModule} from "./components/page/code/code.module";
+import {SocialModule} from "./components/page/social/social.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -21,20 +19,19 @@ import {VirtualScrollerModule} from "@iharbeck/ngx-virtual-scroller";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {TimelineModule} from "./components/page_/timeline/timeline.module";
+import {TimelineModule} from "./components/page/timeline/timeline.module";
 import {MatSelectModule} from "@angular/material/select";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {RouterModule} from "@angular/router";
-import {DialogModule} from "./components/dialog_/dialog.module";
-import {TestModule} from "./components/page_/test/test.module";
+import {DialogModule} from "./components/dialog/dialog.module";
+import {TestModule} from "./components/page/test/test.module";
+import {AuthModule} from "./components/page/auth/auth.module";
 
 @NgModule({
   imports: [
     BrowserModule,
     HomeModule,
-    LoginModule,
-    RegisterModule,
-    ProfileModule,
+    AuthModule,
     SocialModule,
     CodeModule,
     LeaderboardModule,

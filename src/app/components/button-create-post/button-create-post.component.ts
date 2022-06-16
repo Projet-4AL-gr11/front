@@ -3,7 +3,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {UserService} from "../../services/user/user.service";
 import {PostService} from "../../services/post/post.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogCreatePostComponent} from "../dialog_/dialog-create-post/dialog-create-post.component";
+import {DialogCreatePostComponent} from "../dialog/dialog-create-post/dialog-create-post.component";
 
 @Component({
   selector: 'app-button-create-post',

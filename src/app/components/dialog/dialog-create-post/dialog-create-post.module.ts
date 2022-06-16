@@ -3,7 +3,7 @@
 // import {RouterModule} from "@angular/router";
 // import {DialogCreatePostComponent} from "./dialog-create-post.component";
 // import {PipesModules} from "../../../pipes/pipes.modules";
-// import {PostShareCardModule} from "../../card_/post-share-card/post-share-card.module";
+// import {PostShareCardModule} from "../../card/post-share-card/post-share-card.module";
 // import {MatFormFieldModule} from "@angular/material/form-field";
 // import {FormsModule} from "@angular/forms";
 // import {MatButtonModule} from "@angular/material/button";

@@ -4,7 +4,7 @@
 // import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 // import {MatMenuModule} from "@angular/material/menu";
 // import {PipesModules} from "../../../pipes/pipes.modules";
-// import {PostShareCardModule} from "../../card_/post-share-card/post-share-card.module";
+// import {PostShareCardModule} from "../../card/post-share-card/post-share-card.module";
 // import {MatFormFieldModule} from "@angular/material/form-field";
 // import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // import {DialogReportComponent} from "./dialog-report.component";

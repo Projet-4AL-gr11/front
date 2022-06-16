@@ -13,12 +13,12 @@ import {Title} from "@angular/platform-browser";
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {PostService} from "../../../services/post/post.service";
-import {DialogReportComponent} from "../../dialog_/dialog-report/dialog-report.component";
+import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
 import {Post} from "../../../shared/models/post.model";
-import {DialogUpdateUserComponent} from "../../dialog_/dialog-update-user/dialog-update-user.component";
-import {DialogCreateEventComponent} from "../../dialog_/dialog-create-event/dialog-create-event.component";
-import {DialogCreateGroupComponent} from "../../dialog_/dialog-create-group/dialog-create-group.component";
+import {DialogUpdateUserComponent} from "../../dialog/dialog-update-user/dialog-update-user.component";
+import {DialogCreateEventComponent} from "../../dialog/dialog-create-event/dialog-create-event.component";
+import {DialogCreateGroupComponent} from "../../dialog/dialog-create-group/dialog-create-group.component";
 
 @Component({
   selector: 'app-profile',

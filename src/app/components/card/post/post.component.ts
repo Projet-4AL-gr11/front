@@ -6,10 +6,10 @@ import {firstValueFrom, Subscription, take, timer} from "rxjs";
 import {Post} from "../../../shared/models/post.model";
 import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
 import {MediaService} from "../../../services/media/media.service";
-import {DialogReportComponent} from "../../dialog_/dialog-report/dialog-report.component";
+import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {
   DialogCreatePostComponent
-} from "../../dialog_/dialog-create-post/dialog-create-post.component";
+} from "../../dialog/dialog-create-post/dialog-create-post.component";
 import {faCheckCircle, faComment, faEllipsisH, faShare, faThumbsUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({

@@ -13,7 +13,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {PipesModules} from "../../pipes/pipes.modules";
 import {MatMenuModule} from "@angular/material/menu";
-import {PostShareCardModule} from "../card_/post-share-card/post-share-card.module";
+import {PostShareCardModule} from "../card/post-share-card/post-share-card.module";
 import {DialogCreateEventComponent} from "./dialog-create-event/dialog-create-event.component";
 import {DialogCreateGroupComponent} from "./dialog-create-group/dialog-create-group.component";
 import {DialogCreatePostComponent} from "./dialog-create-post/dialog-create-post.component";
