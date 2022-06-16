@@ -26,7 +26,7 @@ export class PostService {
   }
 
   isPostLiked(postId: string): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.apiBaseUrl}/post/is-liked${postId}`);
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/post/is-liked/${postId}`);
   }
 
   likePost(postId: string): Observable<void> {
@@ -54,7 +54,7 @@ export class PostService {
   }
 
   sharedPost(postId: string): Observable<Post> {
-    return this.http.get<Post>(`${environment.apiBaseUrl}/post/${postId}/shares`);
+    return this.http.get<Post>(`${environment.apiBaseUrl}/post/getSharedPost/${postId}`);
   }
 
   createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[]) {

@@ -14,50 +14,50 @@ export class MediaService {
   }
 
   public getPostMedias(postId: string): Observable<Media[]> {
-    return this.http.get<Media[]>(`${environment.apiBaseUrl}/media/post-picture/${postId}`);
+    return this.http.get<Media[]>(`${environment.apiBaseUrl}/media/postPicture/${postId}`);
   }
 
   public getCommentMedias(postId: string): Observable<Media[]> {
-    return this.http.get<Media[]>(`${environment.apiBaseUrl}/media/comment-picture/${postId}`);
+    return this.http.get<Media[]>(`${environment.apiBaseUrl}/media/commentPicture/${postId}`);
   }
 
   public getProfilePicture(userId: string): Observable<Media> {
-    return this.http.get<Media>(`${environment.apiBaseUrl}/media/profile-picture/${userId}`);
+    return this.http.get<Media>(`${environment.apiBaseUrl}/media/profilePicture/${userId}`);
   }
 
   public getBannerPicture(userId: string): Observable<Media> {
-    return this.http.get<Media>(`${environment.apiBaseUrl}/media/banner-picture/${userId}`);
+    return this.http.get<Media>(`${environment.apiBaseUrl}/media/bannerPicture/${userId}`);
   }
 
   public getGroupPicture(userId: string): Observable<Media> {
-    return this.http.get<Media>(`${environment.apiBaseUrl}/media/group-picture/${userId}`);
+    return this.http.get<Media>(`${environment.apiBaseUrl}/media/groupPicture/${userId}`);
   }
 
   public getEventPicture(userId: string): Observable<Media> {
-    return this.http.get<Media>(`${environment.apiBaseUrl}/media/event-picture/${userId}`);
+    return this.http.get<Media>(`${environment.apiBaseUrl}/media/eventPicture/${userId}`);
   }
 
   public saveProfilePicture( file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/profile-picture/`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/profilePicture/`, file);
   }
 
   public saveBannerPicture( file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/banner-picture/`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/bannerPicture/`, file);
   }
 
   public saveEventPicture(eventId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/event-picture/${eventId}`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/eventPicture/${eventId}`, file);
   }
 
   public saveGroupPicture(groupId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/group-picture/${groupId}`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupPicture/${groupId}`, file);
   }
 
   public savePostPicture(postId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/event-picture/${postId}`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/eventPicture/${postId}`, file);
   }
 
   public saveCommentPicture(commentId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/comment-picture/${commentId}`, file);
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/commentPicture/${commentId}`, file);
   }
 }

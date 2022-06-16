@@ -21,6 +21,7 @@ export class FriendshipService {
   }
 
   statusFriendship(userId: string): Observable<FriendRequestStatus> {
+    console.log(userId)
     return this.http.get<FriendRequestStatus>(`${environment.apiBaseUrl}/friendship/${userId}/friendship-status`)
   }
 

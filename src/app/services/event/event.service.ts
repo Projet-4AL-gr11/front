@@ -36,6 +36,7 @@ export class EventService {
 
   getEventParticipation(): Observable<Event[]> {
     const userId = this.authService.getCurrentUserId();
+    console.log("getEventParticipation - " + userId)
     return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${userId}`)
   }
 

@@ -18,7 +18,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {VirtualScrollerModule} from "@iharbeck/ngx-virtual-scroller";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TimelineModule} from "./components/page_/timeline/timeline.module";
@@ -27,6 +27,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {RouterModule} from "@angular/router";
 import {DialogModule} from "./components/dialog_/dialog.module";
 import {TestModule} from "./components/page_/test/test.module";
+import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor";
 
 @NgModule({
   imports: [
@@ -64,7 +65,12 @@ import {TestModule} from "./components/page_/test/test.module";
     AppComponent,
   ],
   providers: [
-    MatSnackBar
+    MatSnackBar,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalHttpInterceptor,
+      multi: true
+    }
   ],
   exports: [
   ],

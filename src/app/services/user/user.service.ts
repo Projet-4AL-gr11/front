@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getFriends(id: string) {
-    return this.http.get<User>(`${environment.apiBaseUrl}/user/friendship/${id}`);
+    return this.http.get<User>(`${environment.apiBaseUrl}/user/friendships/${id}`);
   }
 
   isBlocked(id: string) {

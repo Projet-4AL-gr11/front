@@ -63,6 +63,8 @@ export class ProfileComponent implements OnInit {
   async updateUser(id: string): Promise<void> {
     this.user = await firstValueFrom(this._userService.getById(id));
     this.user.createdPosts = [];
+    this.user.friends = [];
+    this.user.administratedGroup = [];
     this.getMorePosts();
     firstValueFrom(this._userService.getFriends(id)).then(friends =>this.user.friends.push(friends)) ;
     firstValueFrom(this._eventService.getEventParticipation()).then(eventParticipation =>this.user.eventsParticipation=eventParticipation);

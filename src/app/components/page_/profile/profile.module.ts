@@ -15,6 +15,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {PostModule} from "../../card_/post/post.module";
 import {UserCardModule} from "../../card_/user-card/user-card.module";
 import {DialogModule} from "../../dialog_/dialog.module";
+import {EventCardModules} from "../../card_/event-card/event-card.modules";
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {DialogModule} from "../../dialog_/dialog.module";
     MatMenuModule,
     PostModule,
     UserCardModule,
+    EventCardModules,
   ],
   exports: [
     ProfileComponent,

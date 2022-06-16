@@ -27,6 +27,7 @@ export class UserCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.user)
     this.canAdd();
   }
 
