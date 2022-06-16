@@ -7,7 +7,7 @@ const routes: Routes = [
   {path: "test", loadChildren: () => import('./components/page_/test/test.module').then(m => m.TestModule)},
   {path: "login", loadChildren: () => import('./components/page_/auth_/login/login.module').then(m => m.LoginModule)},
   {path: "register", loadChildren: () => import('./components/page_/auth_/register/register.module').then(m => m.RegisterModule)},
-  {path: "profile", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
+  {path: "profile/:id", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
   {path: "code", loadChildren: () => import('./components/page_/code/code.module').then(m => m.CodeModule)},
   {path: "social", loadChildren: () => import('./components/page_/social/social.module').then(m => m.SocialModule)},
   {path: "leaderboard", loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},

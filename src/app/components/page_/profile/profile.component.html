@@ -1,7 +1,12 @@
+<app-header class="w-100"></app-header>
 <div *ngIf="user?.blocksCurrentUser" fxLayoutAlign="center">
   <h1 class="m-5">L'utilisateur vous a bloqué</h1>
 </div>
 <div *ngIf="user && !user?.blocksCurrentUser" class="row m-0">
+  <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+    <div class="position-fixed">
+    </div>
+  </div>
   <div class="col-md-5 my-3">
     <div class="profil-user-scroll">
       <div class="user-card-full">
@@ -127,7 +132,7 @@
           <mat-tab label="Événements">
             <div class="my-3">
               <div *ngFor="let event of user.eventsParticipation">
-                <app-card-event [event]="event"></app-card-event>
+                <app-event-card [event]="event"></app-event-card>
               </div>
             </div>
           </mat-tab>

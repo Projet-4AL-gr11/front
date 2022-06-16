@@ -54,8 +54,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this._titleService.setTitle(params["id"] + " - " + environment.name);
-      this.updateUser(params["id"]).then();
+      this.updateUser(params["id"]).then(() =>
+        this._titleService.setTitle(this.user.username + " - " + environment.name)
+      );
     });
   }
 
@@ -68,6 +69,7 @@ export class ProfileComponent implements OnInit {
     firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked =>this.user.isBlocked=isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus =>this.user.friendshipStatus=friendshipStatus);
     firstValueFrom(this._groupService.getGroupsWhereUserIsAdmin(id)).then(administratedGroup =>this.user.administratedGroup.push(administratedGroup));
+    console.log(this.user);
   }
 
   getMorePosts() {

@@ -82,6 +82,6 @@ export class PostService {
   }
 
   getUserTimeline(id: string, limit: number, offset: number) {
-    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getTimeline/${offset}/${limit}`);
+    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getUserPost/${id}/${offset}/${limit}`);
   }
 }
