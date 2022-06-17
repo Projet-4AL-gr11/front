@@ -42,6 +42,7 @@ export class DialogCreatePostComponent implements OnInit {
       this._snackBar.open("Vous ne pouvez créer un poste s'il est vide.", "Fermer");
       return;
     }
+    console.log(this.text)
     firstValueFrom(this._postService.createPost(this.text, this.data?.sharesPost?.id, this.data?.sharedEvent?.id, this.medias))
       .then();
     this.dialogRef.close();

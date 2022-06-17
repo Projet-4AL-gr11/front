@@ -34,25 +34,33 @@ export class DialogReportComponent implements OnInit {
   }
 
   onClickSubmit(formData) {
+    console.log(" report ID " + this.data.id)
+    console.log(this.data.reportType)
     if (this.formData.valid){
       let newReport: Report = new Report();
       newReport.text = formData.text;
       if (this.data.reportType === ReportTypeEnum.USER) {
+        newReport.reportedUser = this.data.id;
         firstValueFrom(this._userService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       } else if (this.data.reportType === ReportTypeEnum.POST) {
+        newReport.reportedPost = this.data.id;
         firstValueFrom(this._postService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       } else if (this.data.reportType === ReportTypeEnum.EXERCISE) {
+        newReport.reportedExercise = this.data.id;
         firstValueFrom(this._organisationService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       } else if (this.data.reportType === ReportTypeEnum.GROUP) {
+        newReport.reportedGroup = this.data.id;
         firstValueFrom(this._groupService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       } else if (this.data.reportType === ReportTypeEnum.EVENT) {
+        newReport.reportedEvent = this.data.id;
         firstValueFrom(this._eventService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       } else if (this.data.reportType === ReportTypeEnum.COMMENT) {
+        newReport.reportedComment = this.data.id;
         firstValueFrom(this._commentService.sendReport(this.data.id, newReport))
           .then(() => this.dialogRef.close());
       }

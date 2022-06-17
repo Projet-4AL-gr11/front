@@ -14,8 +14,8 @@ import {firstValueFrom} from "rxjs";
 })
 export class UserCardComponent implements OnInit {
 
-  @Input()
-  user: User;
+
+  @Input('user') user: User;
   faCheckCircle = faCheckCircle;
   faUserPlus = faUserPlus;
   faTimes = faTimes;

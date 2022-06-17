@@ -66,11 +66,11 @@ export class ProfileComponent implements OnInit {
     this.user.friends = [];
     this.user.administratedGroup = [];
     this.getMorePosts();
-    firstValueFrom(this._userService.getFriends(id)).then(friends =>this.user.friends.push(friends)) ;
+    firstValueFrom(this._userService.getFriends(id)).then(friends =>this.user.friends = friends) ;
     firstValueFrom(this._eventService.getEventParticipation()).then(eventParticipation =>this.user.eventsParticipation=eventParticipation);
     firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked =>this.user.isBlocked=isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus =>this.user.friendshipStatus=friendshipStatus);
-    firstValueFrom(this._groupService.getGroupsWhereUserIsAdmin(id)).then(administratedGroup =>this.user.administratedGroup.push(administratedGroup));
+    firstValueFrom(this._groupService.getGroupsWhereUserIsAdmin(id)).then(administratedGroup =>this.user.administratedGroup = administratedGroup);
     console.log(this.user);
   }
 

@@ -11,6 +11,7 @@ import {
   DialogCreatePostComponent
 } from "../../dialog_/dialog-create-post/dialog-create-post.component";
 import {faCheckCircle, faComment, faEllipsisH, faShare, faThumbsUp} from '@fortawesome/free-solid-svg-icons';
+import {CommentService} from "../../../services/comment/comment.service";
 
 @Component({
   selector: 'app-post',
@@ -35,6 +36,7 @@ export class PostComponent implements OnInit {
   constructor(private _postService: PostService,
               public _authService: AuthService,
               private _mediaService: MediaService,
+              private _commentService: CommentService,
               public matDialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -52,6 +54,8 @@ export class PostComponent implements OnInit {
   updatePost(): void {
     firstValueFrom(this._postService.getPostLikes(this.post.id)).then(likes => this.post.likes = likes);
     firstValueFrom(this._postService.isPostLiked(this.post.id)).then(isLiked => this.post.isLiked = isLiked);
+    firstValueFrom(this._commentService.getComments(this.post.id)).then(comments => this.post.comments =comments);
+    console.log(this.post)
   }
 
 

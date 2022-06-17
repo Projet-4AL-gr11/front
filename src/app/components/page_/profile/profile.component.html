@@ -124,9 +124,9 @@
           </mat-tab>
           <mat-tab label="Amis">
             <div class="my-3">
-<!--              <div *ngFor="let user of user.friends" class="display-list-user">-->
-<!--                <app-user-card [user]="user" class="m-0"></app-user-card>-->
-<!--              </div>-->
+              <div *ngFor="let friend of user.friends" class="display-list-user">
+                <app-user-card [user]="friend" class="m-0"></app-user-card>
+              </div>
             </div>
           </mat-tab>
           <mat-tab label="Événements">
