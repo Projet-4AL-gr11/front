@@ -34,10 +34,8 @@ export class EventService {
     return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/notEnd`)
   }
 
-  getEventParticipation(): Observable<Event[]> {
-    const userId = this.authService.getCurrentUserId();
-    console.log("getEventParticipation - " + userId)
-    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${userId}`)
+  getEventParticipation(id): Observable<Event[]> {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${id}`)
   }
 
   getEventParticipant(eventId: string): Observable<User[]> {
@@ -52,12 +50,12 @@ export class EventService {
     return this.http.get<User[]>(`${environment.apiBaseUrl}/event/groupOwner/${eventId}`)
   }
 
-  isOwner(eventId: string): Observable<Boolean> {
-    return this.http.get<Boolean>(`${environment.apiBaseUrl}/event/isOwner/${eventId}`)
+  isOwner(eventId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/event/isOwner/${eventId}`)
   }
 
-  isMember(eventId: string): Observable<Boolean> {
-    return this.http.get<Boolean>(`${environment.apiBaseUrl}/event/isMember/${eventId}`)
+  isMember(eventId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiBaseUrl}/event/isMember/${eventId}`)
   }
 
   // TODO: Mettre en place l'ajout d'exercise
@@ -101,19 +99,20 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}`, userId)
+    console.log(userId)
+    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
   }
 
   removeParticipant(eventId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/event/participant/${eventId}`, userId)
+    return this.http.put(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null)
   }
 
   addExercise(eventId: string, exerciseId: string) {
-    return this.http.post(`${environment.apiBaseUrl}/event/exercise/${eventId}`, exerciseId)
+    return this.http.post(`${environment.apiBaseUrl}/event/exercise/${eventId}/${exerciseId}`, null)
   }
 
   removeExercise(eventId: string, exerciseId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/event/exercise/${eventId}`, exerciseId)
+    return this.http.put(`${environment.apiBaseUrl}/event/exercise/${eventId}/${exerciseId}`, null)
   }
 
   sendReport(id: string, report: Report) {

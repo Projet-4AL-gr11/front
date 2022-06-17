@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
-import {Observable} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {Router} from "@angular/router";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-header',
@@ -11,12 +12,15 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
+  user: User;
+
   constructor(
     public router: Router,
     public _authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user)
   }
 
   logout() {
