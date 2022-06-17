@@ -5,6 +5,7 @@ import {Post} from "../../shared/models/post.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {Comment} from "../../shared/models/comment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,24 +31,18 @@ export class PostService {
   }
 
   likePost(postId: string): Observable<void> {
-    return this.http.get<void>(`${environment.apiBaseUrl}/post/${postId}/like`);
+    return this.http.post<void>(`${environment.apiBaseUrl}/post/like/${postId}`, null);
   }
 
   sendReport(id: string, report: Report): Observable<any> {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/post`, report);
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/post`, report);
   }
 
   dislikePost(postId: string): Observable<void> {
-    return this.http.delete<void>(`${environment.apiBaseUrl}/post/${postId}/like`);
+    console.log("dislike de ce post " +postId)
+    return this.http.post<void>(`${environment.apiBaseUrl}/post/dislike/${postId}`, null);
   }
 
-  getComments(postId: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${environment.apiBaseUrl}/post/${postId}/comments`);
-  }
-
-  sendComment(postId: string, text: string): Observable<Comment> {
-    return this.http.post<Comment>(`${environment.apiBaseUrl}/post/${postId}/comment`, {text});
-  }
 
   deletePost(postId: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiBaseUrl}/post/${postId}`);
@@ -59,9 +54,6 @@ export class PostService {
 
   createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[]) {
     const formData = new FormData();
-    if (text === undefined) {
-      text = "";
-    }
     formData.append("text", text);
     if (sharesPostId !== undefined && sharesPostId !== null) {
       formData.append("sharesPost", sharesPostId);

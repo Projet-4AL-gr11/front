@@ -16,7 +16,7 @@ export class GroupService {
   constructor(private http: HttpClient, private mediaService: MediaService) { }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/group`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/group`, report)
   }
 
   findById(groupId: string) {
@@ -36,7 +36,7 @@ export class GroupService {
   }
 
   getGroupsWhereUserIsAdmin(groupId: string) {
-    return this.http.get<Group>(`${environment.apiBaseUrl}/group/whereAdmin/${groupId}`)
+    return this.http.get<Group[]>(`${environment.apiBaseUrl}/group/whereAdmin/${groupId}`)
   }
 
   addGroupFollower(groupId: string) {

@@ -11,6 +11,6 @@ export class ExerciseService {
   constructor(private http: HttpClient) { }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/exercise`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/exercise`, report)
   }
 }

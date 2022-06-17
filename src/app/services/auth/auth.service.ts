@@ -120,6 +120,9 @@ export class AuthService {
   public logout(): Observable<unknown> {
     this.userSubject.next(null);
     this.cookieService.delete('user');
+    this.cookieService.delete('Authentication');
+    this.cookieService.delete('Refresh');
+    this.cookieService.delete('username');
     return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
   }
 

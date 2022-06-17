@@ -117,7 +117,7 @@ export class EventService {
   }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/event`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/event`, report)
   }
 
 }

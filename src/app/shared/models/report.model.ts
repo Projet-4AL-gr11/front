@@ -5,8 +5,10 @@ import {Post} from "./post.model";
 export class Report {
   text: string;
   userReporter: User;
-  reportedUser?: User;
-  reportedGroup?: Group;
-  reportedPost?: Post;
-  reportedEvent?: Event;
+  reportedUser?: string;
+  reportedGroup?: string;
+  reportedPost?: string;
+  reportedEvent?: string;
+  reportedExercise?: string;
+  reportedComment?: string;
 }
