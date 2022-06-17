@@ -28,6 +28,7 @@ import {RouterModule} from "@angular/router";
 import {DialogModule} from "./components/dialog_/dialog.module";
 import {TestModule} from "./components/page_/test/test.module";
 import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor";
+import {PagePostModule} from "./components/page_/page-post/page-post.module";
 
 @NgModule({
   imports: [
@@ -49,7 +50,6 @@ import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor
     HttpClientModule,
     BrowserAnimationsModule,
     TimelineModule,
-    ProfileModule,
     MatDividerModule,
     MatInputModule,
     MatFormFieldModule,
@@ -59,7 +59,8 @@ import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor
     MatTooltipModule,
     RouterModule,
     //
-    AppRoutingModule
+    AppRoutingModule,
+    PagePostModule,
   ],
   declarations: [
     AppComponent,

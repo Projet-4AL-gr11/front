@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {PagePostComponent} from "./components/page_/page-post/page-post.component";
 
 
 const routes: Routes = [
@@ -8,10 +9,12 @@ const routes: Routes = [
   {path: "login", loadChildren: () => import('./components/page_/auth_/login/login.module').then(m => m.LoginModule)},
   {path: "register", loadChildren: () => import('./components/page_/auth_/register/register.module').then(m => m.RegisterModule)},
   {path: "profile/:id", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
+  // TODO: A modifier
+  // {path: "post/:id", loadChildren: () => import('./components/page_/page-post/page-post.module').then(m => m.PagePostModule)},
+  {path: "post/:id", component: PagePostComponent},
   {path: "code", loadChildren: () => import('./components/page_/code/code.module').then(m => m.CodeModule)},
   {path: "social", loadChildren: () => import('./components/page_/social/social.module').then(m => m.SocialModule)},
   {path: "leaderboard", loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},
-  {path: "profile", loadChildren: () => import('./components/page_/profile/profile.module').then(m => m.ProfileModule)},
   {path: "timeline", loadChildren: () => import('./components/page_/timeline/timeline.module').then(m => m.TimelineModule)},
   {path: '**', redirectTo: "/"},
 ];
