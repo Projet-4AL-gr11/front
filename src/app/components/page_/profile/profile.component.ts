@@ -82,7 +82,6 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         }
       });
-    console.log("post: " + this.user.createdPosts?.length + " limit: " + this.limit + " offset : " + this.offset)
   }
 
   showDialogueReport() {

@@ -30,8 +30,10 @@ import {TestModule} from "./components/page_/test/test.module";
 import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor";
 import {PagePostModule} from "./components/page_/page-post/page-post.module";
 import {NotificationsModule} from "./components/page_/notifications/notifications.module";
-import { CardUserAskJoinGroupComponent } from './components/card_/card-user-ask-join-group/card-user-ask-join-group.component';
 import {CardUserAskJoinGroupModule} from "./components/card_/card-user-ask-join-group/card-user-ask-join-group.module";
+import {PageEventModule} from "./components/page_/page-event/page-event.module";
+import {CardLeaderboardModule} from "./components/card_/card-leaderbord/card-leaderboard.module";
+import {CardEventRankingModule} from "./components/card_/card-event-ranking/card-event-ranking.module";
 
 @NgModule({
   imports: [
@@ -64,6 +66,9 @@ import {CardUserAskJoinGroupModule} from "./components/card_/card-user-ask-join-
     PagePostModule,
     NotificationsModule,
     CardUserAskJoinGroupModule,
+    PageEventModule,
+    CardLeaderboardModule,
+    CardEventRankingModule,
     //
     AppRoutingModule,
   ],

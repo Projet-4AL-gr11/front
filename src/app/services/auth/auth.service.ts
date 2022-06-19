@@ -20,8 +20,6 @@ export class AuthService {
     this.userSubject = new BehaviorSubject<User>(null);
     this.user = this.userSubject.asObservable();
     timer(0, 30000).subscribe(async () => await this.updateUser());
-    console.log("Current User in Auth : ")
-    console.log(this.user )
   }
 
   async updateUser() {
@@ -36,8 +34,6 @@ export class AuthService {
        await this.getSentFriendshipRequest();
        await this.getGroup();
     }
-    console.log("Current User in Auth : ")
-    console.log(this.user )
   }
 
   getParticipations(): Observable<Event[]> {
@@ -67,7 +63,6 @@ export class AuthService {
   getReceivedFriendshipRequest(): Observable<FriendRequest[]> {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/received-friendship-request`)
       .pipe(map(requests => {
-        console.log("test")
         let user = this.userSubject.getValue();
         user.friendRequests = requests;
         this.userSubject.next(user);

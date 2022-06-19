@@ -1,0 +1,37 @@
+<app-header class="w-100"></app-header>
+
+<div class=" d-flex flex-column align-items-center main-2 ">
+
+  <div class="component--event-page">
+    <div class="title-envent">
+      {{event?.name}}
+    </div>
+    <div class="event-desciption">
+      <p>{{event?.description}}</p>
+    </div>
+    <div class="container-body-event">
+      <div class="event-part-one">
+        <div class="timer">{{ timer | date: 'hh:mm:ss' }}</div>
+
+        <div class="event-exo-card" *ngFor="let exercise of event?.exercises;index as i" (click)="this.setExercise(exercise)" >
+          <div class="left-part">
+            <div class="title-number-exo">{{i + 1}}</div>
+          </div>
+          <div class="right-part">
+            <div class="title-one-card">{{exercise?.name}}</div>
+            <div class="subtitle-one-card">{{exercise?.exerciseTemplate?.description}}</div>
+          </div>
+        </div>
+      </div>
+      <app-event-exercise [exercise]="currentExercise"></app-event-exercise>
+    </div>
+    <div class="classement-part">
+      <div class="event-ranking-div">
+        <H3 align="center">Classement Event</H3>
+        <app-card-event-ranking [eventRankings]="event?.eventRanking"></app-card-event-ranking>
+      </div>
+    </div>
+  </div>
+
+
+</div>
