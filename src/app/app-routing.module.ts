@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {PagePostComponent} from "./components/page_/page-post/page-post.component";
+import {TimelineComponent} from "./components/page_/timeline/timeline.component";
 
 
 const routes: Routes = [
@@ -12,10 +13,12 @@ const routes: Routes = [
   // TODO: A modifier
   // {path: "post/:id", loadChildren: () => import('./components/page_/page-post/page-post.module').then(m => m.PagePostModule)},
   {path: "post/:id", component: PagePostComponent},
+  // {path: "timeline", loadChildren: () => import('./components/page_/timeline/timeline.module').then(m => m.TimelineModule)},
+  {path: "timeline", component: TimelineComponent},
+  {path: "notifications", loadChildren: () => import('./components/page_/notifications/notifications.module').then(m => m.NotificationsModule)},
   {path: "code", loadChildren: () => import('./components/page_/code/code.module').then(m => m.CodeModule)},
   {path: "social", loadChildren: () => import('./components/page_/social/social.module').then(m => m.SocialModule)},
   {path: "leaderboard", loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},
-  {path: "timeline", loadChildren: () => import('./components/page_/timeline/timeline.module').then(m => m.TimelineModule)},
   {path: '**', redirectTo: "/"},
 ];
 

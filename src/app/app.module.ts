@@ -29,6 +29,9 @@ import {DialogModule} from "./components/dialog_/dialog.module";
 import {TestModule} from "./components/page_/test/test.module";
 import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor";
 import {PagePostModule} from "./components/page_/page-post/page-post.module";
+import {NotificationsModule} from "./components/page_/notifications/notifications.module";
+import { CardUserAskJoinGroupComponent } from './components/card_/card-user-ask-join-group/card-user-ask-join-group.component';
+import {CardUserAskJoinGroupModule} from "./components/card_/card-user-ask-join-group/card-user-ask-join-group.module";
 
 @NgModule({
   imports: [
@@ -58,9 +61,11 @@ import {PagePostModule} from "./components/page_/page-post/page-post.module";
     MatButtonModule,
     MatTooltipModule,
     RouterModule,
+    PagePostModule,
+    NotificationsModule,
+    CardUserAskJoinGroupModule,
     //
     AppRoutingModule,
-    PagePostModule,
   ],
   declarations: [
     AppComponent,

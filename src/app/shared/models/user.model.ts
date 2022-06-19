@@ -7,6 +7,7 @@ import {FriendRequestStatus} from "../enum/friendship_request_status.enum";
 import {Event} from "./event.model";
 import {EventRanking} from "./event_ranking.model";
 import {Leaderboard} from "./leaderboard.model";
+import {GroupRequest} from "./GroupRequest.model";
 
 export class User {
   id: string;
@@ -32,4 +33,5 @@ export class User {
   leaderboards: Leaderboard[];
   eventRankings: EventRanking[];
   administratedGroup: Group[];
+  groupRequests: GroupRequest[];
 }
