@@ -5,8 +5,12 @@
   <div class="event-second-part">
     <div class="editor">
       <div class="exercise-title">{{exercise?.name}}</div>
+      <div
+        class="app-ace-editor"
+        #editor
+      ></div>
     </div>
-    <div class="button-execute">Excuter</div>
+    <button class="button-execute" (click)="executeCode()">Excuter</button>
   </div>
   <div class="event-tree-part">
     <div class="title-tree-part">Console</div>

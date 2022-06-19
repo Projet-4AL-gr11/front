@@ -24,4 +24,12 @@ export class ExerciseService {
   getExerciseTemplateWithExerciseId(id: string) {
     return this.http.get<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/${id}`);
   }
+
+  executeCode(exerciseId: string, value: any) {
+    return this.http.put<any>(`${environment.apiBaseUrl}/exercise/execCode/${exerciseId}` , value)
+  }
+
+  getAllExerciseTemplate() {
+    return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`);
+  }
 }

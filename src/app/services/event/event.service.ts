@@ -66,7 +66,7 @@ export class EventService {
     formData.append("startDate", newEvent.value.startDate.toString());
     formData.append("endDate", newEvent.value.endDate.toString());
     formData.append("participantsLimit", newEvent.value.participantsLimit.toString());
-    // TODO: il vas surement y avoir un problème avec le faite que languages est un tableau
+    formData.append("exerciseTemplateForm", newEvent.value.exerciseTemplates.toString())
     formData.append("languages", newEvent.value.languages)
     if (group) {
       formData.append("group", group.id);

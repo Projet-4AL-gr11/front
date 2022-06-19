@@ -81,6 +81,11 @@
     </div>
   </div>
   <!-- TODO : Ajouter la selection des exercises -->
+  <div class="selcet-exercise-template">
+    <mat-select formControlName="exerciseTempalteForm" multiple>
+      <mat-option *ngFor="let exerciseTemplate of exerciseTemplates" [value]="exerciseTemplate">{{exerciseTemplate?.name}}</mat-option>
+    </mat-select>
+  </div>
   <mat-divider></mat-divider>
   <div class="dialog-actions-create-event" mat-dialog-actions>
     <div class="button-grid-create-event">
