@@ -44,14 +44,12 @@ export class PagePostComponent implements OnInit {
   }
 
   async update(postId: string): Promise<void> {
-    console.log(postId)
     await firstValueFrom(this._postService.getPostById(postId)).then(post => {
       this.post = post;
       this._titleService.setTitle(post.text + " - " + environment.name);
     });
     await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
     await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
-    console.log(this.post)
   }
 
   sendComment(): void {

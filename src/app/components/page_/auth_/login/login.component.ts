@@ -34,14 +34,12 @@ export class LoginComponent implements OnInit {
     const formValue = this.userForm.value;
     firstValueFrom(this._authService.login(formValue.username, formValue.password))
       .then().catch(error => {
-      console.log("tzewstz")
 
       this.submitted = false;
       if (error.status === 400) {
         this.error = true;
       }
     }).finally(() => {
-      console.log("tzewstz")
 
       if (!this.error){
         this.router.navigate(['/timeline']).then();

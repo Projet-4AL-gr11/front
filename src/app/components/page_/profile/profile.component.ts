@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit {
     firstValueFrom(this._eventService.getEventParticipation(id)).then(eventParticipation =>this.user.eventsParticipation=eventParticipation);
     firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked =>this.user.isBlocked=isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus =>this.user.friendshipStatus=friendshipStatus);
-    console.log(this.user);
   }
 
   getMorePosts() {
@@ -83,6 +82,7 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         }
       });
+    console.log("post: " + this.user.createdPosts?.length + " limit: " + this.limit + " offset : " + this.offset)
   }
 
   showDialogueReport() {

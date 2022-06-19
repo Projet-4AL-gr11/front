@@ -24,7 +24,7 @@
             class="ml-auto button-add-friend-disable"
             mat-raised-button><span>Invitation envoyé</span>
     </button>
-    <div class="">
+    <div class="ask-friendship">
       <a (click)="this.delFriendshipRequest()" class=" button-reject-invitation"
          *ngIf="user.friendshipStatus === statusEnum.RECEIVED"
          style=" padding-right: 10px" label="Rejeter l'invitation">

@@ -7,6 +7,7 @@ import {FriendRequest} from "../../shared/models/friend_request.model";
 import {Event} from "../../shared/models/event.model";
 import {Group} from "../../shared/models/group.model";
 import {CookieService} from "ngx-cookie-service";
+import {GroupRequest} from "../../shared/models/GroupRequest.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +20,24 @@ export class AuthService {
     this.userSubject = new BehaviorSubject<User>(null);
     this.user = this.userSubject.asObservable();
     timer(0, 30000).subscribe(async () => await this.updateUser());
+    console.log("Current User in Auth : ")
+    console.log(this.user )
   }
 
   async updateUser() {
-    if (this.getCurrentUserId()) {
+    if (!this.getCurrentUserId()) {
       await this.getCurrentUser();
     }
     if (this.getCurrentUserId() && this.userSubject) {
-      await this.getParticipations();
-      await this.getFriends();
-      await this.getReceivedFriendshipRequest();
-      await this.getSentFriendshipRequest();
-      await this.getGroup();
+       await this.getParticipations();
+       await this.getFriends();
+       await this.getReceivedFriendshipRequest();
+       await this.getReceivedGroupRequest();
+       await this.getSentFriendshipRequest();
+       await this.getGroup();
     }
+    console.log("Current User in Auth : ")
+    console.log(this.user )
   }
 
   getParticipations(): Observable<Event[]> {
@@ -61,8 +67,19 @@ export class AuthService {
   getReceivedFriendshipRequest(): Observable<FriendRequest[]> {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/received-friendship-request`)
       .pipe(map(requests => {
+        console.log("test")
         let user = this.userSubject.getValue();
         user.friendRequests = requests;
+        this.userSubject.next(user);
+        return requests;
+      }));
+  }
+
+  getReceivedGroupRequest(): Observable<GroupRequest[]> {
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest`)
+      .pipe(map(requests => {
+        let user = this.userSubject.getValue();
+        user.groupRequests = requests;
         this.userSubject.next(user);
         return requests;
       }));
@@ -94,7 +111,6 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        console.log(environment.domain)
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});

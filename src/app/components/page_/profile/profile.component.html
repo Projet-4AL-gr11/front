@@ -1,8 +1,8 @@
 <app-header class="w-100"></app-header>
-<div *ngIf="user?.blocksCurrentUser" fxLayoutAlign="center">
+<div *ngIf="user?.isBlocked" fxLayoutAlign="center">
   <h1 class="m-5">L'utilisateur vous a bloqué</h1>
 </div>
-<div *ngIf="user && !user?.blocksCurrentUser" class="row m-0">
+<div *ngIf="user && !user?.isBlocked" class="row m-0">
   <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
     <div class="position-fixed">
     </div>
@@ -102,11 +102,11 @@
               </div>
             </div>
           </div>
-          <div class="user-card-div-row-2">
-            <div class="user-card-infos">
-              <p>{{user.bio}}</p>
-            </div>
-          </div>
+<!--          <div class="user-card-div-row-2">-->
+<!--            <div class="user-card-infos">-->
+<!--              <p>{{user.bio}}</p>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
       <div class="tab-user-profil">
