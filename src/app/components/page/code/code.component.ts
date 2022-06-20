@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as ace from "ace-builds";
+import {ExerciseService} from "../../../services/exercise/exercise.service";
 
 @Component({
   selector: 'app-code',
@@ -10,19 +11,22 @@ export class CodeComponent implements OnInit {
   //creer le tableau des language
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;
+  foo: string = "";
+  aceEditor;
+
+
   language = 'python';
 
-  constructor() { }
+  constructor(private exerciseService: ExerciseService) { }
 
   ngOnInit(): void {
 
   }
-
   ngAfterViewInit(): void {
-    const aceEditor = ace.edit(this.editor.nativeElement);
+    this.aceEditor = ace.edit(this.editor.nativeElement)
     ace.config.set("fontSize", "14px");
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
-    aceEditor.setTheme("ace/theme/monokai");
+    this.aceEditor.setTheme("ace/theme/monokai");
 
     this.changeLanguage();
   }
@@ -52,8 +56,10 @@ export class CodeComponent implements OnInit {
 }
 
   executeCode() {
+    console.log("hello");
 
-    }
+    this.foo = this.exerciseService.runCode(this.aceEditor.getValue()).message;
+  }
 
 
 }

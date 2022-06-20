@@ -15,7 +15,10 @@ export class AuthService {
   public user: Observable<User>;
   private userSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {
     this.userSubject = new BehaviorSubject<User>(null);
     this.user = this.userSubject.asObservable();
     timer(0, 30000).subscribe(async () => await this.updateUser());
