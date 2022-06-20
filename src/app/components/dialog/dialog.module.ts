@@ -13,13 +13,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {PipesModules} from "../../pipes/pipes.modules";
 import {MatMenuModule} from "@angular/material/menu";
-import {PostShareCardModule} from "../card/post-share-card/post-share-card.module";
 import {DialogCreateEventComponent} from "./dialog-create-event/dialog-create-event.component";
 import {DialogCreateGroupComponent} from "./dialog-create-group/dialog-create-group.component";
 import {DialogCreatePostComponent} from "./dialog-create-post/dialog-create-post.component";
 import {DialogReportComponent} from "./dialog-report/dialog-report.component";
 import {DialogUpdateGroupComponent} from "./dialog-update-group/dialog-update-group.component";
 import {DialogUpdateUserComponent} from "./dialog-update-user/dialog-update-user.component";
+import {CardsModule} from "../card/cards.module";
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import {DialogUpdateUserComponent} from "./dialog-update-user/dialog-update-user
     MatDialogModule,
     MatMenuModule,
     PipesModules,
-    PostShareCardModule,
+    CardsModule,
     MatFormFieldModule,
     FormsModule,
     MatButtonModule,

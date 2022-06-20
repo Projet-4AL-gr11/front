@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
-import {LeaderboardModule} from "./leaderboard/leaderboard.module";
+import {LeaderboardModule} from "./components/page/leaderboard/leaderboard.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
 import {CodeModule} from "./components/page/code/code.module";
 import {SocialModule} from "./components/page/social/social.module";
