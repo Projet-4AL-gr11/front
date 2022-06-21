@@ -1,6 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {PostComponent} from "./post.component";
+import {PostCardComponent} from "./post-card.component";
 import {RouterModule} from "@angular/router";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {PipesModules} from "../../../pipes/pipes.modules";
@@ -8,7 +8,7 @@ import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
-    PostComponent,
+    PostCardComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import {MatMenuModule} from "@angular/material/menu";
     MatMenuModule
   ],
   exports: [
-    PostComponent,
+    PostCardComponent,
   ]
 })
-export class PostModule { }
+export class PostCardModule { }

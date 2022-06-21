@@ -14,10 +14,10 @@ import {faCheckCircle, faComment, faEllipsisH, faShare, faThumbsUp} from '@forta
 
 @Component({
   selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  templateUrl: './post-card.component.html',
+  styleUrls: ['./post-card.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostCardComponent implements OnInit {
 
   @Input()
   post: Post;

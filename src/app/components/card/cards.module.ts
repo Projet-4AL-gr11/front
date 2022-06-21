@@ -7,15 +7,15 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCardModule} from "@angular/material/card";
 import {MatMenuModule} from "@angular/material/menu";
 import {EventCardComponent} from "./event-card/event-card.component";
-import {PostComponent} from "./post/post.component";
 import {PostShareCardComponent} from "./post-share-card/post-share-card.component";
 import {UserCardComponent} from "./user-card/user-card.component";
 import {RouterModule} from "@angular/router";
+import {PostCardComponent} from "./post-card/post-card.component";
 
 @NgModule({
   declarations: [
     EventCardComponent,
-    PostComponent,
+    PostCardComponent,
     PostShareCardComponent,
     UserCardComponent,
   ],
@@ -31,7 +31,7 @@ import {RouterModule} from "@angular/router";
   ],
   exports: [
     EventCardComponent,
-    PostComponent,
+    PostCardComponent,
     PostShareCardComponent,
     UserCardComponent,
   ]
