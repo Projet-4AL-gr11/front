@@ -7,6 +7,7 @@ import {throwError} from "rxjs";
 import {User} from "../../components/shared/models/user.model";
 import {FormGroup} from "@angular/forms";
 import {MediaService} from "../media/media.service";
+import {GroupRequest} from "../../shared/models/GroupRequest.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class GroupService {
   constructor(private http: HttpClient, private mediaService: MediaService) { }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/group`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/group`, report)
   }
 
   findById(groupId: string) {
@@ -36,7 +37,7 @@ export class GroupService {
   }
 
   getGroupsWhereUserIsAdmin(groupId: string) {
-    return this.http.get<Group>(`${environment.apiBaseUrl}/group/whereAdmin/${groupId}`)
+    return this.http.get<Group[]>(`${environment.apiBaseUrl}/group/whereAdmin/${groupId}`)
   }
 
   addGroupFollower(groupId: string) {
@@ -99,11 +100,19 @@ export class GroupService {
     return this.http.put(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, userId);
   }
 
-  acceptGroupRequest(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/acceptGroupRequest/${groupId}`, userId);
+  acceptGroupRequest(groupId: string) {
+    return this.http.post(`${environment.apiBaseUrl}/group/acceptGroupRequest/${groupId}`, null);
   }
 
-  cancelGroupRequest(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/cancelGroupRequest/${groupId}`, userId);
+  cancelGroupRequest(groupId: string) {
+    return this.http.post(`${environment.apiBaseUrl}/group/cancelGroupRequest/${groupId}`, null);
+  }
+
+  cancelGroupRequestAdmin(groupId: string, userId: string) {
+    return this.http.put(`${environment.apiBaseUrl}/group/cancelGroupRequestAdmin/${groupId}`, userId);
+  }
+
+  getGroupRequest() {
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/currentUser` );
   }
 }

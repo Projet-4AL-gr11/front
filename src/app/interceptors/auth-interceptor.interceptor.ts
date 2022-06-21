@@ -13,8 +13,7 @@ export class GlobalHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
       request = request.clone({
-        withCredentials: false,
-        headers: request.headers.set('Access-Control-Allow-Origin', '*')
+        withCredentials: true,
       });
 
     return next.handle(request).pipe(

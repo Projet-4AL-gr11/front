@@ -7,6 +7,7 @@ import {FriendRequest} from "../../components/shared/models/friend_request.model
 import {Event} from "../../components/shared/models/event.model";
 import {Group} from "../../components/shared/models/group.model";
 import {CookieService} from "ngx-cookie-service";
+import {GroupRequest} from "../../shared/models/GroupRequest.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,16 @@ export class AuthService {
   }
 
   async updateUser() {
-    if (this.getCurrentUserId()) {
+    if (!this.getCurrentUserId()) {
       await this.getCurrentUser();
     }
     if (this.getCurrentUserId() && this.userSubject) {
-      await this.getParticipations();
-      await this.getFriends();
-      await this.getReceivedFriendshipRequest();
-      await this.getSentFriendshipRequest();
-      await this.getGroup();
+       await this.getParticipations();
+       await this.getFriends();
+       await this.getReceivedFriendshipRequest();
+       await this.getReceivedGroupRequest();
+       await this.getSentFriendshipRequest();
+       await this.getGroup();
     }
   }
 
@@ -71,6 +73,16 @@ export class AuthService {
       }));
   }
 
+  getReceivedGroupRequest(): Observable<GroupRequest[]> {
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest`)
+      .pipe(map(requests => {
+        let user = this.userSubject.getValue();
+        user.groupRequests = requests;
+        this.userSubject.next(user);
+        return requests;
+      }));
+  }
+
   getSentFriendshipRequest(): Observable<FriendRequest[]> {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/sent-friendship-request`)
       .pipe(map(requests => {
@@ -97,10 +109,9 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        console.log(environment.domain)
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
-        this.cookieService.set('refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
       }));
@@ -113,7 +124,7 @@ export class AuthService {
     })
       .pipe(map(user => {
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.updateUser();
         return user;
@@ -123,6 +134,9 @@ export class AuthService {
   public logout(): Observable<unknown> {
     this.userSubject.next(null);
     this.cookieService.delete('user');
+    this.cookieService.delete('Authentication');
+    this.cookieService.delete('Refresh');
+    this.cookieService.delete('username');
     return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
   }
 

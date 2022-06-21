@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient, private mediaService: MediaService) { }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/user`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/user`, report)
   }
 
   getById(id: string) {
@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getFriends(id: string) {
-    return this.http.get<User>(`${environment.apiBaseUrl}/user/friendship/${id}`);
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/user/friendships/${id}`);
   }
 
   isBlocked(id: string) {

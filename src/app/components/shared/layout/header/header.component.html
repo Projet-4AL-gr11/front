@@ -16,12 +16,18 @@
         <a class="nav-link disabled" >Leaderboard</a>
       </li>
     </ul>
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
+    <ul class="navbar-nav ms-auto" *ngIf="_authService.isAuthenticated()">
+      <li class="notifications">
+        <a [routerLink]="['/notifications']" class="nav-link"
+                matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
+          <fa-icon [icon]="faBell" size="2x"></fa-icon>
+        </a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger">Logout </button>
+        <a class="nav-link" [routerLink]="['/profile/' + user?.id]">Profile</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger" (click)="logout()">Logout </button>
       </li>
     </ul>
 
