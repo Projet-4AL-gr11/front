@@ -11,6 +11,11 @@ import {PostShareCardComponent} from "./post-share-card/post-share-card.componen
 import {UserCardComponent} from "./user-card/user-card.component";
 import {RouterModule} from "@angular/router";
 import {PostCardComponent} from "./post-card/post-card.component";
+import {EventRankingCardComponent} from "./event-ranking-card/event-ranking-card.component";
+import {EventExerciceCardComponent} from "./event-exercice-card/event-exercice-card.component";
+import {LeaderboardCardComponent} from "./leaderboard-card/leaderboard-card.component";
+import {CommentCardComponent} from "./comment-card/comment-card.component";
+import {GroupRequestCardComponent} from "./group-request-card/group-request-card.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +23,11 @@ import {PostCardComponent} from "./post-card/post-card.component";
     PostCardComponent,
     PostShareCardComponent,
     UserCardComponent,
+    EventRankingCardComponent,
+    EventExerciceCardComponent,
+    LeaderboardCardComponent,
+    CommentCardComponent,
+    GroupRequestCardComponent,
   ],
   imports: [
     CommonModule,
@@ -27,13 +37,20 @@ import {PostCardComponent} from "./post-card/post-card.component";
     MatButtonModule,
     MatTooltipModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+
   ],
   exports: [
     EventCardComponent,
     PostCardComponent,
     PostShareCardComponent,
     UserCardComponent,
+    EventRankingCardComponent,
+    EventExerciceCardComponent,
+    LeaderboardCardComponent,
+    CommentCardComponent,
+    GroupRequestCardComponent,
+
   ]
 })
 export class CardsModule { }

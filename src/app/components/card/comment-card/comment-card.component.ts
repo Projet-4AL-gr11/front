@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DialogReportComponent} from "../../dialog_/dialog-report/dialog-report.component";
-import {ReportTypeEnum} from "../../../shared/enum/report_type.enum";
 import {AuthService} from "../../../services/auth/auth.service";
-import {CommentService} from "../../../services/comment/comment.service";
 import {MatDialog} from "@angular/material/dialog";
-import {Comment} from "../../../shared/models/comment.model";
 import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
+import {CommentService} from "../../../services/comment/comment.service";
+import {Comment} from "../../shared/models/comment.model";
+import { ReportTypeEnum } from '../../shared/enum/report_type.enum';
 
 @Component({
   selector: 'app-comment-card',

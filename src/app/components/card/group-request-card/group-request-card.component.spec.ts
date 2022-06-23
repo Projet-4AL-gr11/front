@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {GroupRequestCardComponent} from "./group-request-card.component";
 
-import { CardUserAskJoinGroupComponent } from './card-user-ask-join-group.component';
 
 describe('CardUserAskJoinGroupComponent', () => {
-  let component: CardUserAskJoinGroupComponent;
-  let fixture: ComponentFixture<CardUserAskJoinGroupComponent>;
+  let component: GroupRequestCardComponent;
+  let fixture: ComponentFixture<GroupRequestCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardUserAskJoinGroupComponent ]
+      declarations: [ GroupRequestCardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CardUserAskJoinGroupComponent);
+    fixture = TestBed.createComponent(GroupRequestCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

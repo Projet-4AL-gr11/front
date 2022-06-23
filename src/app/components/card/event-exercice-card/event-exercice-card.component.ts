@@ -1,18 +1,18 @@
 import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Exercise} from "../../../shared/models/exercise.model";
 import {firstValueFrom} from "rxjs";
 import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
-import {Leaderboard} from "../../../shared/models/leaderboard.model";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
-import {ExerciseTemplate} from "../../../shared/models/erxercise_template.model";
 import * as ace from "ace-builds";
+import { Leaderboard } from '../../shared/models/leaderboard.model';
+import { ExerciseTemplate } from '../../shared/models/erxercise_template.model';
+import { Exercise } from '../../shared/models/exercise.model';
 
 @Component({
   selector: 'app-event-exercise',
-  templateUrl: './event-exercise.component.html',
-  styleUrls: ['./event-exercise.component.css']
+  templateUrl: './event-exercice-card.component.html',
+  styleUrls: ['./event-exercice-card.component.css']
 })
-export class EventExerciseComponent implements OnInit, OnChanges, AfterViewInit {
+export class EventExerciceCardComponent implements OnInit, OnChanges, AfterViewInit {
   result: string;
   leaderboards: Leaderboard[] = [];
   exerciseTemplate: ExerciseTemplate;
