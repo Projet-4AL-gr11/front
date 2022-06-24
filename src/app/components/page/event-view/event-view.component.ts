@@ -1,20 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../../services/event/event.service";
 import {Title} from "@angular/platform-browser";
-import {Event} from "../../../shared/models/event.model";
-import {firstValueFrom, map, share, Subscription, timer} from "rxjs";
+import {Event} from "../../../services/models/event.model";
+import {firstValueFrom} from "rxjs";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
-import {Exercise} from "../../../shared/models/exercise.model";
 import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
+import {Exercise} from "../../../services/models/exercise.model";
 
 @Component({
   selector: 'app-page-event',
-  templateUrl: './page-event.component.html',
-  styleUrls: ['./page-event.component.css']
+  templateUrl: './event-view.component.html',
+  styleUrls: ['./event-view.component.css']
 })
-export class PageEventComponent implements OnInit {
+export class EventViewComponent implements OnInit {
 
   event: Event;
   result: string;

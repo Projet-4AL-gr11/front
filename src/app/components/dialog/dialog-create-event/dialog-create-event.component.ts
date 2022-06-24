@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Language} from "../../shared/models/language.model";
+import {Language} from "../../../services/models/language.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {EventService} from "../../../services/event/event.service";
@@ -8,7 +8,9 @@ import {LanguageService} from "../../../services/language/language.service";
 import {GroupService} from "../../../services/group/group.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
-import {Group} from "../../shared/models/group.model";
+import {Group} from "../../../services/models/group.model";
+import {ExerciseService} from "../../../services/exercise/exercise.service";
+import {ExerciseTemplate} from "../../../services/models/erxercise_template.model";
 
 @Component({
   selector: 'app-dialog-create-event',
@@ -22,12 +24,13 @@ export class DialogCreateEventComponent implements OnInit {
   picture: File;
   pictureURL: string;
   mediaURL: string;
-
+  exerciseTemplates: ExerciseTemplate[]
   constructor(public dialogRef: MatDialogRef<DialogCreateEventComponent>,
               private _eventService: EventService,
               public _authService: AuthService,
               public _languageService: LanguageService,
               private _groupService: GroupService,
+              private _exerciseService: ExerciseService,
               private _snackBar: MatSnackBar,
               private _formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: { group: Group }) {
@@ -67,9 +70,9 @@ export class DialogCreateEventComponent implements OnInit {
       return;
     }
     if (this.newEventForm.valid){
-        firstValueFrom(
-          this._eventService.createEvent(this.newEventForm, this.data?.group))
-          .then(() => this.dialogRef.close());
+      firstValueFrom(
+        this._eventService.createEvent(this.newEventForm, this.data?.group))
+        .then(() => this.dialogRef.close());
     }
 
   }
@@ -89,6 +92,9 @@ export class DialogCreateEventComponent implements OnInit {
       .then(user => {
         this.newEventForm.value.user = user;
       });
+    firstValueFrom(this._exerciseService.getAllExerciseTemplate()).then(
+      exerciseTemplates => this.exerciseTemplates = exerciseTemplates
+    )
   }
 
   private initializeFormGroup() {
@@ -114,6 +120,9 @@ export class DialogCreateEventComponent implements OnInit {
       endDate: new FormControl('', [
         Validators.required
       ]),
+      exerciseTemplateForm: new FormControl('',[
+        Validators.required
+      ])
     })
   }
 }

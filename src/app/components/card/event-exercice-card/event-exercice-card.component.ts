@@ -3,9 +3,9 @@ import {firstValueFrom} from "rxjs";
 import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import * as ace from "ace-builds";
-import { Leaderboard } from '../../shared/models/leaderboard.model';
-import { ExerciseTemplate } from '../../shared/models/erxercise_template.model';
-import { Exercise } from '../../shared/models/exercise.model';
+import { Leaderboard } from '../../../services/models/leaderboard.model';
+import { ExerciseTemplate } from '../../../services/models/erxercise_template.model';
+import { Exercise } from '../../../services/models/exercise.model';
 
 @Component({
   selector: 'app-event-exercise',

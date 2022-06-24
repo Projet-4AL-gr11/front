@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GroupService} from "../../../services/group/group.service";
-import {Group} from "../../shared/models/group.model";
+import {Group} from "../../../services/models/group.model";
 import {firstValueFrom} from "rxjs";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 

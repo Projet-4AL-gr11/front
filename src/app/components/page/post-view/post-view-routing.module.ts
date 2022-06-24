@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PagePostComponent} from "./page-post.component";
+import {PostViewComponent} from "./post-view.component";
 
 const routes: Routes = [
   {
@@ -8,7 +8,7 @@ const routes: Routes = [
     children: [
       {
         path: ":id",
-        component: PagePostComponent
+        component: PostViewComponent
       }
     ]
   }
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagePostRoutingModule { }
+export class PostViewRoutingModule { }

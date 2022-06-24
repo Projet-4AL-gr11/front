@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {GroupService} from "../../../services/group/group.service";
 import {firstValueFrom} from "rxjs";
-import {Group} from "../../shared/models/group.model";
+import {Group} from "../../../services/models/group.model";
 
 @Component({
   selector: 'app-dialog-update-group',

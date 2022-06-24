@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Report} from "../../components/shared/models/report.model";
+import {Report} from "../models/report.model";
 import {environment} from "../../../environments/environment";
-import {Exercise} from "../../shared/models/exercise.model";
-import {EventRanking} from "../../shared/models/event_ranking.model";
-import {ExerciseTemplate} from "../../shared/models/erxercise_template.model";
+import {Exercise} from "../models/exercise.model";
+import {ExerciseTemplate} from "../models/erxercise_template.model";
 
 @Injectable({
   providedIn: 'root'

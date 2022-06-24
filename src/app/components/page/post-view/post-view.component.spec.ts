@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PagePostComponent } from './page-post.component';
+import { PostViewComponent } from './post-view.component';
 
 describe('PagePostComponent', () => {
-  let component: PagePostComponent;
-  let fixture: ComponentFixture<PagePostComponent>;
+  let component: PostViewComponent;
+  let fixture: ComponentFixture<PostViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PagePostComponent ]
+      declarations: [ PostViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PagePostComponent);
+    fixture = TestBed.createComponent(PostViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

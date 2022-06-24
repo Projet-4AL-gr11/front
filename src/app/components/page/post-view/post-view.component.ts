@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
-import {Post} from "../../../shared/models/post.model";
+import {Post} from "../../../services/models/post.model";
 import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../../services/post/post.service";
 import {UserService} from "../../../services/user/user.service";
@@ -13,10 +13,10 @@ import {CommentService} from "../../../services/comment/comment.service";
 
 @Component({
   selector: 'app-page-post',
-  templateUrl: './page-post.component.html',
-  styleUrls: ['./page-post.component.css']
+  templateUrl: './post-view.component.html',
+  styleUrls: ['./post-view.component.css']
 })
-export class PagePostComponent implements OnInit {
+export class PostViewComponent implements OnInit {
 
   faTimes = faTimes;
   faImage = faImage;

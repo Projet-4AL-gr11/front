@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {User} from "../../components/shared/models/user.model";
-import {Report} from "../../components/shared/models/report.model";
-import {Post} from "../../components/shared/models/post.model";
+import {User} from "../models/user.model";
+import {Report} from "../models/report.model";
+import {Post} from "../models/post.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {Comment} from "../../shared/models/comment.model";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Post} from "../../shared/models/post.model";
+import {Post} from "../../../services/models/post.model";
 import {MediaService} from "../../../services/media/media.service";
 import {faCheckCircle, faShare} from '@fortawesome/free-solid-svg-icons';
 

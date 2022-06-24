@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {faCheckCircle, faEllipsisH, faTimes, faUserPlus} from '@fortawesome/free-solid-svg-icons';
-import {User} from "../../shared/models/user.model";
+import {User} from "../../../services/models/user.model";
 import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
 import {GroupService} from "../../../services/group/group.service";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -15,7 +15,7 @@ import {firstValueFrom} from "rxjs";
 import {PostService} from "../../../services/post/post.service";
 import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {ReportTypeEnum} from "../../shared/enum/report_type.enum";
-import {Post} from "../../shared/models/post.model";
+import {Post} from "../../../services/models/post.model";
 import {DialogUpdateUserComponent} from "../../dialog/dialog-update-user/dialog-update-user.component";
 import {DialogCreateEventComponent} from "../../dialog/dialog-create-event/dialog-create-event.component";
 import {DialogCreateGroupComponent} from "../../dialog/dialog-create-group/dialog-create-group.component";
@@ -50,24 +50,27 @@ export class ProfileComponent implements OnInit {
     public dialogCreateEvent: MatDialog,
     public dialogUpdateUser: MatDialog,
     private _titleService: Title
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this._titleService.setTitle(params["id"] + " - " + environment.name);
-      this.updateUser(params["id"]).then();
+      this.updateUser(params["id"]).then(() =>
+        this._titleService.setTitle(this.user.username + " - " + environment.name)
+      );
     });
   }
 
   async updateUser(id: string): Promise<void> {
     this.user = await firstValueFrom(this._userService.getById(id));
     this.user.createdPosts = [];
+    this.user.friends = [];
+    this.user.administratedGroup = [];
     this.getMorePosts();
-    firstValueFrom(this._userService.getFriends(id)).then(friends =>this.user.friends.push(friends)) ;
-    firstValueFrom(this._eventService.getEventParticipation()).then(eventParticipation =>this.user.eventsParticipation=eventParticipation);
-    firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked =>this.user.isBlocked=isBlocked);
-    firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus =>this.user.friendshipStatus=friendshipStatus);
-    firstValueFrom(this._groupService.getGroupsWhereUserIsAdmin(id)).then(administratedGroup =>this.user.administratedGroup.push(administratedGroup));
+    firstValueFrom(this._userService.getFriends(id)).then(friends => this.user.friends = friends);
+    firstValueFrom(this._eventService.getEventParticipation(id)).then(eventParticipation => this.user.eventsParticipation = eventParticipation);
+    firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
+    firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus => this.user.friendshipStatus = friendshipStatus);
   }
 
   getMorePosts() {

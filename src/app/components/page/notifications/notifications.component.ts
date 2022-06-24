@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
-import {AuthService} from "../../../services/auth/auth.service";
 import {GroupService} from "../../../services/group/group.service";
 import {FriendshipService} from "../../../services/friendship/friendship.service";
 import {firstValueFrom} from "rxjs";
-import {GroupRequest} from "../../../shared/models/GroupRequest.model";
-import {FriendRequest} from "../../../shared/models/friend_request.model";
+import {GroupRequest} from "../../../services/models/GroupRequest.model";
+import {FriendRequest} from "../../../services/models/friend_request.model";
 
 @Component({
   selector: 'app-notifications',

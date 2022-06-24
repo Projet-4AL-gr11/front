@@ -34,12 +34,16 @@ export class LoginComponent implements OnInit {
     const formValue = this.userForm.value;
     firstValueFrom(this._authService.login(formValue.username, formValue.password))
       .then().catch(error => {
+
       this.submitted = false;
-      if (error.status === 401) {
+      if (error.status === 400) {
         this.error = true;
       }
     }).finally(() => {
-      this.router.navigate(['/timeline']).then();
+
+      if (!this.error){
+        this.router.navigate(['/timeline']).then();
+      }
     });
   }
 
@@ -50,3 +54,4 @@ export class LoginComponent implements OnInit {
     });
   }
 }
+

@@ -4,7 +4,7 @@ import {environment} from "../../../../environments/environment";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {Title} from "@angular/platform-browser";
-import {Post} from "../../shared/models/post.model";
+import {Post} from "../../../services/models/post.model";
 import {firstValueFrom} from "rxjs";
 
 @Component({
@@ -44,6 +44,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   getMorePosts() {
     this.loading = true;
+    console.log(" offset: " + this.offset + " limit: " + this.limit)
     firstValueFrom(this._postService.getTimeline( this.limit, this.offset))
       .then(posts => {
         this.posts = this.posts.concat(posts);
@@ -51,6 +52,8 @@ export class TimelineComponent implements OnInit, OnDestroy {
         if (posts.length > 0) {
           this.loading = false;
         }
+        console.log(this.posts?.length)
       });
   }
 }
+

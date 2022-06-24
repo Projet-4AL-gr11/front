@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, map, Observable, timer} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {User} from "../../components/shared/models/user.model";
+import {User} from "../models/user.model";
 import {HttpClient} from "@angular/common/http";
-import {FriendRequest} from "../../components/shared/models/friend_request.model";
-import {Event} from "../../components/shared/models/event.model";
-import {Group} from "../../components/shared/models/group.model";
+import {FriendRequest} from "../models/friend_request.model";
+import {Event} from "../models/event.model";
+import {Group} from "../models/group.model";
 import {CookieService} from "ngx-cookie-service";
-import {GroupRequest} from "../../shared/models/GroupRequest.model";
+import {GroupRequest} from "../models/GroupRequest.model";
 
 @Injectable({
   providedIn: 'root'

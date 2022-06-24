@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {Media} from "../../components/shared/models/media.model";
+import {Media} from "../models/media.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'

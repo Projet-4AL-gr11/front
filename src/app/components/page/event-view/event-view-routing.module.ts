@@ -1,8 +1,8 @@
 import {RouterModule, Routes} from "@angular/router";
 import {ProfileComponent} from "../profile/profile.component";
 import {NgModule} from "@angular/core";
-import {PageEventModule} from "./page-event.module";
-import {PageEventComponent} from "./page-event.component";
+import {EventViewModule} from "./event-view.module";
+import {EventViewComponent} from "./event-view.component";
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: ":eventId",
-        component: PageEventComponent
+        component: EventViewComponent
       }
     ]
   }
@@ -19,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PageEventRoutingModule { }
+export class EventViewRoutingModule { }

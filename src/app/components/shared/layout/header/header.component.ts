@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../../services/auth/auth.service";
 import {firstValueFrom, Observable} from "rxjs";
 import {Router} from "@angular/router";
-import {User} from "../../models/user.model";
-import {GroupService} from "../../../services/group/group.service";
-import {FriendshipService} from "../../../services/friendship/friendship.service";
+import {User} from "../../../../services/models/user.model";
 import {faBell} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from "../../../../services/auth/auth.service";
+import {GroupService} from "../../../../services/group/group.service";
+import {FriendshipService} from "../../../../services/friendship/friendship.service";
 
 @Component({
   selector: 'app-header',

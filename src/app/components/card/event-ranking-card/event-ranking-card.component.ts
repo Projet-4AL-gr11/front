@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EventRanking} from "../../shared/models/event_ranking.model";
+import {EventRanking} from "../../../services/models/event_ranking.model";
 
 @Component({
   selector: 'app-card-event-ranking',

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DialogReportComponent} from "../../dialog_/dialog-report/dialog-report.component";
+import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {AuthService} from "../../../services/auth/auth.service";
 import {MatDialog} from "@angular/material/dialog";
 import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
-import {Comment} from "../../shared/models/comment.model";
+import {Comment} from "../../../services/models/comment.model";
 import { ReportTypeEnum } from '../../shared/enum/report_type.enum';
 
 @Component({

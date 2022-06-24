@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Report} from "../../components/shared/models/report.model";
+import {Report} from "../models/report.model";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {Comment} from "../../shared/models/comment.model";
+import {Comment} from "../models/comment.model";
+
 
 @Injectable({
   providedIn: 'root'

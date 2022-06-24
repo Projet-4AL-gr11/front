@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {LeaderboardModule} from "./components/page/leaderboard/leaderboard.module";
-import {ProfileModule} from "./components/page/profile/profile.module";
 import {CodeModule} from "./components/page/code/code.module";
 import {SocialModule} from "./components/page/social/social.module";
 import {MatButtonModule} from "@angular/material/button";
@@ -22,22 +21,13 @@ import {TimelineModule} from "./components/page/timeline/timeline.module";
 import {MatSelectModule} from "@angular/material/select";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {RouterModule} from "@angular/router";
-<<<<<<< HEAD
-import {DialogModule} from "./components/dialog/dialog.module";
-import {TestModule} from "./components/page/test/test.module";
 import {AuthModule} from "./components/page/auth/auth.module";
 import {SharedModule} from "./components/shared/shared.module";
-=======
-import {DialogModule} from "./components/dialog_/dialog.module";
-import {TestModule} from "./components/page_/test/test.module";
 import {GlobalHttpInterceptor} from "./interceptors/auth-interceptor.interceptor";
-import {PagePostModule} from "./components/page_/page-post/page-post.module";
-import {NotificationsModule} from "./components/page_/notifications/notifications.module";
-import {CardUserAskJoinGroupModule} from "./components/card_/card-user-ask-join-group/card-user-ask-join-group.module";
-import {PageEventModule} from "./components/page_/page-event/page-event.module";
-import {CardLeaderboardModule} from "./components/card_/card-leaderbord/card-leaderboard.module";
-import {CardEventRankingModule} from "./components/card_/card-event-ranking/card-event-ranking.module";
->>>>>>> pageEvetAndCode
+import {PostViewModule} from "./components/page/post-view/post-view.module";
+import {NotificationsModule} from "./components/page/notifications/notifications.module";
+import {EventViewModule} from "./components/page/event-view/event-view.module";
+import {DialogModule} from "./components/dialog/dialog.module";
 
 @NgModule({
   imports: [
@@ -49,7 +39,6 @@ import {CardEventRankingModule} from "./components/card_/card-event-ranking/card
     LeaderboardModule,
     SharedModule,
     DialogModule,
-    TestModule,
     ReactiveFormsModule,
     FormsModule,
     PickerModule,
@@ -65,12 +54,9 @@ import {CardEventRankingModule} from "./components/card_/card-event-ranking/card
     MatButtonModule,
     MatTooltipModule,
     RouterModule,
-    PagePostModule,
+    PostViewModule,
     NotificationsModule,
-    CardUserAskJoinGroupModule,
-    PageEventModule,
-    CardLeaderboardModule,
-    CardEventRankingModule,
+    EventViewModule,
     //
     AppRoutingModule,
   ],

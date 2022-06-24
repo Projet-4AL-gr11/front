@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Leaderboard} from "../../shared/models/leaderboard.model";
+import {Leaderboard} from "../../../services/models/leaderboard.model";
 
 @Component({
   selector: 'app-card-leaderbord',
