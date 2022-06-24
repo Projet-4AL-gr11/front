@@ -1,9 +1,18 @@
-<div class=" d-flex flex-column align-items-center main-2 ">
-  <app-header class="w-100"></app-header>
-
-  <div class="flex-1 w-100 bg-primary">
-    <h2>Home</h2>
-
+<div class="d-flex flex-column vh-100">
+  <div class="d-flex flex-1">
+    <div class="home__box1 flex-2">
+      <img class="home__image" src="assets/wallpaper.png" alt="">
+    </div>
+    <div class="home__box2 ">
+      <div class="home__content">
+        <h2 class="mb-5"> Ça se passe maintenant </h2>
+        <button mat-raised-button color="primary" class="w-75 rounded-semi-circle" [routerLink]="['/auth/login']">
+          Login
+        </button>
+        <button mat-raised-button color="primary" class="w-75 rounded-semi-circle" [routerLink]="['/auth/register']">
+          Register
+        </button>
+      </div>
+    </div>
   </div>
-
 </div>

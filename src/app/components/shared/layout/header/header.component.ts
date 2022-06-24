@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {firstValueFrom, Observable} from "rxjs";
+import {firstValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {User} from "../../../../services/models/user.model";
 import {faBell} from '@fortawesome/free-solid-svg-icons';
