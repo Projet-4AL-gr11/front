@@ -1,0 +1,25 @@
+<div class="execution-code">
+  <div class="exercise-description">
+    <p>{{exerciseTemplate?.description}}</p>
+  </div>
+  <div class="event-second-part">
+    <div class="editor">
+      <div class="exercise-title">{{exercise?.name}}</div>
+      <div
+        class="app-ace-editor"
+        #editor
+      ></div>
+    </div>
+    <button class="button-execute" (click)="executeCode()">Excuter</button>
+  </div>
+  <div class="event-tree-part">
+    <div class="title-tree-part">Console</div>
+    <div class="title-response-console">{{result}}</div>
+  </div>
+</div>
+<div class="leaderboard-tab">
+  <div class="exercise-leaderboard">
+    <H3 align="center">Classement {{exercise?.name}}</H3>
+    <app-card-leaderbord [leaderboards]="this.leaderboards"></app-card-leaderbord>
+  </div>
+</div>

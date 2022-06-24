@@ -1,0 +1,149 @@
+<app-header class="w-100"></app-header>
+<div *ngIf="user?.isBlocked" fxLayoutAlign="center">
+  <h1 class="m-5">L'utilisateur vous a bloqué</h1>
+</div>
+<div *ngIf="user && !user?.isBlocked" class="row m-0">
+  <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+    <div class="position-fixed">
+    </div>
+  </div>
+  <div class="col-md-5 my-3">
+    <div class="profil-user-scroll">
+      <div class="user-card-full">
+        <img [src]="user.bannerPicture?.link | imageUrl:1360:900" alt="" class="rounded"
+             height="300px"
+             style="object-fit: cover" width="100%">
+        <div class="user-card-display">
+          <div class="user-card-div">
+            <div fxFlex fxLayoutAlign="row">
+              <div fxFlex fxLayoutAlign="row start center">
+                <div class="me-2">
+                  <img [src]="user.profilePicture?.link | imageUrl"
+                       alt=""
+                       class="rounded-circle"
+                       height="75"
+                       style="object-fit: cover"
+                       width="75">
+                </div>
+                <div class="user-card-username">
+                  <p>{{user.username}}</p>
+                </div>
+              </div>
+              <div fxLayoutAlign="row center end">
+                <div *ngIf="user.username !== _authService.getCurrentUsername()">
+                  <button (click)="this.askFriend()" *ngIf="this.user.friendshipStatus === allFriendRequestStatus.NONE"
+                          class="ml-auto button-add-friend" mat-raised-button>
+                    <fa-icon [icon]="faUserPlus" [style.color]="'white'"></fa-icon>
+                    Ajouter
+                  </button>
+                  <button (click)="this.removeFriend()"
+                          *ngIf="this.user.friendshipStatus === allFriendRequestStatus.BEFRIENDED"
+                          class="button-add-friend" mat-raised-button
+                          matTooltip="Enlever de la liste des amis"
+                          matTooltipPosition="above">
+                    Retirer des amis
+                  </button>
+                  <a (click)="this.delFriendshipRequest()" *ngIf="this.user.friendshipStatus === allFriendRequestStatus.RECEIVED"
+                     class=" button-reject-invitation"
+                     label="Rejeter l'invitation" style=" padding-right: 10px">
+                    <fa-icon [icon]="faTimes" size="2x" style="color: red"></fa-icon>
+                  </a>
+                  <button (click)="this.acceptFriendship()"
+                          *ngIf="this.user.friendshipStatus === allFriendRequestStatus.RECEIVED"
+                          class="button-add-friend" mat-raised-button
+                          matTooltip="Accepter la demande d'amis"
+                          matTooltipPosition="above"> accepter
+                  </button>
+                  <button (click)="this.cancelRequest()"
+                          *ngIf="this.user.friendshipStatus === allFriendRequestStatus.PENDING"
+                          class="ml-auto button-add-friend-disable"
+                          mat-raised-button><span>Invitation envoyé</span>
+                  </button>
+                </div>
+                <div class="dropdown" dropdown>
+                  <button [matMenuTriggerFor]="menu" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
+                          dropdownToggle
+                          mat-button type="button">
+                    <fa-icon [icon]="faEllipsisH"></fa-icon>
+                  </button>
+                  <mat-menu #menu="matMenu" xPosition="before">
+                    <button
+                      (click)="showDialogueCreateEvent()"
+                      *ngIf="user.username === _authService.getCurrentUsername() && (_authService.user | async)?.certification !== null"
+                      mat-menu-item>Créer un évènement
+                    </button>
+                    <div *ngIf="user.username === _authService.getCurrentUsername()">
+                      <button (click)="showDialogUpdateUser()" mat-menu-item>Edition du profil</button>
+                    </div>
+                    <div
+                      *ngIf="user.username === _authService.getCurrentUsername()">
+                      <button (click)="showDialogCreateGroup()" mat-menu-item>Créer un group</button>
+                    </div>
+                    <div *ngIf="user.administratedGroup?.length !== 0">
+                      <button [matMenuTriggerFor]="groupWhereAdmin" mat-menu-item>Inviter</button>
+                    </div>
+                    <div *ngIf="user.username !== _authService.getCurrentUsername()">
+                      <button (click)="showDialogueReport()" class="text-danger" mat-menu-item>Signaler</button>
+                      <button (click)="blockUser()" *ngIf="!user?.isBlocked" class="text-danger"
+                              mat-menu-item>Bloquer
+                      </button>
+                      <button (click)="unblockUser()" *ngIf="user?.isBlocked" class="text-danger"
+                              mat-menu-item>Débloquer
+                      </button>
+                    </div>
+                  </mat-menu>
+                  <mat-menu #groupWhereAdmin="matMenu">
+                    <div *ngFor="let group of user.administratedGroup">
+                      <button (click)="sendJoinGroup(group.id, this.user.id)"
+                              mat-menu-item>{{group.name}}</button>
+                    </div>
+                  </mat-menu>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--          <div class="user-card-div-row-2">-->
+          <!--            <div class="user-card-infos">-->
+          <!--              <p>{{user.bio}}</p>-->
+          <!--            </div>-->
+          <!--          </div>-->
+        </div>
+      </div>
+      <div class="tab-user-profil">
+        <mat-tab-group mat-align-tabs="center" style="min-height: 100%">
+          <mat-tab label="Post">
+            <div #divContent style="height: 450px">
+              <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)"
+                                [enableUnequalChildrenSizes]="true" [items]="user.createdPosts"
+                                [parentScroll]="divContent" childHeight="1" class="w-100 h-100">
+                <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
+                  <app-post (onDelete)="removePost($event)" [post]="post"></app-post>
+                </div>
+              </virtual-scroller>
+            </div>
+          </mat-tab>
+          <mat-tab label="Amis">
+            <div class="my-3">
+              <div *ngFor="let friend of user.friends" class="display-list-user">
+                <app-user-card [user]="friend" class="m-0"></app-user-card>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Événements">
+            <div class="my-3">
+              <div *ngFor="let event of user.eventsParticipation">
+                <app-event-card [event]="event"></app-event-card>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+    <div class="position-fixed">
+    </div>
+  </div>
+</div>
+
+

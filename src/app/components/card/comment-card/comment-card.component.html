@@ -1,0 +1,28 @@
+<div class="bg-light w-100 rounded-3 p-2" fxFlex fxLayout="row">
+  <div class="rounded-circle profile-picture">
+    <img [src]="comment.creator?.profilePicture?.link | imageUrl" alt=""
+         class="me-1 rounded-circle"
+         height="50"
+         style="object-fit: cover" width="50">
+  </div>
+  <div class="mx-2 w-100">
+    <div class="w-100" fxLayout="row">
+      <div class="w-100">
+        <p>{{comment.creator.username}}</p>
+      </div>
+      <div class="dropdown"  fxLayout="end end">
+        <button mat-icon-button [matMenuTriggerFor]="menu"
+                 type="button">
+          <fa-icon [icon]="faEllipsisH"></fa-icon>
+        </button>
+        <mat-menu #menu="matMenu" >
+          <button (click)="showDialogReport()" mat-menu-item>Signaler</button>
+          <button (click)="deleteComment()" *ngIf="comment.creator?.username === _authService.getCurrentUsername()"
+                  class="text-danger" mat-menu-item>Supprimer
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <p class="text-break">{{comment.text}}</p>
+  </div>
+</div>
