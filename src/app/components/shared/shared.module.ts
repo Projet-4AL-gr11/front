@@ -8,6 +8,7 @@ import {ButtonCreatePostComponent} from "./button-create-post/button-create-post
 import {MatButtonModule} from "@angular/material/button";
 import {MatBadgeModule} from "@angular/material/badge";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { IdeComponent } from './ide/ide.component';
 
 
 
@@ -23,11 +24,13 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     HeaderComponent,
     FooterComponent,
     ButtonCreatePostComponent,
+    IdeComponent,
     ],
   exports: [
     HeaderComponent,
     FooterComponent,
     ButtonCreatePostComponent,
+    IdeComponent,
   ],
 })
 export class SharedModule { }
