@@ -1,16 +1,17 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {faAngleDown, faAngleUp, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {Conversation} from "../../../services/models/conversation.model";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 import {UserService} from "../../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConversationService} from "../../../services/conversation/conversation.service";
-import {firstValueFrom, Subscription} from "rxjs";
+import {firstValueFrom, Observable, Subscription} from "rxjs";
 import {
   DialogCreateConversationComponent
 } from "../../dialog/dialog-create-conversation/dialog-create-conversation.component";
 import {AuthService} from "../../../services/auth/auth.service";
 import {User} from "../../../services/models/user.model";
+import {MatSelectionListChange} from "@angular/material/list";
 
 @Component({
   selector: 'app-conversation-list',
@@ -22,7 +23,7 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
   faPlusCircle = faPlusCircle;
-  conversations: Conversation[];
+  conversations: Observable<Conversation[]>;
   user: User;
 
   constructor(
@@ -35,15 +36,6 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
 
 
   async ngOnInit(): Promise<void> {
-    firstValueFrom(this.authService.user).then(user =>{
-      this.user = user;
-    } )
-    firstValueFrom(await this.conversationService.getUserConversations()).then(conversations => {
-      this.conversations = conversations;
-      if (conversations != null) {
-        this.conversationBoxService.selectConversation(conversations[0])
-      }
-    });
   }
 
   openCreateGroupDialog() {
@@ -53,6 +45,23 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
   ngOnDestroy(): void {
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
+    this.conversationService.getConversations()
+    this.conversations = await this.conversationService.getUserConversations();
+
+  }
+
+  onSelectConversation($event: MatSelectionListChange) {
+    this.conversationBoxService.selectConversation($event.source.selectedOptions.selected[0].value)
+  }
+
+  getConversations() {
+    this.conversationService.getConversations()
+  }
+
+  onOpenConversations() {
+    this.conversationBoxService.opened=!this.conversationBoxService.opened
+    this.getConversations()
+    firstValueFrom(this.authService.actual()).then(user => this.user = user)
   }
 }

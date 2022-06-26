@@ -18,7 +18,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-
+import {FlexLayoutModule} from "@angular/flex-layout"
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -44,6 +46,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatChipsModule,
     MatIconModule,
     MatButtonModule,
+    FlexLayoutModule,
+    BsDropdownModule,
+    MatListModule
   ],
   exports: [
     ConversationComponent,

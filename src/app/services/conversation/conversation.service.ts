@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CustomSocket} from "../../components/shared/custom/custom-socket";
 import {Conversation} from "../models/conversation.model";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {Message, MessageDto} from "../models/message.model";
 
 @Injectable({
@@ -31,22 +31,22 @@ export class ConversationService {
     this.socket.emit('leaveConversation', conversation)
   }
 
-  getMessage(): Observable<Message[]> {
-    return this.socket.fromEvent<Message[]>('messages');
-  }
-
   getAddedMessage(): Observable<Message> {
     return this.socket.fromEvent<Message>('messageAdded');
   }
 
-  async getUserConversations(): Promise<Observable<Conversation[]>> {
+   async getUserConversations(): Promise<Observable<Conversation[]>> {
     return this.socket.fromEvent<Conversation[]>('conversations');
   }
 
   createRoom(conversation: Conversation) {
-    this.socket.emit('createConversation', conversation)
-    this.snackBar.open(`User ${conversation.id} created succesfully`, 'Close', {
-      duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    })
+      this.socket.emit('createConversation', conversation)
+      this.snackBar.open(`User ${conversation.id} created succesfully`, 'Close', {
+        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+      })
+  }
+
+  getConversations() {
+    this.socket.emit('getConversations')
   }
 }

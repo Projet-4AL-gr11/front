@@ -32,7 +32,6 @@ export class ConversationBoxComponent implements OnInit {
   @ViewChild(ConversationBoxDirective, {static: true})
   conversationBoxDirective: ConversationBoxDirective;
   opened: boolean;
-  conversations: Conversation[];
   private destroySubject = new Subject();
 
   constructor(public conversationBoxService: ConversationBoxService) {

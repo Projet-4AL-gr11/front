@@ -1,5 +1,5 @@
 <div class="conversations-box col">
-  <div (click)="conversationBoxService.opened=!conversationBoxService.opened" class="conversations-box-header w-100">
+  <div (click)="onOpenConversations()" class="conversations-box-header w-100">
     <div fxFlex fxLayoutAlign="start center">
       <h2 class="user-select-none m-2 mx-4 ">Messages</h2>
     </div>
@@ -13,9 +13,10 @@
                fxLayoutAlign="end center" size="2x"></fa-icon>
     </div>
   </div>
+
   <div *ngIf="conversationBoxService.opened" class="conversations-list">
-    <div *ngFor="let conversation of conversations">
-      <app-conversation-card [conversation]="conversation"></app-conversation-card>
+    <div *ngFor="let conversation of (conversations | async)">
+      <app-conversation-card [conversation]="conversation" [currentUser]="user"></app-conversation-card>
     </div>
   </div>
 </div>

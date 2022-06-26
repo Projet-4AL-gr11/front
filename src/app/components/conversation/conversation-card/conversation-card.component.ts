@@ -8,42 +8,24 @@ import {Message} from "../../../services/models/message.model";
 import {ConversationService} from "../../../services/conversation/conversation.service";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 import {Media} from "../../../services/models/media.model";
+import {User} from "../../../services/models/user.model";
 
 @Component({
   selector: 'app-conversation-card',
   templateUrl: './conversation-card.component.html',
   styleUrls: ['./conversation-card.component.css']
 })
-export class ConversationCardComponent implements OnChanges {
+export class ConversationCardComponent {
   @Input()
   conversation: Conversation;
+  @Input()
+  currentUser: User;
   faEllipsisH = faEllipsisH;
-
-  messages: Observable<Message[]> = combineLatest([ this.conversationService.getMessages(), this.conversationService.getAddedMessage().pipe(startWith(null))]).pipe(
-    map(([messages, messagesAdded]) => {
-      if (messagesAdded && messagesAdded.conversation.id == this.conversation.id) {
-        messages = messages.concat(messagesAdded)
-      }
-      messages = messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-      return messages;
-    }));
 
   constructor(private conversationBoxService: ConversationBoxService,
               private authService: AuthService,
               private conversationService: ConversationService
   ) {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.conversationService.leaveConversation(changes['conversation'].previousValue);
-    if (this.conversation) {
-      this.conversationService.joinConversation(this.conversation);
-    }
-  }
-
-  ngOnDestroy(): void {
-
-    this.conversationService.leaveConversation(this.conversation)
   }
 
   onConversationSelect() {
@@ -52,7 +34,7 @@ export class ConversationCardComponent implements OnChanges {
 
   getPicture(): Media | undefined {
     if (this.conversation.friendship) {
-      if (this.conversation.friendship.friendOne.username !== this.authService.getCurrentUsername()) {
+      if (this.conversation.friendship.friendOne.username !== this.currentUser?.username) {
         return this.conversation.friendship.friendOne?.profilePicture;
       }
       return this.conversation.friendship.friendTwo?.profilePicture;
@@ -64,7 +46,7 @@ export class ConversationCardComponent implements OnChanges {
     if (this.conversation.group) {
       return this.conversation.group.name;
     } else if (this.conversation.friendship) {
-      if (this.conversation.friendship.friendOne.username !== this.authService.getCurrentUsername()) {
+      if (this.conversation.friendship.friendOne.username !== this.currentUser?.username) {
         return this.conversation.friendship.friendOne.username;
       }
       return this.conversation.friendship.friendTwo.username;
