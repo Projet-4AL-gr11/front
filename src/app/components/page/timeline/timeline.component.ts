@@ -26,7 +26,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("bonjour")
     this.getMorePosts();
   }
 
@@ -52,7 +51,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
         if (posts.length > 0) {
           this.loading = false;
         }
-        console.log(this.posts?.length)
       });
   }
 }

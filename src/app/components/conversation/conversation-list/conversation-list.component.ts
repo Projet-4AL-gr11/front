@@ -33,19 +33,17 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
     private matDialog: MatDialog) {
   }
 
-  async ngAfterViewInit(): Promise<void> {
+
+  async ngOnInit(): Promise<void> {
+    firstValueFrom(this.authService.user).then(user =>{
+      this.user = user;
+    } )
     firstValueFrom(await this.conversationService.getUserConversations()).then(conversations => {
       this.conversations = conversations;
       if (conversations != null) {
         this.conversationBoxService.selectConversation(conversations[0])
       }
     });
-
-  }
-
-  ngOnInit(): void {
-    firstValueFrom(this.authService.user).then(user => this.user = user)
-
   }
 
   openCreateGroupDialog() {
@@ -53,5 +51,8 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy(): void {
+  }
+
+  ngAfterViewInit(): void {
   }
 }

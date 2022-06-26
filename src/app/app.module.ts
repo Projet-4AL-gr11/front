@@ -29,6 +29,7 @@ import {NotificationsModule} from "./components/page/notifications/notifications
 import {EventViewModule} from "./components/page/event-view/event-view.module";
 import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
+import {ProfileModule} from "./components/page/profile/profile.module";
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import {ConversationModule} from "./components/conversation/conversation.module"
     NotificationsModule,
     EventViewModule,
     ConversationModule,
+    ProfileModule,
     //
     AppRoutingModule,
   ],

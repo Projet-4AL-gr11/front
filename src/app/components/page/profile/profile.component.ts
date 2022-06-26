@@ -31,10 +31,14 @@ export class ProfileComponent implements OnInit {
   faEllipsisH = faEllipsisH;
   faUserPlus = faUserPlus;
   loading: boolean = false;
+  loadingEvent: boolean = false;
   offset: number = 0;
   limit: number = 10;
+  offsetEvent: number = 0;
+  limitEvent: number = 10;
   user: User;
   faTimes = faTimes;
+  currentUser: User;
   allFriendRequestStatus = FriendRequestStatus;
 
   constructor(
@@ -59,18 +63,33 @@ export class ProfileComponent implements OnInit {
         this._titleService.setTitle(this.user.username + " - " + environment.name)
       );
     });
+    firstValueFrom(this._authService.actual()).then(user => this.currentUser= user)
   }
 
   async updateUser(id: string): Promise<void> {
     this.user = await firstValueFrom(this._userService.getById(id));
     this.user.createdPosts = [];
+    this.user.eventsParticipation = [];
     this.user.friends = [];
     this.user.administratedGroup = [];
     this.getMorePosts();
+    this.getMoreEvent();
     firstValueFrom(this._userService.getFriends(id)).then(friends => this.user.friends = friends);
-    firstValueFrom(this._eventService.getEventParticipation(id)).then(eventParticipation => this.user.eventsParticipation = eventParticipation);
     firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus => this.user.friendshipStatus = friendshipStatus);
+  }
+
+  getMoreEvent() {
+    this.loadingEvent = true;
+    firstValueFrom(this._eventService.getEventParticipation(this.user.id, this.limitEvent, this.offsetEvent))
+      .then(events => {
+        console.log(events)
+        this.user.eventsParticipation = this.user.eventsParticipation.concat(events);
+        this.offsetEvent += this.limit;
+        if (events.length > 0) {
+          this.loading = false;
+        }
+      });
   }
 
   getMorePosts() {
@@ -163,6 +182,11 @@ export class ProfileComponent implements OnInit {
   triggerGetMore($event) {
     if ($event.endIndex !== this.user.createdPosts.length - 1 || this.loading) return;
     this.getMorePosts();
+  }
+
+  triggerGetMoreEvent($event) {
+    if ($event.endIndex !== this.user.eventsParticipation.length - 1 || this.loading) return;
+    this.getMoreEvent();
   }
 
   sendJoinGroup(groupId: string, userId: string) {

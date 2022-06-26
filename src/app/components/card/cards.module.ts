@@ -16,6 +16,7 @@ import {EventExerciceCardComponent} from "./event-exercice-card/event-exercice-c
 import {LeaderboardCardComponent} from "./leaderboard-card/leaderboard-card.component";
 import {CommentCardComponent} from "./comment-card/comment-card.component";
 import {GroupRequestCardComponent} from "./group-request-card/group-request-card.component";
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {GroupRequestCardComponent} from "./group-request-card/group-request-card
     MatTooltipModule,
     MatCardModule,
     MatMenuModule,
+    BsDropdownModule.forRoot(),
 
   ],
   exports: [
@@ -50,6 +52,7 @@ import {GroupRequestCardComponent} from "./group-request-card/group-request-card
     LeaderboardCardComponent,
     CommentCardComponent,
     GroupRequestCardComponent,
+    BsDropdownModule
 
   ]
 })

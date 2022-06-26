@@ -41,7 +41,6 @@ export class EventCardComponent implements OnInit {
   async canJoin() {
     // TODO: cette apelle crée une fuite de mémoire
     await firstValueFrom(this._eventService.isMember(this.event.id)).then(isMember => this.event.isMember = isMember);
-    console.log(this.event.isMember)
   }
 
   private async getEvent() {

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       .then().catch(error => {
 
       this.submitted = false;
-      if (error.status === 400) {
+      if (error.status === 400 || error.status === 0) {
         this.error = true;
       }
     }).finally(() => {

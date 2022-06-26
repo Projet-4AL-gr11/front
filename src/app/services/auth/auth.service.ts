@@ -166,4 +166,8 @@ export class AuthService {
   getCurrentUsername() {
     return this.cookieService.get('username');
   }
+
+  actual() {
+    return this.http.get<User>(`${environment.apiBaseUrl}/auth/actual`);
+  }
 }

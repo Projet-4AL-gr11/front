@@ -11,7 +11,7 @@
       <p>{{event?.name}}</p>
     </a>
   </div>
-  <div class="orga-card-event">
+  <div class="group-card-event">
     <p *ngIf="event?.group !== null">
       <fa-icon [icon]="faUser"></fa-icon>
       {{event?.group?.name}}
@@ -35,7 +35,7 @@
       </p>
     </div>
   </div>
-  <div class="button-join" *ngIf="isEnd() && canJoin()">
+  <div class="button-join" *ngIf="isEnd()">
     <button (click)="this.joinEvent(event?.id)" *ngIf="!event.isMember" class="ml-auto button-join-event"
             mat-raised-button>
       Rejoindre
