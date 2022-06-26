@@ -83,7 +83,6 @@ export class ProfileComponent implements OnInit {
     this.loadingEvent = true;
     firstValueFrom(this._eventService.getEventParticipation(this.user.id, this.limitEvent, this.offsetEvent))
       .then(events => {
-        console.log(events)
         this.user.eventsParticipation = this.user.eventsParticipation.concat(events);
         this.offsetEvent += this.limit;
         if (events.length > 0) {

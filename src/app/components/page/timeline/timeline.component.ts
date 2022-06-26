@@ -43,7 +43,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   getMorePosts() {
     this.loading = true;
-    console.log(" offset: " + this.offset + " limit: " + this.limit)
     firstValueFrom(this._postService.getTimeline( this.limit, this.offset))
       .then(posts => {
         this.posts = this.posts.concat(posts);

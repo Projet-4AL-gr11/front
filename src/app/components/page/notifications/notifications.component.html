@@ -1,3 +1,5 @@
+<app-header class="w-100"></app-header>
+
 <div>
   <h3 (click)="$event.stopPropagation()" align="center" fxLayoutAlign="center">Notifications</h3>
   <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length == 0">
