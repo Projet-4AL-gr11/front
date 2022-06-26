@@ -65,4 +65,8 @@ export class UserService {
   removeUser(id: string) {
     return this.http.delete<void>(`${environment.apiBaseUrl}/user/${id}`);
   }
+
+  researchUsername(username: string) {
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/user/researchUsername/${username}`);
+  }
 }

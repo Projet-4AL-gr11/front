@@ -31,13 +31,11 @@ export class EventExerciceCardComponent implements OnInit, OnChanges, AfterViewI
   ngOnChanges(changes: SimpleChanges): void {
     if (this.exercise) {
       firstValueFrom(this._exerciseService.getExerciseTemplateWithExerciseId(this.exercise.id)).then(exerciseTemplate => {
-        console.log(exerciseTemplate)
         this.exerciseTemplate = exerciseTemplate
       });
       firstValueFrom(this._leaderboardService.getLeaderboardWithExerciseId(this.exercise.id)).then(leaderboards => {
         this.leaderboards = leaderboards;
       })
-      console.log(this.leaderboards)
     }
   }
 

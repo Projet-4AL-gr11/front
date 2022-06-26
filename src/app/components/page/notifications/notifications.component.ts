@@ -5,6 +5,9 @@ import {FriendshipService} from "../../../services/friendship/friendship.service
 import {firstValueFrom} from "rxjs";
 import {GroupRequest} from "../../../services/models/GroupRequest.model";
 import {FriendRequest} from "../../../services/models/friend_request.model";
+import {AuthService} from "../../../services/auth/auth.service";
+import {UserService} from "../../../services/user/user.service";
+import {User} from "../../../services/models/user.model";
 
 @Component({
   selector: 'app-notifications',
@@ -19,6 +22,8 @@ export class NotificationsComponent implements OnInit {
   friendshipRequestSent: FriendRequest[];
 
   constructor(public _groupService: GroupService,
+              public _authService: AuthService,
+              public _userService: UserService,
               public _friendshipService: FriendshipService) {}
 
   ngOnInit(): void {

@@ -8,17 +8,19 @@ import {ButtonCreatePostComponent} from "./button-create-post/button-create-post
 import {MatButtonModule} from "@angular/material/button";
 import {MatBadgeModule} from "@angular/material/badge";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {ConversationModule} from "../conversation/conversation.module";
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatBadgeModule,
-    FontAwesomeModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatButtonModule,
+        MatBadgeModule,
+        FontAwesomeModule,
+        ConversationModule,
+    ],
   declarations: [
     HeaderComponent,
     FooterComponent,

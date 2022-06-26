@@ -16,6 +16,7 @@ export class UserCardComponent implements OnInit {
 
   @Input()
   user: User;
+  currentUser: User;
   faCheckCircle = faCheckCircle;
   faUserPlus = faUserPlus;
   faTimes = faTimes;
@@ -26,7 +27,8 @@ export class UserCardComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    firstValueFrom(this._authService.actual()).then(user => this.currentUser= user)
     this.canAdd();
   }
 

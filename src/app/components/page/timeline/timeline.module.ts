@@ -5,6 +5,7 @@ import {CodeRoutingModule} from "../code/code-routing.module";
 import {TimelineComponent} from "./timeline.component";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
+import {TimelineRoutingModule} from "./timeline-routing.module";
 
 @NgModule({
   declarations: [
@@ -12,10 +13,10 @@ import {SharedModule} from "../../shared/shared.module";
   ],
   imports: [
     CommonModule,
-    CodeRoutingModule,
     VirtualScrollerModule,
     SharedModule,
     CardsModule,
+    TimelineRoutingModule
   ],
   exports: [
     TimelineComponent,

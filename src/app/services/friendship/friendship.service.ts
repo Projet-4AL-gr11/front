@@ -38,7 +38,8 @@ export class FriendshipService {
   }
 
   rejectFriendRequest(userId: string) {
-    return this.http.delete(`${environment.apiBaseUrl}/friendship/${userId}/cancel`)
+    console.log("rejectFriendRequest")
+    return this.http.delete(`${environment.apiBaseUrl}/friendship/cancel/friendship/${userId}`)
   }
 
   acceptFriendship(userId: string) {

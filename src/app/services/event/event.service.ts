@@ -34,8 +34,8 @@ export class EventService {
     return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/notEnd`)
   }
 
-  getEventParticipation(id): Observable<Event[]> {
-    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${id}`)
+  getEventParticipation(id, limit, offset): Observable<Event[]> {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${id}/${offset}/${limit}`)
   }
 
   getEventParticipant(eventId: string): Observable<User[]> {

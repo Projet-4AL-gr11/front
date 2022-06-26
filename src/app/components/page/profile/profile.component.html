@@ -1,4 +1,5 @@
 <app-header class="w-100"></app-header>
+
 <div *ngIf="user?.isBlocked" fxLayoutAlign="center">
   <h1 class="m-5">L'utilisateur vous a bloqué</h1>
 </div>
@@ -30,7 +31,7 @@
                 </div>
               </div>
               <div fxLayoutAlign="row center end">
-                <div *ngIf="user.username !== _authService.getCurrentUsername()">
+                <div *ngIf="user.id !== currentUser?.id">
                   <button (click)="this.askFriend()" *ngIf="this.user.friendshipStatus === allFriendRequestStatus.NONE"
                           class="ml-auto button-add-friend" mat-raised-button>
                     <fa-icon [icon]="faUserPlus" [style.color]="'white'"></fa-icon>
@@ -60,10 +61,9 @@
                           mat-raised-button><span>Invitation envoyé</span>
                   </button>
                 </div>
-                <div class="dropdown" dropdown>
+                <div class="dropdown">
                   <button [matMenuTriggerFor]="menu" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
-                          dropdownToggle
-                          mat-button type="button">
+                          mat-icon-button type="button">
                     <fa-icon [icon]="faEllipsisH"></fa-icon>
                   </button>
                   <mat-menu #menu="matMenu" xPosition="before">
@@ -131,8 +131,14 @@
           </mat-tab>
           <mat-tab label="Événements">
             <div class="my-3">
-              <div *ngFor="let event of user.eventsParticipation">
-                <app-event-card [event]="event"></app-event-card>
+              <div #divContentEvent style="height: 400px">
+                <virtual-scroller #scrollEvent (vsEnd)="triggerGetMoreEvent($event)"
+                                  [enableUnequalChildrenSizes]="true" [items]="user?.eventsParticipation"
+                                  [parentScroll]="divContentEvent" childHeight="1" class="w-100 h-100">
+                  <div *ngFor="let event of scrollEvent.viewPortItems">
+                    <app-event-card [event]="event"></app-event-card>
+                  </div>
+                </virtual-scroller>
               </div>
             </div>
           </mat-tab>

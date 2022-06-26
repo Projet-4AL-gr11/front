@@ -16,7 +16,7 @@
         <a class="nav-link disabled" >Leaderboard</a>
       </li>
     </ul>
-    <ul class="navbar-nav ms-auto" *ngIf="_authService.isAuthenticated()">
+    <ul class="navbar-nav ms-auto" *ngIf="user">
       <li class="notifications">
         <a [routerLink]="['/notifications']" class="nav-link"
                 matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
@@ -30,6 +30,5 @@
         <button class="btn btn-danger" (click)="logout()">Logout </button>
       </li>
     </ul>
-
   </div>
 </nav>

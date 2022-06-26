@@ -112,6 +112,7 @@ export class AuthService {
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
         this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
@@ -126,6 +127,7 @@ export class AuthService {
         this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
         this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
@@ -133,10 +135,8 @@ export class AuthService {
 
   public logout(): Observable<unknown> {
     this.userSubject.next(null);
-    this.cookieService.delete('user');
-    this.cookieService.delete('Authentication');
-    this.cookieService.delete('Refresh');
-    this.cookieService.delete('username');
+    this.cookieService.getAll()
+    localStorage.clear()
     return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
   }
 
@@ -165,5 +165,9 @@ export class AuthService {
 
   getCurrentUsername() {
     return this.cookieService.get('username');
+  }
+
+  actual() {
+    return this.http.get<User>(`${environment.apiBaseUrl}/auth/actual`);
   }
 }

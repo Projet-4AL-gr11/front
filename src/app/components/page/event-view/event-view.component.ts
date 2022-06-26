@@ -44,11 +44,9 @@ export class EventViewComponent implements OnInit {
     this.event.exercises = [];
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
     await firstValueFrom(this._leaderboardService.getEventRanking(id)).then(eventRanking =>{
-      console.log(eventRanking)
       this.event.eventRanking = eventRanking;
   })
     this.setExercise(this.event?.exercises[0]);
-    console.log(this.event)
   }
 
   public setTimer() {

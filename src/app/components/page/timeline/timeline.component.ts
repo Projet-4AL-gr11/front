@@ -26,7 +26,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("bonjour")
     this.getMorePosts();
   }
 
@@ -44,7 +43,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   getMorePosts() {
     this.loading = true;
-    console.log(" offset: " + this.offset + " limit: " + this.limit)
     firstValueFrom(this._postService.getTimeline( this.limit, this.offset))
       .then(posts => {
         this.posts = this.posts.concat(posts);
@@ -52,7 +50,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
         if (posts.length > 0) {
           this.loading = false;
         }
-        console.log(this.posts?.length)
       });
   }
 }
