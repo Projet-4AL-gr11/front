@@ -1,0 +1,10 @@
+.create-post-button {
+  z-index: 8;
+  position: fixed;
+  bottom: 50px;
+  left: 250px;
+}
+
+.create-post-button button {
+  background-color: red;
+}

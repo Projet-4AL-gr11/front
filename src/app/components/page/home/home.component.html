@@ -1,0 +1,11 @@
+<app-header class="w-100"></app-header>
+
+<div class=" d-flex flex-column align-items-center main-2 ">
+
+  <div class="flex-1 w-100 bg-primary">
+    <h2>Home</h2>
+
+  </div>
+  <app-conversation-box *ngIf="authService.actual()"></app-conversation-box>
+
+</div>

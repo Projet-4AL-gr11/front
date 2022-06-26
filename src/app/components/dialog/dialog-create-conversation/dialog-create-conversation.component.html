@@ -1,0 +1,19 @@
+<div>
+  <mat-card>
+    <mat-card-title>Create Chatroom</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
+
+        <app-select-users-card [users]="users.value" (addUser)="addUser(initUser($event))"
+                               (removeUser)="removeUser($event.id)"></app-select-users-card>
+
+        <mat-hint *ngIf="!formData.valid"><small>Please fill out all needed information</small></mat-hint>
+
+        <div class="button">
+          <button mat-button type="submit" [disabled]="!formData.valid">Create Chatroom</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
