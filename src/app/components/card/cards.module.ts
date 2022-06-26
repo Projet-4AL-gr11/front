@@ -40,17 +40,17 @@ import {GroupRequestCardComponent} from "./group-request-card/group-request-card
     MatMenuModule,
 
   ],
-  exports: [
-    EventCardComponent,
-    PostCardComponent,
-    PostShareCardComponent,
-    UserCardComponent,
-    EventRankingCardComponent,
-    EventExerciceCardComponent,
-    LeaderboardCardComponent,
-    CommentCardComponent,
-    GroupRequestCardComponent,
+    exports: [
+        EventCardComponent,
+        PostCardComponent,
+        PostShareCardComponent,
+        UserCardComponent,
+        EventRankingCardComponent,
+        EventExerciceCardComponent,
+        LeaderboardCardComponent,
+        CommentCardComponent,
+        GroupRequestCardComponent,
 
-  ]
+    ]
 })
 export class CardsModule { }

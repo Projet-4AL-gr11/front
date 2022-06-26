@@ -12,7 +12,8 @@ import {firstValueFrom} from "rxjs";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userForm: FormGroup;
+
+  loginForm: FormGroup;
   submitted: boolean;
   error: boolean;
 
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitForm() {
     this.submitted = true;
-    const formValue = this.userForm.value;
+    const formValue = this.loginForm.value;
     firstValueFrom(this._authService.login(formValue.username, formValue.password))
       .then().catch(error => {
 
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   private initForm() {
-    this.userForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.min(8)]]
     });

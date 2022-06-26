@@ -21,7 +21,6 @@ import {CardsModule} from "../../card/cards.module";
   imports: [
     // DialogModule,
     CommonModule,
-    ProfileRoutingModule,
     SharedModule,
     CardsModule,
     MatTabsModule,
@@ -32,6 +31,8 @@ import {CardsModule} from "../../card/cards.module";
     MatTooltipModule,
     MatMenuModule,
     CardsModule,
+
+    ProfileRoutingModule,
   ],
   exports: [
     ProfileComponent,

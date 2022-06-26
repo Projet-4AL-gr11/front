@@ -12,7 +12,7 @@ import {firstValueFrom} from "rxjs";
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css']
 })
-export class TimelineComponent implements OnInit, OnDestroy {
+export class TimelineComponent implements OnInit {
   offset: number = 0;
   limit: number = 10;
   loading: boolean;
@@ -26,7 +26,6 @@ export class TimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("bonjour")
     this.getMorePosts();
   }
 

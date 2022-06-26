@@ -28,6 +28,7 @@ import {PostViewModule} from "./components/page/post-view/post-view.module";
 import {NotificationsModule} from "./components/page/notifications/notifications.module";
 import {EventViewModule} from "./components/page/event-view/event-view.module";
 import {DialogModule} from "./components/dialog/dialog.module";
+import {ProfileModule} from "./components/page/profile/profile.module";
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import {DialogModule} from "./components/dialog/dialog.module";
     HomeModule,
     AuthModule,
     SocialModule,
+    ProfileModule,
     CodeModule,
     LeaderboardModule,
     SharedModule,
@@ -59,6 +61,7 @@ import {DialogModule} from "./components/dialog/dialog.module";
     EventViewModule,
     //
     AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,

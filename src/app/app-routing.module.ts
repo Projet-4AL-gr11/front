@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PostViewComponent} from "./components/page/post-view/post-view.component";
-import {TimelineComponent} from "./components/page/timeline/timeline.component";
 
 
 const routes: Routes = [
