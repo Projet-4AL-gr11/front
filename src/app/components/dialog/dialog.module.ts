@@ -23,6 +23,7 @@ import {CardsModule} from "../card/cards.module";
 import { DialogCreateConversationComponent } from './dialog-create-conversation/dialog-create-conversation.component';
 import {MatCardModule} from "@angular/material/card";
 import {ConversationModule} from "../conversation/conversation.module";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {ConversationModule} from "../conversation/conversation.module";
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    MatNativeDateModule,
     ConversationModule,
   ],
   declarations: [

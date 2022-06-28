@@ -61,8 +61,5 @@ export class DialogCreateGroupComponent implements OnInit {
         Validators.minLength(2)
       ]),
     });
-    this.formData.patchValue({
-      name: this.data.user
-    })
   }
 }

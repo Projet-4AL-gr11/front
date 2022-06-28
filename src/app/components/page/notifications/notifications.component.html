@@ -1,28 +1,34 @@
 <app-header class="w-100"></app-header>
-
-<div>
-  <h3 (click)="$event.stopPropagation()" align="center" fxLayoutAlign="center">Notifications</h3>
-  <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length == 0">
-    <p> Vous n'avez pas de notifications</p>
+<div class="row m-0">
+  <div class="col-md-4">
   </div>
-  <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length != 0">
-      <app-card-user-ask-join-group (click)="$event.stopPropagation()"
-                                      *ngFor="let groupRequest of groupRequests"
-                                      [group]="groupRequest.group"></app-card-user-ask-join-group>
+  <div class="col-md-4">
+    <h3 (click)="$event.stopPropagation()" align="center" fxLayoutAlign="center">Notifications</h3>
+    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length == 0">
+      <p> Vous n'avez pas de notifications</p>
+    </div>
+    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length != 0">
+        <app-card-user-ask-join-group (click)="$event.stopPropagation()"
+                                        *ngFor="let groupRequest of groupRequests"
+                                        [group]="groupRequest.group"></app-card-user-ask-join-group>
+        <app-user-card (click)="$event.stopPropagation()"
+                       *ngFor="let request of friendshipRequestReceived"
+                       [user]="request.sender"></app-user-card>
+
+
+    </div>
+    <mat-divider></mat-divider>
+    <H2 align="center" fxlayoutalign="center">Invitation envoyé</H2>
+    <div *ngIf="this.friendshipRequestSent?.length == 0">
+      <p> Vous n'avez pas envoyer de demande d'amis</p>
+    </div>
+    <div *ngIf="this.friendshipRequestSent?.length != 0">
       <app-user-card (click)="$event.stopPropagation()"
-                     *ngFor="let request of friendshipRequestReceived"
-                     [user]="request.sender"></app-user-card>
-
-
+                     *ngFor="let request of friendshipRequestSent"
+                     [user]="request.user"></app-user-card>
+    </div>
   </div>
-  <mat-divider></mat-divider>
-  <H2 align="center" fxlayoutalign="center">Invitation envoyé</H2>
-  <div *ngIf="this.friendshipRequestSent?.length == 0">
-    <p> Vous n'avez pas envoyer de demande d'amis</p>
-  </div>
-  <div *ngIf="this.friendshipRequestSent?.length != 0">
-    <app-user-card (click)="$event.stopPropagation()"
-                   *ngFor="let request of friendshipRequestSent"
-                   [user]="request.user"></app-user-card>
+  <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+
   </div>
 </div>

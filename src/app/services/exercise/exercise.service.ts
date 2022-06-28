@@ -30,7 +30,7 @@ export class ExerciseService {
   }
 
   getAllExerciseTemplate() {
-    return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`);
+    return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/all`);
   }
 
   runCode(code: string) {
