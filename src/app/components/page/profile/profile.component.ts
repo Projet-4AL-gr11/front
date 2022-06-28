@@ -75,7 +75,8 @@ export class ProfileComponent implements OnInit {
     this.getMorePosts();
     this.getMoreEvent();
     firstValueFrom(this._userService.getFriends(id)).then(friends => this.user.friends = friends);
-    firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
+    firstValueFrom(this._userService.hasBlocked(id)).then(hasBlocked => this.user.hasBlocked = hasBlocked);
+    firstValueFrom(this._userService.isBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus => this.user.friendshipStatus = friendshipStatus);
   }
 
@@ -166,12 +167,12 @@ export class ProfileComponent implements OnInit {
 
   blockUser() {
     firstValueFrom(this._userService.blockUser(this.user.id))
-      .then(() => this.user.isBlocked = true);
+      .then(() => this.user.hasBlocked = true);
   }
 
   unblockUser() {
     firstValueFrom(this._userService.unblockUser(this.user.id))
-      .then(() => this.user.isBlocked = false);
+      .then(() => this.user.hasBlocked = false);
   }
 
   removePost($event: Post) {
