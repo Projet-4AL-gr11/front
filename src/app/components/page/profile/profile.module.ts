@@ -12,27 +12,29 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
 import {SharedModule} from "../../shared/shared.module";
 import {CardsModule} from "../../card/cards.module";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
   ],
-  imports: [
-    // DialogModule,
-    CommonModule,
-    SharedModule,
-    CardsModule,
-    MatTabsModule,
-    VirtualScrollerModule,
-    PipesModules,
-    FontAwesomeModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatMenuModule,
-    CardsModule,
-    ProfileRoutingModule
-  ],
+    imports: [
+        // DialogModule,
+        CommonModule,
+        SharedModule,
+        CardsModule,
+        MatTabsModule,
+        VirtualScrollerModule,
+        PipesModules,
+        FontAwesomeModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatMenuModule,
+        CardsModule,
+        ProfileRoutingModule,
+        FlexModule
+    ],
   exports: [
     ProfileComponent,
   ]
