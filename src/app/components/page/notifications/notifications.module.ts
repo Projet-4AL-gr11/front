@@ -8,6 +8,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatDividerModule} from "@angular/material/divider";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
+import {FlexModule} from "@angular/flex-layout";
 
 
 
@@ -15,16 +16,17 @@ import {SharedModule} from "../../shared/shared.module";
   declarations: [
     NotificationsComponent,
   ],
-  imports: [
-    CommonModule,
-    NotificationsRoutingModule,
-    SharedModule,
-    MatMenuModule,
-    MatRippleModule,
-    FontAwesomeModule,
-    MatDividerModule,
-    CardsModule,
-  ],
+    imports: [
+        CommonModule,
+        NotificationsRoutingModule,
+        SharedModule,
+        MatMenuModule,
+        MatRippleModule,
+        FontAwesomeModule,
+        MatDividerModule,
+        CardsModule,
+        FlexModule,
+    ],
   exports: [
     NotificationsComponent,
   ],

@@ -9,22 +9,30 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatBadgeModule} from "@angular/material/badge";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ConversationModule} from "../conversation/conversation.module";
+import {FlexModule} from "@angular/flex-layout";
+import { SearchBarComponent } from './layout/search-bar/search-bar.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        MatButtonModule,
-        MatBadgeModule,
-        FontAwesomeModule,
-        ConversationModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatBadgeModule,
+    FontAwesomeModule,
+    ConversationModule,
+    FlexModule,
+    MatOptionModule,
+    MatAutocompleteModule,
+  ],
   declarations: [
     HeaderComponent,
     FooterComponent,
     ButtonCreatePostComponent,
+    SearchBarComponent,
     ],
   exports: [
     HeaderComponent,

@@ -16,6 +16,9 @@
         <a class="nav-link disabled" >Leaderboard</a>
       </li>
     </ul>
+    <div fxFlex fxLayoutAlign="center center">
+      <app-search-bar class="align-self-center"></app-search-bar>
+    </div>
     <ul class="navbar-nav ms-auto" *ngIf="user">
       <li class="notifications">
         <a [routerLink]="['/notifications']" class="nav-link"
@@ -32,3 +35,4 @@
     </ul>
   </div>
 </nav>
+<app-conversation-box *ngIf="_authService.actual()"></app-conversation-box>

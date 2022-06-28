@@ -13,26 +13,28 @@ import {MatMenuModule} from "@angular/material/menu";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
 import {RouterModule} from "@angular/router";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
   declarations: [
     PostViewComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CardsModule,
-    FontAwesomeModule,
-    PipesModules,
-    MatButtonModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatMenuModule,
+    imports: [
+        CommonModule,
+        SharedModule,
+        CardsModule,
+        FontAwesomeModule,
+        PipesModules,
+        MatButtonModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatMenuModule,
 
-    PostViewRoutingModule,
-  ],
+        PostViewRoutingModule,
+        FlexModule,
+    ],
   exports: [
     PostViewComponent,
   ]
