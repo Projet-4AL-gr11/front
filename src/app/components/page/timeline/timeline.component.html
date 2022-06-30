@@ -22,5 +22,5 @@
     </div>
   </div>
 
-  <app-button-create-post *ngIf="_authService.isAuthenticated()"></app-button-create-post>
+  <app-button-create-post *ngIf="_authService.actual()"></app-button-create-post>
 </div>

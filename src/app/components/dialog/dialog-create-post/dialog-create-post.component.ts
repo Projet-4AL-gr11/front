@@ -7,6 +7,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {PostService} from "../../../services/post/post.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
+import {User} from "../../../services/models/user.model";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class DialogCreatePostComponent implements OnInit {
   showPopup: boolean = false;
   text: string;
   events: Event[];
+  user: User;
 
   constructor(public _authService: AuthService,
               private _postService: PostService,
@@ -34,15 +36,16 @@ export class DialogCreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    firstValueFrom(this._authService.actual()).then(user => this.user = user);
   }
 
-  sendPost() {
-    if (this.text === undefined && this.text === '' && this.medias.length <= 0 && this.data.sharesPost === undefined && this.data.sharedEvent === undefined) {
+  async sendPost() {
+    if ((this.text === undefined || this.text === '') && (this.medias?.length <= 0 && this.data?.sharesPost === undefined && this.data?.sharedEvent === undefined)) {
+
       this._snackBar.open("Vous ne pouvez créer un poste s'il est vide.", "Fermer");
       return;
     }
-    firstValueFrom(this._postService.createPost(this.text, this.data?.sharesPost?.id, this.data?.sharedEvent?.id, this.medias))
-      .then();
+    await this._postService.createPost(this.text, this.data?.sharesPost?.id, this.data?.sharedEvent?.id, this.medias)
     this.dialogRef.close();
   }
 

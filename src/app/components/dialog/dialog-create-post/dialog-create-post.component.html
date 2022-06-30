@@ -1,8 +1,8 @@
 <div class="create-post-popup rounded-3" fxFlex fxLayout="column">
   <div class="create-post-text m-2" fxFlex fxLayout="row">
     <div class="create-post-picture">
-      <img [alt]="(_authService.user|async)?.username"
-           [src]="(_authService.user|async)?.profilePicture?.link| imageUrl"
+      <img [alt]="this.user?.username"
+           [src]="this.user?.profilePicture?.link| imageUrl"
            class="rounded-circle profile-picture"
            height="50" style="object-fit: cover" width="50">
     </div>

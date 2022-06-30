@@ -53,7 +53,10 @@ export class MediaService {
   }
 
   public savePostPicture(postId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/eventPicture/${postId}`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+    console.log(formData.get("file"))
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/postPicture/${postId}`, formData.get("file"));
   }
 
   public saveCommentPicture(commentId: string, file: File): Observable<any> {
