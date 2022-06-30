@@ -1,7 +1,7 @@
 <div class="rounded-pill border d-flex p-2 user-join-group my-3">
   <div class="mr-2">
     <img [routerLink]="['/group/' + group.id]"
-         [src]=" group?.picture?.url| imageUrl"
+         [src]=" (group?.picture?.id| imageUrl) | async"
          alt=""
          class="rounded-circle me-2"
          height="50" style="object-fit: cover" width="50">

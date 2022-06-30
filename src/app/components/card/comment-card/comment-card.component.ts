@@ -6,6 +6,7 @@ import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
 import {Comment} from "../../../services/models/comment.model";
 import { ReportTypeEnum } from '../../shared/enum/report_type.enum';
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-comment-card',
@@ -26,7 +27,7 @@ export class CommentCardComponent implements OnInit {
   }
 
   deleteComment() {
-    this._commentService.deleteComment(this.comment.id).toPromise().then();
+    firstValueFrom(this._commentService.deleteComment(this.comment.id)).then();
   }
 
   showDialogReport() {

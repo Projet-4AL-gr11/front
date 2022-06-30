@@ -45,7 +45,6 @@ export class PostService {
   }
 
   dislikePost(postId: string): Observable<void> {
-    console.log("dislike de ce post " +postId)
     return this.http.post<void>(`${environment.apiBaseUrl}/post/dislike/${postId}`, null);
   }
 
@@ -68,18 +67,19 @@ export class PostService {
       formData.sharedEvent = sharedEventId
     }
 
-    firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
+    return firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
       headers: this.headers,
       params: new HttpParams()
     })).then(post => {
-
-      const formData = new FormData();
-      formData.append("file", files[0])
-      firstValueFrom(this.http.post(`${environment.apiBaseUrl}/media/postPicture/${post.id}`, formData)).then()
+      files.forEach(file => {
+        const formData = new FormData();
+        formData.append("file", file)
+        firstValueFrom(this.http.post(`${environment.apiBaseUrl}/media/postPicture/${post.id}`, formData)).then(
+          (media: Media) => post.medias.push(media)
+        )
+      })
       }
     );
-
-    return;
   }
 
   getAll(): Observable<Post[]> {

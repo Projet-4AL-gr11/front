@@ -99,7 +99,6 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    console.log(userId)
     return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
   }
 

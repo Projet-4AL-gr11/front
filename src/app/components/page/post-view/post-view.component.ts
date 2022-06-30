@@ -27,7 +27,7 @@ export class PostViewComponent implements OnInit {
   text: string;
   post: Post;
   caretPosition: number = 0;
-  medias: File[];
+  medias: File[] = [];
   mediasURL: string[];
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -57,12 +57,9 @@ export class PostViewComponent implements OnInit {
       this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
       return;
     }
-    firstValueFrom(this._commentService.sendComment(this.post.id, this.text)).then(comment => {
-      if (this.post.comments === undefined) {
-        this.post.comments = [];
-      }
-      this.post.comments = [comment].concat(this.post.comments);
-    });
+    this._commentService.sendComment(this.post.id, this.text, this.medias).then(() =>
+      this.ngOnInit()
+    );
   }
 
   setCaretPosition($event: any) {

@@ -11,7 +11,7 @@
   <div class="col-md-5 my-3">
     <div class="profil-user-scroll">
       <div class="user-card-full">
-        <img [src]="user.bannerPicture?.link | imageUrl:1360:900" alt="" class="rounded"
+        <img [src]="(user.bannerPicture?.url | imageUrl:1360:900) | async" alt="" class="rounded"
              height="300px"
              style="object-fit: cover" width="100%">
         <div class="user-card-display">
@@ -19,7 +19,7 @@
             <div fxFlex fxLayoutAlign="row">
               <div fxFlex fxLayoutAlign="row start center">
                 <div class="me-2">
-                  <img [src]="user.profilePicture?.link | imageUrl"
+                  <img [src]="(user.profilePicture?.id | imageUrl) | async"
                        alt=""
                        class="rounded-circle"
                        height="75"
