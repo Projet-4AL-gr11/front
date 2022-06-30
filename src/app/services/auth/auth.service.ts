@@ -109,10 +109,9 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id, {sameSite: "None"});
+        this.cookieService.set('username', user.username, {sameSite: "None"});
         this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
@@ -124,9 +123,9 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id,{sameSite:"None"});
         this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{sameSite:"None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
@@ -135,7 +134,8 @@ export class AuthService {
 
   public logout(): Observable<unknown> {
     this.userSubject.next(null);
-    this.cookieService.getAll()
+    this.cookieService.deleteAll('/')
+    this.cookieService.deleteAll('/post')
     localStorage.clear()
     return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
   }
@@ -163,7 +163,7 @@ export class AuthService {
     return this.cookieService.get('refresh');
   }
 
-  getCurrentUsername() {
+   getCurrentUsername() {
     return this.cookieService.get('username');
   }
 
