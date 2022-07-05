@@ -4,16 +4,20 @@
   </div>
   <div class="col-md-4">
     <h3 (click)="$event.stopPropagation()" align="center" fxLayoutAlign="center">Notifications</h3>
-    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length == 0">
+    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequestsAdmin?.length == 0">
       <p> Vous n'avez pas de notifications</p>
     </div>
-    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequests?.length != 0">
+    <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequestsAdmin?.length != 0">
         <app-card-user-ask-join-group (click)="$event.stopPropagation()"
-                                        *ngFor="let groupRequest of groupRequests"
-                                        [group]="groupRequest.group"></app-card-user-ask-join-group>
+                                        *ngFor="let groupRequestAdmin of groupRequestsAdmin"
+                                        [groupRequest]="groupRequestAdmin"
+                                      (removeCard)="removeCard($event)"
+        ></app-card-user-ask-join-group>
         <app-user-card (click)="$event.stopPropagation()"
                        *ngFor="let request of friendshipRequestReceived"
-                       [user]="request.sender"></app-user-card>
+                       [user]="request.sender"
+                       (removeUser)="removeReceiveFriendshipRequest(request)"
+        ></app-user-card>
 
 
     </div>
@@ -25,7 +29,14 @@
     <div *ngIf="this.friendshipRequestSent?.length != 0">
       <app-user-card (click)="$event.stopPropagation()"
                      *ngFor="let request of friendshipRequestSent"
-                     [user]="request.user"></app-user-card>
+                     [user]="request?.user"
+                     (removeUser)="removeSentFriendshipRequest(request)"
+      ></app-user-card>
+      <app-group-card (click)="$event.stopPropagation()"
+                      *ngFor="let groupRequest of groupRequests"
+                      [group]="groupRequest?.group"
+                      (removeGroupCard)="removeSentGroupRequest(groupRequest)"
+      ></app-group-card>
     </div>
   </div>
   <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">

@@ -7,6 +7,9 @@ import {User} from "../models/user.model";
 import {FormGroup} from "@angular/forms";
 import {MediaService} from "../media/media.service";
 import {GroupRequest} from "../models/GroupRequest.model";
+import {GroupDto} from "../models/dto/custom/group.dto";
+import {firstValueFrom} from "rxjs";
+import {GroupRequestStatus} from "../../components/shared/enum/group-request-status.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +50,19 @@ export class GroupService {
     return this.http.put(`${environment.apiBaseUrl}/group/removeFollower/${groupId}`, null);
   }
 
-  createGroup(user: User, form: FormGroup){
-    const formData = new FormData();
-    formData.append("userId", user.id);
-    if (form.value.name != null){
-      formData.append("name", form.value.name)
-    }
-    return this.http.post(`${environment.apiBaseUrl}/group/`, formData);
+  async createGroup(user: User, form: FormGroup, profilePicture?: File, bannerPicture?: File){
+    const formData = new GroupDto();
+    formData.user = user;
+    formData.name = form.value.name;
+    return firstValueFrom(this.http.post<Group>(`${environment.apiBaseUrl}/group/`, formData))
+      .then(group => {
+        if (form.value.profilePicture != null) {
+          firstValueFrom(this.mediaService.saveGroupPicture(group.id, profilePicture )).then()
+        }
+        if (form.value.bannerPicture != null) {
+          firstValueFrom(this.mediaService.saveGroupBannerPicture(group.id, bannerPicture )).then()
+        }
+      })
   }
 
   updateGroup(group: Group, form: FormGroup, picture: File) {
@@ -96,11 +105,11 @@ export class GroupService {
   }
 
   sendGroupRequest(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, userId);
+    return this.http.post(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, userId);
   }
 
-  acceptGroupRequest(groupId: string) {
-    return this.http.post(`${environment.apiBaseUrl}/group/acceptGroupRequest/${groupId}`, null);
+  acceptGroupRequest(groupId: string, userId: string) {
+    return this.http.post(`${environment.apiBaseUrl}/group/acceptGroupRequest/${groupId}/${userId}`, null);
   }
 
   cancelGroupRequest(groupId: string) {
@@ -108,10 +117,18 @@ export class GroupService {
   }
 
   cancelGroupRequestAdmin(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/cancelGroupRequestAdmin/${groupId}`, userId);
+    return this.http.put(`${environment.apiBaseUrl}/group/cancelGroupRequestAdmin/${groupId}/${userId}`, null);
   }
 
   getGroupRequest() {
     return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/currentUser` );
+  }
+
+  getGroupRequestStatus(userId: string, groupId: string) {
+    return this.http.get<GroupRequestStatus>(`${environment.apiBaseUrl}/group/groupRequest/status/${groupId}/${userId}` );
+  }
+
+  getGroupRequestWhereAdmin() {
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/whereAdmin` );
   }
 }

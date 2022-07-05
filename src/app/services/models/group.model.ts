@@ -10,4 +10,5 @@ export class Group {
   posts: Post[];
   conversation: Conversation;
   picture: Media;
+  bannerPicture: Media;
 }
