@@ -8,6 +8,7 @@ import {PostService} from "../../../services/post/post.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
 import {User} from "../../../services/models/user.model";
+import {EventService} from "../../../services/event/event.service";
 
 
 @Component({
@@ -30,13 +31,20 @@ export class DialogCreatePostComponent implements OnInit {
 
   constructor(public _authService: AuthService,
               private _postService: PostService,
+              public _eventService: EventService,
               public dialogRef: MatDialogRef<DialogCreatePostComponent>,
               private _snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data: { sharedEvent: Event, sharesPost: Post }) {
   }
 
   ngOnInit(): void {
-    firstValueFrom(this._authService.actual()).then(user => this.user = user);
+    firstValueFrom(this._authService.actual()).then(user => {
+      this.user = user
+      firstValueFrom(this._eventService.getEventParticipation(user.id, 100, 0)).then(events => {
+        this.events = events
+        console.log(events)
+      });
+    });
   }
 
   async sendPost() {
@@ -45,8 +53,9 @@ export class DialogCreatePostComponent implements OnInit {
       this._snackBar.open("Vous ne pouvez créer un poste s'il est vide.", "Fermer");
       return;
     }
-    await this._postService.createPost(this.text, this.data?.sharesPost?.id, this.data?.sharedEvent?.id, this.medias)
-    this.dialogRef.close();
+    await this._postService.createPost(this.text, this.data?.sharesPost?.id, this.data?.sharedEvent?.id, this.medias).then(() => {
+      this.dialogRef.close();
+    });
   }
 
   setCaretPosition($event: any) {

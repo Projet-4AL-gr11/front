@@ -39,12 +39,8 @@
       <fa-icon [icon]="faCalendarAlt" [matMenuTriggerFor]="eventPicker" class="mx-1" matSuffix size="2x"></fa-icon>
       <mat-menu #eventPicker>
         <p>Vos événements</p>
-        <button (click)="data.sharedEvent=event" *ngFor="let event of (_authService.user|async)?.eventsParticipation"
+        <button (click)="data.sharedEvent=event" *ngFor="let event of events"
                 mat-menu-item>{{event.name}}</button>
-        <div *ngIf="events?.length > 0">
-          <p class="text-center fw-bold">Autres événements</p>
-          <button (click)="data.sharedEvent=option" *ngFor="let option of events" mat-menu-item>{{option.name}}</button>
-        </div>
       </mat-menu>
     </div>
     <div fxFlex fxLayoutAlign="end center">
