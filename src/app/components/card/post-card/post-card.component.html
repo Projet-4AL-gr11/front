@@ -48,8 +48,8 @@
         <img [src]="(post?.sharedEvent?.picture?.id|imageUrl: 1360:906) | async" alt="" class="rounded"
              height="300px"
              style="object-fit: cover" width="100%">
+        <p>{{post?.sharedEvent?.name}}</p>
         <div class="event-card-infos">
-          <p>{{post?.sharedEvent?.name}}</p>
           <p>{{post?.sharedEvent?.description}}</p>
         </div>
       </div>
@@ -65,11 +65,11 @@
       </div>
       <div [routerLink]="'/post/'+post?.id" class="card-link text-decoration-none" style="cursor: pointer">
         <fa-icon [icon]="faComment" flip="horizontal"></fa-icon>
-        {{post?.commentCount || 0}} Commenter
+        {{post?.comments?.length || 0}} Commenter
       </div>
       <div (click)="sharePost()" class="card-link text-decoration-none pull-right" style="cursor: pointer">
         <fa-icon [icon]="faShare" flip="horizontal"></fa-icon>
-        {{post?.shareCount || 0}} Partager
+        {{post?.sharedPosts?.length || 0}} Partager
       </div>
     </div>
   </div>

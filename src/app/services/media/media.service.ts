@@ -37,32 +37,49 @@ export class MediaService {
   }
 
   public saveProfilePicture( file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/profilePicture/`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/profilePicture`, formData);
   }
 
   public saveBannerPicture( file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/bannerPicture/`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/bannerPicture`, formData);
   }
 
   public saveEventPicture(eventId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/eventPicture/${eventId}`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/eventPicture/${eventId}`, formData);
   }
 
   public saveGroupPicture(groupId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupPicture/${groupId}`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+    console.log(formData)
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupPicture/${groupId}`, formData);
   }
 
   public savePostPicture(postId: string, file: File): Observable<any> {
     const formData: any = new FormData()
     formData.append("file", file)
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/postPicture/${postId}`, formData.get("file"));
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/postPicture/${postId}`, formData);
   }
 
   public saveCommentPicture(commentId: string, file: File): Observable<any> {
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/commentPicture/${commentId}`, file);
+    const formData: any = new FormData()
+    formData.append("file", file)
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/commentPicture/${commentId}`, formData);
   }
 
   public getPictureRefresh(pictureId: string): Observable<Media> {
     return this.http.get<Media>(`${environment.apiBaseUrl}/media/getRefreshUrl/${pictureId}`);
   }
+
+  saveGroupBannerPicture(id: string, file: File) {
+    const formData: any = new FormData()
+    formData.append("file", file)
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupBannerPicture/${id}`, formData);  }
 }

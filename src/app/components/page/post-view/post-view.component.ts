@@ -43,6 +43,19 @@ export class PostViewComponent implements OnInit {
     this._activatedRoute.params.subscribe(params => this.update(params["id"]).then());
   }
 
+  sendComment(): void {
+    if (this.text === undefined || this.text.length <= 0) {
+      this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
+      return;
+    }
+    this._commentService.sendComment(this.post.id, this.text, this.medias).then(() => {
+      this.ngOnInit()
+      this.text = ""
+    }
+
+  );
+  }
+
   async update(postId: string): Promise<void> {
     await firstValueFrom(this._postService.getPostById(postId)).then(post => {
       this.post = post;
@@ -50,16 +63,6 @@ export class PostViewComponent implements OnInit {
     });
     await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
     await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
-  }
-
-  sendComment(): void {
-    if (this.text === undefined || this.text.length <= 0) {
-      this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
-      return;
-    }
-    this._commentService.sendComment(this.post.id, this.text, this.medias).then(() =>
-      this.ngOnInit()
-    );
   }
 
   setCaretPosition($event: any) {

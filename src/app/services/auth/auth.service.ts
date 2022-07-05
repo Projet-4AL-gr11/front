@@ -134,8 +134,13 @@ export class AuthService {
 
   public logout(): Observable<unknown> {
     this.userSubject.next(null);
+    this.cookieService.delete('username', "/")
+    this.cookieService.delete('user', "/")
+    this.cookieService.delete('Refresh', "/")
+    this.cookieService.delete('Authentication', "/")
     this.cookieService.deleteAll('/')
     this.cookieService.deleteAll('/post')
+    this.cookieService.deleteAll('/profile')
     localStorage.clear()
     return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
   }
@@ -169,5 +174,11 @@ export class AuthService {
 
   actual() {
     return this.http.get<User>(`${environment.apiBaseUrl}/auth/actual`);
+  }
+
+  refreshCookieUsername(username) {
+    this.cookieService.delete('username', '/');
+    this.cookieService.set('username', username,{sameSite:"None", path: "/"});
+
   }
 }

@@ -1,15 +1,15 @@
 <app-header class="w-100"></app-header>
 
 <div>
-  <div class="row m-0">
+  <div class="row m-0" >
     <div class="col-md-4">
+      <app-button-create-post *ngIf="_authService.isAuthenticated()"></app-button-create-post>
     </div>
-    <div *ngIf="posts?.length == 0" class="col-md-4">
+    <div *ngIf="posts?.length == 0" class="col-md-4" >
       <p style="padding-top: 100px">Il n'y a pas de post à afficher</p>
     </div>
-    <div *ngIf="posts?.length > 0" class="col-md-4">
+    <div *ngIf="posts?.length > 0" class="col-md-4" style="height: 100vh; overflow-x: hidden; overflow-y: scroll">
 
-      <app-button-create-post *ngIf="_authService.isAuthenticated()"></app-button-create-post>
       <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)" [enableUnequalChildrenSizes]="true" [items]="posts"
                         [parentScroll]="scroll.window" style="height: content-box">
         <div *ngFor="let post of scroll.viewPortItems" class="mt-3">

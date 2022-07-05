@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CustomSocket} from "../../components/shared/custom/custom-socket";
+import {CustomSocket} from "../models/dto/custom/custom-socket";
 import {Conversation} from "../models/conversation.model";
 import {Observable, Subject} from "rxjs";
 import {Message, MessageDto} from "../models/message.model";
