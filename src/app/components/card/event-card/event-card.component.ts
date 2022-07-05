@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event} from "../../../services/models/event.model";
 import {faCheckCircle, faClock, faTags, faUser} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
 import {EventService} from "../../../services/event/event.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {firstValueFrom} from "rxjs";
+import {User} from "../../../services/models/user.model";
 
 @Component({
   selector: 'app-event-card',
@@ -18,6 +19,8 @@ export class EventCardComponent implements OnInit {
   faUser = faUser;
   faClock = faClock;
   faTags = faTags;
+
+  @Output() removeEventCard: EventEmitter<Event>= new EventEmitter<Event>();
 
   constructor(
     private _userService: UserService,
@@ -35,7 +38,10 @@ export class EventCardComponent implements OnInit {
   }
 
   leaveEvent(id: string) {
-    firstValueFrom(this._eventService.removeParticipant(id, this._authService.getCurrentUserId())).then(() => this.event.isMember = false);
+    firstValueFrom(this._eventService.removeParticipant(id, this._authService.getCurrentUserId())).then(() => {
+      this.event.isMember = false;
+      this.removeEventCard.emit(this.event);
+    });
   }
 
   async canJoin() {

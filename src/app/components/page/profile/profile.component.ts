@@ -19,6 +19,7 @@ import {Post} from "../../../services/models/post.model";
 import {DialogUpdateUserComponent} from "../../dialog/dialog-update-user/dialog-update-user.component";
 import {DialogCreateEventComponent} from "../../dialog/dialog-create-event/dialog-create-event.component";
 import {DialogCreateGroupComponent} from "../../dialog/dialog-create-group/dialog-create-group.component";
+import {Event} from "../../../services/models/event.model";
 
 @Component({
   selector: 'app-profile',
@@ -78,6 +79,7 @@ export class ProfileComponent implements OnInit {
     firstValueFrom(this._userService.hasBlocked(id)).then(hasBlocked => this.user.hasBlocked = hasBlocked);
     firstValueFrom(this._userService.isBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus => this.user.friendshipStatus = friendshipStatus);
+    firstValueFrom(this._groupService.findGroupsWithUserId(id)).then(groups => this.user.groups = groups);
   }
 
   getMoreEvent() {
@@ -191,5 +193,17 @@ export class ProfileComponent implements OnInit {
 
   sendJoinGroup(groupId: string, userId: string) {
     this._groupService.sendGroupRequest(groupId, userId);
+  }
+
+  removeFriendCard(friend: User) {
+    if (this.currentUser.id == this.user.id) {
+      this.user.friends.splice(this.user.friends.indexOf(friend), 1)
+    }
+  }
+
+  removeEventCard($event: Event) {
+    if (this.currentUser.id == this.user.id) {
+      this.user.eventsParticipation.splice(this.user.eventsParticipation.indexOf($event), 1)
+    }
   }
 }

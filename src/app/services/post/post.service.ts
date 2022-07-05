@@ -6,7 +6,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {firstValueFrom, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {MediaService} from "../media/media.service";
-import {PostDto} from "../../components/shared/custom/post.dto";
+import {PostDto} from "../models/dto/custom/post.dto";
 import {Media} from "../models/media.model";
 
 @Injectable({
@@ -67,7 +67,7 @@ export class PostService {
       formData.sharedEvent = sharedEventId
     }
 
-    return firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
+    firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
       headers: this.headers,
       params: new HttpParams()
     })).then(post => {

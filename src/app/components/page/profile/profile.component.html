@@ -11,7 +11,7 @@
   <div class="col-md-5 my-3">
     <div class="profil-user-scroll">
       <div class="user-card-full">
-        <img [src]="(user.bannerPicture?.url | imageUrl:1360:900) | async" alt="" class="rounded"
+        <img [src]="(user.bannerPicture?.id | imageUrl:1360:900) | async" alt="" class="rounded"
              height="300px"
              style="object-fit: cover" width="100%">
         <div class="user-card-display">
@@ -69,7 +69,7 @@
                   <mat-menu #menu="matMenu" xPosition="before">
                     <button
                       (click)="showDialogueCreateEvent()"
-                      *ngIf="user.username === _authService.getCurrentUsername() && (_authService.user | async)?.certification !== null"
+                      *ngIf="user.username === _authService.getCurrentUsername()"
                       mat-menu-item>Créer un évènement
                     </button>
                     <div *ngIf="user.username === _authService.getCurrentUsername()">
@@ -125,7 +125,7 @@
           <mat-tab label="Amis">
             <div class="my-3">
               <div *ngFor="let friend of user.friends" class="display-list-user">
-                <app-user-card [user]="friend" class="m-0"></app-user-card>
+                <app-user-card [user]="friend" (removeUser)="removeFriendCard(friend)" class="m-0"></app-user-card>
               </div>
             </div>
           </mat-tab>
@@ -136,9 +136,16 @@
                                   [enableUnequalChildrenSizes]="true" [items]="user?.eventsParticipation"
                                   [parentScroll]="divContentEvent" childHeight="1" class="w-100 h-100">
                   <div *ngFor="let event of scrollEvent.viewPortItems">
-                    <app-event-card [event]="event"></app-event-card>
+                    <app-event-card [event]="event" (removeEventCard)="removeEventCard($event)"></app-event-card>
                   </div>
                 </virtual-scroller>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Groupes">
+            <div class="my-3">
+              <div *ngFor="let group of user?.groups" class="display-list-user">
+                <app-group-card [group]="group" class="m-0"></app-group-card>
               </div>
             </div>
           </mat-tab>

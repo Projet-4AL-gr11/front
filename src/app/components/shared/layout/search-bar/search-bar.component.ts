@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {FormControl} from "@angular/forms";
-import {SearchResponseDto} from "../../custom/search-response.dto";
+import {SearchResponseDto} from "../../../../services/models/dto/custom/search-response.dto";
 import {SearchService} from "../../../../services/search/search.service";
 import {firstValueFrom} from "rxjs";
 
@@ -28,7 +28,10 @@ export class SearchBarComponent implements OnInit {
       return;
     }
     firstValueFrom(this.searchService.search($event.target.value))
-      .then(searchResult => this.searchResult = searchResult);
+      .then(searchResult =>{
+        this.searchResult = searchResult
+        console.log(searchResult)
+      });
   }
 
 
