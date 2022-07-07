@@ -132,17 +132,15 @@ export class AuthService {
       }));
   }
 
-  public logout(): Observable<unknown> {
+  async logout() {
     this.userSubject.next(null);
-    this.cookieService.delete('username', "/")
-    this.cookieService.delete('user', "/")
-    this.cookieService.delete('Refresh', "/")
-    this.cookieService.delete('Authentication', "/")
-    this.cookieService.deleteAll('/')
-    this.cookieService.deleteAll('/post')
-    this.cookieService.deleteAll('/profile')
+    this.cookieService.delete('username', "/", environment.domain)
+    this.cookieService.delete('user', "/", environment.domain)
+    this.cookieService.delete('Refresh', "/", environment.domain)
+    this.cookieService.delete('Authentication', "/", environment.domain)
+    this.cookieService.deleteAll('/', environment.domain, false, "None")
     localStorage.clear()
-    return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
+    return this.http.post(`${environment.apiBaseUrl}/auth/logout`, null);
   }
 
   getGroup(): Observable<Group[]> {

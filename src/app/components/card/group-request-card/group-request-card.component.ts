@@ -16,7 +16,8 @@ export class GroupRequestCardComponent implements OnInit {
   groupRequest: GroupRequest;
   faTimes=faTimes;
 
-  @Output() removeCard: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
+  @Output() removeCardJoin: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
+  @Output() removeCardRefuse: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
 
   constructor(public _groupService: GroupService) {
   }
@@ -27,13 +28,13 @@ export class GroupRequestCardComponent implements OnInit {
 
   acceptRequest() {
     firstValueFrom(this._groupService.acceptGroupRequest(this.groupRequest.group.id, this.groupRequest.user.id)).then(() => {
-      this.removeCard.emit()
+      this.removeCardJoin.emit()
     });
   }
 
   rejectRequest() {
     firstValueFrom(this._groupService.cancelGroupRequestAdmin(this.groupRequest.group.id, this.groupRequest.user.id)).then(() => {
-      this.removeCard.emit(this.groupRequest)
+      this.removeCardRefuse.emit(this.groupRequest)
     });
   }
 

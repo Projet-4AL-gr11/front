@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
     firstValueFrom(this._eventService.getEventParticipation(this.user.id, this.limitEvent, this.offsetEvent))
       .then(events => {
         this.user.eventsParticipation = this.user.eventsParticipation.concat(events);
-        this.offsetEvent += this.limit;
+        this.offsetEvent += this.limitEvent;
         if (events.length > 0) {
           this.loading = false;
         }
@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit {
       data: {id: this.user.id, reportType: ReportTypeEnum.USER}
     });
 
-    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   showDialogueCreateEvent() {
@@ -121,7 +121,7 @@ export class ProfileComponent implements OnInit {
       data: {group: null}
     });
 
-    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   async showDialogUpdateUser() {
@@ -141,9 +141,7 @@ export class ProfileComponent implements OnInit {
       data: {user: this.user}
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.updateUser(this.user.id)
-    })
+    dialogRef.afterClosed().subscribe(() => {})
   }
 
   removeFriend() {

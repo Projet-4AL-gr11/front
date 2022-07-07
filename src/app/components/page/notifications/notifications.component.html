@@ -11,7 +11,8 @@
         <app-card-user-ask-join-group (click)="$event.stopPropagation()"
                                         *ngFor="let groupRequestAdmin of groupRequestsAdmin"
                                         [groupRequest]="groupRequestAdmin"
-                                      (removeCard)="removeCard($event)"
+                                      (removeCardJoin)="removeCard($event)"
+                                      (removeCardRefuse)="removeCard($event)"
         ></app-card-user-ask-join-group>
         <app-user-card (click)="$event.stopPropagation()"
                        *ngFor="let request of friendshipRequestReceived"

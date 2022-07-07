@@ -10,6 +10,7 @@ import {Title} from "@angular/platform-browser";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {faCalendarAlt, faImage, faPaperPlane, faTimes, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
+import {Comment} from "../../../services/models/comment.model";
 
 @Component({
   selector: 'app-page-post',
@@ -98,5 +99,9 @@ export class PostViewComponent implements OnInit {
         }
       }
     }
+  }
+
+  removeCommentCard(event: Comment) {
+    this.post.comments.splice(this.post.comments.indexOf(event, 1))
   }
 }

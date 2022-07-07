@@ -36,7 +36,7 @@
     </div>
     <div>
       <div *ngFor="let comment of post?.comments" class="w-100 my-2">
-        <app-comment-card [comment]="comment"></app-comment-card>
+        <app-comment-card [comment]="comment" (removeCommentCard)="removeCommentCard($event)"></app-comment-card>
       </div>
     </div>
   </div>

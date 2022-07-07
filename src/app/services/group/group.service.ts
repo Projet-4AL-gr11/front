@@ -10,6 +10,7 @@ import {GroupRequest} from "../models/GroupRequest.model";
 import {GroupDto} from "../models/dto/custom/group.dto";
 import {firstValueFrom} from "rxjs";
 import {GroupRequestStatus} from "../../components/shared/enum/group-request-status.enum";
+import {GroupMembership} from "../models/group_membership.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class GroupService {
     return this.http.get<Group>(`${environment.apiBaseUrl}/group/${groupId}`)
   }
 
-  findAll(groupId: string) {
+  findAll() {
     return this.http.get<Group>(`${environment.apiBaseUrl}/group`)
   }
 
@@ -35,7 +36,7 @@ export class GroupService {
   }
 
   getFollowers(groupId: string) {
-    return this.http.get<Group>(`${environment.apiBaseUrl}/group/followers/${groupId}`)
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/group/followers/${groupId}`)
   }
 
   getGroupsWhereUserIsAdmin(groupId: string) {
@@ -81,7 +82,7 @@ export class GroupService {
   }
 
   removeUser(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/removeUser/${groupId}`, userId);
+    return this.http.put(`${environment.apiBaseUrl}/group/removeUser/${groupId}/${userId}`, null);
   }
 
   isUserOwner(groupId: string, userId: string) {
@@ -93,19 +94,19 @@ export class GroupService {
   }
 
   giveAdminRight(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/giveAdminRight/${groupId}`, userId);
+    return this.http.put(`${environment.apiBaseUrl}/group/giveAdminRight/${groupId}/${userId}`, null);
   }
 
   removeAdminRight(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/removeAdminRight/${groupId}`, userId);
+    return this.http.put(`${environment.apiBaseUrl}/group/removeAdminRight/${groupId}/${userId}`, null);
   }
 
   giveGroupOwnership(groupId: string, userId: string) {
-    return this.http.put(`${environment.apiBaseUrl}/group/giveGroupOwnership/${groupId}`, userId);
+    return this.http.put(`${environment.apiBaseUrl}/group/giveGroupOwnership/${groupId}/${userId}`, null);
   }
 
   sendGroupRequest(groupId: string, userId: string) {
-    return this.http.post(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, userId);
+    return this.http.post(`${environment.apiBaseUrl}/group/sendGroupRequest/${groupId}`, null);
   }
 
   acceptGroupRequest(groupId: string, userId: string) {
@@ -130,5 +131,17 @@ export class GroupService {
 
   getGroupRequestWhereAdmin() {
     return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/whereAdmin` );
+  }
+
+  getGroupMembers(id: string) {
+    return this.http.get<GroupMembership[]>(`${environment.apiBaseUrl}/group/members/${id}` );
+  }
+
+  GetGroupRequestWithGroupId(id: string) {
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/${id}` );
+  }
+
+  leaveGroup(id: string) {
+    return this.http.put<GroupRequest[]>(`${environment.apiBaseUrl}/group/leaveGroup/${id}`, null );
   }
 }

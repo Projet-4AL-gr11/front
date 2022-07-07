@@ -19,6 +19,7 @@ import {GroupRequestCardComponent} from "./group-request-card/group-request-card
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import {FlexModule} from "@angular/flex-layout";
 import { GroupCardComponent } from './group-card/group-card.component';
+import { UserManagementGroupCardComponent } from './user-management-group-card/user-management-group-card.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { GroupCardComponent } from './group-card/group-card.component';
     CommentCardComponent,
     GroupRequestCardComponent,
     GroupCardComponent,
+    UserManagementGroupCardComponent,
   ],
     imports: [
         CommonModule,
@@ -58,7 +60,8 @@ import { GroupCardComponent } from './group-card/group-card.component';
     GroupRequestCardComponent,
     GroupCardComponent,
     BsDropdownModule,
-    GroupCardComponent
+    GroupCardComponent,
+    UserManagementGroupCardComponent
 
   ]
 })

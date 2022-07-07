@@ -39,10 +39,10 @@ export class HeaderComponent implements OnInit, OnChanges {
     firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
   }
 
-  logout() {
-    this._authService.logout();
+  async logout() {
+    firstValueFrom(await this._authService.logout()).then();
     this.isConnected = false;
-    this.router.navigateByUrl("/auth/login");
+    await this.router.navigateByUrl("/auth/login");
   }
 
   login() {
