@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {Router} from "@angular/router";

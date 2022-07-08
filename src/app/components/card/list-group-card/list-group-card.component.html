@@ -1,0 +1,9 @@
+<div class="border rounded-3 d-flex flex-column p-2 group-list">
+  <div class="m-3">
+    <div class="px-4">
+      <h2>Vos Groupes</h2>
+    </div>
+    <p *ngIf="groups?.length == 0"> Vous ne faite partie d'aucun group</p>
+    <app-group-card *ngFor="let group of groups" [group]="group"></app-group-card>
+  </div>
+</div>

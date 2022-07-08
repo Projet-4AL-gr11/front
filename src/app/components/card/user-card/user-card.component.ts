@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../services/models/user.model";
-import {faCheckCircle, faUserPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle, faTimes, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
 import {FriendshipService} from "../../../services/friendship/friendship.service";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -30,7 +30,7 @@ export class UserCardComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    firstValueFrom(this._authService.actual()).then(user => this.currentUser= user)
+    firstValueFrom(this._authService.actual()).then(user => this.currentUser = user)
     this.canAdd();
   }
 
@@ -52,7 +52,7 @@ export class UserCardComponent implements OnInit {
   }
 
   acceptFriendship() {
-    firstValueFrom(this._friendshipService.acceptFriendship(this.user.id)).then(() =>{
+    firstValueFrom(this._friendshipService.acceptFriendship(this.user.id)).then(() => {
       this.user.friendshipStatus = FriendRequestStatus.BEFRIENDED;
       this.removeUser.emit(this.user);
     })

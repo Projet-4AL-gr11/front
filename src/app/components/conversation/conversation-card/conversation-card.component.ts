@@ -1,10 +1,7 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Conversation} from "../../../services/models/conversation.model";
 import {AuthService} from "../../../services/auth/auth.service";
-import {GroupService} from "../../../services/group/group.service";
 import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
-import {combineLatest, map, Observable, startWith} from "rxjs";
-import {Message} from "../../../services/models/message.model";
 import {ConversationService} from "../../../services/conversation/conversation.service";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 import {Media} from "../../../services/models/media.model";
@@ -21,6 +18,7 @@ export class ConversationCardComponent {
   @Input()
   currentUser: User;
   faEllipsisH = faEllipsisH;
+  picture: Media;
 
   constructor(private conversationBoxService: ConversationBoxService,
               private authService: AuthService,
@@ -38,6 +36,10 @@ export class ConversationCardComponent {
         return this.conversation.friendship.friendOne?.profilePicture;
       }
       return this.conversation.friendship.friendTwo?.profilePicture;
+    } else if (this.conversation.group) {
+      return this.conversation.group?.picture;
+    } else if (this.conversation.users) {
+      return this.conversation.users[0].profilePicture;
     }
     return undefined;
   }
@@ -50,6 +52,8 @@ export class ConversationCardComponent {
         return this.conversation.friendship.friendOne.username;
       }
       return this.conversation.friendship.friendTwo.username;
+    } else if (this.conversation.users) {
+      return this.conversation.users[0].username + " et autres..."
     }
     return undefined;
   }

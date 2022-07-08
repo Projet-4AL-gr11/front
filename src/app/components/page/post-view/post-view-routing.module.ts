@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {PostViewComponent} from "./post-view.component";
 
 const routes: Routes = [
@@ -13,8 +13,10 @@ const routes: Routes = [
     ]
   }
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PostViewRoutingModule { }
+export class PostViewRoutingModule {
+}

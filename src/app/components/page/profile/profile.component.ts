@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faCheckCircle, faEllipsisH, faTimes, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../../services/models/user.model";
 import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
         this._titleService.setTitle(this.user.username + " - " + environment.name)
       );
     });
-    firstValueFrom(this._authService.actual()).then(user => this.currentUser= user)
+    firstValueFrom(this._authService.actual()).then(user => this.currentUser = user)
   }
 
   async updateUser(id: string): Promise<void> {
@@ -112,7 +112,8 @@ export class ProfileComponent implements OnInit {
       data: {id: this.user.id, reportType: ReportTypeEnum.USER}
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
   showDialogueCreateEvent() {
@@ -121,7 +122,8 @@ export class ProfileComponent implements OnInit {
       data: {group: null}
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
   async showDialogUpdateUser() {
@@ -141,7 +143,8 @@ export class ProfileComponent implements OnInit {
       data: {user: this.user}
     });
 
-    dialogRef.afterClosed().subscribe(() => {})
+    dialogRef.afterClosed().subscribe(() => {
+    })
   }
 
   removeFriend() {

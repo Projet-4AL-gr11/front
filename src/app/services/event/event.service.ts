@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Report} from "../models/report.model";
 import {Event} from "../models/event.model";
@@ -15,9 +15,10 @@ import {MediaService} from "../media/media.service";
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) {
+  }
 
- // Get
+  // Get
   getEventById(id: string): Observable<Event> {
     return this.http.get<Event>(`${environment.apiBaseUrl}/event/${id}`)
   }
@@ -99,7 +100,7 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
+    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null)
   }
 
   removeParticipant(eventId: string, userId: string) {

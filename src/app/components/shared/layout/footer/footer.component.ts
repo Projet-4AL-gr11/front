@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../../../../services/auth/auth.service";
 
 @Component({
@@ -6,11 +6,10 @@ import {AuthService} from "../../../../services/auth/auth.service";
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
-  constructor(public _authService: AuthService) { }
-
-  ngOnInit(): void {
+  constructor(public _authService: AuthService) {
   }
+
 
 }

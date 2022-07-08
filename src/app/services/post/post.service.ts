@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../models/user.model";
 import {Report} from "../models/report.model";
 import {Post} from "../models/post.model";
@@ -18,14 +18,15 @@ export class PostService {
 
   constructor(private http: HttpClient, private mediaService: MediaService) {
     this.headers = new Headers();
-    this.headers.append('Content-Type', 'multipart/form-data;boundary='+Math.random());
+    this.headers.append('Content-Type', 'multipart/form-data;boundary=' + Math.random());
     this.headers.append('Accept', 'application/json');
   }
+
   getPostById(postId: string): Observable<Post> {
     return this.http.get<Post>(`${environment.apiBaseUrl}/post/${postId}`);
   }
 
-  getTimeline( limit: number, offset: number): Observable<Post[]> {
+  getTimeline(limit: number, offset: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getTimeline/${offset}/${limit}`);
   }
 
@@ -74,13 +75,13 @@ export class PostService {
       headers: this.headers,
       params: new HttpParams()
     })).then(post => {
-      files.forEach(file => {
-        const formData = new FormData();
-        formData.append("file", file)
-        firstValueFrom(this.http.post(`${environment.apiBaseUrl}/media/postPicture/${post.id}`, formData)).then(
-          (media: Media) => post.medias.push(media)
-        )
-      })
+        files.forEach(file => {
+          const formData = new FormData();
+          formData.append("file", file)
+          firstValueFrom(this.http.post(`${environment.apiBaseUrl}/media/postPicture/${post.id}`, formData)).then(
+            (media: Media) => post.medias.push(media)
+          )
+        })
       }
     );
   }

@@ -14,13 +14,14 @@ export class SelectUsersCardComponent implements OnInit {
 
   @Input() users: User[] = [];
   @Output() addUser: EventEmitter<User> = new EventEmitter<User>();
-  @Output() removeUser: EventEmitter<User>= new EventEmitter<User>();
+  @Output() removeUser: EventEmitter<User> = new EventEmitter<User>();
 
   searchUsername = new FormControl();
   filteredUsers: User[] = [];
   selectedUser: User = null;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.searchUsername.valueChanges.pipe(
@@ -48,7 +49,7 @@ export class SelectUsersCardComponent implements OnInit {
   }
 
   displayFn(user: User) {
-    if(user) {
+    if (user) {
       return user.username;
     } else {
       return '';

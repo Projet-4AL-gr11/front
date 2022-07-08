@@ -17,7 +17,8 @@ export class DialogCreateConversationComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _conversationService: ConversationService,
     @Inject(MAT_DIALOG_DATA) public data: { user: User }
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initializeFormGroup();

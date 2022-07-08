@@ -6,14 +6,17 @@
          class="rounded-circle me-2"
          height="50" style="object-fit: cover" width="50">
   </div>
-  <p class="my-3"><a [routerLink]="['/profile/' + groupRequest?.user?.id]"><strong>{{groupRequest?.user?.username}}</strong>  </a></p>
+  <p class="my-3"><a
+    [routerLink]="['/profile/' + groupRequest?.user?.id]"><strong>{{groupRequest?.user?.username}}</strong> </a></p>
   <p class="my-3"> demande pour </p>
-  <p class="my-3"><a [routerLink]="['/group/' + groupRequest?.group?.id]"> <strong>{{groupRequest?.group?.name}}</strong></a></p>
+  <p class="my-3"><a [routerLink]="['/group/' + groupRequest?.group?.id]">
+    <strong>{{groupRequest?.group?.name}}</strong></a></p>
   <div class="spacer"></div>
-  <a (click)="this.rejectRequest()" class="button-reject-invitation" style="padding-right: 20px; padding-top: 13px" label="Rejeter l'invitation">
+  <a (click)="this.rejectRequest()" class="button-reject-invitation" style="padding-right: 20px; padding-top: 13px"
+     label="Rejeter l'invitation">
     <fa-icon [icon]="faTimes" size="2x" style="color: red"></fa-icon>
   </a>
-  <button (click)="this.acceptRequest()"  class="ml-auto button-accept-invitation" mat-raised-button>
+  <button (click)="this.acceptRequest()" class="ml-auto button-accept-invitation" mat-raised-button>
     Accepter
   </button>
 

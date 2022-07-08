@@ -14,7 +14,8 @@ export class MessageComponent implements OnInit {
   message: Message;
   user: User;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService) {
+  }
 
   ngOnInit(): void {
     firstValueFrom(this.authService.actual()).then(user => this.user = user)

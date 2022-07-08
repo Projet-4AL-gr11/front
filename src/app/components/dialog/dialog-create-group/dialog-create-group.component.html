@@ -19,7 +19,8 @@
                 height="150px"
                 style="object-fit: cover"
                 width="150px">
-              <input #profilePictureInput (change)="onProfilePictureSelected()" formControlName="profilePicture" hidden id="profilePicture" type="file">
+              <input #profilePictureInput (change)="onProfilePictureSelected()" formControlName="profilePicture" hidden
+                     id="profilePicture" type="file">
             </a>
           </div>
         </div>
@@ -30,7 +31,8 @@
             <img [src]="bannerPictureURL || '../../../../assets/images/no-image.png'" alt=""
                  class="rounded"
                  height="300px" style="object-fit: cover" width="100%">
-            <input #profileBannerInput (change)="onBannerPictureSelected()" formControlName="bannerPicture" hidden id="bannerPicture" type="file">
+            <input #profileBannerInput (change)="onBannerPictureSelected()" formControlName="bannerPicture" hidden
+                   id="bannerPicture" type="file">
           </a>
         </div>
       </div>

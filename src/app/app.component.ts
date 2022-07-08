@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {environment} from "../environments/environment";
 import {Title} from "@angular/platform-browser";
 import {UserService} from "./services/user/user.service";

@@ -27,11 +27,20 @@
                 class="button-add-friend-disable"
                 mat-menu-item><span>Invitation envoyé</span>
         </button>
-        <button (click)="this.deleteMembership(user.id)" *ngIf="isOwner || (!userIsAdmin && !userIsOwner) " class="button-remove-group" mat-menu-item>
+        <button (click)="this.deleteMembership(user.id)" *ngIf="(isOwner || isAdmin) || (!userIsAdmin && !userIsOwner) "
+                class="button-remove-group" mat-menu-item>
           Retirer du group
         </button>
-        <button (click)="this.giveAdmin(user.id)" *ngIf="isOwner && !userIsAdmin" mat-menu-item>Ajouter un administrateur</button>
-        <button (click)="this.removeAdmin(user.id)" *ngIf="isOwner && userIsAdmin" mat-menu-item>Retirer l'administrateur</button>
+        <button (click)="this.giveAdmin(user.id)" *ngIf="(isOwner || isAdmin) && !userIsAdmin" mat-menu-item>Ajouter un
+          administrateur
+        </button>
+        <!-- TODO: Il y a un problème sur la condition quand l'user est owner -->
+        <button (click)="this.removeAdmin(user.id)" *ngIf="(isOwner || isAdmin) && (userIsAdmin && !userIsOwner)"
+                mat-menu-item>Retirer l'administrateur
+        </button>
+        <button (click)="this.giveOwnerShipRight(user.id)" *ngIf="isOwner && userIsAdmin" mat-menu-item>Donner
+          l'Ownership
+        </button>
       </mat-menu>
       <mat-menu #resfFriendship="matMenu">
         <button (click)="this.acceptFriendship()"

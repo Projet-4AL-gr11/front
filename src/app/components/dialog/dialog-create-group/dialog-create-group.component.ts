@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../../services/models/user.model";
 import {GroupService} from "../../../services/group/group.service";
-import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-dialog-create-group',
@@ -23,7 +22,8 @@ export class DialogCreateGroupComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _groupService: GroupService,
     @Inject(MAT_DIALOG_DATA) public data: { user: User }
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initializeFormGroup();
@@ -82,7 +82,7 @@ export class DialogCreateGroupComponent implements OnInit {
         Validators.maxLength(30),
         Validators.minLength(2)
       ]),
-      profilePicture: new FormControl('',[]),
+      profilePicture: new FormControl('', []),
       bannerPicture: new FormControl('', [])
     });
   }

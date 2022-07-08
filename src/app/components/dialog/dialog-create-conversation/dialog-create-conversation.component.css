@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .mat-card .mat-card-content .form .mat-form-field {
   width: 100%;
   min-width: 300px;

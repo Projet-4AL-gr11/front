@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogUpdateGroupComponent } from './dialog-update-group.component';
+import {DialogUpdateGroupComponent} from './dialog-update-group.component';
 
 describe('DialogUpdateGroupComponent', () => {
   let component: DialogUpdateGroupComponent;
@@ -8,9 +8,9 @@ describe('DialogUpdateGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogUpdateGroupComponent ]
+      declarations: [DialogUpdateGroupComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

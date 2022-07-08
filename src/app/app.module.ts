@@ -1,6 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
 import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {LeaderboardModule} from "./components/page/leaderboard/leaderboard.module";
@@ -30,8 +30,6 @@ import {EventViewModule} from "./components/page/event-view/event-view.module";
 import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
-import { GroupViewComponent } from './components/page/group-view/group-view.component';
-import {Group} from "./services/models/group.model";
 import {GroupViewModule} from "./components/page/group-view/group-view.module";
 
 @NgModule({
@@ -79,11 +77,11 @@ import {GroupViewModule} from "./components/page/group-view/group-view.module";
       multi: true
     }
   ],
-  exports: [
-  ],
+  exports: [],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

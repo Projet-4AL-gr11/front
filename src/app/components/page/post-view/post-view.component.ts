@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Post} from "../../../services/models/post.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PostService} from "../../../services/post/post.service";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -37,6 +37,7 @@ export class PostViewComponent implements OnInit {
               public _userService: UserService,
               public _authService: AuthService,
               private _titleService: Title,
+              private router: Router,
               private _snackBar: MatSnackBar) {
   }
 
@@ -50,11 +51,10 @@ export class PostViewComponent implements OnInit {
       return;
     }
     this._commentService.sendComment(this.post.id, this.text, this.medias).then(() => {
-      this.ngOnInit()
-      this.text = ""
-    }
-
-  );
+        this.ngOnInit()
+        this.text = ""
+      }
+    );
   }
 
   async update(postId: string): Promise<void> {
@@ -62,7 +62,7 @@ export class PostViewComponent implements OnInit {
       this.post = post;
       this._titleService.setTitle(post.text + " - " + environment.name);
     });
-    await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
+    await firstValueFrom(this._postService.sharedPost(postId)).then(shared => this.post.sharesPost = shared);
     await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
   }
 
@@ -103,5 +103,9 @@ export class PostViewComponent implements OnInit {
 
   removeCommentCard(event: Comment) {
     this.post.comments.splice(this.post.comments.indexOf(event, 1))
+  }
+
+  goToTimeline() {
+    this.router.navigate(['/timeline']).then();
   }
 }

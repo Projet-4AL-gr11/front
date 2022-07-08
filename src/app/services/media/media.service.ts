@@ -36,13 +36,13 @@ export class MediaService {
     return this.http.get<Media>(`${environment.apiBaseUrl}/media/eventPicture/${userId}`);
   }
 
-  public saveProfilePicture( file: File): Observable<any> {
+  public saveProfilePicture(file: File): Observable<any> {
     const formData: any = new FormData()
     formData.append("file", file)
     return this.http.post<Media>(`${environment.apiBaseUrl}/media/profilePicture`, formData);
   }
 
-  public saveBannerPicture( file: File): Observable<any> {
+  public saveBannerPicture(file: File): Observable<any> {
     const formData: any = new FormData()
     formData.append("file", file)
 
@@ -80,5 +80,6 @@ export class MediaService {
   saveGroupBannerPicture(id: string, file: File) {
     const formData: any = new FormData()
     formData.append("file", file)
-    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupBannerPicture/${id}`, formData);  }
+    return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupBannerPicture/${id}`, formData);
+  }
 }

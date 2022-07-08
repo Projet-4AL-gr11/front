@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, timer} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {User} from "../models/user.model";
@@ -30,12 +30,12 @@ export class AuthService {
       await this.getCurrentUser();
     }
     if (this.getCurrentUserId() && this.userSubject) {
-       await this.getParticipations();
-       await this.getFriends();
-       await this.getReceivedFriendshipRequest();
-       await this.getReceivedGroupRequest();
-       await this.getSentFriendshipRequest();
-       await this.getGroup();
+      await this.getParticipations();
+      await this.getFriends();
+      await this.getReceivedFriendshipRequest();
+      await this.getReceivedGroupRequest();
+      await this.getSentFriendshipRequest();
+      await this.getGroup();
     }
   }
 
@@ -109,8 +109,8 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id, {path: '/',sameSite: "None"});
-        this.cookieService.set('username', user.username, {path: '/',sameSite: "None"});
+        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
+        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
         this.updateUser();
         return user;
       }));
@@ -122,9 +122,9 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{path: '/', sameSite:"None"});
+        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
         // this.cookieService.set('Refresh', user.currentHashedRefreshToken,{path: '/',sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{path: '/',sameSite:"None"});
+        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
@@ -165,7 +165,7 @@ export class AuthService {
     return this.cookieService.get('refresh');
   }
 
-   getCurrentUsername() {
+  getCurrentUsername() {
     return this.cookieService.get('username');
   }
 
@@ -175,7 +175,7 @@ export class AuthService {
 
   refreshCookieUsername(username) {
     this.cookieService.delete('username', '/');
-    this.cookieService.set('username', username,{sameSite:"None", path: "/"});
+    this.cookieService.set('username', username, {sameSite: "None", path: "/"});
 
   }
 }

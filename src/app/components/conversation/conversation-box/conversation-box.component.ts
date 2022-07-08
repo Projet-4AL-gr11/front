@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {ConversationBoxDirective} from "../conversation-directive/conversation-box.directive";
-import {Conversation} from "../../../services/models/conversation.model";
 import {mergeMap, Subject, takeUntil} from "rxjs";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 

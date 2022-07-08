@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LeaderboardCardComponent} from "./leaderboard-card.component";
 
 
@@ -8,9 +8,9 @@ describe('CardLeaderbordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeaderboardCardComponent ]
+      declarations: [LeaderboardCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

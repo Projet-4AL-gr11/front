@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ProfileRoutingModule } from './profile-routing.module';
+import {ProfileRoutingModule} from './profile-routing.module';
 import {ProfileComponent} from "./profile.component";
 import {MatTabsModule} from "@angular/material/tabs";
 import {VirtualScrollerModule} from "@iharbeck/ngx-virtual-scroller";
@@ -19,24 +19,25 @@ import {FlexModule} from "@angular/flex-layout";
   declarations: [
     ProfileComponent,
   ],
-    imports: [
-        // DialogModule,
-        CommonModule,
-        SharedModule,
-        CardsModule,
-        MatTabsModule,
-        VirtualScrollerModule,
-        PipesModules,
-        FontAwesomeModule,
-        MatButtonModule,
-        MatTooltipModule,
-        MatMenuModule,
-        CardsModule,
-        ProfileRoutingModule,
-        FlexModule
-    ],
+  imports: [
+    // DialogModule,
+    CommonModule,
+    SharedModule,
+    CardsModule,
+    MatTabsModule,
+    VirtualScrollerModule,
+    PipesModules,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatMenuModule,
+    CardsModule,
+    ProfileRoutingModule,
+    FlexModule
+  ],
   exports: [
     ProfileComponent,
   ]
 })
-export class ProfileModule { }
+export class ProfileModule {
+}

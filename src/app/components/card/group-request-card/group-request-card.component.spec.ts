@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {GroupRequestCardComponent} from "./group-request-card.component";
 
 
@@ -8,9 +8,9 @@ describe('CardUserAskJoinGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupRequestCardComponent ]
+      declarations: [GroupRequestCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

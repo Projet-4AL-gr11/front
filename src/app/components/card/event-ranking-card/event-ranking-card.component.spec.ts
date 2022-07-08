@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {EventRankingCardComponent} from "./event-ranking-card.component";
 
 
@@ -8,9 +8,9 @@ describe('CardEventRankingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventRankingCardComponent ]
+      declarations: [EventRankingCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

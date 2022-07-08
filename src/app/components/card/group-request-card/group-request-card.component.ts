@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupService} from "../../../services/group/group.service";
-import {Group} from "../../../services/models/group.model";
 import {firstValueFrom} from "rxjs";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {User} from "../../../services/models/user.model";
 import {GroupRequest} from "../../../services/models/GroupRequest.model";
 
 @Component({
@@ -14,7 +12,7 @@ import {GroupRequest} from "../../../services/models/GroupRequest.model";
 export class GroupRequestCardComponent implements OnInit {
   @Input()
   groupRequest: GroupRequest;
-  faTimes=faTimes;
+  faTimes = faTimes;
 
   @Output() removeCardJoin: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
   @Output() removeCardRefuse: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();

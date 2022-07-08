@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {faCalendarAlt, faImage, faPeopleGroup, faSmile, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarAlt, faImage, faPeopleGroup, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Post} from "../../../services/models/post.model";
 import {Event} from "../../../services/models/event.model";
@@ -40,7 +40,8 @@ export class DialogCreatePostComponent implements OnInit {
               public dialogRef: MatDialogRef<DialogCreatePostComponent>,
               private _snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data: {
-                sharedEvent: Event, sharesPost: Post }) {
+                sharedEvent: Event, sharesPost: Post
+              }) {
   }
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class DialogCreatePostComponent implements OnInit {
   }
 
   async sendPost() {
-    if ((this.text === undefined || this.text === '') ) {
+    if ((this.text === undefined || this.text === '')) {
 
       this._snackBar.open("Vous ne pouvez créer un poste s'il est vide.", "Fermer");
       return;

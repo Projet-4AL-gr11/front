@@ -44,7 +44,8 @@
                           matTooltipPosition="above">
                     Retirer des amis
                   </button>
-                  <a (click)="this.delFriendshipRequest()" *ngIf="this.user.friendshipStatus === allFriendRequestStatus.RECEIVED"
+                  <a (click)="this.delFriendshipRequest()"
+                     *ngIf="this.user.friendshipStatus === allFriendRequestStatus.RECEIVED"
                      class=" button-reject-invitation"
                      label="Rejeter l'invitation" style=" padding-right: 10px">
                     <fa-icon [icon]="faTimes" size="2x" style="color: red"></fa-icon>
@@ -102,11 +103,11 @@
               </div>
             </div>
           </div>
-<!--          <div class="user-card-div-row-2">-->
-<!--            <div class="user-card-infos">-->
-<!--              <p>{{user.bio}}</p>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="user-card-div-row-2">-->
+          <!--            <div class="user-card-infos">-->
+          <!--              <p>{{user.bio}}</p>-->
+          <!--            </div>-->
+          <!--          </div>-->
         </div>
       </div>
       <div class="tab-user-profil">
@@ -117,7 +118,7 @@
                                 [enableUnequalChildrenSizes]="true" [items]="user.createdPosts"
                                 [parentScroll]="divContent" childHeight="1" class="w-100 h-100">
                 <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
-                  <app-post (onDelete)="removePost($event)" [post]="post"></app-post>
+                  <app-post (postDelete)="removePost($event)" [post]="post"></app-post>
                 </div>
               </virtual-scroller>
             </div>
