@@ -32,8 +32,8 @@ import {FlexModule} from "@angular/flex-layout";
         MatInputModule,
         MatMenuModule,
 
-        PostViewRoutingModule,
         FlexModule,
+      PostViewRoutingModule,
     ],
   exports: [
     PostViewComponent,

@@ -30,6 +30,9 @@ import {EventViewModule} from "./components/page/event-view/event-view.module";
 import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
+import { GroupViewComponent } from './components/page/group-view/group-view.component';
+import {Group} from "./services/models/group.model";
+import {GroupViewModule} from "./components/page/group-view/group-view.module";
 
 @NgModule({
   imports: [
@@ -61,6 +64,7 @@ import {ProfileModule} from "./components/page/profile/profile.module";
     EventViewModule,
     ConversationModule,
     ProfileModule,
+    GroupViewModule,
     //
     AppRoutingModule,
   ],

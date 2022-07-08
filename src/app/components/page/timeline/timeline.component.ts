@@ -51,6 +51,14 @@ export class TimelineComponent implements OnInit, OnDestroy {
           this.loading = false;
         }
       });
+
+  }
+
+  updatePost() {
+    this.offset = 0;
+    this.limit = 10;
+    this.posts = [];
+    this.getMorePosts()
   }
 }
 

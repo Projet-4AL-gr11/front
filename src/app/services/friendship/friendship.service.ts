@@ -21,7 +21,6 @@ export class FriendshipService {
   }
 
   statusFriendship(userId: string): Observable<FriendRequestStatus> {
-    console.log(userId)
     return this.http.get<FriendRequestStatus>(`${environment.apiBaseUrl}/friendship/${userId}/friendship-status`)
   }
 
@@ -29,7 +28,7 @@ export class FriendshipService {
     return this.http.delete(`${environment.apiBaseUrl}/friendship/${userId}/remove`)
   }
 
-  sendFriendRequest(userId: string) {
+  sendFriendRequest(userId: string): Observable<any> {
     return this.http.post(`${environment.apiBaseUrl}/friendship/sendFriendshipRequest/${userId}`, null)
   }
 
@@ -38,11 +37,14 @@ export class FriendshipService {
   }
 
   rejectFriendRequest(userId: string) {
-    console.log("rejectFriendRequest")
     return this.http.delete(`${environment.apiBaseUrl}/friendship/cancel/friendship/${userId}`)
   }
 
   acceptFriendship(userId: string) {
     return this.http.put(`${environment.apiBaseUrl}/friendship/acceptFriendshipRequest/${userId}`, null)
+  }
+
+  cancelMyFriendRequest(id: string) {
+    return this.http.delete(`${environment.apiBaseUrl}/friendship/cancel/friendship/${id}`)
   }
 }

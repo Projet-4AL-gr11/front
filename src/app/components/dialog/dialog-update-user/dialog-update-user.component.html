@@ -8,7 +8,7 @@
         <div class="mr-2">
           <a (click)="profilePictureInput.click()">
             <img
-              [src]="updatedProfilePictureURL || (data.user?.profilePicture?.link | imageUrl:undefined:undefined:false) || '../../../../assets/images/no-image.png'"
+              [src]="updatedProfilePictureURL || ((data.user?.profilePicture?.id | imageUrl:undefined:undefined:false) | async) || '../../../../assets/images/no-image.png'"
               alt="" class="rounded-circle"
               height="150px"
               style="object-fit: cover"
@@ -21,7 +21,7 @@
       <div class="form-field-update-bannerPicture">
         <p> Photo de Bannière</p>
         <a (click)="profileBannerInput.click()">
-          <img [src]="updatedBannerPictureURL || (data.user?.bannerPicture?.link | imageUrl:undefined:undefined:false) || '../../../../assets/images/no-image.png'" alt=""
+          <img [src]="updatedBannerPictureURL || ((data.user?.bannerPicture?.id | imageUrl:undefined:undefined:false) | async) || '../../../../assets/images/no-image.png'" alt=""
                class="rounded"
                height="300px" style="object-fit: cover" width="100%">
           <input #profileBannerInput (change)="onProfileBannerSelected()" formControlName="bannerPicture" hidden id="bannerPicture" type="file">

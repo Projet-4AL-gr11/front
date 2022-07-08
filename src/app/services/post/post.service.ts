@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 import {User} from "../models/user.model";
 import {Report} from "../models/report.model";
 import {Post} from "../models/post.model";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {firstValueFrom, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {MediaService} from "../media/media.service";
+import {PostDto} from "../models/dto/custom/post.dto";
+import {Media} from "../models/media.model";
+import {Group} from "../models/group.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+  headers: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private mediaService: MediaService) {
+    this.headers = new Headers();
+    this.headers.append('Content-Type', 'multipart/form-data;boundary='+Math.random());
+    this.headers.append('Accept', 'application/json');
   }
   getPostById(postId: string): Observable<Post> {
     return this.http.get<Post>(`${environment.apiBaseUrl}/post/${postId}`);
@@ -38,7 +46,6 @@ export class PostService {
   }
 
   dislikePost(postId: string): Observable<void> {
-    console.log("dislike de ce post " +postId)
     return this.http.post<void>(`${environment.apiBaseUrl}/post/dislike/${postId}`, null);
   }
 
@@ -51,21 +58,31 @@ export class PostService {
     return this.http.get<Post>(`${environment.apiBaseUrl}/post/getSharedPost/${postId}`);
   }
 
-  createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[]) {
-    const formData = new FormData();
-    formData.append("text", text);
+  async createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[], groupSelected: Group) {
+    let formData: PostDto = new PostDto();
+    formData.text = text;
     if (sharesPostId !== undefined && sharesPostId !== null) {
-      formData.append("sharesPost", sharesPostId);
+      formData.sharesPost = sharesPostId
     }
     if (sharedEventId !== undefined && sharedEventId !== null) {
-      formData.append("sharedEvent", sharedEventId);
+      formData.sharedEvent = sharedEventId
     }
-    if (files) {
-      for (let file of files) {
-        formData.append("post_medias", file);
+    if (groupSelected !== undefined) {
+      formData.group = groupSelected;
+    }
+    firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
+      headers: this.headers,
+      params: new HttpParams()
+    })).then(post => {
+      files.forEach(file => {
+        const formData = new FormData();
+        formData.append("file", file)
+        firstValueFrom(this.http.post(`${environment.apiBaseUrl}/media/postPicture/${post.id}`, formData)).then(
+          (media: Media) => post.medias.push(media)
+        )
+      })
       }
-    }
-    return this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData);
+    );
   }
 
   getAll(): Observable<Post[]> {
@@ -74,5 +91,9 @@ export class PostService {
 
   getUserTimeline(id: string, limit: number, offset: number) {
     return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/getUserPost/${id}/${offset}/${limit}`);
+  }
+
+  getPostWithGroupId(id: string, limit: number, offset: number) {
+    return this.http.get<Post[]>(`${environment.apiBaseUrl}/post/group/${id}/${offset}/${limit}`);
   }
 }

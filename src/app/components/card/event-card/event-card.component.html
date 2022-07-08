@@ -1,7 +1,7 @@
 <mat-card class="event-card-list">
   <div class="img-card-event">
     <a [routerLink]="['/event/' + event?.id]">
-      <img [src]=" event?.picture?.link | imageUrl:1360:906"
+      <img [src]=" (event?.picture?.id | imageUrl:1360:906) | async"
            alt=""
            class="rounded" style="object-fit: cover">
     </a>

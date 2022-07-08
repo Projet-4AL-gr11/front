@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../services/models/user.model";
 import {faCheckCircle, faUserPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
@@ -22,6 +22,8 @@ export class UserCardComponent implements OnInit {
   faTimes = faTimes;
   statusEnum: typeof FriendRequestStatus = FriendRequestStatus;
 
+  @Output() removeUser: EventEmitter<User> = new EventEmitter<User>();
+
   constructor(private _friendshipService: FriendshipService,
               public _authService: AuthService,
               public dialog: MatDialog) {
@@ -44,24 +46,31 @@ export class UserCardComponent implements OnInit {
 
   removeFriend() {
     firstValueFrom(this._friendshipService.removeFriendship(this.user.id))
-      .then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
+      .then(() => {
+        this.user.friendshipStatus = FriendRequestStatus.NONE;
+      });
   }
 
   acceptFriendship() {
     firstValueFrom(this._friendshipService.acceptFriendship(this.user.id)).then(() =>{
       this.user.friendshipStatus = FriendRequestStatus.BEFRIENDED;
+      this.removeUser.emit(this.user);
     })
   }
 
   delFriendshipRequest() {
     firstValueFrom(this._friendshipService.rejectFriendRequest(this.user.id)).then(() => {
       this.user.friendshipStatus = FriendRequestStatus.NONE;
+      this.removeUser.emit(this.user);
     })
   }
 
   cancelRequest() {
     firstValueFrom(this._friendshipService.cancelFriendRequest(this.user.id))
-      .then(() => this.user.friendshipStatus = FriendRequestStatus.NONE);
+      .then(() => {
+        this.user.friendshipStatus = FriendRequestStatus.NONE
+        this.removeUser.emit(this.user);
+      });
   }
 
 }

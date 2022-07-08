@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
 import {User} from "../../../services/models/user.model";
 import {environment} from "../../../../environments/environment";
+import {firstValueFrom} from "rxjs";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-dialog-update-user',
@@ -22,6 +24,7 @@ export class DialogUpdateUserComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogUpdateUserComponent>,
               private _formBuilder: FormBuilder,
               public _userService: UserService,
+              private _authService: AuthService,
               @Inject(MAT_DIALOG_DATA) public data: { user: User }) {
     this.env = environment;
   }
@@ -37,10 +40,12 @@ export class DialogUpdateUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onClickSubmit() {
-    this._userService.putUser(this.formData, this.updatedProfilePicture, this.updatedBannerPicture)
-      .toPromise()
-      .then(() => this.dialogRef.close());
+  async onClickSubmit() {
+    await this._userService.putUser(this.formData, this.updatedProfilePicture, this.updatedBannerPicture)
+      .then(user => {
+        this._authService.refreshCookieUsername(user.username)
+        this.dialogRef.close()
+      });
   }
 
   onProfilePictureSelected() {
@@ -95,17 +100,15 @@ export class DialogUpdateUserComponent implements OnInit {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ]),
       bio: new FormControl('', [
-        Validators.required,
         Validators.minLength(3),
         Validators.maxLength(200)
       ]),
       profilePicture: new FormControl('',[]),
       bannerPicture: new FormControl('', [])
     });
-
     this.formData.patchValue({
       username: this.data.user.username,
-      mail: this.data.user.email,
+      email: this.data.user.email,
       bio: this.data.user.bio
     })
   }

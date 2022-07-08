@@ -10,6 +10,7 @@ import {Title} from "@angular/platform-browser";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {faCalendarAlt, faImage, faPaperPlane, faTimes, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
+import {Comment} from "../../../services/models/comment.model";
 
 @Component({
   selector: 'app-page-post',
@@ -27,7 +28,7 @@ export class PostViewComponent implements OnInit {
   text: string;
   post: Post;
   caretPosition: number = 0;
-  medias: File[];
+  medias: File[] = [];
   mediasURL: string[];
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -43,6 +44,19 @@ export class PostViewComponent implements OnInit {
     this._activatedRoute.params.subscribe(params => this.update(params["id"]).then());
   }
 
+  sendComment(): void {
+    if (this.text === undefined || this.text.length <= 0) {
+      this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
+      return;
+    }
+    this._commentService.sendComment(this.post.id, this.text, this.medias).then(() => {
+      this.ngOnInit()
+      this.text = ""
+    }
+
+  );
+  }
+
   async update(postId: string): Promise<void> {
     await firstValueFrom(this._postService.getPostById(postId)).then(post => {
       this.post = post;
@@ -50,19 +64,6 @@ export class PostViewComponent implements OnInit {
     });
     await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
     await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
-  }
-
-  sendComment(): void {
-    if (this.text === undefined || this.text.length <= 0) {
-      this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
-      return;
-    }
-    firstValueFrom(this._commentService.sendComment(this.post.id, this.text)).then(comment => {
-      if (this.post.comments === undefined) {
-        this.post.comments = [];
-      }
-      this.post.comments = [comment].concat(this.post.comments);
-    });
   }
 
   setCaretPosition($event: any) {
@@ -98,5 +99,9 @@ export class PostViewComponent implements OnInit {
         }
       }
     }
+  }
+
+  removeCommentCard(event: Comment) {
+    this.post.comments.splice(this.post.comments.indexOf(event, 1))
   }
 }

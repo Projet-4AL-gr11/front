@@ -3,7 +3,7 @@
        fxFlex
        fxLayout="row">
     <div class="rounded-circle profile-picture" fxFlex>
-      <img [alt]="message?.author?.username" [src]="message?.author?.profilePicture?.link| imageUrl"
+      <img [alt]="message?.author?.username" [src]="(message?.author?.profilePicture?.id| imageUrl) | async"
            class="rounded-circle profile-picture"
            size="10px" style="object-fit: cover">
     </div>
@@ -23,7 +23,7 @@
         <span class="m-0 text-break date">{{message?.createdAt | date:'MM/dd/yy, HH:mm'}}</span>
       </div>
       <div class="rounded-circle profile-picture" fxFlex fxLayoutAlign="end end">
-        <img [alt]="message?.author?.username" [src]="message?.author?.profilePicture?.link | imageUrl"
+        <img [alt]="message?.author?.username" [src]="(message?.author?.profilePicture?.id | imageUrl) | async"
              class="rounded-circle profile-picture"
              size="10px" style="object-fit: cover">
       </div>

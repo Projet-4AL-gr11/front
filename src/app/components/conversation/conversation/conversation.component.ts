@@ -32,7 +32,7 @@ export class ConversationComponent implements OnInit {
   messages: Observable<Message[]> = combineLatest([ this.conversationService.getMessages(), this.conversationService.getAddedMessage().pipe(startWith(null))]).pipe(
     map(([messages, messagesAdded]) => {
       if (messagesAdded && messagesAdded.conversation.id == this.conversation.id) {
-        messages = messages.concat(messagesAdded)
+        messages.push(messagesAdded)
       }
       messages = messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
       return messages;
@@ -49,6 +49,7 @@ export class ConversationComponent implements OnInit {
     this.conversationService.leaveConversation(this.conversation)
 
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.conversationService.leaveConversation(changes['conversation'].previousValue);
     if (this.conversation) {
@@ -84,8 +85,19 @@ export class ConversationComponent implements OnInit {
   sendMessage() {
     this.conversationService.sendMessage({content: this.tchatMessage.value, conversation: this.conversation });
     this.tchatMessage.reset()
+    this.scrollToBottom()
   }
 
+  private scrollToBottom() {
+    this.isNearBottom = this.isUserNearBottom();
+    if (this.isNearBottom) {
+      this.scroll.scroll({
+        top: this.scroll.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  }
   private isUserNearBottom(): boolean {
     const threshold = 5;
     const position = this.scroll.scrollTop + this.scroll.offsetHeight;

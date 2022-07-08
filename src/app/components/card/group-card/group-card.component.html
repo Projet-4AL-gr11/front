@@ -1,0 +1,22 @@
+<div class="rounded-pill border d-flex p-2 group-card my-3" fxFlex fxLayoutAlign="row">
+  <div class="mr-2" fxFlex fxLayoutAlign="row start center">
+    <img [routerLink]="['/group/' + group.id]"
+         [src]="(group?.picture?.id | imageUrl) | async"
+         alt=""
+         class="rounded-circle me-2"
+         height="50" style="object-fit: cover" width="50">
+    <p class="my-3"><a [routerLink]="['/group/' + group.id]">{{group.name}}</a>
+    </p>
+  </div>
+  <div fxFlex fxLayoutAlign="end center">
+    <button (click)="this.askJoin()" *ngIf="this.groupRequestStatus == statusEnum.NONE"
+            class="ml-auto button-add-friend" mat-raised-button>
+      <fa-icon [icon]="faUserPlus"></fa-icon>
+      Rejoindre
+    </button>
+    <button (click)="this.cancelRequest()" *ngIf="this.groupRequestStatus === statusEnum.PENDING"
+            class="ml-auto button-add-friend-disable"
+            mat-raised-button><span>Requête envoyé</span>
+    </button>
+  </div>
+</div>

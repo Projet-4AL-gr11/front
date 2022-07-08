@@ -16,10 +16,11 @@ const routes: Routes = [
   {path: "profile/:id", loadChildren: () => import('./components/page/profile/profile.module').then(m => m.ProfileModule)},
   {path: "notifications", loadChildren: () => import('./components/page/notifications/notifications.module').then(m => m.NotificationsModule)},
   {path: "event/:eventId", loadChildren: () => import('./components/page/event-view/event-view.module').then(m => m.EventViewModule)},
+  {path: "group/:groupId", loadChildren: () => import('./components/page/group-view/group-view.module').then(m => m.GroupViewModule)},
+  {path: "post/:id", loadChildren: () => import('./components/page/post-view/post-view.module').then(m => m.PostViewModule)},
 
   // TODO: A modifier
   // {path: "post/:id", loadChildren: () => import('./components/page/page-post/page-post.module').then(m => m.PostViewModule)},
-  {path: "post/:id", component: PostViewComponent},
   // {path: "timeline", loadChildren: () => import('./components/page/timeline/timeline.module').then(m => m.TimelineModule)},
   // {path: "timeline", component: TimelineComponent},
 

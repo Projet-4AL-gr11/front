@@ -1,7 +1,7 @@
 <div class="rounded-pill border d-flex p-2 card-user my-3" fxFlex fxLayoutAlign="row">
   <div class="mr-2" fxFlex fxLayoutAlign="row start center">
     <img [routerLink]="['/profile/' + user.id]"
-         [src]="user?.profilePicture?.link | imageUrl"
+         [src]="(user?.profilePicture?.id | imageUrl) | async"
          alt=""
          class="rounded-circle me-2"
          height="50" style="object-fit: cover" width="50">

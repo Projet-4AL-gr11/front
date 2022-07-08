@@ -23,29 +23,33 @@ import {CardsModule} from "../card/cards.module";
 import { DialogCreateConversationComponent } from './dialog-create-conversation/dialog-create-conversation.component';
 import {MatCardModule} from "@angular/material/card";
 import {ConversationModule} from "../conversation/conversation.module";
+import {MatNativeDateModule} from "@angular/material/core";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    FontAwesomeModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatMenuModule,
-    PipesModules,
-    CardsModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatCardModule,
-    ConversationModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FontAwesomeModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatMenuModule,
+        PipesModules,
+        CardsModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        MatNativeDateModule,
+        ConversationModule,
+        FlexModule,
+    ],
   declarations: [
     DialogCreateEventComponent,
     DialogCreateGroupComponent,

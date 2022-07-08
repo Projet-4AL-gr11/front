@@ -109,10 +109,8 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
+        this.cookieService.set('user', user.id, {path: '/',sameSite: "None"});
+        this.cookieService.set('username', user.username, {path: '/',sameSite: "None"});
         this.updateUser();
         return user;
       }));
@@ -124,20 +122,24 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id,{path: '/', sameSite:"None"});
+        // this.cookieService.set('Refresh', user.currentHashedRefreshToken,{path: '/',sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{path: '/',sameSite:"None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
   }
 
-  public logout(): Observable<unknown> {
+  async logout() {
     this.userSubject.next(null);
-    this.cookieService.getAll()
+    this.cookieService.delete('username', "/", environment.domain)
+    this.cookieService.delete('user', "/", environment.domain)
+    this.cookieService.delete('Refresh', "/", environment.domain)
+    this.cookieService.delete('Authentication', "/", environment.domain)
+    this.cookieService.deleteAll('/', environment.domain, false, "None")
     localStorage.clear()
-    return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
+    return this.http.post(`${environment.apiBaseUrl}/auth/logout`, null);
   }
 
   getGroup(): Observable<Group[]> {
@@ -163,11 +165,17 @@ export class AuthService {
     return this.cookieService.get('refresh');
   }
 
-  getCurrentUsername() {
+   getCurrentUsername() {
     return this.cookieService.get('username');
   }
 
   actual() {
     return this.http.get<User>(`${environment.apiBaseUrl}/auth/actual`);
+  }
+
+  refreshCookieUsername(username) {
+    this.cookieService.delete('username', '/');
+    this.cookieService.set('username', username,{sameSite:"None", path: "/"});
+
   }
 }

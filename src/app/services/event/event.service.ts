@@ -99,7 +99,6 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    console.log(userId)
     return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
   }
 
@@ -119,4 +118,7 @@ export class EventService {
     return this.http.post<any>(`${environment.apiBaseUrl}/report/event`, report)
   }
 
+  getEventWithGroupId(id: string, limitEvent: number, offsetEvent: number) {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/group/${id}/${offsetEvent}/${limitEvent}`)
+  }
 }

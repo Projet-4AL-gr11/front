@@ -39,7 +39,6 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     firstValueFrom(this._postService.sharedPost(this.post.id)).then(post => this.post.sharesPost = post);
-    firstValueFrom(this._mediaService.getPostMedias(this.post.id)).then(medias => this.post.medias = medias);
     this.updatePost();
     this.timeSubscription = timer(0, 15000)
       .subscribe(() => this.updatePost());

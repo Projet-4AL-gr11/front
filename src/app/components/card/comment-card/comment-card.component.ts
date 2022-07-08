@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {AuthService} from "../../../services/auth/auth.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -6,6 +6,8 @@ import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
 import {Comment} from "../../../services/models/comment.model";
 import { ReportTypeEnum } from '../../shared/enum/report_type.enum';
+import {firstValueFrom} from "rxjs";
+import {User} from "../../../services/models/user.model";
 
 @Component({
   selector: 'app-comment-card',
@@ -16,6 +18,7 @@ export class CommentCardComponent implements OnInit {
   @Input()
   comment: Comment;
   faEllipsisH = faEllipsisH;
+  @Output() removeCommentCard: EventEmitter<Comment>= new EventEmitter<Comment>();
 
   constructor(public _authService: AuthService,
               private _commentService: CommentService,
@@ -26,7 +29,9 @@ export class CommentCardComponent implements OnInit {
   }
 
   deleteComment() {
-    this._commentService.deleteComment(this.comment.id).toPromise().then();
+    firstValueFrom(this._commentService.deleteComment(this.comment.id)).then(() => {
+      this.removeCommentCard.emit(this.comment);
+    });
   }
 
   showDialogReport() {

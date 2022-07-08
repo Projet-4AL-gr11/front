@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user.model";
 import {environment} from "../../../environments/environment";
-import {SearchResponseDto} from "../../components/shared/custom/search-response.dto";
+import {SearchResponseDto} from "../models/dto/custom/search-response.dto";
 import {Observable} from "rxjs";
 
 @Injectable({
