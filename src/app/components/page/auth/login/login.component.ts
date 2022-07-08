@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {Router} from "@angular/router";
@@ -37,12 +37,12 @@ export class LoginComponent implements OnInit {
       .then().catch(error => {
 
       this.submitted = false;
-      if (error.status === 400) {
+      if (error.status === 400 || error.status === 0) {
         this.error = true;
       }
     }).finally(() => {
 
-      if (!this.error){
+      if (!this.error) {
         this.router.navigate(['/timeline']).then();
       }
     });

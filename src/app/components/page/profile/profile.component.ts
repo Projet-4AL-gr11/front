@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faCheckCircle, faEllipsisH, faTimes, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../../services/models/user.model";
 import {FriendRequestStatus} from "../../shared/enum/friendship_request_status.enum";
@@ -19,6 +19,7 @@ import {Post} from "../../../services/models/post.model";
 import {DialogUpdateUserComponent} from "../../dialog/dialog-update-user/dialog-update-user.component";
 import {DialogCreateEventComponent} from "../../dialog/dialog-create-event/dialog-create-event.component";
 import {DialogCreateGroupComponent} from "../../dialog/dialog-create-group/dialog-create-group.component";
+import {Event} from "../../../services/models/event.model";
 
 @Component({
   selector: 'app-profile',
@@ -31,10 +32,14 @@ export class ProfileComponent implements OnInit {
   faEllipsisH = faEllipsisH;
   faUserPlus = faUserPlus;
   loading: boolean = false;
+  loadingEvent: boolean = false;
   offset: number = 0;
   limit: number = 10;
+  offsetEvent: number = 0;
+  limitEvent: number = 10;
   user: User;
   faTimes = faTimes;
+  currentUser: User;
   allFriendRequestStatus = FriendRequestStatus;
 
   constructor(
@@ -59,18 +64,34 @@ export class ProfileComponent implements OnInit {
         this._titleService.setTitle(this.user.username + " - " + environment.name)
       );
     });
+    firstValueFrom(this._authService.actual()).then(user => this.currentUser = user)
   }
 
   async updateUser(id: string): Promise<void> {
     this.user = await firstValueFrom(this._userService.getById(id));
     this.user.createdPosts = [];
+    this.user.eventsParticipation = [];
     this.user.friends = [];
     this.user.administratedGroup = [];
     this.getMorePosts();
+    this.getMoreEvent();
     firstValueFrom(this._userService.getFriends(id)).then(friends => this.user.friends = friends);
-    firstValueFrom(this._eventService.getEventParticipation(id)).then(eventParticipation => this.user.eventsParticipation = eventParticipation);
-    firstValueFrom(this._userService.hasBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
+    firstValueFrom(this._userService.hasBlocked(id)).then(hasBlocked => this.user.hasBlocked = hasBlocked);
+    firstValueFrom(this._userService.isBlocked(id)).then(isBlocked => this.user.isBlocked = isBlocked);
     firstValueFrom(this._friendshipService.statusFriendship(id)).then(friendshipStatus => this.user.friendshipStatus = friendshipStatus);
+    firstValueFrom(this._groupService.findGroupsWithUserId(id)).then(groups => this.user.groups = groups);
+  }
+
+  getMoreEvent() {
+    this.loadingEvent = true;
+    firstValueFrom(this._eventService.getEventParticipation(this.user.id, this.limitEvent, this.offsetEvent))
+      .then(events => {
+        this.user.eventsParticipation = this.user.eventsParticipation.concat(events);
+        this.offsetEvent += this.limitEvent;
+        if (events.length > 0) {
+          this.loading = false;
+        }
+      });
   }
 
   getMorePosts() {
@@ -91,7 +112,8 @@ export class ProfileComponent implements OnInit {
       data: {id: this.user.id, reportType: ReportTypeEnum.USER}
     });
 
-    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
   showDialogueCreateEvent() {
@@ -100,7 +122,8 @@ export class ProfileComponent implements OnInit {
       data: {group: null}
     });
 
-    dialogRef.afterClosed().subscribe(() => this.updateUser(this.user.id));
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
   async showDialogUpdateUser() {
@@ -121,7 +144,6 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.updateUser(this.user.id)
     })
   }
 
@@ -148,12 +170,12 @@ export class ProfileComponent implements OnInit {
 
   blockUser() {
     firstValueFrom(this._userService.blockUser(this.user.id))
-      .then(() => this.user.isBlocked = true);
+      .then(() => this.user.hasBlocked = true);
   }
 
   unblockUser() {
     firstValueFrom(this._userService.unblockUser(this.user.id))
-      .then(() => this.user.isBlocked = false);
+      .then(() => this.user.hasBlocked = false);
   }
 
   removePost($event: Post) {
@@ -165,7 +187,24 @@ export class ProfileComponent implements OnInit {
     this.getMorePosts();
   }
 
+  triggerGetMoreEvent($event) {
+    if ($event.endIndex !== this.user.eventsParticipation.length - 1 || this.loading) return;
+    this.getMoreEvent();
+  }
+
   sendJoinGroup(groupId: string, userId: string) {
     this._groupService.sendGroupRequest(groupId, userId);
+  }
+
+  removeFriendCard(friend: User) {
+    if (this.currentUser.id == this.user.id) {
+      this.user.friends.splice(this.user.friends.indexOf(friend), 1)
+    }
+  }
+
+  removeEventCard($event: Event) {
+    if (this.currentUser.id == this.user.id) {
+      this.user.eventsParticipation.splice(this.user.eventsParticipation.indexOf($event), 1)
+    }
   }
 }

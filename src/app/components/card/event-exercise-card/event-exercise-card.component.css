@@ -2,18 +2,20 @@
   display: inline;
   width: 900px;
 }
-.execution-code .event-second-part{
+
+.execution-code .event-second-part {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.execution-code .event-second-part .editor{
-  background-color:#000000;
+.execution-code .event-second-part .editor {
+  background-color: #000000;
   height: 900px;
   width: 700px;
   border-radius: 5px;
 }
+
 .execution-code .event-second-part .editor .app-ace-editor {
   border: 2px solid #f8f9fa;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -22,7 +24,7 @@
 }
 
 
-.execution-code .event-second-part .editor .exercise-title{
+.execution-code .event-second-part .editor .exercise-title {
   border-radius: 5px;
   border: 1px solid white;
   position: center;
@@ -31,19 +33,18 @@
   color: white;
   font-size: 16px;
   line-height: 18px;
-  padding:15px 10px;
+  padding: 15px 10px;
 
 }
 
 
-
-.execution-code .event-second-part .button-execute{
+.execution-code .event-second-part .button-execute {
   position: absolute;
   bottom: 10px;
   right: 20px;
-  background-color:#0168D9;
+  background-color: #0168D9;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
   padding: 10px 0;
   width: 265px;
   font-weight: 600;
@@ -52,46 +53,48 @@
   line-height: 26px;
   color: #FFFFFF;
 }
+
 .execution-code .exercise-description {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   width: 273px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  height:900px;
-  padding:20px;
+  height: 900px;
+  padding: 20px;
 }
 
-.execution-code .exercise-description .p{
-  font-size:16px;
+.execution-code .exercise-description .p {
+  font-size: 16px;
   line-height: 18px;
   color: #000000;
   margin-bottom: 10px;
 }
-.execution-code .event-tree-part{
+
+.execution-code .event-tree-part {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   width: 273px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  height:900px;
-  padding:20px;
+  height: 900px;
+  padding: 20px;
 }
 
-.execution-code .event-tree-part .title-tree-part{
+.execution-code .event-tree-part .title-tree-part {
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   text-align: center;
-  font-size:16px;
+  font-size: 16px;
   line-height: 18px;
   border: 1px solid #000000;
-  margin-bottom:30px;
+  margin-bottom: 30px;
   padding: 10px 50px;
 }
 
-.execution-code .event-tree-part .title-response-console{
-  font-size:16px;
+.execution-code .event-tree-part .title-response-console {
+  font-size: 16px;
   line-height: 18px;
   color: #000000;
   margin-bottom: 10px;

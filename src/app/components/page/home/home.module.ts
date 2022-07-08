@@ -5,6 +5,7 @@ import {HomeRoutingModule} from "./home-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule} from "@angular/router";
+import {ConversationModule} from "../../conversation/conversation.module";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {RouterModule} from "@angular/router";
     SharedModule,
     MatButtonModule,
   ],
+    ConversationModule
   exports: [
     HomeComponent
   ],

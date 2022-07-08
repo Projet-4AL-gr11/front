@@ -26,11 +26,11 @@ export class ExerciseService {
   }
 
   executeCode(exerciseId: string, value: any) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/exercise/execCode/${exerciseId}` , value)
+    return this.http.put<any>(`${environment.apiBaseUrl}/exercise/execCode/${exerciseId}`, value)
   }
 
   getAllExerciseTemplate() {
-    return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`);
+    return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/all`);
   }
 
   runCode(code: string) {

@@ -52,7 +52,8 @@
   grid-area: 6 / 1 / 6 / span 2;
   width: 100%;
 }
-.form-field-update-email mat-form-field{
+
+.form-field-update-email mat-form-field {
   width: 100%;
 }
 

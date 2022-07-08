@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Leaderboard} from "../models/leaderboard.model";
@@ -18,6 +18,7 @@ export class LeaderboardService {
   }
 
   getEventRanking(id: string) {
-    return this.http.get<EventRanking[]>(`${environment.apiBaseUrl}/leaderboard/event/ranking/${id}`);;
+    return this.http.get<EventRanking[]>(`${environment.apiBaseUrl}/leaderboard/event/ranking/${id}`);
+
   }
 }

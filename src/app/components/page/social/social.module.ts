@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SocialRoutingModule } from './social-routing.module';
+import {SocialRoutingModule} from './social-routing.module';
 import {SocialComponent} from "./social.component";
 
 
@@ -17,4 +17,5 @@ import {SocialComponent} from "./social.component";
     SocialComponent,
   ]
 })
-export class SocialModule { }
+export class SocialModule {
+}

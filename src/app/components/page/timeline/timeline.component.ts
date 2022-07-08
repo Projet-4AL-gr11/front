@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PostService} from "../../../services/post/post.service";
 import {environment} from "../../../../environments/environment";
 import {UserService} from "../../../services/user/user.service";
@@ -33,9 +33,6 @@ export class TimelineComponent implements OnInit {
     this.posts = this.posts.filter(post => post.id !== $event.id);
   }
 
-  ngOnDestroy(): void {
-  }
-
   triggerGetMore($event) {
     if ($event.endIndex !== this.posts.length - 1 || this.loading) return;
     this.getMorePosts();
@@ -43,16 +40,22 @@ export class TimelineComponent implements OnInit {
 
   getMorePosts() {
     this.loading = true;
-    console.log(" offset: " + this.offset + " limit: " + this.limit)
-    firstValueFrom(this._postService.getTimeline( this.limit, this.offset))
+    firstValueFrom(this._postService.getTimeline(this.limit, this.offset))
       .then(posts => {
         this.posts = this.posts.concat(posts);
         this.offset += this.limit;
         if (posts.length > 0) {
           this.loading = false;
         }
-        console.log(this.posts?.length)
       });
+
+  }
+
+  updatePost() {
+    this.offset = 0;
+    this.limit = 10;
+    this.posts = [];
+    this.getMorePosts()
   }
 }
 

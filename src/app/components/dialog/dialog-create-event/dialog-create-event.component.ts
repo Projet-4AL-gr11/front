@@ -25,6 +25,7 @@ export class DialogCreateEventComponent implements OnInit {
   pictureURL: string;
   mediaURL: string;
   exerciseTemplates: ExerciseTemplate[]
+
   constructor(public dialogRef: MatDialogRef<DialogCreateEventComponent>,
               private _eventService: EventService,
               public _authService: AuthService,
@@ -69,7 +70,7 @@ export class DialogCreateEventComponent implements OnInit {
       });
       return;
     }
-    if (this.newEventForm.valid){
+    if (this.newEventForm.valid) {
       firstValueFrom(
         this._eventService.createEvent(this.newEventForm, this.data?.group))
         .then(() => this.dialogRef.close());
@@ -120,7 +121,7 @@ export class DialogCreateEventComponent implements OnInit {
       endDate: new FormControl('', [
         Validators.required
       ]),
-      exerciseTemplateForm: new FormControl('',[
+      exerciseTemplateForm: new FormControl('', [
         Validators.required
       ])
     })

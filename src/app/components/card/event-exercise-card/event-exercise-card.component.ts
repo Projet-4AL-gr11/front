@@ -1,43 +1,38 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import * as ace from "ace-builds";
-import { Leaderboard } from '../../../services/models/leaderboard.model';
-import { ExerciseTemplate } from '../../../services/models/erxercise_template.model';
-import { Exercise } from '../../../services/models/exercise.model';
+import {Leaderboard} from '../../../services/models/leaderboard.model';
+import {ExerciseTemplate} from '../../../services/models/erxercise_template.model';
+import {Exercise} from '../../../services/models/exercise.model';
 
 @Component({
   selector: 'app-event-exercise',
-  templateUrl: './event-exercice-card.component.html',
-  styleUrls: ['./event-exercice-card.component.css']
+  templateUrl: './event-exercise-card.component.html',
+  styleUrls: ['./event-exercise-card.component.css']
 })
-export class EventExerciceCardComponent implements OnInit, OnChanges, AfterViewInit {
+export class EventExerciseCardComponent implements OnChanges, AfterViewInit {
   result: string;
   leaderboards: Leaderboard[] = [];
   exerciseTemplate: ExerciseTemplate;
-  @Input('exercise') exercise: Exercise;
+  @Input() exercise: Exercise;
   aceEditor: any;
 
   constructor(
     private _leaderboardService: LeaderboardService,
     private _exerciseService: ExerciseService
-  ) { }
-
-  ngOnInit(): void {
-
+  ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.exercise) {
       firstValueFrom(this._exerciseService.getExerciseTemplateWithExerciseId(this.exercise.id)).then(exerciseTemplate => {
-        console.log(exerciseTemplate)
         this.exerciseTemplate = exerciseTemplate
       });
       firstValueFrom(this._leaderboardService.getLeaderboardWithExerciseId(this.exercise.id)).then(leaderboards => {
         this.leaderboards = leaderboards;
       })
-      console.log(this.leaderboards)
     }
   }
 

@@ -1,14 +1,14 @@
 <div class="rounded-pill border d-flex p-2 card-user my-3" fxFlex fxLayoutAlign="row">
   <div class="mr-2" fxFlex fxLayoutAlign="row start center">
-    <img [routerLink]="['/user/' + user.username]"
-         [src]="user?.profilePicture?.link | imageUrl"
+    <img [routerLink]="['/profile/' + user.id]"
+         [src]="(user?.profilePicture?.id | imageUrl) | async"
          alt=""
          class="rounded-circle me-2"
          height="50" style="object-fit: cover" width="50">
-    <p class="my-3"><a [routerLink]="['/user/' + user.username]">{{user.username}}</a>
+    <p class="my-3"><a [routerLink]="['/profile/' + user.id]">{{user.username}}</a>
     </p>
   </div>
-  <div *ngIf="user.username !== _authService.getCurrentUsername()" fxFlex fxLayoutAlign="end center">
+  <div *ngIf="user.id != currentUser?.id" fxFlex fxLayoutAlign="end center">
     <button (click)="this.askFriend()" *ngIf="user.friendshipStatus === statusEnum.NONE"
             class="ml-auto button-add-friend" mat-raised-button>
       <fa-icon [icon]="faUserPlus"></fa-icon>
@@ -20,12 +20,12 @@
             matTooltipPosition="above">
       Retirer des amis
     </button>
-    <button (click)="cancelRequest()" *ngIf="user.friendshipStatus === statusEnum.PENDING"
+    <button (click)="delFriendshipRequest()" *ngIf="user.friendshipStatus === statusEnum.PENDING"
             class="ml-auto button-add-friend-disable"
             mat-raised-button><span>Invitation envoyé</span>
     </button>
     <div class="">
-      <a (click)="this.delFriendshipRequest()" class=" button-reject-invitation"
+      <a (click)="this.cancelRequest()" class=" button-reject-invitation"
          *ngIf="user.friendshipStatus === statusEnum.RECEIVED"
          style=" padding-right: 10px" label="Rejeter l'invitation">
         <fa-icon [icon]="faTimes" size="2x" style="color: red"></fa-icon>

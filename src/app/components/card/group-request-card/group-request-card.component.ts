@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupService} from "../../../services/group/group.service";
-import {Group} from "../../../services/models/group.model";
 import {firstValueFrom} from "rxjs";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {GroupRequest} from "../../../services/models/GroupRequest.model";
 
 @Component({
   selector: 'app-card-user-ask-join-group',
@@ -10,8 +10,13 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./group-request-card.component.css']
 })
 export class GroupRequestCardComponent implements OnInit {
-  @Input('group') group: Group;
-  faTimes=faTimes;
+  @Input()
+  groupRequest: GroupRequest;
+  faTimes = faTimes;
+
+  @Output() removeCardJoin: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
+  @Output() removeCardRefuse: EventEmitter<GroupRequest> = new EventEmitter<GroupRequest>();
+
   constructor(public _groupService: GroupService) {
   }
 
@@ -19,11 +24,15 @@ export class GroupRequestCardComponent implements OnInit {
   }
 
   acceptRequest() {
-    firstValueFrom(this._groupService.acceptGroupRequest(this.group.id)).then();
+    firstValueFrom(this._groupService.acceptGroupRequest(this.groupRequest.group.id, this.groupRequest.user.id)).then(() => {
+      this.removeCardJoin.emit()
+    });
   }
 
   rejectRequest() {
-    firstValueFrom(this._groupService.cancelGroupRequest(this.group.id)).then();
+    firstValueFrom(this._groupService.cancelGroupRequestAdmin(this.groupRequest.group.id, this.groupRequest.user.id)).then(() => {
+      this.removeCardRefuse.emit(this.groupRequest)
+    });
   }
 
 }

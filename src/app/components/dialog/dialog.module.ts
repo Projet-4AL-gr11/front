@@ -20,6 +20,11 @@ import {DialogReportComponent} from "./dialog-report/dialog-report.component";
 import {DialogUpdateGroupComponent} from "./dialog-update-group/dialog-update-group.component";
 import {DialogUpdateUserComponent} from "./dialog-update-user/dialog-update-user.component";
 import {CardsModule} from "../card/cards.module";
+import {DialogCreateConversationComponent} from './dialog-create-conversation/dialog-create-conversation.component';
+import {MatCardModule} from "@angular/material/card";
+import {ConversationModule} from "../conversation/conversation.module";
+import {MatNativeDateModule} from "@angular/material/core";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -40,6 +45,10 @@ import {CardsModule} from "../card/cards.module";
     FormsModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
+    MatNativeDateModule,
+    ConversationModule,
+    FlexModule,
   ],
   declarations: [
     DialogCreateEventComponent,
@@ -48,6 +57,7 @@ import {CardsModule} from "../card/cards.module";
     DialogReportComponent,
     DialogUpdateGroupComponent,
     DialogUpdateUserComponent,
+    DialogCreateConversationComponent,
   ],
   exports: [
     DialogCreateEventComponent,

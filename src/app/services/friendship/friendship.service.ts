@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FriendRequest} from "../models/friend_request.model";
@@ -10,7 +10,8 @@ import {FriendRequestStatus} from "../../components/shared/enum/friendship_reque
 })
 export class FriendshipService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   sentFriendshipRequest(): Observable<FriendRequest[]> {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/sent-friendship-request`);
@@ -21,7 +22,6 @@ export class FriendshipService {
   }
 
   statusFriendship(userId: string): Observable<FriendRequestStatus> {
-    console.log(userId)
     return this.http.get<FriendRequestStatus>(`${environment.apiBaseUrl}/friendship/${userId}/friendship-status`)
   }
 
@@ -29,7 +29,7 @@ export class FriendshipService {
     return this.http.delete(`${environment.apiBaseUrl}/friendship/${userId}/remove`)
   }
 
-  sendFriendRequest(userId: string) {
+  sendFriendRequest(userId: string): Observable<any> {
     return this.http.post(`${environment.apiBaseUrl}/friendship/sendFriendshipRequest/${userId}`, null)
   }
 
@@ -38,10 +38,14 @@ export class FriendshipService {
   }
 
   rejectFriendRequest(userId: string) {
-    return this.http.delete(`${environment.apiBaseUrl}/friendship/${userId}/cancel`)
+    return this.http.delete(`${environment.apiBaseUrl}/friendship/cancel/friendship/${userId}`)
   }
 
   acceptFriendship(userId: string) {
     return this.http.put(`${environment.apiBaseUrl}/friendship/acceptFriendshipRequest/${userId}`, null)
+  }
+
+  cancelMyFriendRequest(id: string) {
+    return this.http.delete(`${environment.apiBaseUrl}/friendship/cancel/friendship/${id}`)
   }
 }

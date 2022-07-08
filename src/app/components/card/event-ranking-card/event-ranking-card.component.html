@@ -7,12 +7,12 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let eventRanking of eventRankings ; index as i">
-      <th scope="row">{{i + 1}}</th>
-      <td>
-        {{eventRanking?.user.username}}
-      </td>
-      <td>{{eventRanking?.score}}</td>
-    </tr>
+  <tr *ngFor="let eventRanking of eventRankings ; index as i">
+    <th scope="row">{{i + 1}}</th>
+    <td>
+      {{eventRanking?.user.username}}
+    </td>
+    <td>{{eventRanking?.score}}</td>
+  </tr>
   </tbody>
 </table>

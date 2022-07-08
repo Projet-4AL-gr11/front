@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Post} from "../../../services/models/post.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PostService} from "../../../services/post/post.service";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -10,6 +10,7 @@ import {Title} from "@angular/platform-browser";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {faCalendarAlt, faImage, faPaperPlane, faTimes, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {CommentService} from "../../../services/comment/comment.service";
+import {Comment} from "../../../services/models/comment.model";
 
 @Component({
   selector: 'app-page-post',
@@ -27,7 +28,7 @@ export class PostViewComponent implements OnInit {
   text: string;
   post: Post;
   caretPosition: number = 0;
-  medias: File[];
+  medias: File[] = [];
   mediasURL: string[];
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -36,6 +37,7 @@ export class PostViewComponent implements OnInit {
               public _userService: UserService,
               public _authService: AuthService,
               private _titleService: Title,
+              private router: Router,
               private _snackBar: MatSnackBar) {
   }
 
@@ -43,26 +45,25 @@ export class PostViewComponent implements OnInit {
     this._activatedRoute.params.subscribe(params => this.update(params["id"]).then());
   }
 
-  async update(postId: string): Promise<void> {
-    await firstValueFrom(this._postService.getPostById(postId)).then(post => {
-      this.post = post;
-      this._titleService.setTitle(post.text + " - " + environment.name);
-    });
-    await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
-    await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
-  }
-
   sendComment(): void {
     if (this.text === undefined || this.text.length <= 0) {
       this._snackBar.open("Impossible d'envoyer un commentaire vide", "Fermer");
       return;
     }
-    firstValueFrom(this._commentService.sendComment(this.post.id, this.text)).then(comment => {
-      if (this.post.comments === undefined) {
-        this.post.comments = [];
+    this._commentService.sendComment(this.post.id, this.text, this.medias).then(() => {
+        this.ngOnInit()
+        this.text = ""
       }
-      this.post.comments = [comment].concat(this.post.comments);
+    );
+  }
+
+  async update(postId: string): Promise<void> {
+    await firstValueFrom(this._postService.getPostById(postId)).then(post => {
+      this.post = post;
+      this._titleService.setTitle(post.text + " - " + environment.name);
     });
+    await firstValueFrom(this._postService.sharedPost(postId)).then(shared => this.post.sharesPost = shared);
+    await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
   }
 
   setCaretPosition($event: any) {
@@ -98,5 +99,13 @@ export class PostViewComponent implements OnInit {
         }
       }
     }
+  }
+
+  removeCommentCard(event: Comment) {
+    this.post.comments.splice(this.post.comments.indexOf(event, 1))
+  }
+
+  goToTimeline() {
+    this.router.navigate(['/timeline']).then();
   }
 }

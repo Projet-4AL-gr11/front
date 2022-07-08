@@ -35,9 +35,7 @@ export class DialogReportComponent implements OnInit {
   }
 
   onClickSubmit(formData) {
-    console.log(" report ID " + this.data.id)
-    console.log(this.data.reportType)
-    if (this.formData.valid){
+    if (this.formData.valid) {
       let newReport: Report = new Report();
       newReport.text = formData.text;
       if (this.data.reportType === ReportTypeEnum.USER) {

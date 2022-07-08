@@ -1,10 +1,14 @@
-import {Message} from "@angular/compiler/src/i18n/i18n_ast";
 import {Group} from "./group.model";
 import {Friendship} from "./friendship.model";
+import {Message} from "./message.model";
+import {User} from "./user.model";
 
 export class Conversation {
   id: string;
-  messages: Message[];
+  messages?: Message[];
   group?: Group;
+  users?: User[]
   friendship?: Friendship;
+  createdAt: Date;
+  updatedAt: Date;
 }

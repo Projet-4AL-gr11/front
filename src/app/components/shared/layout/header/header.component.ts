@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {User} from "../../../../services/models/user.model";
@@ -12,28 +12,37 @@ import {FriendshipService} from "../../../../services/friendship/friendship.serv
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
 
   user: User;
   notificationCount: number = 0;
   faBell = faBell;
+  isConnected: boolean = false;
 
   constructor(
     public router: Router,
     public _authService: AuthService,
     public _groupService: GroupService,
     public _friendshipService: FriendshipService
-  ) { }
+  ) {
+  }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
-    firstValueFrom(this._groupService.getGroupRequest()).then(groupRequest => this.notificationCount += groupRequest.length);
+    firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
     firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
   }
 
-  logout() {
-    this._authService.logout();
-    this.router.navigateByUrl("/login");
+  ngOnInit(): void {
+    firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
+    firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
+    firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
+  }
+
+  async logout() {
+    firstValueFrom(await this._authService.logout()).then();
+    this.isConnected = false;
+    await this.router.navigateByUrl("/auth/login");
   }
 
   goToHome() {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Report} from "../models/report.model";
 import {Event} from "../models/event.model";
@@ -15,9 +15,10 @@ import {MediaService} from "../media/media.service";
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) {
+  }
 
- // Get
+  // Get
   getEventById(id: string): Observable<Event> {
     return this.http.get<Event>(`${environment.apiBaseUrl}/event/${id}`)
   }
@@ -34,8 +35,8 @@ export class EventService {
     return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/notEnd`)
   }
 
-  getEventParticipation(id): Observable<Event[]> {
-    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${id}`)
+  getEventParticipation(id, limit, offset): Observable<Event[]> {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/participation/${id}/${offset}/${limit}`)
   }
 
   getEventParticipant(eventId: string): Observable<User[]> {
@@ -99,8 +100,7 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    console.log(userId)
-    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
+    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null)
   }
 
   removeParticipant(eventId: string, userId: string) {
@@ -119,4 +119,7 @@ export class EventService {
     return this.http.post<any>(`${environment.apiBaseUrl}/report/event`, report)
   }
 
+  getEventWithGroupId(id: string, limitEvent: number, offsetEvent: number) {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/group/${id}/${offsetEvent}/${limitEvent}`)
+  }
 }

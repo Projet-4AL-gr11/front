@@ -1,14 +1,16 @@
 <app-header class="w-100"></app-header>
+
 <div class="row m-0">
   <div class="col-md-4">
   </div>
   <div class="col-md-4" fxFlex
        fxLayout="column">
-    <app-post *ngIf="post" [post]="post" class="w-100"></app-post>
+    <app-post *ngIf="post" [post]="post" (postDelete)="goToTimeline()"
+              class="w-100"></app-post>
     <div class="my-2 w-100"
          fxFlex fxLayout="row">
       <div class="rounded-circle profile-picture">
-        <img [src]="(_authService.user | async)?.profilePicture?.link | imageUrl"
+        <img [src]="((_authService.user | async)?.profilePicture?.id | imageUrl) | async"
              alt="" class="me-1 rounded-circle"
              height="50"
              style="object-fit: cover" width="50">
@@ -20,6 +22,7 @@
       <div class="d-inline-block">
         <img *ngFor="let media of mediasURL" [src]="media" alt="" class="rounded-3 w-25 h-25 me-2">
       </div>
+    </div>
     <div>
       <div fxFlex fxLayoutAlign="start center">
         <input (change)="addImages($event)" accept="image/png, image/jpeg" id="file-selector" multiple
@@ -34,7 +37,7 @@
     </div>
     <div>
       <div *ngFor="let comment of post?.comments" class="w-100 my-2">
-        <app-comment-card [comment]="comment"></app-comment-card>
+        <app-comment-card [comment]="comment" (removeCommentCard)="removeCommentCard($event)"></app-comment-card>
       </div>
     </div>
   </div>

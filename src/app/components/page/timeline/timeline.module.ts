@@ -15,11 +15,11 @@ import {TimelineRoutingModule} from "./timeline-routing.module";
     VirtualScrollerModule,
     SharedModule,
     CardsModule,
-
-    TimelineRoutingModule,
+    TimelineRoutingModule
   ],
   exports: [
     TimelineComponent,
   ]
 })
-export class TimelineModule { }
+export class TimelineModule {
+}

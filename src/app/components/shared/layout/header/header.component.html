@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
   <a class="navbar-brand" >Code</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
@@ -9,16 +10,20 @@
       <li class="nav-item active">
         <a class="nav-link" (click)="goToHome()"> Home </a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/timeline']">Timeline</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" (click)="goToCode()"> Code </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" >Leaderboard</a>
+        <a class="nav-link disabled">Leaderboard</a>
       </li>
     </ul>
-
-    <!--*ngIf="_authService.isAuthenticated()"-->
-    <ul class="navbar-nav ms-auto"  >
+    <div fxFlex fxLayoutAlign="center center">
+      <app-search-bar class="align-self-center"></app-search-bar>
+    </div>
+    <ul class="navbar-nav ms-auto" *ngIf="user">
       <li class="notifications">
         <a [routerLink]="['/notifications']" class="nav-link"
            matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
@@ -29,11 +34,9 @@
         <a class="nav-link" (click)="goToProfile()">Profile</a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger" (click)="logout()">Logout </button>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
       </li>
     </ul>
-
-
-
   </div>
 </nav>
+<app-conversation-box *ngIf="_authService.actual() != null"></app-conversation-box>

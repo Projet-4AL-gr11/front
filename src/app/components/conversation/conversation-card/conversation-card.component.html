@@ -1,0 +1,16 @@
+<div (click)="onConversationSelect()" class="conversation-card container " fxFlex fxLayout="row">
+  <div fxFlex fxLayoutAlign="start center">
+    <img [src]="(getPicture()?.id | imageUrl) | async"
+         alt=""
+         class="rounded-circle mx-2" height="50" style="object-fit: cover" width="50">
+    <div class="w-100" fxFlex fxLayout="row">
+      <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="start start">
+        <p class="m-0 fw-bold username">{{getName() || "ça beug"}}</p>
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="end end">
+        <div (click)="$event.stopPropagation()" *ngIf="conversation" fxFlex fxLayoutAlign="end center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

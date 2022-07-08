@@ -7,9 +7,7 @@ import {Post} from "../../../services/models/post.model";
 import {ReportTypeEnum} from "../../shared/enum/report_type.enum";
 import {MediaService} from "../../../services/media/media.service";
 import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
-import {
-  DialogCreatePostComponent
-} from "../../dialog/dialog-create-post/dialog-create-post.component";
+import {DialogCreatePostComponent} from "../../dialog/dialog-create-post/dialog-create-post.component";
 import {faCheckCircle, faComment, faEllipsisH, faShare, faThumbsUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -22,7 +20,7 @@ export class PostCardComponent implements OnInit {
   @Input()
   post: Post;
   @Output()
-  onDelete: EventEmitter<Post> = new EventEmitter();
+  postDelete: EventEmitter<Post> = new EventEmitter();
   text: string;
   private timeSubscription: Subscription;
 
@@ -35,11 +33,11 @@ export class PostCardComponent implements OnInit {
   constructor(private _postService: PostService,
               public _authService: AuthService,
               private _mediaService: MediaService,
-              public matDialog: MatDialog) { }
+              public matDialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     firstValueFrom(this._postService.sharedPost(this.post.id)).then(post => this.post.sharesPost = post);
-    firstValueFrom(this._mediaService.getPostMedias(this.post.id)).then(medias => this.post.medias = medias);
     this.updatePost();
     this.timeSubscription = timer(0, 15000)
       .subscribe(() => this.updatePost());
@@ -64,7 +62,7 @@ export class PostCardComponent implements OnInit {
 
   deletePost() {
     firstValueFrom(this._postService.deletePost(this.post.id))
-      .then(() => this.onDelete.emit(this.post));
+      .then(() => this.postDelete.emit(this.post));
   }
 
   likePost() {
@@ -73,7 +71,7 @@ export class PostCardComponent implements OnInit {
         this.post.isLiked = true;
         firstValueFrom(this._authService.user
           .pipe(take(1)))
-          .then(user=>this.post.likes.push(user));
+          .then(user => this.post.likes.push(user));
       });
   }
 
@@ -83,7 +81,7 @@ export class PostCardComponent implements OnInit {
         this.post.isLiked = false;
         firstValueFrom(this._authService.user
           .pipe(take(1)))
-          .then(user=>this.post.likes = this.post.likes.filter(user1=>user1.id !== user.id));
+          .then(user => this.post.likes = this.post.likes.filter(user1 => user1.id !== user.id));
       });
   }
 
