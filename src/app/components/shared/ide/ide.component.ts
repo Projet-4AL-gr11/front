@@ -15,8 +15,9 @@ export class IdeComponent implements OnInit {
   foo: string = "";
   aceEditor;
 
-
-  language = 'python';
+  selectLanguage = 'python';
+  languages = [ 'Python', 'JavaScript'
+  ];
 
   constructor(private exerciseService: ExerciseService) { }
 
@@ -29,31 +30,26 @@ export class IdeComponent implements OnInit {
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
     this.aceEditor.setTheme("ace/theme/monokai");
 
-    this.changeLanguage();
+    this.changeLanguage(event);
   }
 
-  changeLanguage() {
+  changeLanguage(event: any) {
     const editor = ace.edit(this.editor.nativeElement);
 
-    if(this.language == 'c' || this.language == 'cpp'){
-      editor.session.setMode("ace/mode/c_cpp");
-      editor.session.setValue("testc");
-    }
-    else if(this.language == 'php'){
-      editor.session.setMode("ace/mode/php");
-      editor.session.setValue("testcphp");
+    this.selectLanguage = event.target.value;
 
-    }
-    else if(this.language == 'python'){
+    if(this.selectLanguage == 'Python'){
       editor.session.setMode("ace/mode/python");
       editor.session.setValue("testpyuthonc");
-
+      console.log("Bonjour python")
     }
-    else if(this.language == 'node'){
+    else if(this.selectLanguage == 'JavaScript'){
       editor.session.setMode("ace/mode/javascript");
       editor.session.setValue("testnodec");
+      console.log("Bonjour js")
 
     }
+
   }
 
   executeCode() {

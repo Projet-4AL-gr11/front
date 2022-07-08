@@ -57,4 +57,9 @@ export class HeaderComponent implements OnInit, OnChanges {
 
     this.router.navigateByUrl("/profile/" + this.user?.id);
   }
+
+  goToNotification() {
+    this.router.navigateByUrl("/notification/");
+
+  }
 }

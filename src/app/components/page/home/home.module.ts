@@ -15,11 +15,11 @@ import {ConversationModule} from "../../conversation/conversation.module";
   imports: [
     CommonModule,
     RouterModule,
-    HomeRoutingModule,
+    ConversationModule,
     SharedModule,
     MatButtonModule,
+    HomeRoutingModule,
   ],
-    ConversationModule
   exports: [
     HomeComponent
   ],
