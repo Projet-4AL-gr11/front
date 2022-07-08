@@ -9,7 +9,6 @@ import * as ace from "ace-builds";
 })
 export class IdeComponent implements OnInit {
 
-  //creer le tableau des language
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;
   foo: string = "";
@@ -40,21 +39,16 @@ export class IdeComponent implements OnInit {
 
     if(this.selectLanguage == 'Python'){
       editor.session.setMode("ace/mode/python");
-      editor.session.setValue("testpyuthonc");
-      console.log("Bonjour python")
+      editor.session.setValue("Ready to Python");
     }
     else if(this.selectLanguage == 'JavaScript'){
       editor.session.setMode("ace/mode/javascript");
-      editor.session.setValue("testnodec");
-      console.log("Bonjour js")
-
+      editor.session.setValue("Ready to JavasSript");
     }
 
   }
 
   executeCode() {
-    console.log("hello");
-
     this.foo = this.exerciseService.runCode(this.aceEditor.getValue()).message;
   }
 
