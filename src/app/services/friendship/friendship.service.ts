@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FriendRequest} from "../models/friend_request.model";
@@ -10,7 +10,8 @@ import {FriendRequestStatus} from "../../components/shared/enum/friendship_reque
 })
 export class FriendshipService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   sentFriendshipRequest(): Observable<FriendRequest[]> {
     return this.http.get<FriendRequest[]>(`${environment.apiBaseUrl}/friendship/sent-friendship-request`);

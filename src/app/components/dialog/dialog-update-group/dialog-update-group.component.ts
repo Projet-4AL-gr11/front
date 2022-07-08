@@ -23,7 +23,8 @@ export class DialogUpdateGroupComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _groupService: GroupService,
     @Inject(MAT_DIALOG_DATA) public data: { group: Group }
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initializeFormGroup();
@@ -33,7 +34,7 @@ export class DialogUpdateGroupComponent implements OnInit {
 
   onClickSubmit() {
     if (this.formData.valid) {
-      firstValueFrom(this._groupService.updateGroup(this.data.group, this.formData, this.picture, this.updatedBannerPicture)).then(()=> this.dialogRef.close())
+      firstValueFrom(this._groupService.updateGroup(this.data.group, this.formData, this.picture, this.updatedBannerPicture)).then(() => this.dialogRef.close())
     }
   }
 

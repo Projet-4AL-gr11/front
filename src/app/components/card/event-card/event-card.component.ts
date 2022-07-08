@@ -5,7 +5,6 @@ import {UserService} from "../../../services/user/user.service";
 import {EventService} from "../../../services/event/event.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {firstValueFrom} from "rxjs";
-import {User} from "../../../services/models/user.model";
 
 @Component({
   selector: 'app-event-card',
@@ -14,13 +13,13 @@ import {User} from "../../../services/models/user.model";
 })
 export class EventCardComponent implements OnInit {
 
-  @Input("event") event: Event = new Event();
+  @Input() event: Event = new Event();
   faCheckCircle = faCheckCircle;
   faUser = faUser;
   faClock = faClock;
   faTags = faTags;
 
-  @Output() removeEventCard: EventEmitter<Event>= new EventEmitter<Event>();
+  @Output() removeEventCard: EventEmitter<Event> = new EventEmitter<Event>();
 
   constructor(
     private _userService: UserService,

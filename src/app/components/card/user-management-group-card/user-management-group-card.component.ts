@@ -18,10 +18,10 @@ import {firstValueFrom} from "rxjs";
 })
 export class UserManagementGroupCardComponent implements OnInit {
 
-  @Input('user') user: User = new User();
-  @Input('group') group: Group;
-  @Input('isOwner') isOwner: boolean;
-  @Input('isAdmin') isAdmin: boolean;
+  @Input() user: User = new User();
+  @Input() group: Group;
+  @Input() isOwner: boolean;
+  @Input() isAdmin: boolean;
   faUserPlus = faUserPlus;
   friendshipRequest: FriendRequestStatus;
   userIsAdmin: boolean = false;
@@ -34,7 +34,8 @@ export class UserManagementGroupCardComponent implements OnInit {
               public _authService: AuthService,
               private _userService: UserService,
               private _groupService: GroupService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.canAddFriend();
@@ -89,7 +90,7 @@ export class UserManagementGroupCardComponent implements OnInit {
   }
 
   giveAdmin(userId: string) {
-    this._groupService.giveAdminRight( this.group.id, userId).subscribe({
+    this._groupService.giveAdminRight(this.group.id, userId).subscribe({
       next: () => {
         this.userIsAdmin = true;
       },

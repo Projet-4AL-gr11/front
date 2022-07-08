@@ -17,11 +17,13 @@ export class CodeComponent implements OnInit {
 
   language = 'python';
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private exerciseService: ExerciseService) {
+  }
 
   ngOnInit(): void {
 
   }
+
   ngAfterViewInit(): void {
     this.aceEditor = ace.edit(this.editor.nativeElement)
     ace.config.set("fontSize", "14px");
@@ -32,28 +34,25 @@ export class CodeComponent implements OnInit {
   }
 
   changeLanguage() {
-  const editor = ace.edit(this.editor.nativeElement);
+    const editor = ace.edit(this.editor.nativeElement);
 
-  if(this.language == 'c' || this.language == 'cpp'){
-    editor.session.setMode("ace/mode/c_cpp");
-    editor.session.setValue("testc");
-  }
-  else if(this.language == 'php'){
-    editor.session.setMode("ace/mode/php");
-    editor.session.setValue("testcphp");
+    if (this.language == 'c' || this.language == 'cpp') {
+      editor.session.setMode("ace/mode/c_cpp");
+      editor.session.setValue("testc");
+    } else if (this.language == 'php') {
+      editor.session.setMode("ace/mode/php");
+      editor.session.setValue("testcphp");
 
-  }
-  else if(this.language == 'python'){
-    editor.session.setMode("ace/mode/python");
-    editor.session.setValue("testpyuthonc");
+    } else if (this.language == 'python') {
+      editor.session.setMode("ace/mode/python");
+      editor.session.setValue("testpyuthonc");
 
-  }
-  else if(this.language == 'node'){
-    editor.session.setMode("ace/mode/javascript");
-    editor.session.setValue("testnodec");
+    } else if (this.language == 'node') {
+      editor.session.setMode("ace/mode/javascript");
+      editor.session.setValue("testnodec");
 
+    }
   }
-}
 
   executeCode() {
     console.log("hello");

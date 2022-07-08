@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { LeaderboardRoutingModule } from './leaderboard-routing.module';
-import { LeaderboardComponent } from './leaderboard.component';
+import {LeaderboardRoutingModule} from './leaderboard-routing.module';
+import {LeaderboardComponent} from './leaderboard.component';
 import {SharedModule} from "../../shared/shared.module";
 
 
@@ -20,4 +20,5 @@ import {SharedModule} from "../../shared/shared.module";
     LeaderboardComponent,
   ]
 })
-export class LeaderboardModule { }
+export class LeaderboardModule {
+}

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
   <a class="navbar-brand" href="#">Code</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
@@ -16,7 +17,7 @@
         <a class="nav-link disabled" href="#">Code</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" >Leaderboard</a>
+        <a class="nav-link disabled">Leaderboard</a>
       </li>
     </ul>
     <div fxFlex fxLayoutAlign="center center">
@@ -25,7 +26,7 @@
     <ul class="navbar-nav ms-auto" *ngIf="user">
       <li class="notifications">
         <a [routerLink]="['/notifications']" class="nav-link"
-                matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
+           matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
           <fa-icon [icon]="faBell" size="2x"></fa-icon>
         </a>
       </li>
@@ -33,7 +34,7 @@
         <a class="nav-link" [routerLink]="['/profile/' + user?.id]">Profile</a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger" (click)="logout()">Logout </button>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
       </li>
     </ul>
   </div>

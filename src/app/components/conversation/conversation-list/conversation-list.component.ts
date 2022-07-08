@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {faAngleDown, faAngleUp, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {Conversation} from "../../../services/models/conversation.model";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 import {UserService} from "../../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConversationService} from "../../../services/conversation/conversation.service";
-import {firstValueFrom, Observable, Subscription} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {
   DialogCreateConversationComponent
 } from "../../dialog/dialog-create-conversation/dialog-create-conversation.component";
@@ -39,7 +39,11 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
   }
 
   openCreateGroupDialog() {
-      this.matDialog.open(DialogCreateConversationComponent, {minWidth: "500px", minHeight: "121px", data: {user: this.user}});
+    this.matDialog.open(DialogCreateConversationComponent, {
+      minWidth: "500px",
+      minHeight: "121px",
+      data: {user: this.user}
+    });
   }
 
   ngOnDestroy(): void {
@@ -60,7 +64,7 @@ export class ConversationListComponent implements OnInit, AfterViewInit {
   }
 
   onOpenConversations() {
-    this.conversationBoxService.opened=!this.conversationBoxService.opened
+    this.conversationBoxService.opened = !this.conversationBoxService.opened
     this.getConversations()
     firstValueFrom(this.authService.actual()).then(user => this.user = user)
   }

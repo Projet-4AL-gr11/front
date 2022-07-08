@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {PipesModules} from "../../pipes/pipes.modules";
 import {MatButtonModule} from "@angular/material/button";
@@ -12,14 +12,15 @@ import {UserCardComponent} from "./user-card/user-card.component";
 import {RouterModule} from "@angular/router";
 import {PostCardComponent} from "./post-card/post-card.component";
 import {EventRankingCardComponent} from "./event-ranking-card/event-ranking-card.component";
-import {EventExerciceCardComponent} from "./event-exercice-card/event-exercice-card.component";
+import {EventExerciseCardComponent} from "./event-exercise-card/event-exercise-card.component";
 import {LeaderboardCardComponent} from "./leaderboard-card/leaderboard-card.component";
 import {CommentCardComponent} from "./comment-card/comment-card.component";
 import {GroupRequestCardComponent} from "./group-request-card/group-request-card.component";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import {FlexModule} from "@angular/flex-layout";
-import { GroupCardComponent } from './group-card/group-card.component';
-import { UserManagementGroupCardComponent } from './user-management-group-card/user-management-group-card.component';
+import {GroupCardComponent} from './group-card/group-card.component';
+import {UserManagementGroupCardComponent} from './user-management-group-card/user-management-group-card.component';
+import {ListGroupCardComponent} from './list-group-card/list-group-card.component';
 
 @NgModule({
   declarations: [
@@ -28,41 +29,44 @@ import { UserManagementGroupCardComponent } from './user-management-group-card/u
     PostShareCardComponent,
     UserCardComponent,
     EventRankingCardComponent,
-    EventExerciceCardComponent,
+    EventExerciseCardComponent,
     LeaderboardCardComponent,
     CommentCardComponent,
     GroupRequestCardComponent,
     GroupCardComponent,
     UserManagementGroupCardComponent,
+    ListGroupCardComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FontAwesomeModule,
-        PipesModules,
-        MatButtonModule,
-        MatTooltipModule,
-        MatCardModule,
-        MatMenuModule,
-        BsDropdownModule.forRoot(),
-        FlexModule,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FontAwesomeModule,
+    PipesModules,
+    MatButtonModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatMenuModule,
+    BsDropdownModule.forRoot(),
+    FlexModule,
 
-    ],
+  ],
   exports: [
     EventCardComponent,
     PostCardComponent,
     PostShareCardComponent,
     UserCardComponent,
     EventRankingCardComponent,
-    EventExerciceCardComponent,
+    EventExerciseCardComponent,
     LeaderboardCardComponent,
     CommentCardComponent,
     GroupRequestCardComponent,
     GroupCardComponent,
     BsDropdownModule,
     GroupCardComponent,
-    UserManagementGroupCardComponent
+    UserManagementGroupCardComponent,
+    ListGroupCardComponent
 
   ]
 })
-export class CardsModule { }
+export class CardsModule {
+}

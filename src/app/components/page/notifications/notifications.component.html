@@ -8,17 +8,17 @@
       <p> Vous n'avez pas de notifications</p>
     </div>
     <div *ngIf="this.friendshipRequestReceived?.length + this.groupRequestsAdmin?.length != 0">
-        <app-card-user-ask-join-group (click)="$event.stopPropagation()"
-                                        *ngFor="let groupRequestAdmin of groupRequestsAdmin"
-                                        [groupRequest]="groupRequestAdmin"
-                                      (removeCardJoin)="removeCard($event)"
-                                      (removeCardRefuse)="removeCard($event)"
-        ></app-card-user-ask-join-group>
-        <app-user-card (click)="$event.stopPropagation()"
-                       *ngFor="let request of friendshipRequestReceived"
-                       [user]="request.sender"
-                       (removeUser)="removeReceiveFriendshipRequest(request)"
-        ></app-user-card>
+      <app-card-user-ask-join-group (click)="$event.stopPropagation()"
+                                    *ngFor="let groupRequestAdmin of groupRequestsAdmin"
+                                    [groupRequest]="groupRequestAdmin"
+                                    (removeCardJoin)="removeCard($event)"
+                                    (removeCardRefuse)="removeCard($event)"
+      ></app-card-user-ask-join-group>
+      <app-user-card (click)="$event.stopPropagation()"
+                     *ngFor="let request of friendshipRequestReceived"
+                     [user]="request.sender"
+                     (removeUser)="removeReceiveFriendshipRequest(request)"
+      ></app-user-card>
 
 
     </div>

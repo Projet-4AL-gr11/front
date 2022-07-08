@@ -27,7 +27,8 @@ export class EventViewComponent implements OnInit {
               private _exerciseService: ExerciseService,
               private _titleService: Title,
               private _leaderboardService: LeaderboardService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -43,9 +44,9 @@ export class EventViewComponent implements OnInit {
     this.event = await firstValueFrom(this._eventService.getEventById(id));
     this.event.exercises = [];
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
-    await firstValueFrom(this._leaderboardService.getEventRanking(id)).then(eventRanking =>{
+    await firstValueFrom(this._leaderboardService.getEventRanking(id)).then(eventRanking => {
       this.event.eventRanking = eventRanking;
-  })
+    })
     this.setExercise(this.event?.exercises[0]);
   }
 
@@ -59,7 +60,7 @@ export class EventViewComponent implements OnInit {
   }
 
   setExercise(exercise?: Exercise) {
-    if (exercise != undefined){
+    if (exercise != undefined) {
       this.currentExercise = exercise;
     }
   }

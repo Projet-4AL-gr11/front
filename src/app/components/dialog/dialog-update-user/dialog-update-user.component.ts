@@ -4,7 +4,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user/user.service";
 import {User} from "../../../services/models/user.model";
 import {environment} from "../../../../environments/environment";
-import {firstValueFrom} from "rxjs";
 import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
@@ -103,7 +102,7 @@ export class DialogUpdateUserComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(200)
       ]),
-      profilePicture: new FormControl('',[]),
+      profilePicture: new FormControl('', []),
       bannerPicture: new FormControl('', [])
     });
     this.formData.patchValue({

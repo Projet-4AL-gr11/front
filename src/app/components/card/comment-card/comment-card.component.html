@@ -10,12 +10,12 @@
       <div class="w-100">
         <p>{{comment?.creator?.username}}</p>
       </div>
-      <div class="dropdown"  fxLayout="end end">
+      <div class="dropdown" fxLayout="end end">
         <button mat-icon-button [matMenuTriggerFor]="menu"
-                 type="button">
+                type="button">
           <fa-icon [icon]="faEllipsisH"></fa-icon>
         </button>
-        <mat-menu #menu="matMenu" >
+        <mat-menu #menu="matMenu">
           <button (click)="showDialogReport()" mat-menu-item>Signaler</button>
           <button (click)="deleteComment()" *ngIf="comment.creator?.username === _authService.getCurrentUsername()"
                   class="text-danger" mat-menu-item>Supprimer
@@ -25,7 +25,8 @@
     </div>
     <p class="text-break">{{comment.text}}</p>
     <div class="d-inline-block">
-      <img *ngFor="let media of comment?.medias" [src]="(media.id | imageUrl) | async" alt="" class="rounded-3 w-25 h-25 me-2">
+      <img *ngFor="let media of comment?.medias" [src]="(media.id | imageUrl) | async" alt=""
+           class="rounded-3 w-25 h-25 me-2">
     </div>
   </div>
 </div>

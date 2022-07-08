@@ -5,7 +5,7 @@ import {firstValueFrom} from "rxjs";
 import {AuthService} from "../../../services/auth/auth.service";
 import {GroupRequestStatus} from "../../shared/enum/group-request-status.enum";
 import {GroupService} from "../../../services/group/group.service";
-import {faCheckCircle, faUserPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-group-card',
@@ -24,11 +24,12 @@ export class GroupCardComponent implements OnInit {
   @Output() removeGroupCard: EventEmitter<Group> = new EventEmitter<Group>();
 
   constructor(private _authService: AuthService,
-              private _groupService: GroupService) { }
+              private _groupService: GroupService) {
+  }
 
   ngOnInit(): void {
     firstValueFrom(this._authService.actual()).then(user => {
-      this.currentUser= user;
+      this.currentUser = user;
       firstValueFrom(this._groupService.getGroupRequestStatus(user.id, this.group.id)).then(groupRequestStatus => {
         this.groupRequestStatus = groupRequestStatus;
       })

@@ -11,7 +11,7 @@ import {ConversationCardComponent} from "./conversation-card/conversation-card.c
 import {ConversationBoxDirective} from "./conversation-directive/conversation-box.directive";
 import {MatMenuModule} from "@angular/material/menu";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { SelectUsersCardComponent } from './select-users-card/select-users-card.component';
+import {SelectUsersCardComponent} from './select-users-card/select-users-card.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
@@ -27,7 +27,7 @@ import {MatListModule} from "@angular/material/list";
     ConversationComponent,
     ConversationBoxComponent,
     ConversationListComponent,
-    ConversationCardComponent ,
+    ConversationCardComponent,
     MessageComponent,
     ConversationBoxDirective,
     SelectUsersCardComponent
@@ -60,4 +60,5 @@ import {MatListModule} from "@angular/material/list";
     SelectUsersCardComponent
   ]
 })
-export class ConversationModule { }
+export class ConversationModule {
+}

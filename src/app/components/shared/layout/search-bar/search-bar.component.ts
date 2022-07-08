@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {FormControl} from "@angular/forms";
 import {SearchResponseDto} from "../../../../services/models/dto/custom/search-response.dto";
@@ -10,7 +10,7 @@ import {firstValueFrom} from "rxjs";
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
 
   faSearch = faSearch;
   searchControl = new FormControl();
@@ -19,16 +19,13 @@ export class SearchBarComponent implements OnInit {
   constructor(private searchService: SearchService) {
   }
 
-  ngOnInit(): void {
-  }
-
   searchData($event: any): void {
     if ($event.target.value === undefined || $event.target.value === '') {
       this.searchResult = undefined;
       return;
     }
     firstValueFrom(this.searchService.search($event.target.value))
-      .then(searchResult =>{
+      .then(searchResult => {
         this.searchResult = searchResult
       });
   }

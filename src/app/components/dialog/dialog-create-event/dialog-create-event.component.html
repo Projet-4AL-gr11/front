@@ -9,7 +9,7 @@
       <div class="form-field-name-event">
         <mat-form-field appearance="fill">
           <mat-label>Nom de l'Évènement</mat-label>
-          <input  matInput name="name" placeholder="Nom de l'Évènement" formControlName="name" required>
+          <input matInput name="name" placeholder="Nom de l'Évènement" formControlName="name" required>
         </mat-form-field>
       </div>
       <div class="form-field-participant-limit">
@@ -83,7 +83,8 @@
   <!-- TODO : Ajouter la selection des exercises -->
   <div class="selcet-exercise-template">
     <mat-select formControlName="exerciseTempalteForm" multiple>
-      <mat-option *ngFor="let exerciseTemplate of exerciseTemplates" [value]="exerciseTemplate">{{exerciseTemplate?.name}}</mat-option>
+      <mat-option *ngFor="let exerciseTemplate of exerciseTemplates"
+                  [value]="exerciseTemplate">{{exerciseTemplate?.name}}</mat-option>
     </mat-select>
   </div>
   <mat-divider></mat-divider>

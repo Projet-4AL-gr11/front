@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Report} from "../models/report.model";
 import {environment} from "../../../environments/environment";
@@ -17,7 +17,8 @@ import {GroupMembership} from "../models/group_membership.model";
 })
 export class GroupService {
 
-  constructor(private http: HttpClient, private mediaService: MediaService) { }
+  constructor(private http: HttpClient, private mediaService: MediaService) {
+  }
 
   sendReport(id: string, report: Report) {
     return this.http.post<any>(`${environment.apiBaseUrl}/report/group`, report)
@@ -51,24 +52,24 @@ export class GroupService {
     return this.http.put(`${environment.apiBaseUrl}/group/removeFollower/${groupId}`, null);
   }
 
-  async createGroup(user: User, form: FormGroup, profilePicture?: File, bannerPicture?: File){
+  async createGroup(user: User, form: FormGroup, profilePicture?: File, bannerPicture?: File) {
     const formData = new GroupDto();
     formData.user = user;
     formData.name = form.value.name;
     return firstValueFrom(this.http.post<Group>(`${environment.apiBaseUrl}/group/`, formData))
       .then(group => {
         if (form.value.profilePicture != null) {
-          firstValueFrom(this.mediaService.saveGroupPicture(group.id, profilePicture )).then()
+          firstValueFrom(this.mediaService.saveGroupPicture(group.id, profilePicture)).then()
         }
         if (form.value.bannerPicture != null) {
-          firstValueFrom(this.mediaService.saveGroupBannerPicture(group.id, bannerPicture )).then()
+          firstValueFrom(this.mediaService.saveGroupBannerPicture(group.id, bannerPicture)).then()
         }
       })
   }
 
   updateGroup(group: Group, form: FormGroup, picture: File, updatedBannerPicture: File) {
     const formData = new GroupDto();
-    if (form.value.name != null){
+    if (form.value.name != null) {
       formData.name = form.value.name;
     }
     if (picture != null) {
@@ -80,7 +81,7 @@ export class GroupService {
     return this.http.put(`${environment.apiBaseUrl}/group/${group.id}`, formData);
   }
 
-  removeGroup(groupId: string){
+  removeGroup(groupId: string) {
     return this.http.delete(`${environment.apiBaseUrl}/group/${groupId}`);
   }
 
@@ -125,26 +126,30 @@ export class GroupService {
   }
 
   getGroupRequest() {
-    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/currentUser` );
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/currentUser`);
   }
 
   getGroupRequestStatus(userId: string, groupId: string) {
-    return this.http.get<GroupRequestStatus>(`${environment.apiBaseUrl}/group/groupRequest/status/${groupId}/${userId}` );
+    return this.http.get<GroupRequestStatus>(`${environment.apiBaseUrl}/group/groupRequest/status/${groupId}/${userId}`);
   }
 
   getGroupRequestWhereAdmin() {
-    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/whereAdmin` );
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/whereAdmin`);
   }
 
   getGroupMembers(id: string) {
-    return this.http.get<GroupMembership[]>(`${environment.apiBaseUrl}/group/members/${id}` );
+    return this.http.get<GroupMembership[]>(`${environment.apiBaseUrl}/group/members/${id}`);
   }
 
   GetGroupRequestWithGroupId(id: string) {
-    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/${id}` );
+    return this.http.get<GroupRequest[]>(`${environment.apiBaseUrl}/group/groupRequest/${id}`);
   }
 
   leaveGroup(id: string) {
-    return this.http.put<GroupRequest[]>(`${environment.apiBaseUrl}/group/leaveGroup/${id}`, null );
+    return this.http.put<GroupRequest[]>(`${environment.apiBaseUrl}/group/leaveGroup/${id}`, null);
+  }
+
+  getGroupsWithUserId(id: string) {
+    return this.http.get<Group[]>(`${environment.apiBaseUrl}/group/userId/${id}`);
   }
 }

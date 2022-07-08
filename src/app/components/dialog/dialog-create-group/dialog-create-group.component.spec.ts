@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogCreateGroupComponent } from './dialog-create-group.component';
+import {DialogCreateGroupComponent} from './dialog-create-group.component';
 
 describe('DialogCreateGroupComponent', () => {
   let component: DialogCreateGroupComponent;
@@ -8,9 +8,9 @@ describe('DialogCreateGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogCreateGroupComponent ]
+      declarations: [DialogCreateGroupComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

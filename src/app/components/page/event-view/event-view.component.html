@@ -13,7 +13,8 @@
       <div class="event-part-one">
         <div class="timer">{{ timer | date: 'hh:mm:ss' }}</div>
 
-        <div class="event-exo-card" *ngFor="let exercise of event?.exercises;index as i" (click)="this.setExercise(exercise)" >
+        <div class="event-exo-card" *ngFor="let exercise of event?.exercises;index as i"
+             (click)="this.setExercise(exercise)">
           <div class="left-part">
             <div class="title-number-exo">{{i + 1}}</div>
           </div>

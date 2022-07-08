@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Report} from "../models/report.model";
 import {environment} from "../../../environments/environment";
@@ -12,7 +12,8 @@ import {Media} from "../models/media.model";
 })
 export class CommentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getComments(postId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${environment.apiBaseUrl}/comment/getPostComments/${postId}`);
@@ -22,7 +23,7 @@ export class CommentService {
   sendComment(postId: string, text: string, files: File[]) {
     return firstValueFrom(this.http.post<Comment>(`${environment.apiBaseUrl}/comment/${postId}`, {text})).then(
       comment => {
-        if (files.length > 0){
+        if (files.length > 0) {
           files.forEach(
             file => {
               comment.medias = []

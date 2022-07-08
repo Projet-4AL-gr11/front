@@ -1,5 +1,4 @@
-import {Inject, Injectable, Pipe, PipeTransform} from '@angular/core';
-import {environment} from "../../../environments/environment";
+import {Injectable, Pipe, PipeTransform} from '@angular/core';
 import {MediaService} from "../../services/media/media.service";
 import {firstValueFrom} from "rxjs";
 

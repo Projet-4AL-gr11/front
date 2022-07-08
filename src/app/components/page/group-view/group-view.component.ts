@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Group} from "../../../services/models/group.model";
 import {firstValueFrom} from "rxjs";
 import {User} from "../../../services/models/user.model";
 import {EventService} from "../../../services/event/event.service";
 import {Post} from "../../../services/models/post.model";
 import {PostService} from "../../../services/post/post.service";
-import {faCheckCircle, faEllipsisH, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import {faEllipsisH, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import {GroupService} from "../../../services/group/group.service";
 import {DialogReportComponent} from "../../dialog/dialog-report/dialog-report.component";
 import {ReportTypeEnum} from "../../shared/enum/report_type.enum";
@@ -49,12 +49,12 @@ export class GroupViewComponent implements OnInit {
               private dialogUpdateGroup: MatDialog,
               private dialogCreateEvent: MatDialog,
               private _titleService: Title
-
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     firstValueFrom(this._authService.actual()).then(user => {
-      this.user= user;
+      this.user = user;
       this.route.params.subscribe(params => {
         this.updateGroup(params["groupId"]).then(() =>
           this._titleService.setTitle(this.group.name + " - " + environment.name)
@@ -153,7 +153,8 @@ export class GroupViewComponent implements OnInit {
       data: {id: this.user.id, reportType: ReportTypeEnum.GROUP}
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
 
   }
 
@@ -163,7 +164,8 @@ export class GroupViewComponent implements OnInit {
       data: {group: this.group}
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
   showDialogueCreateEvent() {
@@ -172,7 +174,8 @@ export class GroupViewComponent implements OnInit {
       data: {group: this.group}
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
 

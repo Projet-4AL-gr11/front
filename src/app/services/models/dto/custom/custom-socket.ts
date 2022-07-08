@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Socket, SocketIoConfig } from 'ngx-socket-io';
+import {Injectable} from '@angular/core';
+import {Socket, SocketIoConfig} from 'ngx-socket-io';
 import {CookieService} from "ngx-cookie-service";
 
 // Workaround till ngx-socket-io fixes the missing "extraHeaders", add extraHeaders to Options
@@ -109,7 +109,6 @@ export interface ExtendedSocketIoConfig extends SocketIoConfig {
     extraHeaders?: {}
   }
 }
-
 
 
 export function tokenGetter() {

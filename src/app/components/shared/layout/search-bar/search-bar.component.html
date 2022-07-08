@@ -25,6 +25,6 @@
   <div *ngIf="searchResult?.posts?.length > 0">
     <p class="text-center fw-bold">Posts</p>
     <mat-option *ngFor="let option of searchResult?.posts"
-                [routerLink]="['/post/' + option.id]">{{(option.text.length>6)? (option.text | slice:0:15)+'..':(option.text)}}</mat-option>
+                [routerLink]="['/post/' + option.id]">{{(option.text.length > 6) ? (option.text | slice:0:15) + '..' : (option.text)}}</mat-option>
   </div>
 </mat-autocomplete>

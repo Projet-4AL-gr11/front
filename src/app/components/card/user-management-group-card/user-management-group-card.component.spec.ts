@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserManagementGroupCardComponent } from './user-management-group-card.component';
+import {UserManagementGroupCardComponent} from './user-management-group-card.component';
 
 describe('UserManagementGroupComponent', () => {
   let component: UserManagementGroupCardComponent;
@@ -8,9 +8,9 @@ describe('UserManagementGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserManagementGroupCardComponent ]
+      declarations: [UserManagementGroupCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

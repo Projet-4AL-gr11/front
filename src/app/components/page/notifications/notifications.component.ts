@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
 import {GroupService} from "../../../services/group/group.service";
 import {FriendshipService} from "../../../services/friendship/friendship.service";
@@ -7,8 +7,6 @@ import {GroupRequest} from "../../../services/models/GroupRequest.model";
 import {FriendRequest} from "../../../services/models/friend_request.model";
 import {AuthService} from "../../../services/auth/auth.service";
 import {UserService} from "../../../services/user/user.service";
-import {User} from "../../../services/models/user.model";
-import {Group} from "../../../services/models/group.model";
 
 @Component({
   selector: 'app-notifications',
@@ -26,7 +24,8 @@ export class NotificationsComponent implements OnInit {
   constructor(public _groupService: GroupService,
               public _authService: AuthService,
               public _userService: UserService,
-              public _friendshipService: FriendshipService) {}
+              public _friendshipService: FriendshipService) {
+  }
 
   ngOnInit(): void {
     firstValueFrom(this._groupService.getGroupRequest()).then(groupRequest => this.groupRequests = groupRequest);

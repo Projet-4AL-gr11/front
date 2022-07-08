@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { PostViewRoutingModule } from './post-view-routing.module';
-import { PostViewComponent } from './post-view.component';
+import {PostViewRoutingModule} from './post-view-routing.module';
+import {PostViewComponent} from './post-view.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {PipesModules} from "../../../pipes/pipes.modules";
 import {MatButtonModule} from "@angular/material/button";
@@ -12,7 +12,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatMenuModule} from "@angular/material/menu";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
-import {RouterModule} from "@angular/router";
 import {FlexModule} from "@angular/flex-layout";
 
 
@@ -20,23 +19,24 @@ import {FlexModule} from "@angular/flex-layout";
   declarations: [
     PostViewComponent,
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        CardsModule,
-        FontAwesomeModule,
-        PipesModules,
-        MatButtonModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatInputModule,
-        MatMenuModule,
+  imports: [
+    CommonModule,
+    SharedModule,
+    CardsModule,
+    FontAwesomeModule,
+    PipesModules,
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatMenuModule,
 
-        FlexModule,
-      PostViewRoutingModule,
-    ],
+    FlexModule,
+    PostViewRoutingModule,
+  ],
   exports: [
     PostViewComponent,
   ]
 })
-export class PostViewModule { }
+export class PostViewModule {
+}

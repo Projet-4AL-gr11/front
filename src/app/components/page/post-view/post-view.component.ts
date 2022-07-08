@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Post} from "../../../services/models/post.model";
@@ -51,11 +51,10 @@ export class PostViewComponent implements OnInit {
       return;
     }
     this._commentService.sendComment(this.post.id, this.text, this.medias).then(() => {
-      this.ngOnInit()
-      this.text = ""
-    }
-
-  );
+        this.ngOnInit()
+        this.text = ""
+      }
+    );
   }
 
   async update(postId: string): Promise<void> {
@@ -63,7 +62,7 @@ export class PostViewComponent implements OnInit {
       this.post = post;
       this._titleService.setTitle(post.text + " - " + environment.name);
     });
-    await firstValueFrom(this._postService.sharedPost(postId)).then(shared=> this.post.sharesPost = shared);
+    await firstValueFrom(this._postService.sharedPost(postId)).then(shared => this.post.sharesPost = shared);
     await firstValueFrom(this._commentService.getComments(postId)).then(comments => this.post.comments = comments);
   }
 

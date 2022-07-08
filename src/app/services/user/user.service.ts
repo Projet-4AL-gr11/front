@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Report} from "../models/report.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {User} from "../models/user.model";
 import {FormGroup} from "@angular/forms";
-import {firstValueFrom, Observable} from "rxjs";
+import {firstValueFrom} from "rxjs";
 import {MediaService} from "../media/media.service";
 import {UserDto} from "../models/dto/custom/user.dto";
 
@@ -13,7 +13,8 @@ import {UserDto} from "../models/dto/custom/user.dto";
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private mediaService: MediaService) { }
+  constructor(private http: HttpClient, private mediaService: MediaService) {
+  }
 
   sendReport(id: string, report: Report) {
     return this.http.post<any>(`${environment.apiBaseUrl}/report/user`, report)

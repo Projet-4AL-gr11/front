@@ -1,7 +1,5 @@
 import {NgModule} from "@angular/core";
-import {EventViewComponent} from "../event-view/event-view.component";
 import {CommonModule} from "@angular/common";
-import {EventViewRoutingModule} from "../event-view/event-view-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {CardsModule} from "../../card/cards.module";
 import {GroupViewComponent} from "./group-view.component";
@@ -19,22 +17,23 @@ import {MatMenuModule} from "@angular/material/menu";
   declarations: [
     GroupViewComponent
   ],
-    imports: [
-      CommonModule,
-      SharedModule,
-      CardsModule,
-      MatButtonModule,
-      FlexModule,
-      MatTabsModule,
-      VirtualScrollerModule,
-      MatListModule,
-      PipesModules,
-      FontAwesomeModule,
-      MatMenuModule,
-      GroupViewRoutingModule,
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    CardsModule,
+    MatButtonModule,
+    FlexModule,
+    MatTabsModule,
+    VirtualScrollerModule,
+    MatListModule,
+    PipesModules,
+    FontAwesomeModule,
+    MatMenuModule,
+    GroupViewRoutingModule,
+  ],
   exports: [
     GroupViewComponent
   ],
 })
-export class GroupViewModule { }
+export class GroupViewModule {
+}

@@ -8,8 +8,10 @@ import {Leaderboard} from "../../../services/models/leaderboard.model";
 })
 export class LeaderboardCardComponent implements OnInit {
 
-  @Input('leaderboards') leaderboards: Leaderboard[];
-  constructor() { }
+  @Input() leaderboards: Leaderboard[];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
