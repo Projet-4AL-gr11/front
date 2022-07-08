@@ -38,6 +38,7 @@ import {GroupViewModule} from "./components/page/group-view/group-view.module";
     HomeModule,
     AuthModule,
     SocialModule,
+    ProfileModule,
     CodeModule,
     LeaderboardModule,
     SharedModule,
@@ -65,6 +66,7 @@ import {GroupViewModule} from "./components/page/group-view/group-view.module";
     GroupViewModule,
     //
     AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,

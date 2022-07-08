@@ -66,7 +66,7 @@ import {ListGroupCardComponent} from './list-group-card/list-group-card.componen
     UserManagementGroupCardComponent,
     ListGroupCardComponent
 
-  ]
+    ]
 })
 export class CardsModule {
 }

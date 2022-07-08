@@ -1,0 +1,38 @@
+.home__box1 {
+  background-image: url("src/assets/wallpaper.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home__logo {
+  color: lightgrey;
+  vertical-align: center;
+}
+
+.home__box2 {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg , rgb(10,15,35), grey);
+}
+
+h2 {
+  color: lightgrey;
+  margin-bottom: 10vh;
+}
+
+h3 {
+  margin-top: 5vh;
+  color : lightgrey;
+}
+
+
+.home__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+}

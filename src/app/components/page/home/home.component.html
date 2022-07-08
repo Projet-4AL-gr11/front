@@ -2,9 +2,21 @@
 
 <div class=" d-flex flex-column align-items-center main-2 ">
 
-  <div class="flex-1 w-100 bg-primary">
-    <h2>Home</h2>
-
+  <div class="home__box1 flex-2">
+    <img class="home__logo " src="assets/"/>
   </div>
 
+  <div class="home__box2 ">
+    <div class="home__content">
+      <h2 class=""> Défie tes amis sur 2 Fast Hands </h2>
+
+      <button mat-raised-button color="primary" class="w-75 rounded-semi-circle" [routerLink]="['/auth/register']">
+        Inscrivez-vous
+      </button>
+      <h3>Vous avez deja un compte ?</h3>
+      <button mat-raised-button color="primary" class="w-75 rounded-semi-circle" [routerLink]="['/auth/login']">
+        Connectez vous
+      </button>
+    </div>
+  </div>
 </div>

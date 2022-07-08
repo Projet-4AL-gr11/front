@@ -45,11 +45,21 @@ export class HeaderComponent implements OnInit, OnChanges {
     await this.router.navigateByUrl("/auth/login");
   }
 
-  login() {
-    this.router.navigateByUrl("/auth/login");
+  goToHome() {
+    this.router.navigateByUrl("/timeline");
   }
 
-  subscribe() {
-    this.router.navigateByUrl("/auth/register");
+  goToCode() {
+    this.router.navigateByUrl("/code/select");
+  }
+
+  goToProfile() {
+
+    this.router.navigateByUrl("/profile/" + this.user?.id);
+  }
+
+  goToNotification() {
+    this.router.navigateByUrl("/notification/");
+
   }
 }

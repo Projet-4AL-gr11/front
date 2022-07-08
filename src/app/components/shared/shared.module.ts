@@ -13,6 +13,7 @@ import {FlexModule} from "@angular/flex-layout";
 import {SearchBarComponent} from './layout/search-bar/search-bar.component';
 import {MatOptionModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { IdeComponent } from './ide/ide.component';
 
 
 @NgModule({
@@ -31,12 +32,14 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     HeaderComponent,
     FooterComponent,
     ButtonCreatePostComponent,
+    IdeComponent,
     SearchBarComponent,
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     ButtonCreatePostComponent,
+    IdeComponent,
   ],
 })
 export class SharedModule {

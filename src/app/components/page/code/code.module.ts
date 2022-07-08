@@ -1,20 +1,28 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {CodeRoutingModule} from './code-routing.module';
-import {CodeComponent} from "./code.component";
+import { CodeRoutingModule } from './code-routing.module';
+import {SharedModule} from "../../shared/shared.module";
+import {CardsModule} from "../../card/cards.module";
+import { LanguageSelectComponent } from './language-select/language-select.component';
+import { SandboxComponent } from './sandbox/sandbox.component';
 
 
 @NgModule({
   declarations: [
-    CodeComponent,
+    LanguageSelectComponent,
+    SandboxComponent,
   ],
   imports: [
     CommonModule,
-    CodeRoutingModule
+    CodeRoutingModule,
+    SharedModule,
+    CardsModule,
   ],
   exports: [
-    CodeComponent,
+    LanguageSelectComponent,
+    SandboxComponent,
+
   ]
 })
 export class CodeModule {
