@@ -50,9 +50,15 @@ export class TimelineComponent implements OnInit, OnDestroy {
         if (posts.length > 0) {
           this.loading = false;
         }
-        console.log(this.posts)
       });
 
+  }
+
+  updatePost() {
+    this.offset = 0;
+    this.limit = 10;
+    this.posts = [];
+    this.getMorePosts()
   }
 }
 

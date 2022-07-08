@@ -106,7 +106,6 @@ export class DialogUpdateUserComponent implements OnInit {
       profilePicture: new FormControl('',[]),
       bannerPicture: new FormControl('', [])
     });
-    console.log(this.data.user)
     this.formData.patchValue({
       username: this.data.user.username,
       email: this.data.user.email,

@@ -109,9 +109,8 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id, {sameSite: "None"});
-        this.cookieService.set('username', user.username, {sameSite: "None"});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id, {path: '/',sameSite: "None"});
+        this.cookieService.set('username', user.username, {path: '/',sameSite: "None"});
         this.updateUser();
         return user;
       }));
@@ -123,9 +122,9 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"None"});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"None"});
+        this.cookieService.set('user', user.id,{path: '/', sameSite:"None"});
+        // this.cookieService.set('Refresh', user.currentHashedRefreshToken,{path: '/',sameSite:"Lax",expires:3});
+        this.cookieService.set('username', user.username,{path: '/',sameSite:"None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;

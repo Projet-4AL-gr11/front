@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 import {MediaService} from "../media/media.service";
 import {PostDto} from "../models/dto/custom/post.dto";
 import {Media} from "../models/media.model";
+import {Group} from "../models/group.model";
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,7 @@ export class PostService {
     return this.http.get<Post>(`${environment.apiBaseUrl}/post/getSharedPost/${postId}`);
   }
 
-  async createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[]) {
+  async createPost(text: string, sharesPostId: string, sharedEventId: string, files: File[], groupSelected: Group) {
     let formData: PostDto = new PostDto();
     formData.text = text;
     if (sharesPostId !== undefined && sharesPostId !== null) {
@@ -66,7 +67,9 @@ export class PostService {
     if (sharedEventId !== undefined && sharedEventId !== null) {
       formData.sharedEvent = sharedEventId
     }
-
+    if (groupSelected !== undefined) {
+      formData.group = groupSelected;
+    }
     firstValueFrom(this.http.post<Post>(`${environment.apiBaseUrl}/post`, formData, {
       headers: this.headers,
       params: new HttpParams()

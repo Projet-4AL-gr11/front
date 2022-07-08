@@ -30,7 +30,6 @@ export class SearchBarComponent implements OnInit {
     firstValueFrom(this.searchService.search($event.target.value))
       .then(searchResult =>{
         this.searchResult = searchResult
-        console.log(searchResult)
       });
   }
 

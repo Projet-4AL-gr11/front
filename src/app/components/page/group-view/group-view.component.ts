@@ -92,7 +92,6 @@ export class GroupViewComponent implements OnInit {
       })
     });
     firstValueFrom(this._groupService.isUserAdmin(id, this.user.id)).then(isAdmin => {
-      console.log(isAdmin)
       this.group.isAdmin = isAdmin
     });
     firstValueFrom(this._groupService.isUserOwner(id, this.user.id)).then(isOwner => this.group.isOwner = isOwner);
@@ -100,7 +99,6 @@ export class GroupViewComponent implements OnInit {
     firstValueFrom(this._groupService.getGroupRequestStatus(this.user.id, this.group.id)).then(groupRequestStatus => {
       this.groupRequestStatus = groupRequestStatus;
     })
-    console.log(this.group)
   }
 
   triggerGetMore($event) {

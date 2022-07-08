@@ -29,6 +29,9 @@
       </div>
     </div>
   </div>
+  <div *ngIf="groupSelected">
+    <p>Post pour le group : {{groupSelected.name}}</p>
+  </div>
   <hr class="my-0">
   <div class="create-post-options m-2" fxFlex fxLayout="row">
     <div fxFlex fxLayoutAlign="start center">
@@ -41,6 +44,14 @@
         <p>Vos événements</p>
         <button (click)="data.sharedEvent=event" *ngFor="let event of events"
                 mat-menu-item>{{event.name}}</button>
+      </mat-menu>
+    </div>
+    <div *ngIf="groups.length > 0">
+      <fa-icon [icon]="faGroup" [matMenuTriggerFor]="groupPicker" class="mx-1" matSuffix size="2x"></fa-icon>
+      <mat-menu #groupPicker>
+        <p>Vos Group</p>
+        <button (click)="groupSelected=group" *ngFor="let group of groups"
+                mat-menu-item>{{group.name}}</button>
       </mat-menu>
     </div>
     <div fxFlex fxLayoutAlign="end center">

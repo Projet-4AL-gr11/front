@@ -80,7 +80,7 @@
                                 [enableUnequalChildrenSizes]="true" [items]="group.posts"
                                 [parentScroll]="divContent" childHeight="1" class="w-100 h-100">
                 <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
-                  <app-post (onDelete)="removePost($event)" [post]="post"></app-post>
+                  <app-post (onDelete)="removePost($event)" [post]="post" ></app-post>
                 </div>
               </virtual-scroller>
             </div>            <div *ngIf="group?.posts?.length === 0">

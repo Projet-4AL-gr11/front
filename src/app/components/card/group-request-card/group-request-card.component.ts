@@ -23,7 +23,6 @@ export class GroupRequestCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.groupRequest)
   }
 
   acceptRequest() {

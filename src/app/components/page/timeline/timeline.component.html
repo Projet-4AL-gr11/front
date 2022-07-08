@@ -3,7 +3,7 @@
 <div>
   <div class="row m-0" >
     <div class="col-md-4">
-      <app-button-create-post *ngIf="_authService.isAuthenticated()"></app-button-create-post>
+      <app-button-create-post *ngIf="_authService.actual()" (postSend)="updatePost()"></app-button-create-post>
     </div>
     <div *ngIf="posts?.length == 0" class="col-md-4" >
       <p style="padding-top: 100px">Il n'y a pas de post à afficher</p>
@@ -21,6 +21,4 @@
     <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
     </div>
   </div>
-
-  <app-button-create-post *ngIf="_authService.actual()"></app-button-create-post>
 </div>

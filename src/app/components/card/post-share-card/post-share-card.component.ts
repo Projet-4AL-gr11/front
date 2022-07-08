@@ -12,7 +12,7 @@ export class PostShareCardComponent implements OnInit {
   @Input()
   post: Post;
   faShare = faShare;
-  faCheckCircle = faCheckCircle;
+  faCheckCisrcle = faCheckCircle;
 
   constructor(private _mediaService: MediaService) {
   }

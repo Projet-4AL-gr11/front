@@ -58,7 +58,6 @@ export class MediaService {
   public saveGroupPicture(groupId: string, file: File): Observable<any> {
     const formData: any = new FormData()
     formData.append("file", file)
-    console.log(formData)
     return this.http.post<Media>(`${environment.apiBaseUrl}/media/groupPicture/${groupId}`, formData);
   }
 
