@@ -66,13 +66,16 @@ export class GroupService {
       })
   }
 
-  updateGroup(group: Group, form: FormGroup, picture: File) {
-    const formData = new FormData();
+  updateGroup(group: Group, form: FormGroup, picture: File, updatedBannerPicture: File) {
+    const formData = new GroupDto();
     if (form.value.name != null){
-      formData.append("name", form.value.name)
+      formData.name = form.value.name;
     }
     if (picture != null) {
-      this.mediaService.saveGroupPicture(group.id, picture);
+      firstValueFrom(this.mediaService.saveGroupPicture(group.id, picture)).then();
+    }
+    if (updatedBannerPicture != null) {
+      firstValueFrom(this.mediaService.saveGroupBannerPicture(group.id, updatedBannerPicture)).then();
     }
     return this.http.put(`${environment.apiBaseUrl}/group/${group.id}`, formData);
   }

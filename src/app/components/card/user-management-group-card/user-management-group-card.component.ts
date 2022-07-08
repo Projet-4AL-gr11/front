@@ -21,6 +21,7 @@ export class UserManagementGroupCardComponent implements OnInit {
   @Input('user') user: User = new User();
   @Input('group') group: Group;
   @Input('isOwner') isOwner: boolean;
+  @Input('isAdmin') isAdmin: boolean;
   faUserPlus = faUserPlus;
   friendshipRequest: FriendRequestStatus;
   userIsAdmin: boolean = false;
@@ -117,6 +118,18 @@ export class UserManagementGroupCardComponent implements OnInit {
     this._groupService.isUserAdmin(this.group.id, this.user.id).subscribe({
       next: bool => {
         this.userIsAdmin = bool;
+        if (!this.isOwner) {
+          this._groupService.isUserOwner(this.group.id, this.user.id).subscribe({
+            next: bool => {
+              this.userIsOwner = bool;
+            },
+            error: err => {
+              if (!environment.production) {
+                console.log(err)
+              }
+            }
+          })
+        }
       },
       error: err => {
         if (!environment.production) {
@@ -124,18 +137,6 @@ export class UserManagementGroupCardComponent implements OnInit {
         }
       }
     })
-    if (!this.isOwner) {
-      this._groupService.isUserOwner(this.group.id, this.user.id).subscribe({
-        next: bool => {
-          this.userIsOwner = bool;
-        },
-        error: err => {
-          if (!environment.production) {
-            console.log(err)
-          }
-        }
-      })
-    }
   }
 
   acceptFriendship() {
@@ -167,5 +168,12 @@ export class UserManagementGroupCardComponent implements OnInit {
   cancelRequest() {
     firstValueFrom(this._friendshipService.cancelMyFriendRequest(this.user.id))
       .then(() => this.friendshipRequest = FriendRequestStatus.NONE);
+  }
+
+  giveOwnerShipRight(id: string) {
+    firstValueFrom(this._groupService.giveGroupOwnership(this.group.id, id))
+      .then(() => {
+        this.isOwner = false;
+      })
   }
 }

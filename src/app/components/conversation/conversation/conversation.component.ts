@@ -70,10 +70,15 @@ export class ConversationComponent implements OnInit {
 
 
   getConversationName(): string {
-    if (this.conversation?.group) {
-      return this.conversation?.group?.name;
-    } else if (this.conversation?.friendship) {
-      return this.conversation?.friendship?.friendOne?.username !== this.user?.username ? this.conversation?.friendship?.friendOne?.username : this.conversation?.friendship?.friendTwo?.username;
+    if (this.conversation.group) {
+      return this.conversation.group.name;
+    } else if (this.conversation.friendship) {
+      if (this.conversation.friendship.friendOne.username) {
+        return this.conversation.friendship.friendOne.username;
+      }
+      return this.conversation.friendship.friendTwo.username;
+    } else if (this.conversation.users) {
+      return this.conversation.users[0].username + " et autres..."
     }
     return undefined;
   }

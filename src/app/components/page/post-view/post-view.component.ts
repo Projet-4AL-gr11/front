@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Post} from "../../../services/models/post.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PostService} from "../../../services/post/post.service";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -37,6 +37,7 @@ export class PostViewComponent implements OnInit {
               public _userService: UserService,
               public _authService: AuthService,
               private _titleService: Title,
+              private router: Router,
               private _snackBar: MatSnackBar) {
   }
 
@@ -103,5 +104,9 @@ export class PostViewComponent implements OnInit {
 
   removeCommentCard(event: Comment) {
     this.post.comments.splice(this.post.comments.indexOf(event, 1))
+  }
+
+  goToTimeline() {
+    this.router.navigate(['/timeline']).then();
   }
 }

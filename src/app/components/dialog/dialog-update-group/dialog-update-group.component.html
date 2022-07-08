@@ -16,14 +16,22 @@
         <p> Photo </p>
         <div class="mr-2">
           <a (click)="pictureInput.click()">
-            <img [src]="pictureURL || '../../../../assets/images/no-image.png'"
+            <img [src]="pictureURL || ((data.group?.picture?.id | imageUrl:undefined:undefined:false) | async) || '../../../../assets/images/no-image.png'"
                  alt="" class="rounded-circle"
                  height="150px"
                  style="object-fit: cover" width="150px">
             <input #pictureInput (change)="onPictureSelected()" formControlName="picture" hidden id="picture" type="file">
           </a>
-
         </div>
+      </div>
+      <div class="form-field-update-bannerPicture">
+        <p> Photo de Bannière</p>
+        <a (click)="profileBannerInput.click()">
+          <img [src]="updatedBannerPictureURL || ((data.group?.bannerPicture?.id | imageUrl:undefined:undefined:false) | async) || '../../../../assets/images/no-image.png'" alt=""
+               class="rounded"
+               height="300px" style="object-fit: cover" width="100%">
+          <input #profileBannerInput (change)="onProfileBannerSelected()" formControlName="bannerPicture" hidden id="bannerPicture" type="file">
+        </a>
       </div>
     </div>
   </div>

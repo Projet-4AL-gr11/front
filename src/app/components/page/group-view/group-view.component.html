@@ -97,6 +97,7 @@
             <div *ngIf="group.isAdmin || group.isOwner" class="my-3">
               <div *ngFor="let member of group.members;" class="display-list-user">
                 <app-user-management-group-card [isOwner]="group.isOwner"
+                                                [isAdmin]="group.isAdmin"
                                                    [group]="group"
                                                    [user]="member.user"
                                                    class="m-0"></app-user-management-group-card>

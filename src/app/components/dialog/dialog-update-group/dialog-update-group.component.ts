@@ -15,6 +15,8 @@ export class DialogUpdateGroupComponent implements OnInit {
   formData: FormGroup;
   picture: File;
   pictureURL: string;
+  updatedBannerPictureURL: string;
+  updatedBannerPicture: File;
 
   constructor(
     public dialogRef: MatDialogRef<DialogUpdateGroupComponent>,
@@ -25,11 +27,13 @@ export class DialogUpdateGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeFormGroup();
+    this.picture = null;
+    this.updatedBannerPicture = null;
   }
 
   onClickSubmit() {
     if (this.formData.valid) {
-      firstValueFrom(this._groupService.updateGroup(this.data.group, this.formData, this.picture)).then(()=> this.dialogRef.close())
+      firstValueFrom(this._groupService.updateGroup(this.data.group, this.formData, this.picture, this.updatedBannerPicture)).then(()=> this.dialogRef.close())
     }
   }
 
@@ -61,9 +65,30 @@ export class DialogUpdateGroupComponent implements OnInit {
         Validators.minLength(2)
       ]),
       picture: new FormControl('', []),
+      bannerPicture: new FormControl('', [])
     });
     this.formData.patchValue({
       name: this.data.group.name
     })
+  }
+
+  onProfileBannerSelected() {
+    const inputNode: any = document.querySelector('#bannerPicture');
+    if (typeof (FileReader) !== 'undefined') {
+
+      const reader = new FileReader();
+      reader.readAsDataURL(inputNode.files[0]);
+      reader.onload = (e: any) => {
+        const file: string = e.target.result
+        if (file.match(/image\/*/) === null) {
+          console.log('invalid file input');
+          return;
+        }
+        if (typeof file === "string") {
+          this.updatedBannerPictureURL = file;
+          this.updatedBannerPicture = inputNode.files[0];
+        }
+      };
+    }
   }
 }
