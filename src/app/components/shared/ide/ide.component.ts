@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import * as ace from "ace-builds";
+import {ExecuteService} from "../../../services/execute/execute.service";
 
 @Component({
   selector: 'app-ide',
@@ -14,11 +15,19 @@ export class IdeComponent implements OnInit {
   foo: string = "";
   aceEditor;
 
-  selectLanguage = 'python';
-  languages = [ 'Python', 'JavaScript'
+  selectLanguage;
+  languages = [
+    {
+      name: 'Python',
+      value: 'py'
+    },
+    {
+      name: 'JavaScript',
+      value: 'js'
+    },
   ];
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private executeService: ExecuteService) { }
 
   ngOnInit(): void {
 
@@ -35,21 +44,22 @@ export class IdeComponent implements OnInit {
   changeLanguage(event: any) {
     const editor = ace.edit(this.editor.nativeElement);
 
-    this.selectLanguage = event.target.value;
 
-    if(this.selectLanguage == 'Python'){
+    if(event.target.value == 'Python'){
+      this.selectLanguage = 'py'
       editor.session.setMode("ace/mode/python");
-      editor.session.setValue("Ready to Python");
     }
-    else if(this.selectLanguage == 'JavaScript'){
+    else if(event.target.value == 'JavaScript'){
+      this.selectLanguage = 'js'
       editor.session.setMode("ace/mode/javascript");
-      editor.session.setValue("Ready to JavasSript");
     }
 
   }
 
   executeCode() {
-    this.foo = this.exerciseService.runCode(this.aceEditor.getValue()).message;
+    this.executeService.runCode(this.aceEditor.getValue(), this.selectLanguage).subscribe(response => {
+       this.foo = response;
+    });
   }
 
 

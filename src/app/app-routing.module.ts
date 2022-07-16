@@ -16,22 +16,12 @@ const routes: Routes = [
   },
   {path: "code", loadChildren: () => import('./components/page/code/code.module').then(m => m.CodeModule)},
   {path: "social", loadChildren: () => import('./components/page/social/social.module').then(m => m.SocialModule)},
-  {
-    path: "leaderboard",
-    loadChildren: () => import('./components/page/leaderboard/leaderboard.module').then(m => m.LeaderboardModule)
-  },
-  {
-    path: "timeline",
-    loadChildren: () => import('./components/page/timeline/timeline.module').then(m => m.TimelineModule)
-  },
+  {path: "leaderboard",loadChildren: () => import('./components/page/leaderboard/leaderboard.module').then(m => m.LeaderboardModule)},
+  {path: "timeline", loadChildren: () => import('./components/page/timeline/timeline.module').then(m => m.TimelineModule)},
   {
     path: "profile/:id",
-    loadChildren: () => import('./components/page/profile/profile.module').then(m => m.ProfileModule)
-  },
-  {
-    path: "notifications",
-    loadChildren: () => import('./components/page/notifications/notifications.module').then(m => m.NotificationsModule)
-  },
+    loadChildren: () => import('./components/page/profile/profile.module').then(m => m.ProfileModule)},
+  {path: "notifications",loadChildren: () => import('./components/page/notifications/notifications.module').then(m => m.NotificationsModule)},
   {
     path: "event/:eventId",
     loadChildren: () => import('./components/page/event-view/event-view.module').then(m => m.EventViewModule)

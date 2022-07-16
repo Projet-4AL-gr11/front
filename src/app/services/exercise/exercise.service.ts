@@ -33,12 +33,5 @@ export class ExerciseService {
     return this.http.get<ExerciseTemplate[]>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/all`);
   }
 
-  runCode(code: string) {
-    return (
-      {
-        message: code
-      })
-    //  return this.http.post<any>(`${environment.apiBaseUrl}/exercise/exercise`, code)
-  }
 
 }
