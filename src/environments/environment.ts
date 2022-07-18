@@ -7,6 +7,7 @@ export const environment = {
   name: "2FastHand",
   domain: "localhost",
   apiBaseUrl: "http://localhost:3000",
+  apiExecUrl: "http://ec2-18-117-90-11.us-east-2.compute.amazonaws.com"
 };
 
 /*
