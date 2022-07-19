@@ -31,6 +31,7 @@ import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
 import {GroupViewModule} from "./components/page/group-view/group-view.module";
+import { CreateExerciseTemplateComponent } from './components/page/admin/create-exercise-template/create-exercise-template.component';
 
 @NgModule({
   imports: [

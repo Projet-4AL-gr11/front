@@ -1,0 +1,30 @@
+<h1 class="create-event-title" mat-dialog-title>Création d'un Exercise Template</h1>
+<mat-divider></mat-divider>
+<form [formGroup]="newExerciseTemplate" (ngSubmit)="onClickSubmit()">
+  <div mat-dialog-content>
+    <div class="create-event-grid">
+      <div class="form-field-name-event">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom de l'Exercise_template</mat-label>
+          <input matInput name="name" placeholder="Nom de l'exercise_template" formControlName="name" required>
+        </mat-form-field>
+      </div>
+      <div class="form-field-name-event">
+        <mat-form-field appearance="fill">
+          <mat-label>Description de l'exercice</mat-label>
+          <textarea formControlName="description" class="textarea-description" matInput
+                    name="description" placeholder="Ex. L'obejectif est ..."></textarea>        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <!-- TODO: mettre l'ide ici -->
+    <mat-divider></mat-divider>
+    <div class="dialog-actions-create-event" mat-dialog-actions>
+      <div class="button-grid-create-event">
+        <div class="button-send">
+          <button class="button-send" mat-raised-button type="submit">Modifier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

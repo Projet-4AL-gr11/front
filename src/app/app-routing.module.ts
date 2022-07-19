@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: "event/:eventId", loadChildren: () => import('./components/page/event-view/event-view.module').then(m => m.EventViewModule)},
   {path: "post/:id", loadChildren: () => import('./components/page/post-view/post-view.module').then(m => m.PostViewModule)},
   {path: "timeline", loadChildren: () => import('./components/page/timeline/timeline.module').then(m => m.TimelineModule)},
+  {path: "admin", loadChildren: () => import('./components/page/admin/admin.module').then(m => m.AdminModule)},
 
 ];
 

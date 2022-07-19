@@ -21,6 +21,19 @@
       <app-search-bar class="align-self-center"></app-search-bar>
     </div>
     <ul class="navbar-nav ms-auto" *ngIf="user">
+      <li *ngIf="user.userType == 'ADMIN'">
+        <div class="dropdown">
+          <button [matMenuTriggerFor]="menu" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
+                  mat-icon-button type="button">
+            <p>Administration</p>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <div>
+              <button (click)="goToCreateExerciseTemplate()" mat-menu-item>Edition du profil</button>
+            </div>
+          </mat-menu>
+        </div>
+      </li>
       <li class="notifications">
         <a (click)="goToNotification()" class="nav-link"
            matBadge="{{notificationCount}}" matBadgePosition="before" matBadgeColor="accent">
