@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
-import {ExerciseTemplate} from "../../../../services/models/erxercise_template.model";
-import {environment} from "../../../../../environments/environment";
+import {ExerciseService} from "../../../../../services/exercise/exercise.service";
+import {ExerciseTemplate} from "../../../../../services/models/erxercise_template.model";
+import {environment} from "../../../../../../environments/environment";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";

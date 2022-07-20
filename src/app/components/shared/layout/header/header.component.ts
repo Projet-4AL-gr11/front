@@ -63,6 +63,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   goToCreateExerciseTemplate() {
-    this.router.navigateByUrl("/admin/exerciseTemplate")
+    this.router.navigateByUrl("/admin/listExerciseTemplate")
   }
 }
