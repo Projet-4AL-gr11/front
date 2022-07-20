@@ -13,12 +13,26 @@ import { ListExerciseTemplateComponent } from './exerciseTemplate/list-exercise-
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { ReportListEventComponent } from './report/report-list-event/report-list-event.component';
+import { ReportListGroupComponent } from './report/report-list-group/report-list-group.component';
+import { ReportListPostComponent } from './report/report-list-post/report-list-post.component';
+import { ReportListUserComponent } from './report/report-list-user/report-list-user.component';
+import { ReportListCommentComponent } from './report/report-list-comment/report-list-comment.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import { ReportListExerciseComponent } from './report/report-list-exercise/report-list-exercise.component';
 
 @NgModule({
   declarations: [
     CreateExerciseTemplateComponent,
     UpdateExerciseTemplateComponent,
     ListExerciseTemplateComponent,
+    ReportListEventComponent,
+    ReportListGroupComponent,
+    ReportListPostComponent,
+    ReportListUserComponent,
+    ReportListCommentComponent,
+    ReportListExerciseComponent,
   ],
   imports: [
     CommonModule,
@@ -33,11 +47,18 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatPaginatorModule,
     //
     AdminRoutingModule,
+    MatIconModule,
+    MatMenuModule,
   ],
   exports: [
     CreateExerciseTemplateComponent,
     UpdateExerciseTemplateComponent,
-    ListExerciseTemplateComponent
+    ListExerciseTemplateComponent,
+    ReportListEventComponent,
+    ReportListGroupComponent,
+    ReportListPostComponent,
+    ReportListUserComponent,
+    ReportListCommentComponent,
   ]
 })
 export class AdminModule {
