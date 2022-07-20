@@ -111,6 +111,7 @@ export class AuthService {
       .pipe(map(user => {
         this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
         this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
+        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
@@ -123,7 +124,6 @@ export class AuthService {
     })
       .pipe(map(user => {
         this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
-        // this.cookieService.set('Refresh', user.currentHashedRefreshToken,{path: '/',sameSite:"Lax",expires:3});
         this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
