@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as ace from "ace-builds";
 import {ExecuteService} from "../../../services/execute/execute.service";
 
@@ -49,5 +49,8 @@ export class IdeComponent implements OnInit {
     return this.aceEditor.getValue();
   }
 
+  setCode(code: string) {
+    this.aceEditor.session.setValue(code);
+  }
 
 }

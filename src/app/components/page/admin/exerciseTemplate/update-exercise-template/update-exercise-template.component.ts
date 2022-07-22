@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Language} from "../../../../../services/models/language.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LanguageService} from "../../../../../services/language/language.service";
@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../../../../../environments/environment";
 import {ExerciseTemplate} from "../../../../../services/models/erxercise_template.model";
 import {Title} from "@angular/platform-browser";
+import {IdeComponent} from "../../../../shared/ide/ide.component";
 
 @Component({
   selector: 'app-update-create-exercise-template',
@@ -16,9 +17,12 @@ import {Title} from "@angular/platform-browser";
 })
 export class UpdateExerciseTemplateComponent implements OnInit {
 
+  @ViewChild(IdeComponent) private editor: IdeComponent;
+
   exerciseTemplate: ExerciseTemplate = new ExerciseTemplate();
   languages: Language[];
   newExerciseTemplate: FormGroup;
+  languageSelected: Language;
 
   constructor(
     private _languageService: LanguageService,
@@ -64,19 +68,25 @@ export class UpdateExerciseTemplateComponent implements OnInit {
       description: new FormControl('', [
         Validators.required
       ]),
-      language: new FormControl('', [
-        Validators.required
-      ]),
-      code: new FormControl('', [
-        Validators.required
-      ])
     })
 
   }
 
   onClickSubmit() {
+    this.newExerciseTemplate.value.code = this.editor.getCode();
+    this.newExerciseTemplate.value.language = this.languageSelected;
     if (!this.newExerciseTemplate.valid) {
       this._snackBar.open('Le schéma n\'est pas validé, veillez réessayer', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else if (!this.newExerciseTemplate?.value?.code?.includes("#@#@#@#@#@")) {
+      this._snackBar.open('Veillez inséré le flag #@#@#@#@#@ dans le code', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else if (!this.newExerciseTemplate?.value?.code?.includes("EverythingIsGood")) {
+      this._snackBar.open('Vous n\'avez pas mis le code de retour EverythingIsGood', 'Fermer', {
         duration: 3000
       });
       return;
@@ -123,5 +133,7 @@ export class UpdateExerciseTemplateComponent implements OnInit {
       description: this.exerciseTemplate.description,
       language: this.exerciseTemplate.language,
     })
+    this.languageSelected = this.exerciseTemplate.language;
+    this.editor.setCode(this.exerciseTemplate.code);
   }
 }

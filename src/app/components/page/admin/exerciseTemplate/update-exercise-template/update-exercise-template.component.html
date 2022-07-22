@@ -1,48 +1,44 @@
 <app-header class="w-100"></app-header>
 
-<div class="page-users row m-0">
-  <div class="col-md-1 my-3">
+<div class="p-3">
+  <h1 class="create-event-title" mat-dialog-title>Update d'un Exercise Template</h1>
+  <hr>
+  <form [formGroup]="newExerciseTemplate" (ngSubmit)="onClickSubmit()">
 
-  </div>
-  <div class="col-md-9 my-3">
-    <h1 class="create-event-title" mat-dialog-title>Création d'un Exercise Template</h1>
-    <mat-divider></mat-divider>
-    <form [formGroup]="newExerciseTemplate" (ngSubmit)="onClickSubmit()">
-      <div mat-dialog-content>
-        <div class="create-event-grid">
-          <div class="form-field-name-event">
-            <mat-form-field appearance="fill">
-              <mat-label>Nom de l'Exercise_template</mat-label>
-              <input matInput name="name" placeholder="Nom de l'exercise_template" formControlName="name" required>
-            </mat-form-field>
-          </div>
-          <div class="form-field-name-event">
-            <mat-form-field appearance="fill">
-              <mat-label>Description de l'exercice</mat-label>
-              <textarea formControlName="description" class="textarea-description" matInput
-                        name="description" placeholder="Ex. L'obejectif est ..."></textarea>
-            </mat-form-field>
-          </div>
-        </div>
-        <mat-divider></mat-divider>
-        <!-- TODO: mettre l'ide ici -->
-        <mat-form-field appearance="fill">
-          <mat-label>Code</mat-label>
-          <textarea formControlName="code" class="textarea-code" matInput
-                    name="code" placeholder="Ex. L'obejectif est ..."></textarea>
+    <div class="d-flex flex-row">
+
+      <div class="d-flex flex-column justify-content-center create__field ps-1 pe-5">
+        <h3>Entrer le nom de l'exercice</h3>
+        <mat-form-field appearance="fill" class="pb-5">
+          <mat-label>Nom de l'Exercise_template</mat-label>
+          <input matInput name="name" placeholder="Nom de l'exercise_template" formControlName="name" required>
         </mat-form-field>
-        <!-- -->
-        <mat-divider></mat-divider>
-        <div class="dialog-actions-create-event" mat-dialog-actions>
-          <div class="button-grid-create-event">
-            <div class="button-send">
-              <button class="button-send" mat-raised-button type="submit">Modifier</button>
-            </div>
-          </div>
-        </div>
+
+        <h3>Entrer la description de l'exercice</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Description de l'exercice</mat-label>
+          <textarea formControlName="description" class="textarea-description" matInput
+                    name="description" placeholder="Ex. L'obejectif est ..."></textarea>
+        </mat-form-field>
       </div>
-    </form>
-  </div>
-  <div class="col-md-9 my-3">
-  </div>
+      <div class="shadow">
+        <app-ide class="ide"></app-ide>
+      </div>
+
+      <div class="ps-5">
+        <h3>Selectionner un langage</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Langage</mat-label>
+          <mat-select [(value)]="languageSelected">
+            <mat-option *ngFor="let language of languages" [value]="language">
+              {{language.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <hr>
+    <button class="m-1" mat-raised-button (click)="onClickSubmit()">Update</button>
+  </form>
 </div>
