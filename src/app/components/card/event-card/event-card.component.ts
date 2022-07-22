@@ -32,21 +32,7 @@ export class EventCardComponent implements OnInit {
     this.updateData();
   }
 
-  async joinEvent(id: string) {
-    firstValueFrom(this._eventService.addParticipant(id, this._authService.getCurrentUserId())).then(() => this.event.isMember = true);
-  }
 
-  leaveEvent(id: string) {
-    firstValueFrom(this._eventService.removeParticipant(id, this._authService.getCurrentUserId())).then(() => {
-      this.event.isMember = false;
-      this.removeEventCard.emit(this.event);
-    });
-  }
-
-  async canJoin() {
-    // TODO: cette apelle crée une fuite de mémoire
-    await firstValueFrom(this._eventService.isMember(this.event.id)).then(isMember => this.event.isMember = isMember);
-  }
 
   private async getEvent() {
     this.event = await firstValueFrom(this._eventService.getEventById(this.event.id));
@@ -54,7 +40,6 @@ export class EventCardComponent implements OnInit {
 
   private updateData() {
     this.getEvent().then();
-    this.canJoin().then();
   }
 
   isEnd(): boolean {

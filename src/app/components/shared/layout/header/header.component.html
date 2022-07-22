@@ -16,6 +16,19 @@
       <li class="nav-item">
         <a class="nav-link disabled">Leaderboard</a>
       </li>
+      <li *ngIf="user?.userType == 'ADMIN'">
+        <div class="dropdown">
+          <button [matMenuTriggerFor]="menu" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
+                  mat-icon-button type="button">
+            <p>Administration</p>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="after">
+            <div>
+              <button (click)="goToCreateExerciseTemplate()" mat-menu-item>Exercise Template</button>
+            </div>
+          </mat-menu>
+        </div>
+      </li>
     </ul>
     <div fxFlex fxLayoutAlign="center center">
       <app-search-bar class="align-self-center"></app-search-bar>

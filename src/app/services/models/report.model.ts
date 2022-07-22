@@ -1,6 +1,7 @@
 import {User} from "./user.model";
 
 export class Report {
+  id: string;
   text: string;
   userReporter: User;
   reportedUser?: string;
@@ -9,4 +10,5 @@ export class Report {
   reportedEvent?: string;
   reportedExercise?: string;
   reportedComment?: string;
+  nbReport?: number;
 }

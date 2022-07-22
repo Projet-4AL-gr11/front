@@ -1,0 +1,32 @@
+.page-list-comment-report-title {
+  padding-left: 50px;
+  font-family: Roboto, serif;
+  color: #00643C;
+  font-weight: bold;
+  font-size: 46px;
+}
+.page-list-comment-report-filter {
+  width: 100%;
+}
+
+.page-list-comment-report-table {
+  width: 100%;
+}
+
+.column-text {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: justify;
+}
+
+.waz-75{
+  width: 115px;
+}
+
+
+
+.tab-list-comment-report.dropdown-toggle {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}

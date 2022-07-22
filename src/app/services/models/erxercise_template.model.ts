@@ -5,4 +5,5 @@ export class ExerciseTemplate {
   name: string;
   language: Language;
   description?: string;
+  code?: string;
 }

@@ -14,20 +14,22 @@ import {SearchBarComponent} from './layout/search-bar/search-bar.component';
 import {MatOptionModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { IdeComponent } from './ide/ide.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatBadgeModule,
-    FontAwesomeModule,
-    ConversationModule,
-    FlexModule,
-    MatOptionModule,
-    MatAutocompleteModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatButtonModule,
+        MatBadgeModule,
+        FontAwesomeModule,
+        ConversationModule,
+        FlexModule,
+        MatOptionModule,
+        MatAutocompleteModule,
+        MatMenuModule,
+    ],
   declarations: [
     HeaderComponent,
     FooterComponent,
