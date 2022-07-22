@@ -16,7 +16,7 @@ import {Title} from "@angular/platform-browser";
 })
 export class UpdateExerciseTemplateComponent implements OnInit {
 
-  exerciseTemplate: ExerciseTemplate;
+  exerciseTemplate: ExerciseTemplate = new ExerciseTemplate();
   languages: Language[];
   newExerciseTemplate: FormGroup;
 
@@ -32,12 +32,13 @@ export class UpdateExerciseTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
-      this.getExerciseTemplate(params["id"]).then(() =>
-        this._titleService.setTitle(this.exerciseTemplate.name + " - " + environment.name)
+      this.getExerciseTemplate(params["id"]).then(() => {
+          this._titleService.setTitle(this.exerciseTemplate.name + " - " + environment.name)
+        }
       );
     });
-    this.initializeFormGroup();
     this.getAllLanguage();
+    this.initializeFormGroup();
   }
 
   private getAllLanguage() {
@@ -63,19 +64,14 @@ export class UpdateExerciseTemplateComponent implements OnInit {
       description: new FormControl('', [
         Validators.required
       ]),
-      languages: new FormControl('', [
+      language: new FormControl('', [
         Validators.required
       ]),
       code: new FormControl('', [
         Validators.required
       ])
     })
-    this.newExerciseTemplate.patchValue({
-      name: this.exerciseTemplate.name,
-      code: this.exerciseTemplate.code,
-      description: this.exerciseTemplate.description,
-      language: this.exerciseTemplate.language,
-    })
+
   }
 
   onClickSubmit() {
@@ -106,7 +102,7 @@ export class UpdateExerciseTemplateComponent implements OnInit {
     this._exerciseService.getExerciseTemplateWithId(id).subscribe({
       next: exerciseTemplate => {
         this.exerciseTemplate = exerciseTemplate;
-        this.initializeFormGroup();
+        this.patchValue();
       },
       error: err => {
         if (!environment.production) {
@@ -117,6 +113,15 @@ export class UpdateExerciseTemplateComponent implements OnInit {
         });
         return;
       }
+    })
+  }
+
+  private patchValue() {
+    this.newExerciseTemplate.patchValue({
+      name: this.exerciseTemplate.name,
+      code: this.exerciseTemplate.code,
+      description: this.exerciseTemplate.description,
+      language: this.exerciseTemplate.language,
     })
   }
 }

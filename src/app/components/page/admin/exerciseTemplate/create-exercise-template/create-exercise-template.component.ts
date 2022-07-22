@@ -16,7 +16,7 @@ export class CreateExerciseTemplateComponent implements OnInit {
 
   languages: Language[];
   newExerciseTemplate: FormGroup;
-
+  languageSelected: Language;
   constructor(
     private _languageService: LanguageService,
     private _formBuilder: FormBuilder,
@@ -35,7 +35,8 @@ export class CreateExerciseTemplateComponent implements OnInit {
       next: languages => {
         this.languages = languages;
       },
-      error: err => {
+      error: err => {    this.initializeFormGroup();
+
         if (!environment.production) {
           console.log(err)
         }
@@ -53,8 +54,7 @@ export class CreateExerciseTemplateComponent implements OnInit {
       description: new FormControl('', [
         Validators.required
       ]),
-      languages: new FormControl('', [
-        Validators.required
+      languages: new FormControl(this.languageSelected, [
       ]),
       code: new FormControl('', [
         Validators.required
@@ -69,7 +69,8 @@ export class CreateExerciseTemplateComponent implements OnInit {
       });
       return;
     } else {
-      this._exerciseService.createExerciseTemplate(this.newExerciseTemplate).subscribe({
+
+      this._exerciseService.createExerciseTemplate(this.newExerciseTemplate, this.languageSelected).subscribe({
         next: () => {
           this._router.navigateByUrl("/admin/listExerciseTemplate")
         },
