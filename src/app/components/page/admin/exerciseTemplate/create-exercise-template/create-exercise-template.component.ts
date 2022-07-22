@@ -69,8 +69,13 @@ export class CreateExerciseTemplateComponent implements OnInit {
         duration: 3000
       });
       return;
+    } else if (this.languageSelected == undefined) {
+      this._snackBar.open('Veillez sélectionner un langage', 'Fermer', {
+        duration: 3000
+      });
+      return;
     } else if (!this.newExerciseTemplate?.value?.code?.includes("#@#@#@#@#@")) {
-      this._snackBar.open('Veillez inséré le flag #@#@#@#@#@ dans le code', 'Fermer', {
+      this._snackBar.open('Veillez insérer le flag #@#@#@#@#@ dans le code', 'Fermer', {
         duration: 3000
       });
       return;
