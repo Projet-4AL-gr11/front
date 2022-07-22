@@ -34,7 +34,8 @@ export class ReportListEventComponent implements OnInit {
     this._reportService.getRetortedEvent().subscribe({
       next: reports => {
         this.dataSource = new MatTableDataSource(reports);
-
+        this.dataSource.paginator = this.paginator;
+        this.sort !== null?this.dataSource.sort = this.sort: null;
       },
       error: err => {
         if (!environment.production) {
@@ -42,11 +43,6 @@ export class ReportListEventComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.sort !== null?this.dataSource.sort = this.sort: null;
   }
 
   applyFilter(event: Event) {

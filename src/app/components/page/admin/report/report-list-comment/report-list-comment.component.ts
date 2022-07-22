@@ -33,8 +33,10 @@ export class ReportListCommentComponent implements OnInit {
   private async updateData() {
     this._reportService.getReportedComments().subscribe({
       next: reports => {
+        console.log(reports)
         this.dataSource = new MatTableDataSource(reports);
-
+        this.dataSource.paginator = this.paginator;
+        this.sort !== null?this.dataSource.sort = this.sort: null;
       },
       error: err => {
         if (!environment.production) {
@@ -42,11 +44,6 @@ export class ReportListCommentComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.sort !== null?this.dataSource.sort = this.sort: null;
   }
 
   applyFilter(event: Event) {

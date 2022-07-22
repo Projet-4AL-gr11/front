@@ -34,6 +34,8 @@ export class ReportListExerciseComponent implements OnInit {
     this._reportService.getReportedExercise().subscribe({
       next: reports => {
         this.dataSource = new MatTableDataSource(reports);
+        this.dataSource.paginator = this.paginator;
+        this.sort !== null?this.dataSource.sort = this.sort: null;
       },
       error: err => {
         if (!environment.production) {
@@ -41,11 +43,6 @@ export class ReportListExerciseComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.sort !== null?this.dataSource.sort = this.sort: null;
   }
 
   applyFilter(event: Event) {

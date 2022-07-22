@@ -65,4 +65,28 @@ export class HeaderComponent implements OnInit, OnChanges {
   goToCreateExerciseTemplate() {
     this.router.navigateByUrl("/admin/listExerciseTemplate")
   }
+
+  goToCommentReport() {
+    this.router.navigateByUrl("/admin/listCommentReport")
+  }
+
+  goToEventReport() {
+    this.router.navigateByUrl("/admin/listEventReport")
+  }
+
+  goToExerciseReport() {
+    this.router.navigateByUrl("/admin/listExerciseReport")
+  }
+
+  goToGroupReport() {
+    this.router.navigateByUrl("/admin/listGroupReport")
+  }
+
+  goToPostsReport() {
+    this.router.navigateByUrl("/admin/listPostReport")
+  }
+
+  goToUserReport() {
+    this.router.navigateByUrl("/admin/listUserReport")
+  }
 }

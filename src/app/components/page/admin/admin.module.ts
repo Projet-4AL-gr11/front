@@ -21,6 +21,8 @@ import { ReportListCommentComponent } from './report/report-list-comment/report-
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { ReportListExerciseComponent } from './report/report-list-exercise/report-list-exercise.component';
+import {SharedModule} from "../../shared/shared.module";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ReportListExerciseComponent } from './report/report-list-exercise/repor
     AdminRoutingModule,
     MatIconModule,
     MatMenuModule,
+    SharedModule,
+    MatSelectModule,
   ],
   exports: [
     CreateExerciseTemplateComponent,
