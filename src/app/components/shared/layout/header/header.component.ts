@@ -12,7 +12,7 @@ import {FriendshipService} from "../../../../services/friendship/friendship.serv
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
   user: User;
   notificationCount: number = 0;
@@ -27,11 +27,11 @@ export class HeaderComponent implements OnInit, OnChanges {
   ) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
-    firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
-    firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
+  //   firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
+  //   firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
+  // }
 
   ngOnInit(): void {
     firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   async logout() {
     firstValueFrom(await this._authService.logout()).then();
     this.isConnected = false;
-    await this.router.navigateByUrl("/auth/login");
+    await this.router.navigateByUrl("");
   }
 
   goToHome() {

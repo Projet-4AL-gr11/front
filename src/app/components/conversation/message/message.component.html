@@ -10,8 +10,8 @@
     <div class="bg-light rounded-3 mx-2 p-2 w-75">
       <p class="m-0 text-break">{{message?.content}}</p>
       <hr class="my-1">
-      <span class="m-0 text-break date">{{message?.author?.username}} | </span>
-      <span class="m-0 text-break date">{{message?.createdAt | date:'MM/dd/yy, HH:mm'}}</span>
+      <span class="p-1 text-break date">{{message?.author?.username}} | </span>
+      <span class="p-1 text-break date">{{message?.createdAt | date:'MM/dd/yy, HH:mm'}}</span>
     </div>
   </div>
   <ng-template #currentUser>

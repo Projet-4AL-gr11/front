@@ -6,7 +6,7 @@ import {environment} from "../../../../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {ExerciseService} from "../../../../../services/exercise/exercise.service";
-import {IdeComponent} from "../../../../shared/ide/ide.component";
+import {AdminIdeComponent} from "../../../../shared/admin-ide/admin-ide.component";
 
 @Component({
   selector: 'app-create-exercise-template',
@@ -15,7 +15,7 @@ import {IdeComponent} from "../../../../shared/ide/ide.component";
 })
 export class CreateExerciseTemplateComponent implements OnInit {
 
-  @ViewChild(IdeComponent) private editor: IdeComponent;
+  @ViewChild(AdminIdeComponent) private editor: AdminIdeComponent;
 
   languages: Language[];
   newExerciseTemplate: FormGroup;

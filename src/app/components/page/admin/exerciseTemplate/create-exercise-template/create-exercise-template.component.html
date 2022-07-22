@@ -3,24 +3,26 @@
   <hr>
   <form [formGroup]="newExerciseTemplate" (ngSubmit)="onClickSubmit()">
 
-    <div class="d-flex flex-row">
+    <div class="template__body">
 
       <div class="d-flex flex-column justify-content-center create__field ps-1 pe-5">
+
         <h3>Entrer le nom de l'exercice</h3>
+
         <mat-form-field appearance="fill" class="pb-5">
           <mat-label>Nom de l'Exercise_template</mat-label>
           <input matInput name="name" placeholder="Nom de l'exercise_template" formControlName="name" required>
         </mat-form-field>
 
         <h3>Entrer la description de l'exercice</h3>
+
         <mat-form-field appearance="fill">
           <mat-label>Description de l'exercice</mat-label>
-          <textarea formControlName="description" class="textarea-description" matInput
-                    name="description" placeholder="Ex. L'obejectif est ..."></textarea>
+          <textarea formControlName="description" class="textarea-description" matInput name="description" placeholder="Ex. L'obejectif est ..."></textarea>
         </mat-form-field>
       </div>
       <div class="shadow">
-        <app-ide class="ide"></app-ide>
+        <app-admin-ide class="ide"></app-admin-ide>
       </div>
 
       <div class="ps-5">

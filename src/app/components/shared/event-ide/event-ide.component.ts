@@ -3,11 +3,11 @@ import * as ace from "ace-builds";
 import {ExecuteService} from "../../../services/execute/execute.service";
 
 @Component({
-  selector: 'app-ide',
-  templateUrl: './ide.component.html',
-  styleUrls: ['./ide.component.css']
+  selector: 'app-event-ide',
+  templateUrl: './event-ide.component.html',
+  styleUrls: ['./event-ide.component.css']
 })
-export class IdeComponent implements OnInit {
+export class EventIdeComponent implements OnInit {
 
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;

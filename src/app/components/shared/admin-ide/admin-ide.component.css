@@ -1,0 +1,27 @@
+*{margin: 0;}
+
+#editor {
+  height: 350px;
+  border-radius: 5px;
+}
+
+.button-container {
+  text-align: right;
+  padding: 4px;
+}
+
+.btn {
+  background: #2e67c9;
+  color: white;
+  border-radius: 10px;
+}
+
+.output {
+  background-color: lightgrey;
+  padding: 4px;
+  border-radius: 5px;
+  border: 2px solid gray;
+  min-height: 100px;
+  resize: none;
+}
+

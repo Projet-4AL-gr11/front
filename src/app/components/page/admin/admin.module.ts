@@ -21,6 +21,7 @@ import { ReportListCommentComponent } from './report/report-list-comment/report-
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { ReportListExerciseComponent } from './report/report-list-exercise/report-list-exercise.component';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -34,22 +35,23 @@ import { ReportListExerciseComponent } from './report/report-list-exercise/repor
     ReportListCommentComponent,
     ReportListExerciseComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    //
-    AdminRoutingModule,
-    MatIconModule,
-    MatMenuModule,
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        //
+        AdminRoutingModule,
+        MatIconModule,
+        MatMenuModule,
+        SharedModule,
+    ],
   exports: [
     CreateExerciseTemplateComponent,
     UpdateExerciseTemplateComponent,

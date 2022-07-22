@@ -1,0 +1,17 @@
+<div class="card__profile border rounded-3 m-3">
+  <h3>{{user?.username}}</h3>
+  <div class="card__body border">
+    <div class="card__picture ">
+      <img [src]="(user?.profilePicture?.id | imageUrl) | async"
+           class="rounded-circle"
+           height="50"
+           style="object-fit: cover"
+           width="50">
+    </div>
+    <div class="card__info test ">
+      <div class="mt-2 ms-2">Posts : </div>
+      <div class="mb-2 ms-2">Amis : </div>
+    </div>
+
+  </div>
+</div>

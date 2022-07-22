@@ -1,78 +1,49 @@
-.code__page {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 100vh;
-  background-color: lightslategray;
+*{margin: 0;}
+
+.header {
+  background: #57a958;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 4px;
+  font-family: sans-serif;
 }
 
-.code__language {
-  border: solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.control-panel {
+  background: lightgray;
+  text-align: right;
+  padding: 4px;
+  font-family: sans-serif;
 }
 
-.code__card {
-  display: flex;
+.languages {
+  background: white;
+  border: 1px solid gray;
 }
 
-.card {
-  width: 350px;
-  height: 150px;
-  background-color: #fff;
-  background: linear-gradient(#f8f8f8, #fff);
-  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
-  border-radius: 6px;
-  overflow: hidden;
-  position: relative;
-  margin: 1.5rem;
-}
-
-.card .additional {
-  position: absolute;
-  width: 100px;
-  height: 100%;
-  background: linear-gradient(midnightblue, lightblue);
-  transition: width 0.4s;
-  overflow: hidden;
-  z-index: 2;
-}
-
-.card:hover .additional {
-  width: 100%;
-  border-radius: 0 5px 5px 0;
-}
-
-.card .additional .user-card {
-  width: 150px;
-  height: 100%;
-  position: relative;
-  float: left;
-}
-
-.card .additional .more-info {
-  width: 200px;
-  float: left;
-  position: absolute;
-  left: 100px;
-  height: 100%;
-  color: #fff;
-  margin-bottom: 0;
-  padding: 1rem;
-  text-align: center;
+#editor {
+  height: 400px;
 
 }
 
-.card .general {
-  width: 300px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  box-sizing: border-box;
-  padding: 1rem;
-  text-align: center;
+
+.button-container {
+  text-align: right;
+  padding: 4px;
 }
 
+.btn {
+  background: #2e67c9;
+  color: white;
+  width: 5%;
+  border-radius: 10px;
+}
+
+.output {
+  padding: 4px;
+  border: 2px solid gray;
+  min-height: 100px;
+  width: 99%;
+  resize: none;
+}

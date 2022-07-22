@@ -1,0 +1,29 @@
+.card__profile {
+  height: 200px;
+}
+
+.card__body {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  border-radius: 50px;
+  margin: 20px;
+}
+
+.card__picture {
+  margin: auto;
+}
+
+.card__info {
+  display: grid;
+  margin-right: auto;
+  width: 100%;
+
+}
+
+.test{
+}
+
+h3 {
+  text-align: center;
+  padding: 1rem;
+}
