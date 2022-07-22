@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ExerciseService} from "../../../services/exercise/exercise.service";
 import * as ace from "ace-builds";
 import {ExecuteService} from "../../../services/execute/execute.service";
 
@@ -12,22 +11,13 @@ export class IdeComponent implements OnInit {
 
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;
-  foo: string = "";
+
+  input: string;
   aceEditor;
+  language: string;
 
-  selectLanguage;
-  languages = [
-    {
-      name: 'Python',
-      value: 'py'
-    },
-    {
-      name: 'JavaScript',
-      value: 'js'
-    },
-  ];
 
-  constructor(private executeService: ExecuteService) { }
+  constructor() { }
 
   ngOnInit(): void {
 
@@ -38,28 +28,25 @@ export class IdeComponent implements OnInit {
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
     this.aceEditor.setTheme("ace/theme/monokai");
 
-    this.changeLanguage(event);
+    this.changeLanguage();
   }
 
-  changeLanguage(event: any) {
+  changeLanguage() {
     const editor = ace.edit(this.editor.nativeElement);
 
-
-    if(event.target.value == 'Python'){
-      this.selectLanguage = 'py'
+    if(this.language == 'Python'){
+      this.language  = 'py'
       editor.session.setMode("ace/mode/python");
     }
-    else if(event.target.value == 'JavaScript'){
-      this.selectLanguage = 'js'
+    else if(this.language  == 'JavaScript'){
+      this.language  = 'js'
       editor.session.setMode("ace/mode/javascript");
     }
 
   }
 
-  executeCode() {
-    this.executeService.runCode(this.aceEditor.getValue(), this.selectLanguage).subscribe(response => {
-       this.foo = response;
-    });
+  getCode(): string {
+    return this.aceEditor.getValue();
   }
 
 

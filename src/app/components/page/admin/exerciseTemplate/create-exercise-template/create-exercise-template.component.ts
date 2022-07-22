@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Language} from "../../../../../services/models/language.model";
 import {LanguageService} from "../../../../../services/language/language.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -6,6 +6,7 @@ import {environment} from "../../../../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {ExerciseService} from "../../../../../services/exercise/exercise.service";
+import {IdeComponent} from "../../../../shared/ide/ide.component";
 
 @Component({
   selector: 'app-create-exercise-template',
@@ -13,6 +14,8 @@ import {ExerciseService} from "../../../../../services/exercise/exercise.service
   styleUrls: ['./create-exercise-template.component.css']
 })
 export class CreateExerciseTemplateComponent implements OnInit {
+
+  @ViewChild(IdeComponent) private editor: IdeComponent;
 
   languages: Language[];
   newExerciseTemplate: FormGroup;
@@ -29,6 +32,7 @@ export class CreateExerciseTemplateComponent implements OnInit {
     this.initializeFormGroup();
     this.getAllLanguage();
   }
+
 
   private getAllLanguage() {
     this._languageService.getAllLanguage().subscribe({
@@ -86,4 +90,9 @@ export class CreateExerciseTemplateComponent implements OnInit {
       });
     }
   }
+
+  test() {
+    console.log(this.editor.getCode());
+  }
+
 }
