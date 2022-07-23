@@ -1,7 +1,7 @@
 <mat-card class="event-card-list">
   <div class="img-card-event">
     <a [routerLink]="['/event/' + event?.id]">
-      <img [src]=" event?.picture?.link | imageUrl:1360:906"
+      <img [src]=" (event?.picture?.id | imageUrl:1360:906) | async"
            alt=""
            class="rounded" style="object-fit: cover">
     </a>
@@ -34,14 +34,5 @@
         {{language.name}}
       </p>
     </div>
-  </div>
-  <div class="button-join" *ngIf="isEnd()">
-    <button (click)="this.joinEvent(event?.id)" *ngIf="!event.isMember" class="ml-auto button-join-event"
-            mat-raised-button>
-      Rejoindre
-    </button>
-    <button (click)="this.leaveEvent(event?.id)" *ngIf="event.isMember" class="ml-auto button-join-event"
-            mat-raised-button>Quitter
-    </button>
   </div>
 </mat-card>

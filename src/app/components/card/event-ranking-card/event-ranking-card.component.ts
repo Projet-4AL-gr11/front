@@ -8,8 +8,10 @@ import {EventRanking} from "../../../services/models/event_ranking.model";
 })
 export class EventRankingCardComponent implements OnInit {
 
-  @Input('eventRankings') eventRankings: EventRanking[];
-  constructor() { }
+  @Input() eventRankings: EventRanking[];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

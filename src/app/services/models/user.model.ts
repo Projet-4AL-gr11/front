@@ -15,6 +15,7 @@ export class User {
   email?: string;
   bio?: string;
   isBlocked: boolean;
+  hasBlocked: boolean;
   blocksCurrentUser: boolean;
   currentHashedRefreshToken: string;
   userType: UserType;

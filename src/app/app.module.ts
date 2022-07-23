@@ -1,6 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
 import {HomeModule} from "./components/page/home/home.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {LeaderboardModule} from "./components/page/leaderboard/leaderboard.module";
@@ -30,6 +30,8 @@ import {EventViewModule} from "./components/page/event-view/event-view.module";
 import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
+import {GroupViewModule} from "./components/page/group-view/group-view.module";
+import {AdminModule} from "./components/page/admin/admin.module";
 
 @NgModule({
   imports: [
@@ -37,6 +39,7 @@ import {ProfileModule} from "./components/page/profile/profile.module";
     HomeModule,
     AuthModule,
     SocialModule,
+    ProfileModule,
     CodeModule,
     LeaderboardModule,
     SharedModule,
@@ -61,8 +64,11 @@ import {ProfileModule} from "./components/page/profile/profile.module";
     EventViewModule,
     ConversationModule,
     ProfileModule,
+    GroupViewModule,
+    AdminModule,
     //
     AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,
@@ -75,11 +81,11 @@ import {ProfileModule} from "./components/page/profile/profile.module";
       multi: true
     }
   ],
-  exports: [
-  ],
+  exports: [],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

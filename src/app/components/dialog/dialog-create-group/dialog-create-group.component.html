@@ -9,7 +9,32 @@
           <input formControlName="name" matInput name="name"
                  placeholder="Nom du group" required>
         </mat-form-field>
-
+        <div class="form-field-update-profilePicture">
+          <p> Photo de Profil</p>
+          <div class="mr-2">
+            <a (click)="profilePictureInput.click()">
+              <img
+                [src]="profilePictureURL || '../../../../assets/images/no-image.png'"
+                alt="" class="rounded-circle"
+                height="150px"
+                style="object-fit: cover"
+                width="150px">
+              <input #profilePictureInput (change)="onProfilePictureSelected()" formControlName="profilePicture" hidden
+                     id="profilePicture" type="file">
+            </a>
+          </div>
+        </div>
+        <mat-divider class="mat-divider-1"></mat-divider>
+        <div class="form-field-update-bannerPicture">
+          <p> Photo de Bannière</p>
+          <a (click)="profileBannerInput.click()">
+            <img [src]="bannerPictureURL || '../../../../assets/images/no-image.png'" alt=""
+                 class="rounded"
+                 height="300px" style="object-fit: cover" width="100%">
+            <input #profileBannerInput (change)="onBannerPictureSelected()" formControlName="bannerPicture" hidden
+                   id="bannerPicture" type="file">
+          </a>
+        </div>
       </div>
     </div>
   </div>

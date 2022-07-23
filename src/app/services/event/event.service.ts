@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Report} from "../models/report.model";
 import {Event} from "../models/event.model";
@@ -6,18 +6,20 @@ import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {AuthService} from "../auth/auth.service";
 import {User} from "../models/user.model";
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {Group} from "../models/group.model";
 import {MediaService} from "../media/media.service";
+import {CreateEventDto} from "../models/dto/create_event.dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private mediaService: MediaService) {
+  }
 
- // Get
+  // Get
   getEventById(id: string): Observable<Event> {
     return this.http.get<Event>(`${environment.apiBaseUrl}/event/${id}`)
   }
@@ -58,20 +60,35 @@ export class EventService {
     return this.http.get<boolean>(`${environment.apiBaseUrl}/event/isMember/${eventId}`)
   }
 
-  // TODO: Mettre en place l'ajout d'exercise
-  createEvent(newEvent: FormGroup, group: Group): Observable<any> {
-    let formData = new FormData();
-    formData.append("name", newEvent.value.name);
-    formData.append("description", newEvent.value.description);
-    formData.append("startDate", newEvent.value.startDate.toString());
-    formData.append("endDate", newEvent.value.endDate.toString());
-    formData.append("participantsLimit", newEvent.value.participantsLimit.toString());
-    formData.append("exerciseTemplateForm", newEvent.value.exerciseTemplates.toString())
-    formData.append("languages", newEvent.value.languages)
+  async createEvent(newEvent: FormGroup, exerciseTemplates: FormControl, group: Group, picture?: File) {
+    const formData = new CreateEventDto();
+    formData.name = newEvent.value.name;
+    formData.description = newEvent.value.description;
+    formData.startDate = newEvent.value.startDate;
+    formData.endDate = newEvent.value.endDate;
+    formData.exerciseTemplates = exerciseTemplates.value;
     if (group) {
-      formData.append("group", group.id);
+      formData.group = group;
     }
-    return this.http.post<Event>(`${environment.apiBaseUrl}/event/`, formData);
+    return this.http.post<Event>(`${environment.apiBaseUrl}/event/`, formData).subscribe({
+      next: createdEvent => {
+        this.mediaService.saveEventPicture(createdEvent.id, picture).subscribe({
+          next: () => {
+          },
+          error: err => {
+            if (!environment.production) {
+              console.log(err)
+            }
+          }
+        });
+        return createdEvent;
+      },
+      error: err => {
+        if (!environment.production) {
+          console.log(err)
+        }
+      }
+    });
   }
 
   // TODO: Mettre en place l'ajout d'exercise
@@ -99,8 +116,7 @@ export class EventService {
   }
 
   addParticipant(eventId: string, userId: string) {
-    console.log(userId)
-    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null )
+    return this.http.post(`${environment.apiBaseUrl}/event/participant/${eventId}/${userId}`, null)
   }
 
   removeParticipant(eventId: string, userId: string) {
@@ -119,4 +135,7 @@ export class EventService {
     return this.http.post<any>(`${environment.apiBaseUrl}/report/event`, report)
   }
 
+  getEventWithGroupId(id: string, limitEvent: number, offsetEvent: number) {
+    return this.http.get<Event[]>(`${environment.apiBaseUrl}/event/group/${id}/${offsetEvent}/${limitEvent}`)
+  }
 }

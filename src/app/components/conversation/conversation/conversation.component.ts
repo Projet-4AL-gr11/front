@@ -6,8 +6,7 @@ import {User} from "../../../services/models/user.model";
 import {AuthService} from "../../../services/auth/auth.service";
 import {ConversationBoxService} from "../../../services/conversation-box/conversation-box.service";
 import {ConversationService} from "../../../services/conversation/conversation.service";
-import {MatDialog} from "@angular/material/dialog";
-import {combineLatest, firstValueFrom, map, Observable, startWith} from "rxjs";
+import {combineLatest, map, Observable, startWith} from "rxjs";
 import {FormControl, Validators} from "@angular/forms";
 
 @Component({
@@ -29,10 +28,10 @@ export class ConversationComponent implements OnInit {
   private scroll: any;
   tchatMessage: FormControl;
 
-  messages: Observable<Message[]> = combineLatest([ this.conversationService.getMessages(), this.conversationService.getAddedMessage().pipe(startWith(null))]).pipe(
+  messages: Observable<Message[]> = combineLatest([this.conversationService.getMessages(), this.conversationService.getAddedMessage().pipe(startWith(null))]).pipe(
     map(([messages, messagesAdded]) => {
       if (messagesAdded && messagesAdded.conversation.id == this.conversation.id) {
-        messages = messages.concat(messagesAdded)
+        messages.push(messagesAdded)
       }
       messages = messages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
       return messages;
@@ -49,6 +48,7 @@ export class ConversationComponent implements OnInit {
     this.conversationService.leaveConversation(this.conversation)
 
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.conversationService.leaveConversation(changes['conversation'].previousValue);
     if (this.conversation) {
@@ -59,7 +59,7 @@ export class ConversationComponent implements OnInit {
   ngOnInit(): void {
     this.tchatMessage = new FormControl(null, [Validators.required])
     this.conversation = this.conversationBoxService.selectedConversation;
-      this.conversationService.joinConversation(this.conversation);
+    this.conversationService.joinConversation(this.conversation);
   }
 
   ngAfterViewInit() {
@@ -69,10 +69,15 @@ export class ConversationComponent implements OnInit {
 
 
   getConversationName(): string {
-    if (this.conversation?.group) {
-      return this.conversation?.group?.name;
-    } else if (this.conversation?.friendship) {
-      return this.conversation?.friendship?.friendOne?.username !== this.user?.username ? this.conversation?.friendship?.friendOne?.username : this.conversation?.friendship?.friendTwo?.username;
+    if (this.conversation.group) {
+      return this.conversation.group.name;
+    } else if (this.conversation.friendship) {
+      if (this.conversation.friendship.friendOne.username) {
+        return this.conversation.friendship.friendOne.username;
+      }
+      return this.conversation.friendship.friendTwo.username;
+    } else if (this.conversation.users) {
+      return this.conversation.users[0].username + " et autres..."
     }
     return undefined;
   }
@@ -82,8 +87,20 @@ export class ConversationComponent implements OnInit {
   }
 
   sendMessage() {
-    this.conversationService.sendMessage({content: this.tchatMessage.value, conversation: this.conversation });
+    this.conversationService.sendMessage({content: this.tchatMessage.value, conversation: this.conversation});
     this.tchatMessage.reset()
+    this.scrollToBottom()
+  }
+
+  private scrollToBottom() {
+    this.isNearBottom = this.isUserNearBottom();
+    if (this.isNearBottom) {
+      this.scroll.scroll({
+        top: this.scroll.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   }
 
   private isUserNearBottom(): boolean {

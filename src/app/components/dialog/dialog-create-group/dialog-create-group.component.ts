@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../../services/models/user.model";
 import {GroupService} from "../../../services/group/group.service";
-import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-dialog-create-group',
@@ -13,28 +12,31 @@ import {firstValueFrom} from "rxjs";
 export class DialogCreateGroupComponent implements OnInit {
 
   formData: FormGroup;
-  picture: File;
-  pictureURL: string;
+  profilePicture: any;
+  bannerPicture: any;
+  profilePictureURL: any;
+  bannerPictureURL: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreateGroupComponent>,
     private _formBuilder: FormBuilder,
     private _groupService: GroupService,
     @Inject(MAT_DIALOG_DATA) public data: { user: User }
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initializeFormGroup();
   }
 
-  onClickSubmit() {
+  onClickSubmit = async () => {
     if (this.formData.valid) {
-      firstValueFrom(this._groupService.createGroup(this.data.user, this.formData)).then(()=> this.dialogRef.close())
+      await this._groupService.createGroup(this.data.user, this.formData, this.profilePicture, this.bannerPicture).then(() => this.dialogRef.close())
     }
-  }
+  };
 
-  onPictureSelected() {
-    const inputNode: any = document.querySelector('#picture');
+  onProfilePictureSelected() {
+    const inputNode: any = document.querySelector('#profilePicture');
     if (typeof (FileReader) !== 'undefined') {
 
       const reader = new FileReader();
@@ -46,8 +48,28 @@ export class DialogCreateGroupComponent implements OnInit {
           return;
         }
         if (typeof file === "string") {
-          this.pictureURL = file;
-          this.picture = inputNode.files[0];
+          this.profilePictureURL = file;
+          this.profilePicture = inputNode.files[0];
+        }
+      };
+    }
+  }
+
+  onBannerPictureSelected() {
+    const inputNode: any = document.querySelector('#bannerPicture');
+    if (typeof (FileReader) !== 'undefined') {
+
+      const reader = new FileReader();
+      reader.readAsDataURL(inputNode.files[0]);
+      reader.onload = (e: any) => {
+        const file: string = e.target.result
+        if (file.match(/image\/*/) === null) {
+          console.log('invalid file input');
+          return;
+        }
+        if (typeof file === "string") {
+          this.bannerPictureURL = file;
+          this.bannerPicture = inputNode.files[0];
         }
       };
     }
@@ -60,9 +82,8 @@ export class DialogCreateGroupComponent implements OnInit {
         Validators.maxLength(30),
         Validators.minLength(2)
       ]),
+      profilePicture: new FormControl('', []),
+      bannerPicture: new FormControl('', [])
     });
-    this.formData.patchValue({
-      name: this.data.user
-    })
   }
 }

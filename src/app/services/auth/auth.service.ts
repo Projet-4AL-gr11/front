@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, timer} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {User} from "../models/user.model";
@@ -30,12 +30,12 @@ export class AuthService {
       await this.getCurrentUser();
     }
     if (this.getCurrentUserId() && this.userSubject) {
-       await this.getParticipations();
-       await this.getFriends();
-       await this.getReceivedFriendshipRequest();
-       await this.getReceivedGroupRequest();
-       await this.getSentFriendshipRequest();
-       await this.getGroup();
+      await this.getParticipations();
+      await this.getFriends();
+      await this.getReceivedFriendshipRequest();
+      await this.getReceivedGroupRequest();
+      await this.getSentFriendshipRequest();
+      await this.getGroup();
     }
   }
 
@@ -109,9 +109,8 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
+        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
@@ -124,20 +123,23 @@ export class AuthService {
       password
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id,{sameSite:"Lax",expires:3});
-        this.cookieService.set('Refresh', user.currentHashedRefreshToken,{sameSite:"Lax",expires:3});
-        this.cookieService.set('username', user.username,{sameSite:"Lax",expires:3});
+        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
+        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
       }));
   }
 
-  public logout(): Observable<unknown> {
+  async logout() {
     this.userSubject.next(null);
-    this.cookieService.getAll()
+    this.cookieService.delete('username', "/", environment.domain)
+    this.cookieService.delete('user', "/", environment.domain)
+    this.cookieService.delete('Refresh', "/", environment.domain)
+    this.cookieService.delete('Authentication', "/", environment.domain)
+    this.cookieService.deleteAll('/', environment.domain, false, "None")
     localStorage.clear()
-    return this.http.delete(`${environment.apiBaseUrl}/auth/logout`);
+    return this.http.post(`${environment.apiBaseUrl}/auth/logout`, null);
   }
 
   getGroup(): Observable<Group[]> {
@@ -169,5 +171,11 @@ export class AuthService {
 
   actual() {
     return this.http.get<User>(`${environment.apiBaseUrl}/auth/actual`);
+  }
+
+  refreshCookieUsername(username) {
+    this.cookieService.delete('username', '/');
+    this.cookieService.set('username', username, {sameSite: "None", path: "/"});
+
   }
 }

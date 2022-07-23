@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
 import {UserService} from "../../../services/user/user.service";
 import {PostService} from "../../../services/post/post.service";
@@ -10,8 +10,9 @@ import {DialogCreatePostComponent} from "../../dialog/dialog-create-post/dialog-
   templateUrl: './button-create-post.component.html',
   styleUrls: ['./button-create-post.component.css']
 })
-export class ButtonCreatePostComponent implements OnInit {
+export class ButtonCreatePostComponent {
 
+  @Output() postSend: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _authService: AuthService,
               private _userService: UserService,
@@ -19,11 +20,11 @@ export class ButtonCreatePostComponent implements OnInit {
               public dialogReport: MatDialog) {
   }
 
-  ngOnInit(): void {
-  }
-
   openPopup() {
-    this.dialogReport.open(DialogCreatePostComponent, {minWidth: "500px", minHeight: "121px", data: {}});
+    const dialog = this.dialogReport.open(DialogCreatePostComponent, {minWidth: "500px", minHeight: "121px", data: {}});
+    dialog.afterClosed().subscribe(() => {
+      this.postSend.emit()
+    })
   }
 
 }

@@ -1,6 +1,6 @@
 <div (click)="onConversationSelect()" class="conversation-card container " fxFlex fxLayout="row">
   <div fxFlex fxLayoutAlign="start center">
-    <img [src]="getPicture()?.link | imageUrl"
+    <img [src]="(getPicture()?.id | imageUrl) | async"
          alt=""
          class="rounded-circle mx-2" height="50" style="object-fit: cover" width="50">
     <div class="w-100" fxFlex fxLayout="row">

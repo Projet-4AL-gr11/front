@@ -35,7 +35,7 @@ export class DialogReportComponent implements OnInit {
   }
 
   onClickSubmit(formData) {
-    if (this.formData.valid){
+    if (this.formData.valid) {
       let newReport: Report = new Report();
       newReport.text = formData.text;
       if (this.data.reportType === ReportTypeEnum.USER) {

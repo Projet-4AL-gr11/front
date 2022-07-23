@@ -6,6 +6,12 @@
 .flex-1 {
   flex: 1;
 }
+.flex-2 {
+  flex: 2;
+}
+.rounded-semi-circle {
+  border-radius: 25px !important;
+}
 
 .main {
   min-height: 100vh;

@@ -6,8 +6,9 @@ import {Title} from "@angular/platform-browser";
 import {Event} from "../../../services/models/event.model";
 import {firstValueFrom} from "rxjs";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
-import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
+import {ExecutionService} from "../../../services/execution/execution.service";
 import {Exercise} from "../../../services/models/exercise.model";
+import {Leaderboard} from "../../../services/models/leaderboard.model";
 
 @Component({
   selector: 'app-page-event',
@@ -17,6 +18,7 @@ import {Exercise} from "../../../services/models/exercise.model";
 export class EventViewComponent implements OnInit {
 
   event: Event;
+  leaderboards: Leaderboard[] = [];
   result: string;
   timer = new Date();
   intervalId;
@@ -26,8 +28,9 @@ export class EventViewComponent implements OnInit {
               private route: ActivatedRoute,
               private _exerciseService: ExerciseService,
               private _titleService: Title,
-              private _leaderboardService: LeaderboardService,
-  ) { }
+              private _executionService: ExecutionService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -43,9 +46,9 @@ export class EventViewComponent implements OnInit {
     this.event = await firstValueFrom(this._eventService.getEventById(id));
     this.event.exercises = [];
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
-    await firstValueFrom(this._leaderboardService.getEventRanking(id)).then(eventRanking =>{
+    await firstValueFrom(this._executionService.getEventRanking(id)).then(eventRanking => {
       this.event.eventRanking = eventRanking;
-  })
+    })
     this.setExercise(this.event?.exercises[0]);
   }
 
@@ -59,8 +62,10 @@ export class EventViewComponent implements OnInit {
   }
 
   setExercise(exercise?: Exercise) {
-    if (exercise != undefined){
+    if (exercise != undefined) {
       this.currentExercise = exercise;
     }
   }
+
+
 }

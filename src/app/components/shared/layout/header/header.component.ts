@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {firstValueFrom, Observable} from "rxjs";
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {firstValueFrom} from "rxjs";
 import {Router} from "@angular/router";
 import {User} from "../../../../services/models/user.model";
 import {faBell} from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import {FriendshipService} from "../../../../services/friendship/friendship.serv
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
   user: User;
   notificationCount: number = 0;
@@ -27,29 +27,66 @@ export class HeaderComponent implements OnInit, OnChanges {
   ) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
-    firstValueFrom(this._groupService.getGroupRequest()).then(groupRequest => this.notificationCount += groupRequest.length);
-    firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
+  //   firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
+  //   firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
+  // }
 
   ngOnInit(): void {
     firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
-    firstValueFrom(this._groupService.getGroupRequest()).then(groupRequest => this.notificationCount += groupRequest.length);
+    firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
     firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
   }
 
-  logout() {
-    this._authService.logout();
+  async logout() {
+    firstValueFrom(await this._authService.logout()).then();
     this.isConnected = false;
-    this.router.navigateByUrl("/auth/login");
+    await this.router.navigateByUrl("");
   }
 
-  login() {
-    this.router.navigateByUrl("/auth/login");
+  goToHome() {
+    this.router.navigateByUrl("/timeline");
   }
 
-  subscribe() {
-    this.router.navigateByUrl("/auth/register");
+  goToCode() {
+    this.router.navigateByUrl("/code/select");
+  }
+
+  goToProfile() {
+
+    this.router.navigateByUrl("/profile/" + this.user?.id);
+  }
+
+  goToNotification() {
+    this.router.navigateByUrl("/notifications");
+  }
+
+  goToCreateExerciseTemplate() {
+    this.router.navigateByUrl("/admin/listExerciseTemplate")
+  }
+
+  goToCommentReport() {
+    this.router.navigateByUrl("/admin/listCommentReport")
+  }
+
+  goToEventReport() {
+    this.router.navigateByUrl("/admin/listEventReport")
+  }
+
+  goToExerciseReport() {
+    this.router.navigateByUrl("/admin/listExerciseReport")
+  }
+
+  goToGroupReport() {
+    this.router.navigateByUrl("/admin/listGroupReport")
+  }
+
+  goToPostsReport() {
+    this.router.navigateByUrl("/admin/listPostReport")
+  }
+
+  goToUserReport() {
+    this.router.navigateByUrl("/admin/listUserReport")
   }
 }

@@ -1,0 +1,149 @@
+<app-header class="w-100"></app-header>
+
+<div *ngIf="group" class="row ">
+  <div class="col-md-4 ">
+  </div>
+  <div class="col-md-5 my-2">
+    <div class="profil-user-scroll">
+      <div class="group-card-full">
+        <img [src]="(group.bannerPicture?.id | imageUrl:1360:906) | async" alt=""
+             class="rounded"
+             height="300px"
+             style="object-fit: cover" width="100%">
+        <div class="group-card-display">
+          <div class="group-card-div">
+            <div fxFlex fxLayoutAlign="row">
+              <div fxFlex fxLayoutAlign="row start center">
+                <div class="me-2">
+                  <img [src]="(group.picture?.id | imageUrl) | async"
+                       alt=""
+                       class="rounded-circle"
+                       height="75" style="object-fit: cover" width="75">
+                </div>
+                <div class="group-card-name">
+                  <p>{{group.name}}</p>
+                </div>
+              </div>
+              <div fxLayoutAlign="row center end">
+                <div *ngIf="!group.isAdmin && !group.isOwner" class="group-card-button">
+                  <button (click)="this.followOrganisation()" *ngIf="!group.isFollower"
+                          class="ml-auto button-join-event"
+                          mat-raised-button>
+                    <fa-icon [icon]="faUserPlus"></fa-icon>
+                    Suivre
+                  </button>
+                  <button (click)="this.unfollowOrganisation()" *ngIf="group.isFollower"
+                          class="ml-auto mat-button-event"
+                          mat-raised-button>Ne plus suivre
+                  </button>
+                </div>
+                <div class="dropdown" dropdown>
+                  <button aria-expanded="false" aria-haspopup="true" class="btn btn-link dropdown-toggle"
+                          data-toggle="dropdown"
+                          dropdownToggle type="button">
+                    <fa-icon [icon]="faEllipsisH"></fa-icon>
+                  </button>
+                  <div *dropdownMenu class="dropdown-menu-right dropdown-menu">
+                    <button (click)="showDialogueReport()" mat-menu-item>Signaler</button>
+                    <div *ngIf="group.isOwner || group.isAdmin">
+                      <button (click)="showDialogueUpdateOrganisation()" mat-menu-item>Modifier</button>
+                      <button (click)="showDialogueCreateEvent()" mat-menu-item>Créer un évènement</button>
+                    </div>
+                    <div *ngIf="!group.isOwner">
+                      <div *ngIf="!isMember">
+                        <button (click)="this.askJoin()" *ngIf="this.groupRequestStatus == statusEnum.NONE"
+                                class="ml-auto button-add-friend" mat-menu-item>
+                          <fa-icon [icon]="faUserPlus"></fa-icon>
+                          Rejoindre
+                        </button>
+                        <button (click)="this.cancelRequest()" *ngIf="this.groupRequestStatus === statusEnum.PENDING"
+                                class="ml-auto button-add-friend-disable"
+                                mat-menu-item><span>Requête envoyé</span>
+                        </button>
+                      </div>
+                      <div *ngIf="isMember">
+                        <button (click)="leaveGroup()" mat-menu-item>Quitter le groupe</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-event  ">
+        <mat-tab-group dynamicHeight mat-align-tabs="center">
+          <mat-tab label="Post">
+            <div #divContent style="height: 450px">
+              <virtual-scroller #scroll (vsEnd)="triggerGetMoreEvent($event)"
+                                [enableUnequalChildrenSizes]="true" [items]="group.posts"
+                                [parentScroll]="divContent" childHeight="1" class="w-100 h-100">
+                <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
+                  <app-post (postDelete)="removePost($event)" [post]="post"></app-post>
+                </div>
+              </virtual-scroller>
+            </div>
+            <div *ngIf="group?.posts?.length === 0">
+              <p style="text-align: center"> Cette group n'a pas de Posts</p>
+            </div>
+          </mat-tab>
+          <mat-tab label="Membres">
+            <div *ngIf="!group.isOwner && !group.isAdmin">
+              <mat-list-item *ngFor="let member of group.members"
+                             style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+                <app-user-card [user]="member.user"></app-user-card>
+              </mat-list-item>
+            </div>
+            <div *ngIf="group.isAdmin || group.isOwner" class="my-3">
+              <div *ngFor="let member of group.members;" class="display-list-user">
+                <app-user-management-group-card [isOwner]="group.isOwner"
+                                                [isAdmin]="group.isAdmin"
+                                                [group]="group"
+                                                [user]="member.user"
+                                                class="m-0"></app-user-management-group-card>
+              </div>
+            </div>
+            <div *ngIf="group.members?.length === 0">
+              <p style="text-align: center"> Cette group n'a pas de membre</p>
+            </div>
+          </mat-tab>
+          <mat-tab label="Événements">
+            <div *ngFor="let event of group.events;">
+              <div class="event-list-item m-2 flex">
+                <app-event-card [event]="event"></app-event-card>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Followers">
+            <div *ngFor="let user of group.followers;">
+              <div class="follower-list-item m-2 flex">
+                <app-user-card [user]="user"></app-user-card>
+              </div>
+            </div>
+            <div *ngIf="group.events?.length === 0">
+              <p style="text-align: center"> Ce group n'a pas de followers</p>
+            </div>
+          </mat-tab>
+          <div *ngIf="group.isAdmin || group.isOwner">
+            <mat-tab label="Gestion">
+              <div *ngIf="group?.groupRequests !== null">
+                <mat-list-item *ngFor="let groupRequest of group?.groupRequests"
+                               style="display: block; margin-left: auto; margin-right: auto; width: 90%;">
+                  <app-card-user-ask-join-group [groupRequest]="groupRequest"
+                                                (removeCardJoin)="removeGroupRequestAndJoin(groupRequest)"
+                                                (removeCardRefuse)="removeGroupRequestAndLeave(groupRequest)"></app-card-user-ask-join-group>
+                </mat-list-item>
+              </div>
+              <div *ngIf="group?.groupRequests?.length === 0">
+                <p style="text-align: center">Il n'y a pas de demande en cours</p>
+              </div>
+            </mat-tab>
+          </div>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+  </div>
+</div>

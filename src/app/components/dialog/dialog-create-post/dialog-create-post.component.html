@@ -1,8 +1,8 @@
-<div class="create-post-popup rounded-3" fxFlex fxLayout="column">
+<div class="create-post-popup rounded-3 p-3" fxFlex fxLayout="column">
   <div class="create-post-text m-2" fxFlex fxLayout="row">
     <div class="create-post-picture">
-      <img [alt]="(_authService.user|async)?.username"
-           [src]="(_authService.user|async)?.profilePicture?.link| imageUrl"
+      <img [alt]="this.user?.username"
+           [src]="(this.user?.profilePicture?.id| imageUrl) | async"
            class="rounded-circle profile-picture"
            height="50" style="object-fit: cover" width="50">
     </div>
@@ -20,7 +20,7 @@
         <app-post-share-card [post]="data.sharesPost"></app-post-share-card>
       </div>
       <div *ngIf="data?.sharedEvent" class="event-card">
-        <img [src]="data?.sharedEvent?.picture?.link|imageUrl: 1360:906" alt="" class="rounded"
+        <img [src]="(data?.sharedEvent?.picture?.id|imageUrl: 1360:906) | async" alt="" class="rounded"
              height="300px"
              style="object-fit: cover" width="100%">
         <div class="event-card-infos">
@@ -28,6 +28,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="groupSelected">
+    <p>Post pour le group : {{groupSelected.name}}</p>
   </div>
   <hr class="my-0">
   <div class="create-post-options m-2" fxFlex fxLayout="row">
@@ -39,12 +42,16 @@
       <fa-icon [icon]="faCalendarAlt" [matMenuTriggerFor]="eventPicker" class="mx-1" matSuffix size="2x"></fa-icon>
       <mat-menu #eventPicker>
         <p>Vos événements</p>
-        <button (click)="data.sharedEvent=event" *ngFor="let event of (_authService.user|async)?.eventsParticipation"
+        <button (click)="data.sharedEvent=event" *ngFor="let event of events"
                 mat-menu-item>{{event.name}}</button>
-        <div *ngIf="events?.length > 0">
-          <p class="text-center fw-bold">Autres événements</p>
-          <button (click)="data.sharedEvent=option" *ngFor="let option of events" mat-menu-item>{{option.name}}</button>
-        </div>
+      </mat-menu>
+    </div>
+    <div *ngIf="groups.length > 0">
+      <fa-icon [icon]="faGroup" [matMenuTriggerFor]="groupPicker" class="mx-1" matSuffix size="2x"></fa-icon>
+      <mat-menu #groupPicker>
+        <p>Vos Group</p>
+        <button (click)="groupSelected=group" *ngFor="let group of groups"
+                mat-menu-item>{{group.name}}</button>
       </mat-menu>
     </div>
     <div fxFlex fxLayoutAlign="end center">

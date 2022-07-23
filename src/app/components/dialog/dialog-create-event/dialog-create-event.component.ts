@@ -25,6 +25,8 @@ export class DialogCreateEventComponent implements OnInit {
   pictureURL: string;
   mediaURL: string;
   exerciseTemplates: ExerciseTemplate[]
+  exerciseTemplatesControl: FormControl;
+
   constructor(public dialogRef: MatDialogRef<DialogCreateEventComponent>,
               private _eventService: EventService,
               public _authService: AuthService,
@@ -62,16 +64,16 @@ export class DialogCreateEventComponent implements OnInit {
     }
   }
 
-  onClickSubmit() {
+  onSubmitEvent() {
     if (this.newEventForm.value.startDate > this.newEventForm.value.endDate) {
       this._snackBar.open('La date de début doit précéder la date de fin prévue', 'Fermer', {
         duration: 3000
       });
       return;
     }
-    if (this.newEventForm.valid){
-      firstValueFrom(
-        this._eventService.createEvent(this.newEventForm, this.data?.group))
+
+    if (this.newEventForm.valid && this.exerciseTemplatesControl.valid) {
+        this._eventService.createEvent(this.newEventForm,this.exerciseTemplatesControl, this.data?.group, this.picture)
         .then(() => this.dialogRef.close());
     }
 
@@ -93,7 +95,9 @@ export class DialogCreateEventComponent implements OnInit {
         this.newEventForm.value.user = user;
       });
     firstValueFrom(this._exerciseService.getAllExerciseTemplate()).then(
-      exerciseTemplates => this.exerciseTemplates = exerciseTemplates
+      exerciseTemplates => {
+        this.exerciseTemplates = exerciseTemplates
+      }
     )
   }
 
@@ -105,24 +109,16 @@ export class DialogCreateEventComponent implements OnInit {
         Validators.maxLength(30)
       ]),
       description: new FormControl('', []),
-      participationLimit: new FormControl('', [
-        Validators.required,
-        Validators.min(2),
-        Validators.max(1000),
-        Validators.pattern('^[0-9]*$')
-      ]),
-      languages: new FormControl('', [
-        Validators.required
-      ]),
+      picture: new FormControl(''),
       startDate: new FormControl('', [
         Validators.required
       ]),
       endDate: new FormControl('', [
         Validators.required
-      ]),
-      exerciseTemplateForm: new FormControl('',[
-        Validators.required
       ])
     })
+    this.exerciseTemplatesControl = new FormControl('', [
+      Validators.required,
+    ])
   }
 }

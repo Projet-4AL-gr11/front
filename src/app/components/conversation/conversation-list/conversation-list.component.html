@@ -1,7 +1,7 @@
 <div class="conversations-box col">
   <div (click)="onOpenConversations()" class="conversations-box-header w-100">
     <div fxFlex fxLayoutAlign="start center">
-      <h2 class="user-select-none m-2 mx-4 ">Messages</h2>
+      <h2 class="user-select-none p-2 mx-4 ">Messages</h2>
     </div>
     <div class="my-2 mx-4" fxLayoutAlign="row end center">
       <fa-icon (click)="openCreateGroupDialog()" *ngIf="conversationBoxService.opened" [icon]="faPlusCircle"

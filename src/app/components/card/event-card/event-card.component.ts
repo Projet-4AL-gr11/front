@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event} from "../../../services/models/event.model";
 import {faCheckCircle, faClock, faTags, faUser} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from "../../../services/user/user.service";
@@ -13,11 +13,13 @@ import {firstValueFrom} from "rxjs";
 })
 export class EventCardComponent implements OnInit {
 
-  @Input("event") event: Event = new Event();
+  @Input() event: Event = new Event();
   faCheckCircle = faCheckCircle;
   faUser = faUser;
   faClock = faClock;
   faTags = faTags;
+
+  @Output() removeEventCard: EventEmitter<Event> = new EventEmitter<Event>();
 
   constructor(
     private _userService: UserService,
@@ -30,18 +32,7 @@ export class EventCardComponent implements OnInit {
     this.updateData();
   }
 
-  async joinEvent(id: string) {
-    firstValueFrom(this._eventService.addParticipant(id, this._authService.getCurrentUserId())).then(() => this.event.isMember = true);
-  }
 
-  leaveEvent(id: string) {
-    firstValueFrom(this._eventService.removeParticipant(id, this._authService.getCurrentUserId())).then(() => this.event.isMember = false);
-  }
-
-  async canJoin() {
-    // TODO: cette apelle crée une fuite de mémoire
-    await firstValueFrom(this._eventService.isMember(this.event.id)).then(isMember => this.event.isMember = isMember);
-  }
 
   private async getEvent() {
     this.event = await firstValueFrom(this._eventService.getEventById(this.event.id));
@@ -49,7 +40,6 @@ export class EventCardComponent implements OnInit {
 
   private updateData() {
     this.getEvent().then();
-    this.canJoin().then();
   }
 
   isEnd(): boolean {

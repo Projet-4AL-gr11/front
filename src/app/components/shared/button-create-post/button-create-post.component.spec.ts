@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ButtonCreatePostComponent } from './button-create-post.component';
+import {ButtonCreatePostComponent} from './button-create-post.component';
 
 describe('ButtonCreatePostComponent', () => {
   let component: ButtonCreatePostComponent;
@@ -8,9 +8,9 @@ describe('ButtonCreatePostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonCreatePostComponent ]
+      declarations: [ButtonCreatePostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

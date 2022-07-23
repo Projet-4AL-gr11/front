@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PostCardComponent } from './post-card.component';
+import {PostCardComponent} from './post-card.component';
 
 describe('PostComponent', () => {
   let component: PostCardComponent;
@@ -8,9 +8,9 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostCardComponent ]
+      declarations: [PostCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
