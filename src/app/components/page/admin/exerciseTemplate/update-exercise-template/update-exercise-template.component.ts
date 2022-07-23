@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../../../../../environments/environment";
 import {ExerciseTemplate} from "../../../../../services/models/erxercise_template.model";
 import {Title} from "@angular/platform-browser";
-import {IdeComponent} from "../../../../shared/ide/ide.component";
+import {AdminIdeComponent} from "../../../../shared/admin-ide/admin-ide.component";
 
 @Component({
   selector: 'app-update-create-exercise-template',
@@ -17,7 +17,7 @@ import {IdeComponent} from "../../../../shared/ide/ide.component";
 })
 export class UpdateExerciseTemplateComponent implements OnInit {
 
-  @ViewChild(IdeComponent) private editor: IdeComponent;
+  @ViewChild(AdminIdeComponent) private editor: AdminIdeComponent;
 
   exerciseTemplate: ExerciseTemplate = new ExerciseTemplate();
   languages: Language[];
