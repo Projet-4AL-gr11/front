@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IdeComponent } from './ide.component';
+import { AdminIdeComponent } from './admin-ide.component';
 
-describe('IdeComponent', () => {
-  let component: IdeComponent;
-  let fixture: ComponentFixture<IdeComponent>;
+describe('AdminIdeComponent', () => {
+  let component: AdminIdeComponent;
+  let fixture: ComponentFixture<AdminIdeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IdeComponent ]
+      declarations: [ AdminIdeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IdeComponent);
+    fixture = TestBed.createComponent(AdminIdeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

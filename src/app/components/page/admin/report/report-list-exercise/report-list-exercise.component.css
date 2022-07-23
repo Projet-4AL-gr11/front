@@ -1,0 +1,31 @@
+.page-list-exercise-report-title {
+  padding-left: 50px;
+  font-family: Roboto, serif;
+  font-weight: bold;
+  font-size: 46px;
+}
+.page-list-exercise-report-filter {
+  width: 100%;
+}
+
+.page-list-exercise-report-table {
+  width: 100%;
+}
+
+.column-text {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: justify;
+}
+
+.waz-75{
+  width: 115px;
+}
+
+
+
+.tab-list-exercise-report.dropdown-toggle {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}

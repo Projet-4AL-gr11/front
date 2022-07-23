@@ -1,9 +1,8 @@
-<div class="code__page">
-  <app-header></app-header>
+<div class="select__page">
+  <app-header class=""></app-header>
   <div>
     <h2 class="ms-4 p-2">Choisis ton Language</h2>
-    <hr>
-    <div class="code__card">
+    <div class="select__card">
       <div class="card" (click)="goToSendBox()">
         <div class="additional">
           <div class="user-card">
@@ -24,26 +23,44 @@
           </div>
         </div>
       </div>
-      <div class="card">
+      <div *ngFor="let language of languages" id="language_card" class="card" (click)="goToSendBox()">
         <div class="additional">
           <div class="user-card">
             <div class="test__img">
             </div>
           </div>
           <div class="more-info">
-            <h1>Python</h1>
-            <p>test python</p>
+            <h1>{{language}}</h1>
+            <p>test {{language}}</p>
             <div class="coords">
             </div>
           </div>
         </div>
         <div class="general">
-          <h1>Python</h1>
+          <h1>{{language}}</h1>
           <div class="">
-            <p>test python</p>
+            <p>test {{language}}</p>
           </div>
         </div>
       </div>
+    </div>
+    <hr >
+    <div class="select__event">
+        <h2 class="ms-4 p-2 ">Evenement</h2>
+
+
+      <div class="event__grid">
+        <div *ngFor="let event of events" class=""[routerLink]="'/event/'+event.id" >
+          <mat-card class="card__event d-flex flex-column align-items-center ">
+           <h4>{{event.name}}</h4>
+            Temps restant : 00:45:00
+          </mat-card>
+        </div>
+      </div>
+
+
+
+      <button mat-flat-button color="primary" class="mt-1" (click)="openPopup()" >Créer un évement</button>
     </div>
   </div>
 </div>

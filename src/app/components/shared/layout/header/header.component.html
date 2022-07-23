@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+<nav class="navbar navbar-expand-lg navbar-light px-5">
   <a class="navbar-brand" >2FASTHAND</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
@@ -15,6 +15,25 @@
       </li>
       <li class="nav-item">
         <a class="nav-link disabled">Leaderboard</a>
+      </li>
+      <li *ngIf="user?.userType == 'ADMIN'">
+        <div class="dropdown">
+          <button [matMenuTriggerFor]="menu" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
+                  mat-icon-button type="button">
+            <p>Administration</p>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="after">
+            <div>
+              <button (click)="goToCreateExerciseTemplate()" mat-menu-item>Exercise Template</button>
+              <button (click)="goToCommentReport()" mat-menu-item>Signalements des commentaires</button>
+              <button (click)="goToEventReport()" mat-menu-item>Signalements des Evènements</button>
+              <button (click)="goToExerciseReport()" mat-menu-item>Signalements des Exercices</button>
+              <button (click)="goToGroupReport()" mat-menu-item>Signalements des Groups</button>
+              <button (click)="goToPostsReport()" mat-menu-item>Signalements des Posts</button>
+              <button (click)="goToUserReport()" mat-menu-item>Signalements des Utilisateurs</button>
+            </div>
+          </mat-menu>
+        </div>
       </li>
     </ul>
     <div fxFlex fxLayoutAlign="center center">
@@ -36,4 +55,4 @@
     </ul>
   </div>
 </nav>
-<app-conversation-box *ngIf="_authService.actual() != null"></app-conversation-box>
+<app-conversation-box></app-conversation-box>

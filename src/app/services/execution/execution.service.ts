@@ -7,18 +7,17 @@ import {EventRanking} from "../models/event_ranking.model";
 @Injectable({
   providedIn: 'root'
 })
-export class LeaderboardService {
+export class ExecutionService {
 
   constructor(private http: HttpClient) {
   }
 
-
   getLeaderboardWithExerciseId(id: string) {
-    return this.http.get<Leaderboard[]>(`${environment.apiBaseUrl}/leaderboard/leaderboardExercise/${id}`);
+    return this.http.get<Leaderboard[]>(`${environment.apiBaseUrl}/execution/leaderboardExercise/${id}`);
   }
 
   getEventRanking(id: string) {
-    return this.http.get<EventRanking[]>(`${environment.apiBaseUrl}/leaderboard/event/ranking/${id}`);
+    return this.http.get<EventRanking[]>(`${environment.apiBaseUrl}/execution/event/ranking/${id}`);
 
   }
 }

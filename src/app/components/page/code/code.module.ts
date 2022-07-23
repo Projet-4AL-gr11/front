@@ -6,6 +6,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {CardsModule} from "../../card/cards.module";
 import { LanguageSelectComponent } from './language-select/language-select.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { SandboxComponent } from './sandbox/sandbox.component';
     CommonModule,
     CodeRoutingModule,
     SharedModule,
+    MatButtonModule,
+    MatCardModule,
     CardsModule,
   ],
   exports: [

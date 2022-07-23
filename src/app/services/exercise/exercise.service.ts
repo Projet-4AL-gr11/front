@@ -4,6 +4,9 @@ import {Report} from "../models/report.model";
 import {environment} from "../../../environments/environment";
 import {Exercise} from "../models/exercise.model";
 import {ExerciseTemplate} from "../models/erxercise_template.model";
+import {FormGroup} from "@angular/forms";
+import {ExerciseTemplateDto} from "../models/dto/exercise_template.dto";
+import {Language} from "../models/language.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +37,30 @@ export class ExerciseService {
   }
 
 
+  createExerciseTemplate(newExerciseTemplate: FormGroup, language: Language) {
+    const formData = new ExerciseTemplateDto();
+    formData.name = newExerciseTemplate.value.name;
+    formData.description = newExerciseTemplate.value.description;
+    formData.language = language.id;
+    formData.code = newExerciseTemplate.value.code;
+    return this.http.post<any>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`, formData);
+  }
+
+  updateExerciseTemplate(exerciseTemplateId: string, updatedExerciseTemplate: FormGroup) {
+    const formData = new ExerciseTemplateDto();
+    formData.id = exerciseTemplateId;
+    formData.name = updatedExerciseTemplate.value.name;
+    formData.description = updatedExerciseTemplate.value.description;
+    formData.language = updatedExerciseTemplate.value.language.id;
+    formData.code = updatedExerciseTemplate.value.code;
+    return this.http.put<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`, formData);
+  }
+
+  getExerciseTemplateWithId(id: string) {
+    return this.http.get<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/${id}`);
+  }
+
+  removeExerciseTemplate(id: string) {
+    return this.http.delete<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/${id}`);
+  }
 }

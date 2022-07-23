@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {firstValueFrom} from "rxjs";
-import {LeaderboardService} from "../../../services/leaderboard/leaderboard.service";
+import {ExecutionService} from "../../../services/execution/execution.service";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import * as ace from "ace-builds";
 import {Leaderboard} from '../../../services/models/leaderboard.model';
@@ -20,7 +20,7 @@ export class EventExerciseCardComponent implements OnChanges, AfterViewInit {
   aceEditor: any;
 
   constructor(
-    private _leaderboardService: LeaderboardService,
+    private _executionService: ExecutionService,
     private _exerciseService: ExerciseService
   ) {
   }
@@ -30,7 +30,7 @@ export class EventExerciseCardComponent implements OnChanges, AfterViewInit {
       firstValueFrom(this._exerciseService.getExerciseTemplateWithExerciseId(this.exercise.id)).then(exerciseTemplate => {
         this.exerciseTemplate = exerciseTemplate
       });
-      firstValueFrom(this._leaderboardService.getLeaderboardWithExerciseId(this.exercise.id)).then(leaderboards => {
+      firstValueFrom(this._executionService.getLeaderboardWithExerciseId(this.exercise.id)).then(leaderboards => {
         this.leaderboards = leaderboards;
       })
     }

@@ -1,30 +1,12 @@
 .execution-code {
-  display: inline;
-  width: 900px;
-}
-
-.execution-code .event-second-part {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.execution-code .event-second-part .editor {
-  background-color: #000000;
-  height: 900px;
-  width: 700px;
-  border-radius: 5px;
-}
-
-.execution-code .event-second-part .editor .app-ace-editor {
-  border: 2px solid #f8f9fa;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  width: 100%;
-  height: 95%;
+  /*display: inline;*/
+  /*width: 900px;*/
 }
 
 
-.execution-code .event-second-part .editor .exercise-title {
+
+
+.exercise-title {
   border-radius: 5px;
   border: 1px solid white;
   position: center;
@@ -38,38 +20,28 @@
 }
 
 
-.execution-code .event-second-part .button-execute {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  background-color: #0168D9;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 10px 0;
-  width: 265px;
-  font-weight: 600;
-  font-size: 22px;
-  text-align: center;
-  line-height: 26px;
-  color: #FFFFFF;
+.exercise__main {
+  /*padding: 1rem;*/
 }
 
-.execution-code .exercise-description {
-  display: flex;
-  flex-direction: column;
+.exercise-description {
   border-radius: 5px;
+  background-color: lightgrey;
   width: 273px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  height: 900px;
-  padding: 20px;
+  height: 500px;
+  /*padding: 1rem;*/
 }
 
-.execution-code .exercise-description .p {
+.exercise-description > p {
   font-size: 16px;
   line-height: 18px;
   color: #000000;
   margin-bottom: 10px;
+  padding: 0.5rem;
 }
+
+
 
 .execution-code .event-tree-part {
   display: flex;

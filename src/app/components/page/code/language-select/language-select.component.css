@@ -1,19 +1,12 @@
-.code__page {
+.select__page {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 100vh;
-  background-color: lightslategray;
+  background-color: whitesmoke;
 }
 
-.code__language {
-  border: solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.code__card {
+.select__card {
   display: flex;
 }
 
@@ -59,9 +52,8 @@
   height: 100%;
   color: #fff;
   margin-bottom: 0;
-  padding: 1rem;
+  padding-top: 15px;
   text-align: center;
-
 }
 
 .card .general {
@@ -74,5 +66,23 @@
   box-sizing: border-box;
   padding: 1rem;
   text-align: center;
+}
+
+.select__event {
+  padding-left: 1.5%;
+}
+
+.card__event {
+  height: auto;
+  width: 300px;
+  padding: 5px;
+  margin-right: 30px;
+  margin-bottom: 15px;
+
+}
+
+.event__grid {
+  display: flex;
+  flex-wrap: wrap;
 }
 

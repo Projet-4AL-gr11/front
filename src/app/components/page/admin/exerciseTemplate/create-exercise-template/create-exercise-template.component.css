@@ -1,0 +1,10 @@
+
+.create__field {
+  width: 500px;
+}
+
+.template__body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+
+}

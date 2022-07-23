@@ -1,7 +1,22 @@
 <div class="">
   <app-header></app-header>
-  <div class="p-2 shadow">
-    <app-ide></app-ide>
+  <div class="ps-1 pe-1">
+    <div class="control-panel">
+      Select Language:
+      <!--  appeler les language (ng for)-->
+      <select  id="languages" class="languages" (change)="changeLanguage($event)">
+        <option value="default">----------</option>
+        <option *ngFor="let language of languages">{{language.name}}</option>
+      </select>
+    </div>
+
+    <div #editor class="editor" id="editor"></div>
+    <div class="button-container">
+      <button class="btn" (click)="executeCode()"> Run </button>
+    </div>
+
+    <div class="output shadow">{{result}}</div>
+
   </div>
 </div>
 

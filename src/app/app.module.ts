@@ -31,6 +31,7 @@ import {DialogModule} from "./components/dialog/dialog.module";
 import {ConversationModule} from "./components/conversation/conversation.module";
 import {ProfileModule} from "./components/page/profile/profile.module";
 import {GroupViewModule} from "./components/page/group-view/group-view.module";
+import {AdminModule} from "./components/page/admin/admin.module";
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import {GroupViewModule} from "./components/page/group-view/group-view.module";
     ConversationModule,
     ProfileModule,
     GroupViewModule,
+    AdminModule,
     //
     AppRoutingModule,
 
