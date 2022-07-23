@@ -8,9 +8,12 @@
 .page-list-exercise-template-filter {
   width: 100%;
 }
-
+.list-exercise-templates {
+  padding-bottom: 100px;
+}
 .page-list-exercise-template-table {
   width: 100%;
+
 }
 
 .column-text {

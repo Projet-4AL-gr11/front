@@ -16,7 +16,7 @@ import {GroupService} from "../../../../../services/group/group.service";
 export class ReportListGroupComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['userReporter', 'reportedGroup','owner', 'text','nbReport', 'createdAt', 'actions', 'open'];
+  displayedColumns: string[] = ['userReporter', 'reportedGroup', 'text','nbReport', 'createdAt', 'actions', 'open'];
   dataSource: MatTableDataSource<Report>
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,6 +35,8 @@ export class ReportListGroupComponent implements OnInit {
     this._reportService.getReportedGroups().subscribe({
       next: reports => {
         this.dataSource = new MatTableDataSource(reports);
+        this.dataSource.paginator = this.paginator;
+        this.sort !== null?this.dataSource.sort = this.sort: null;
       },
       error: err => {
         if (!environment.production) {
@@ -42,11 +44,6 @@ export class ReportListGroupComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.sort !== null?this.dataSource.sort = this.sort: null;
   }
 
   applyFilter(event: Event) {

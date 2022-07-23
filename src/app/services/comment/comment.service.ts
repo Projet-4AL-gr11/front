@@ -45,6 +45,6 @@ export class CommentService {
   }
 
   sendReport(id: string, report: Report) {
-    return this.http.put<any>(`${environment.apiBaseUrl}/report/comment`, report)
+    return this.http.post<any>(`${environment.apiBaseUrl}/report/comment`, report)
   }
 }

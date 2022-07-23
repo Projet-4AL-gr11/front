@@ -1,3 +1,5 @@
+<app-header class="w-100"></app-header>
+
 <div class="p-3">
   <h1 class="create-event-title" mat-dialog-title>Création d'un Exercise Template</h1>
   <hr>
@@ -27,12 +29,18 @@
 
       <div class="ps-5">
         <h3>Selectionner un langage</h3>
-        <!--TODO inserer la selection-->
+        <mat-form-field appearance="fill">
+          <mat-label>Langage</mat-label>
+          <mat-select [(value)]="languageSelected">
+            <mat-option *ngFor="let language of languages" [value]="language">
+              {{language.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
     </div>
     <hr>
-<!--    type="submit"-->
-    <button class="m-1" mat-raised-button (click)="test()">Créer</button>
+    <button class="m-1" mat-raised-button (click)="onClickSubmit()">Créer</button>
   </form>
 </div>

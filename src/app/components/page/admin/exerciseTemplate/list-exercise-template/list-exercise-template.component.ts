@@ -12,10 +12,10 @@ import {Router} from "@angular/router";
   templateUrl: './list-exercise-template.component.html',
   styleUrls: ['./list-exercise-template.component.css']
 })
-export class ListExerciseTemplateComponent implements OnInit, AfterViewInit {
+export class ListExerciseTemplateComponent implements OnInit {
 
   exerciseTemplates: ExerciseTemplate[];
-  displayedColumns: string[] = ['id','description', 'name','nbReport', 'actions', 'open'];
+  displayedColumns: string[] = ['id','name', 'description', 'createdAt', 'actions'];
   dataSource: MatTableDataSource<ExerciseTemplate>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -29,10 +29,13 @@ export class ListExerciseTemplateComponent implements OnInit, AfterViewInit {
     this.initializeData();
   }
 
-  private initializeData() {
-    this._exerciseService.getAllExerciseTemplate().subscribe({
+  private async initializeData() {
+    await this._exerciseService.getAllExerciseTemplate().subscribe({
       next: exerciseTemplates => {
         this.dataSource = new MatTableDataSource<ExerciseTemplate>(exerciseTemplates);
+        this.dataSource.paginator = this.paginator;
+        this.sort !== null ? this.dataSource.sort = this.sort : null;
+
       },
       error: err => {
         if (!environment.production) {
@@ -40,11 +43,6 @@ export class ListExerciseTemplateComponent implements OnInit, AfterViewInit {
         }
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.sort !== null?this.dataSource.sort = this.sort: null;
   }
 
   applyFilter(event: Event) {
@@ -58,8 +56,8 @@ export class ListExerciseTemplateComponent implements OnInit, AfterViewInit {
 
   removeExerciseTemplate(id) {
     this._exerciseService.removeExerciseTemplate(id).subscribe({
-      next: () => {
-        this.initializeData();
+      next: async () => {
+        await this.initializeData();
       },
       error: err => {
         if (!environment.production){
@@ -71,5 +69,9 @@ export class ListExerciseTemplateComponent implements OnInit, AfterViewInit {
 
   updateExerciseTemplate(id: string) {
     this._router.navigateByUrl("admin/updateExerciseTemplate/" + id).then();
+  }
+
+  gotToCreateExercisePage() {
+    this._router.navigateByUrl("admin/createExerciseTemplate")
   }
 }

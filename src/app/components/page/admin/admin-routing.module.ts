@@ -19,7 +19,7 @@ const routes: Routes = [
         component: CreateExerciseTemplateComponent
       },
       {
-        path: "exerciseTemplate/:id",
+        path: "updateExerciseTemplate/:id",
         component: UpdateExerciseTemplateComponent
       },
       {

@@ -19,7 +19,7 @@ export class CreateExerciseTemplateComponent implements OnInit {
 
   languages: Language[];
   newExerciseTemplate: FormGroup;
-
+  languageSelected: Language;
   constructor(
     private _languageService: LanguageService,
     private _formBuilder: FormBuilder,
@@ -39,7 +39,8 @@ export class CreateExerciseTemplateComponent implements OnInit {
       next: languages => {
         this.languages = languages;
       },
-      error: err => {
+      error: err => {    this.initializeFormGroup();
+
         if (!environment.production) {
           console.log(err)
         }
@@ -57,23 +58,34 @@ export class CreateExerciseTemplateComponent implements OnInit {
       description: new FormControl('', [
         Validators.required
       ]),
-      languages: new FormControl('', [
-        Validators.required
-      ]),
-      code: new FormControl('', [
-        Validators.required
-      ])
     })
   }
 
   onClickSubmit() {
+    this.newExerciseTemplate.value.code = this.editor.getCode();
+    this.newExerciseTemplate.value.language = this.languageSelected;
     if (!this.newExerciseTemplate.valid) {
       this._snackBar.open('Le schéma n\'est pas validé, veillez réessayer', 'Fermer', {
         duration: 3000
       });
       return;
+    } else if (this.languageSelected == undefined) {
+      this._snackBar.open('Veillez sélectionner un langage', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else if (!this.newExerciseTemplate?.value?.code?.includes("#@#@#@#@#@")) {
+      this._snackBar.open('Veillez insérer le flag #@#@#@#@#@ dans le code', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else if (!this.newExerciseTemplate?.value?.code?.includes("EverythingIsGood")) {
+      this._snackBar.open('Vous n\'avez pas mis le code de retour EverythingIsGood', 'Fermer', {
+        duration: 3000
+      });
+      return;
     } else {
-      this._exerciseService.createExerciseTemplate(this.newExerciseTemplate).subscribe({
+      this._exerciseService.createExerciseTemplate(this.newExerciseTemplate, this.languageSelected).subscribe({
         next: () => {
           this._router.navigateByUrl("/admin/listExerciseTemplate")
         },
@@ -88,10 +100,6 @@ export class CreateExerciseTemplateComponent implements OnInit {
         }
       });
     }
-  }
-
-  test() {
-    console.log(this.editor.getCode());
   }
 
 }

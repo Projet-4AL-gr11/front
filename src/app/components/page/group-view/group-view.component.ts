@@ -150,7 +150,7 @@ export class GroupViewComponent implements OnInit {
   showDialogueReport() {
     const dialogRef = this.dialogReport.open(DialogReportComponent, {
       width: '500px',
-      data: {id: this.user.id, reportType: ReportTypeEnum.GROUP}
+      data: {id: this.group.id, reportType: ReportTypeEnum.GROUP}
     });
 
     dialogRef.afterClosed().subscribe(() => {

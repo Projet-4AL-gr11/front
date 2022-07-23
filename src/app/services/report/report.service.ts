@@ -16,11 +16,11 @@ export class ReportService {
   }
 
   getReportedComments(): Observable<Report[]> {
-    return this.http.get<Report[]>(`${environment.apiBaseUrl}/report/comments`);
+    return this.http.get<Report[]>(`${environment.apiBaseUrl}/report/comments/`);
   }
 
   getRetortedEvent(): Observable<Report[]> {
-    return this.http.get<Report[]>(`${environment.apiBaseUrl}/report/events`);
+    return this.http.get<Report[]>(`${environment.apiBaseUrl}/report/events/`);
   }
 
   getReportedGroups(): Observable<Report[]> {
