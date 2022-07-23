@@ -1,25 +1,33 @@
-<app-header class="w-100"></app-header>
-
-<div>
+<div class="">
+  <app-header></app-header>
   <div class="row m-0">
+
     <div class="col-md-4">
+      <div class="profile__card d-none d-sm-block d-sm-block d-sm-none d-md-block">
+        <app-profile-card></app-profile-card>
+      </div>
       <app-button-create-post *ngIf="_authService.actual()" (postSend)="updatePost()"></app-button-create-post>
     </div>
-    <div *ngIf="posts?.length == 0" class="col-md-4">
-      <p style="padding-top: 100px">Il n'y a pas de post à afficher</p>
-    </div>
-    <div *ngIf="posts?.length > 0" class="col-md-4" style="height: 100vh; overflow-x: hidden; overflow-y: scroll">
 
-      <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)" [enableUnequalChildrenSizes]="true" [items]="posts"
-                        [parentScroll]="scroll.window" style="height: content-box">
+    <div *ngIf="posts?.length == 0" class="post__card col-md-4 pt-5">
+      <p>Il n'y a pas de post à afficher</p>
+    </div>
+    <div class="post__card col-md-4" >
+
+      <virtual-scroller #scroll (vsEnd)="triggerGetMore($event)"
+                        [enableUnequalChildrenSizes]="true"
+                        [items]="posts"
+                        [parentScroll]="scroll.window" >
         <div *ngFor="let post of scroll.viewPortItems" class="mt-3">
           <app-post (postDelete)="removePost($event)" [post]="post"></app-post>
         </div>
       </virtual-scroller>
 
     </div>
-    <div class="col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
+
+    <div class="group__card col-md-4 my-3 d-none d-sm-block d-sm-block d-sm-none d-md-block">
       <app-list-group-card></app-list-group-card>
     </div>
+
   </div>
 </div>

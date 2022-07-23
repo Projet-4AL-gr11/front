@@ -17,12 +17,11 @@ export class ExecuteService {
 
     const input = {
         execution_id: Date.now(),
-         language: selectLanguage,
-         code: code
+        language: selectLanguage,
+        code: code,
     };
     console.log(selectLanguage)
-    const response = this.http.post<any>(`${environment.apiBaseUrl}/execute`, input)
-    //  return this.http.post<any>(`${environment.apiBaseUrl}/exercise/exercise`, code)
+    const response = this.http.post<any>(`${environment.apiBaseUrl}/execution/sandbox`, input)
 
     return response.pipe(map(response => {
       console.log(response)

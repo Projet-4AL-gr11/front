@@ -21,6 +21,7 @@ import {FlexModule} from "@angular/flex-layout";
 import {GroupCardComponent} from './group-card/group-card.component';
 import {UserManagementGroupCardComponent} from './user-management-group-card/user-management-group-card.component';
 import {ListGroupCardComponent} from './list-group-card/list-group-card.component';
+import { ProfileCardComponent } from './profile-card/profile-card.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {ListGroupCardComponent} from './list-group-card/list-group-card.componen
     GroupCardComponent,
     UserManagementGroupCardComponent,
     ListGroupCardComponent,
+    ProfileCardComponent,
   ],
   imports: [
     CommonModule,
@@ -50,21 +52,22 @@ import {ListGroupCardComponent} from './list-group-card/list-group-card.componen
     FlexModule,
 
   ],
-  exports: [
-    EventCardComponent,
-    PostCardComponent,
-    PostShareCardComponent,
-    UserCardComponent,
-    EventRankingCardComponent,
-    EventExerciseCardComponent,
-    LeaderboardCardComponent,
-    CommentCardComponent,
-    GroupRequestCardComponent,
-    GroupCardComponent,
-    BsDropdownModule,
-    GroupCardComponent,
-    UserManagementGroupCardComponent,
-    ListGroupCardComponent
+    exports: [
+        EventCardComponent,
+        PostCardComponent,
+        PostShareCardComponent,
+        UserCardComponent,
+        EventRankingCardComponent,
+        EventExerciseCardComponent,
+        LeaderboardCardComponent,
+        CommentCardComponent,
+        GroupRequestCardComponent,
+        GroupCardComponent,
+        BsDropdownModule,
+        GroupCardComponent,
+        UserManagementGroupCardComponent,
+        ListGroupCardComponent,
+        ProfileCardComponent
 
     ]
 })

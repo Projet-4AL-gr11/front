@@ -8,6 +8,7 @@ import {firstValueFrom} from "rxjs";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {ExecutionService} from "../../../services/execution/execution.service";
 import {Exercise} from "../../../services/models/exercise.model";
+import {Leaderboard} from "../../../services/models/leaderboard.model";
 
 @Component({
   selector: 'app-page-event',
@@ -17,6 +18,7 @@ import {Exercise} from "../../../services/models/exercise.model";
 export class EventViewComponent implements OnInit {
 
   event: Event;
+  leaderboards: Leaderboard[] = [];
   result: string;
   timer = new Date();
   intervalId;
