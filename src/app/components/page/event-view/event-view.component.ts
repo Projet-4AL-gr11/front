@@ -9,6 +9,8 @@ import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {ExecutionService} from "../../../services/execution/execution.service";
 import {Exercise} from "../../../services/models/exercise.model";
 import {Leaderboard} from "../../../services/models/leaderboard.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-page-event',
@@ -24,10 +26,14 @@ export class EventViewComponent implements OnInit {
   intervalId;
   currentExercise: Exercise;
 
+  eventStarted: boolean = false;
+
   constructor(public _eventService: EventService,
               private route: ActivatedRoute,
+              private _snackBar: MatSnackBar,
               private _exerciseService: ExerciseService,
               private _titleService: Title,
+              private _authService: AuthService,
               private _executionService: ExecutionService,
   ) {
   }
@@ -38,18 +44,26 @@ export class EventViewComponent implements OnInit {
         this._titleService.setTitle(this.event.name + " - " + environment.name)
       );
     });
-    this.setTimer();
   }
 
 
   async updateEvent(id: string): Promise<void> {
     this.event = await firstValueFrom(this._eventService.getEventById(id));
     this.event.exercises = [];
+    await this._eventService.isMember(id).subscribe({
+      next: value => {
+        this.event.isMember = value;
+      },
+      error: err => {
+        if (environment.production) {
+          console.log(err)
+        }
+      }
+    })
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
     await firstValueFrom(this._executionService.getEventRanking(id)).then(eventRanking => {
       this.event.eventRanking = eventRanking;
     })
-    this.setExercise(this.event?.exercises[0]);
   }
 
   public setTimer() {
@@ -57,8 +71,6 @@ export class EventViewComponent implements OnInit {
     this.intervalId = setInterval(() => {
       this.timer = new Date(new Date(this.event?.endDate).getTime() - Date.now())
     }, 1000);
-
-
   }
 
   setExercise(exercise?: Exercise) {
@@ -68,4 +80,44 @@ export class EventViewComponent implements OnInit {
   }
 
 
+  startEvent() {
+    console.log(this.event)
+    if (!this.event?.exercises) {
+      this._snackBar.open('Une erreur c\'est produite lors de la récupération des exercises, réessayer plus tard', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else {
+      this.eventStarted = true;
+      this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
+        next: () => {
+          this.startExercise(this.event.exercises[0])
+        },
+        error: err => {
+          if (!environment.production) {
+            console.log(err)
+          }
+          this._snackBar.open('Il semble que vous avez déjà participer a l\'évènment', 'Fermer', {
+            duration: 3000
+          });
+        }
+      });
+    }
+  }
+
+  startExercise(exercise: Exercise) {
+    this.currentExercise = exercise;
+  }
+
+  nextExercise() {
+    if ((this.event.exercises.length -1 == this.event.exercises.indexOf(this.currentExercise))) {
+      this.eventStarted = false;
+      this._snackBar.open('Event terminé, regarder où vous êtes dans le classement :)', 'Fermer', {
+        duration: 3000
+      });
+      return;
+    } else {
+      this.currentExercise = this.event.exercises[this.event.exercises.indexOf(this.currentExercise) + 1];
+    }
+  }
 }

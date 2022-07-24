@@ -23,10 +23,20 @@ export class EventIdeComponent implements OnInit {
 
   }
   ngAfterViewInit(): void {
-    this.aceEditor = ace.edit(this.editor.nativeElement)
+    ace.config.set("fontSize", "14px");
+    ace.config.set(
+      "basePath",
+      "https://unpkg.com/ace-builds@1.4.12/src-noconflict"
+    );
+    this.aceEditor = ace.edit(this.editor.nativeElement);
+    this.aceEditor.session.setValue("<h1>Ace Editor works great in Angular!</h1>");
     ace.config.set("fontSize", "14px");
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
-    this.aceEditor.setTheme("ace/theme/monokai");
+    this.aceEditor.setTheme("ace/theme/twilight");
+    this.aceEditor.session.setMode("ace/mode/html");
+    this.aceEditor.on("change", () => {
+      console.log(this.aceEditor.getValue());
+    });
 
     this.changeLanguage();
   }
