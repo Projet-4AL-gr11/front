@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../../services/event/event.service";
@@ -9,6 +9,7 @@ import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {ExecutionService} from "../../../services/execution/execution.service";
 import {Exercise} from "../../../services/models/exercise.model";
 import {Leaderboard} from "../../../services/models/leaderboard.model";
+import {Chronometer} from "ngx-chronometer";
 
 @Component({
   selector: 'app-page-event',
@@ -19,10 +20,9 @@ export class EventViewComponent implements OnInit {
 
   event: Event;
   leaderboards: Leaderboard[] = [];
-  result: string;
-  timer = new Date();
-  intervalId;
+  timerState: boolean = true;
   currentExercise: Exercise;
+  chronometer: Chronometer = new Chronometer();
 
   constructor(public _eventService: EventService,
               private route: ActivatedRoute,
@@ -38,8 +38,8 @@ export class EventViewComponent implements OnInit {
         this._titleService.setTitle(this.event.name + " - " + environment.name)
       );
     });
-    this.setTimer();
   }
+
 
 
   async updateEvent(id: string): Promise<void> {
@@ -52,20 +52,15 @@ export class EventViewComponent implements OnInit {
     this.setExercise(this.event?.exercises[0]);
   }
 
-  public setTimer() {
-    // Using Basic Interval
-    this.intervalId = setInterval(() => {
-      this.timer = new Date(new Date(this.event?.endDate).getTime() - Date.now())
-    }, 1000);
-
-
-  }
-
   setExercise(exercise?: Exercise) {
     if (exercise != undefined) {
       this.currentExercise = exercise;
     }
   }
 
+  startTimer() {
+    this.chronometer.start();
+    this.timerState = false;
+  }
 
 }

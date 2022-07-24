@@ -1,3 +1,7 @@
 .navbar {
   background-color: rgba(221,218,215,0.5);
 }
+
+.header__admin {
+  padding-top: 2.5px;
+}
