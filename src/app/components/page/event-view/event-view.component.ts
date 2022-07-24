@@ -80,7 +80,7 @@ export class EventViewComponent implements OnInit {
       this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
         next: () => {
           this.startExercise(this.event.exercises[0])
-          console.log("CURRENT EXO")
+          console.log("CURRENT EXO" + this.currentExercise.exerciseTemplate.language.name)
           console.log(this.currentExercise)
         },
         error: err => {

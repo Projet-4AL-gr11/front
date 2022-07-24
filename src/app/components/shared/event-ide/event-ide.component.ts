@@ -35,11 +35,9 @@ export class EventIdeComponent implements OnInit {
     const editor = ace.edit(this.editor.nativeElement);
 
     if(language == 'Python'){
-      this.language  = language
       editor.session.setMode("ace/mode/python");
     }
-    else if(language  == 'JavaScript'){
-      this.language  = language
+    else if(language  == 'JS'){
       editor.session.setMode("ace/mode/javascript");
     }
 
