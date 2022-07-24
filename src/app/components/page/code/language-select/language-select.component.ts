@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {Event} from "../../../../services/models/event.model";
 import {EventService} from "../../../../services/event/event.service";
-import {DialogCreatePostComponent} from "../../../dialog/dialog-create-post/dialog-create-post.component";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogCreateEventComponent} from "../../../dialog/dialog-create-event/dialog-create-event.component";
 
@@ -21,10 +20,11 @@ export class LanguageSelectComponent implements OnInit {
     public router: Router,
     public eventService: EventService,
     public dialogReport: MatDialog,
-) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.eventService.getAllEvent().subscribe( res => {
+    this.eventService.getAllEvent().subscribe(res => {
       this.events = res;
     });
   }

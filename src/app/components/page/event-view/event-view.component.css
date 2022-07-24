@@ -21,6 +21,7 @@
   width: 100%;
   border-top: 3px solid #000000;
   height: 400px;
+  box-shadow: black;
 }
 
 .event__body {
@@ -29,6 +30,7 @@
   grid-template-columns: 0.5fr 3.5fr 1.5fr;
   gap: 1rem;
   padding: 1rem;
+  box-shadow: black;
 }
 
 .event__exercise {
@@ -37,4 +39,17 @@
 
 .event__ide {
 
+}
+
+.event-ranking-div {
+  padding: 1rem;
+}
+
+.start__button {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  width: 100%;
+  background: red;
+  color: white;
+  border-radius: 7px;
 }
