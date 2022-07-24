@@ -33,7 +33,7 @@
     "flex-layout": "^1.0.1",
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^8.0.0",
-    "ngx-chronometer": "0.0.9",
+    "ngx-chronometer": "^0.0.9",
     "ngx-cookie-service": "^13.2.1",
     "ngx-socket-io": "^4.2.0",
     "rxjs": "~7.5.0",

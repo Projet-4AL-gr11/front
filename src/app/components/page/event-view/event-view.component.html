@@ -3,9 +3,9 @@
   <h1>{{event?.name}}</h1>
   <h5 class="event__desc">{{event?.description}}</h5>
 
-  <div class="event-part-one">
+  <div *ngIf="!timerState"  class="event-part-one">
     <div class="timer"><b [chronometer]="chronometer"></b></div>
-    <button *ngIf="!timerState" class="start__button" (click)="startEvent()">START TIMER
+    <button class="start__button" (click)="startEvent()">START TIMER
     </button>
   </div>
 
@@ -13,11 +13,11 @@
 
 <div *ngIf="timerState"  class="event__body ">
   <div class="event__exercise ">
-    <app-event-exercise [description]="currentExercise?.description">
+    <app-event-exercise [description]="currentExercise?.exerciseTemplate?.description">
     </app-event-exercise>
   </div>
   <div class="event__ide ">
-    <app-event-ide></app-event-ide>
+    <app-event-ide (execCode)="executeCode()"></app-event-ide>
   </div>
   <div class="classement-part">
     <div class="event-ranking-div">
@@ -26,7 +26,6 @@
       <app-card-leaderbord [leaderboards]="this.leaderboards"></app-card-leaderbord>
     </div>
   </div>
-
 </div>
 <div class="classement-part ">
   <div class="event-ranking-div">

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../../services/event/event.service";
@@ -12,6 +12,8 @@ import {Leaderboard} from "../../../services/models/leaderboard.model";
 import {Chronometer} from "ngx-chronometer";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../../services/auth/auth.service";
+import {EventIdeComponent} from "../../shared/event-ide/event-ide.component";
+import {ExecuteDto} from "../../../services/models/dto/execute.dto";
 
 @Component({
   selector: 'app-page-event',
@@ -25,6 +27,7 @@ export class EventViewComponent implements OnInit {
   timerState: boolean = false;
   currentExercise: Exercise;
   chronometer: Chronometer = new Chronometer();
+  @ViewChild(EventIdeComponent) private eventIde: EventIdeComponent;
 
   constructor(public _eventService: EventService,
               private route: ActivatedRoute,
@@ -94,6 +97,8 @@ export class EventViewComponent implements OnInit {
 
   startExercise(exercise: Exercise) {
     this.currentExercise = exercise;
+    this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
+
   }
 
   nextExercise() {
@@ -105,11 +110,38 @@ export class EventViewComponent implements OnInit {
       return;
     } else {
       this.currentExercise = this.event.exercises[this.event.exercises.indexOf(this.currentExercise) + 1];
+      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.abbreviation);
       this.chronometer.restart()
     }
   }
 
-
+  executeCode() {
+    const exerciseRequest = new ExecuteDto(
+      this.currentExercise.exerciseTemplate.language.abbreviation,
+      this.eventIde.aceEditor.getValue(),
+      this.currentExercise.id,
+      this.chronometer.second,
+    );
+    this._exerciseService.executeEventCode(exerciseRequest).subscribe({
+      next: result => {
+        if (!result.isGoToNextExercise) {
+          this.eventIde.setLog(result.log);
+        } else {
+          console.log(result);
+          this.nextExercise();
+        }
+      },
+      error: err => {
+        if (!environment.production) {
+          console.log(err)
+        }
+        this._snackBar.open('Une érreur à été rencontré lors de l\'envoie du code', 'Fermer', {
+          duration: 3000
+        });
+        return;
+      }
+    })
+  }
 }
 
 

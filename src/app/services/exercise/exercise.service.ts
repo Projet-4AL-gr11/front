@@ -7,6 +7,9 @@ import {ExerciseTemplate} from "../models/erxercise_template.model";
 import {FormGroup} from "@angular/forms";
 import {ExerciseTemplateDto} from "../models/dto/exercise_template.dto";
 import {Language} from "../models/language.model";
+import {ExecuteDto} from "../models/dto/execute.dto";
+import {Observable} from "rxjs";
+import {ExecuteResponseDto} from "../models/dto/ExecuteResponseDto";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +48,11 @@ export class ExerciseService {
     formData.code = newExerciseTemplate.value.code;
     return this.http.post<any>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`, formData);
   }
+
+  executeEventCode(executeDto: ExecuteDto): Observable<ExecuteResponseDto>{
+    return this.http.post<ExecuteResponseDto>(`${environment.apiBaseUrl}/execution/execute`, executeDto)
+  }
+
 
   updateExerciseTemplate(exerciseTemplateId: string, updatedExerciseTemplate: FormGroup) {
     const formData = new ExerciseTemplateDto();
