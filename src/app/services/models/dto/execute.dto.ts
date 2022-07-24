@@ -6,6 +6,5 @@ export class ExecuteDto {
     public readonly exerciseId: string,
     public readonly timerScore: number,
   ) {
-    this.execution_id = -1;
   }
 }

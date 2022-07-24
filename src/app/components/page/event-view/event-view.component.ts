@@ -22,6 +22,7 @@ import {ExecuteDto} from "../../../services/models/dto/execute.dto";
 })
 export class EventViewComponent implements OnInit {
 
+  indexExo = 0;
   event: Event;
   leaderboards: Leaderboard[] = [];
   timerState: boolean = false;
@@ -68,7 +69,6 @@ export class EventViewComponent implements OnInit {
   }
 
   startEvent() {
-    console.log(this.event)
     if (!this.event?.exercises) {
       this._snackBar.open('Une erreur c\'est produite lors de la récupération des exercises, réessayer plus tard', 'Fermer', {
         duration: 3000
@@ -80,7 +80,7 @@ export class EventViewComponent implements OnInit {
       this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
         next: () => {
           this.startExercise(this.event.exercises[0])
-          console.log("CURRENT EXO" + this.currentExercise.exerciseTemplate.language.name)
+          console.log("CURRENT EXO" + this.currentExercise.exerciseTemplate.language.abbreviation)
           console.log(this.currentExercise)
         },
         error: err => {
@@ -98,7 +98,7 @@ export class EventViewComponent implements OnInit {
   startExercise(exercise: Exercise) {
     this.currentExercise = exercise;
     this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
-
+    console.log(this.currentExercise)
   }
 
   nextExercise() {
@@ -116,8 +116,10 @@ export class EventViewComponent implements OnInit {
   }
 
   executeCode() {
+    console.log("BONJOUR")
+    console.log(this.currentExercise.exerciseTemplate.language.name)
     const exerciseRequest = new ExecuteDto(
-      this.currentExercise.exerciseTemplate.language.abbreviation,
+      this.setLanguage(this.currentExercise.exerciseTemplate.language.name),
       this.eventIde.aceEditor.getValue(),
       this.currentExercise.id,
       this.chronometer.second,
@@ -142,19 +144,11 @@ export class EventViewComponent implements OnInit {
       }
     })
   }
+
+  setLanguage(language: string): string {
+    if(language == "Python") return "py";
+    if(language == "JS") return "js";
+    return "";
+  }
 }
 
-
-/*
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.exercise) {
-      firstValueFrom(this._exerciseService.getExerciseTemplateWithExerciseId(this.exercise.id)).then(exerciseTemplate => {
-        this.exerciseTemplate = exerciseTemplate
-      });
-      firstValueFrom(this._executionService.getLeaderboardWithExerciseId(this.exercise.id)).then(leaderboards => {
-        this.leaderboards = leaderboards;
-      })
-    }
-  }
-
- */

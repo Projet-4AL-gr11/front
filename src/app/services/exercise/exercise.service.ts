@@ -50,6 +50,7 @@ export class ExerciseService {
   }
 
   executeEventCode(executeDto: ExecuteDto): Observable<ExecuteResponseDto>{
+    executeDto.execution_id = Date.now()
     return this.http.post<ExecuteResponseDto>(`${environment.apiBaseUrl}/execution/execute`, executeDto)
   }
 
