@@ -5,15 +5,16 @@
 
   <div class="event-part-one">
     <div class="timer"><b [chronometer]="chronometer"></b></div>
-    <button *ngIf="timerState" class="start__button" (click)="startTimer()">START TIMER
+    <button *ngIf="!timerState" class="start__button" (click)="startEvent()">START TIMER
     </button>
   </div>
 
 </div>
 
-<div class="event__body ">
+<div *ngIf="timerState"  class="event__body ">
   <div class="event__exercise ">
-    <app-event-exercise></app-event-exercise>
+    <app-event-exercise [description]="currentExercise?.description">
+    </app-event-exercise>
   </div>
   <div class="event__ide ">
     <app-event-ide></app-event-ide>
