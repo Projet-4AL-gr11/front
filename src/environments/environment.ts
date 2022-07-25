@@ -7,7 +7,7 @@ export const environment = {
   name: "2FastHand",
   domain: "localhost",
   // apiBaseUrl: "http://localhost:3000",
-  apiBaseUrl: "https://2fasthandapi.azurewebsites.net/"
+  apiBaseUrl: "https://2fasthandapi.azurewebsites.net",
 };
 
 /*

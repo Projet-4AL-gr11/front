@@ -109,8 +109,8 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
-        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
+        this.cookieService.set('user', user.id);
+        this.cookieService.set('username', user.username);
         localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
         this.updateUser();
         return user;
@@ -168,7 +168,7 @@ export class AuthService {
 
   refreshCookieUsername(username) {
     this.cookieService.delete('username', '/');
-    this.cookieService.set('username', username, {sameSite: "None", path: "/"});
+    this.cookieService.set('username', username);
 
   }
 }
