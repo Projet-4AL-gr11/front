@@ -17,6 +17,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {AdminIdeComponent} from "./admin-ide/admin-ide.component";
 import { AdminIdeValidateComponent } from './admin-ide-validate/admin-ide-validate.component';
 import { AdminIdeValidateBadCodeComponent } from './admin-ide-validate-bad-code/admin-ide-validate-bad-code.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { AdminIdeValidateBadCodeComponent } from './admin-ide-validate-bad-code/
     SearchBarComponent,
     AdminIdeValidateComponent,
     AdminIdeValidateBadCodeComponent,
+    LoaderComponent,
   ],
   exports: [
     HeaderComponent,
@@ -51,6 +53,8 @@ import { AdminIdeValidateBadCodeComponent } from './admin-ide-validate-bad-code/
     SearchBarComponent,
     AdminIdeValidateComponent,
     AdminIdeValidateBadCodeComponent,
+    LoaderComponent,
+
   ],
 })
 
