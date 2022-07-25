@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../../../services/models/user.model";
 import {UserService} from "../../../services/user/user.service";
 import {AuthService} from "../../../services/auth/auth.service";
-import {Post} from "../../../services/models/post.model";
 import {GroupService} from "../../../services/group/group.service";
 import {PostService} from "../../../services/post/post.service";
+import {Post} from "../../../services/models/post.model";
 
 @Component({
   selector: 'app-profile-card',
@@ -14,8 +14,9 @@ import {PostService} from "../../../services/post/post.service";
 export class ProfileCardComponent implements OnInit {
 
   user: User;
-  posts: Post[] ;
   friends: User[];
+  userPost: Post[];
+
 
   constructor(
     public userService: UserService,
@@ -27,11 +28,20 @@ export class ProfileCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.actual().subscribe({
-      next: user => {
-        this.user = user
-        this.posts = user.createdPosts
-        this.friends = user.friends
-      }});
+    this.authService.actual().subscribe(response => {
+      this.user = response;
+
+      this.userService.getFriends(this.user?.id).subscribe( response => {
+        this.friends = response;
+      })
+      this.postService.getAllUserPost(this.user?.id).subscribe( response => {
+        this.userPost = response;
+        console.log(this.user.id)
+        console.log(this.userPost)
+      })
+    })
+
+
   }
+
 }
