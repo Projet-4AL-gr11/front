@@ -55,4 +55,9 @@ export class EventIdeComponent implements OnInit {
   setLog(log) {
     this.log = log
   }
+
+  clearIde() {
+    this.aceEditor.session.setValue("");
+    this.log = "";
+  }
 }

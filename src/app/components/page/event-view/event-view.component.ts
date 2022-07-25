@@ -51,6 +51,16 @@ export class EventViewComponent implements OnInit {
   async updateEvent(id: string): Promise<void> {
     this.event = await firstValueFrom(this._eventService.getEventById(id));
     this.event.exercises = [];
+    await this._eventService.isMember(id).subscribe({
+      next: value => {
+        this.event.isMember = value;
+      },
+      error: err => {
+        if (environment.production) {
+          console.log(err)
+        }
+      }
+    })
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
     await firstValueFrom(this._executionService.getEventRanking(id)).then(eventRanking => {
       this.event.eventRanking = eventRanking;
@@ -76,12 +86,11 @@ export class EventViewComponent implements OnInit {
       return;
     } else {
       this.timerState = true;
+      this.event.isMember = true;
       this.chronometer.start();
       this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
         next: () => {
           this.startExercise(this.event.exercises[0])
-          console.log("CURRENT EXO" + this.currentExercise.exerciseTemplate.language.abbreviation)
-          console.log(this.currentExercise)
         },
         error: err => {
           if (!environment.production) {
@@ -107,17 +116,17 @@ export class EventViewComponent implements OnInit {
       this._snackBar.open('Event terminé, regarder où vous êtes dans le classement :)', 'Fermer', {
         duration: 3000
       });
+      this.updateEvent(this.event.id).then();
       return;
     } else {
+      this.eventIde.clearIde();
       this.currentExercise = this.event.exercises[this.event.exercises.indexOf(this.currentExercise) + 1];
-      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.abbreviation);
+      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
       this.chronometer.restart()
     }
   }
 
   executeCode() {
-    console.log("BONJOUR")
-    console.log(this.currentExercise.exerciseTemplate.language.name)
     const exerciseRequest = new ExecuteDto(
       this.setLanguage(this.currentExercise.exerciseTemplate.language.name),
       this.eventIde.aceEditor.getValue(),
@@ -150,5 +159,6 @@ export class EventViewComponent implements OnInit {
     if(language == "JS") return "js";
     return "";
   }
+
 }
 

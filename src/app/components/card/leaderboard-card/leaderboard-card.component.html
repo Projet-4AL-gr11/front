@@ -3,14 +3,18 @@
   <tr>
     <th scope="col">Rang</th>
     <th scope="col">Nom</th>
+    <th scope="col">Temps</th>
   </tr>
   </thead>
-  <tbody *ngIf="leaderboards.length == 0"> Aucune information a afficher</tbody>
-  <tbody *ngIf="leaderboards.length >0">
-  <tr *ngFor="let leaderboard of leaderboards">
-    <th scope="row">{{leaderboard.ranking}}</th>
+  <tbody *ngIf="leaderboards?.length == 0"> Aucune information a afficher</tbody>
+  <tbody *ngIf="leaderboards?.length >0">
+  <tr *ngFor="let leaderboard of sortArray()">
+    <th scope="row">{{leaderboard?.ranking}}</th>
     <td>
-      {{leaderboard.user?.username}}
+      {{leaderboard?.user?.username}}
+    </td>
+    <td>
+      {{leaderboard?.timerScore}}
     </td>
   </tr>
   </tbody>
