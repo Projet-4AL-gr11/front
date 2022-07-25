@@ -28,10 +28,12 @@ export class CreateExerciseTemplateComponent implements OnInit {
   @ViewChild(AdminIdeValidateComponent) private editorValidate: AdminIdeValidateComponent;
   @ViewChild(AdminIdeValidateBadCodeComponent) private editorValidateBadCode: AdminIdeValidateComponent;
 
-  private codeValidated: boolean = false;
+  codeValidated: boolean = false;
   languages: Language[];
   newExerciseTemplate: FormGroup;
   languageSelected: Language;
+  badCode: boolean;
+  goodCode: boolean;
   constructor(
     private _languageService: LanguageService,
     private _formBuilder: FormBuilder,
@@ -97,30 +99,29 @@ export class CreateExerciseTemplateComponent implements OnInit {
       });
       return;
     } else {
-      await this.validateGoodCode().then(async result => {
-        console.log(result)
-        if (result) {
-          await this.validateBadTest().then(async result2 => {
-            console.log(result2)
-            if (result2) {
-              await this._exerciseService.createExerciseTemplate(this.newExerciseTemplate, this.languageSelected).subscribe({
-                next: () => {
-                  // this._router.navigateByUrl("/admin/listExerciseTemplate")
-                },
-                error: err => {
-                  if (!environment.production) {
-                    console.log(err)
-                  }
-                  this._snackBar.open('Une erreur a été rencontré', 'Fermer', {
-                    duration: 3000
-                  });
-                  return;
-                }
-              });
+      if (this.codeValidated) {
+
+        await this._exerciseService.createExerciseTemplate(this.newExerciseTemplate, this.languageSelected).subscribe({
+          next: () => {
+            this._router.navigateByUrl("/admin/listExerciseTemplate")
+          },
+          error: err => {
+            if (!environment.production) {
+              console.log(err)
             }
-          })
-        }
-      });
+            this._snackBar.open('Une erreur a été rencontré', 'Fermer', {
+              duration: 3000
+            });
+            return;
+          }
+        });
+      } else {
+        this._snackBar.open('Valider votre code Avant de créer le template', 'Fermer', {
+          duration: 3000
+        });
+        return;
+      }
+
     }
   }
 
@@ -133,7 +134,7 @@ export class CreateExerciseTemplateComponent implements OnInit {
       next: result => {
         if (!result.isGoToNextExercise) {
           this.loadingExec = false;
-          return false;
+          this.badCode = true
         } else {
           this.loadingExec = false;
           this._snackBar.open('Le retour pour un code qui où les test ne passe pas n\'est pas bon', 'Fermer', {
@@ -163,8 +164,9 @@ export class CreateExerciseTemplateComponent implements OnInit {
     return this._exerciseService.executeValidateCode(exerciseRequest).subscribe({
       next: result => {
         if (!result.isGoToNextExercise) {
+
           this.loadingExec = false;
-          return true;
+          this.goodCode = true
         } else {
           this.loadingExec = false;
           this._snackBar.open('Le retour pour un code qui devrait être bon est faux', 'Fermer', {
@@ -194,5 +196,21 @@ export class CreateExerciseTemplateComponent implements OnInit {
     if(language == "Python") return "py";
     if(language == "JS") return "js";
     return "";
+  }
+
+  async validateExec() {
+    await this.validateBadTest();
+    await this.validateGoodCode();
+    console.log(this.badCode && this.goodCode)
+    if (this.badCode && this.goodCode) {
+      this._snackBar.open('Code Valide', 'Fermer', {
+        duration: 3000
+      });
+      this.codeValidated = true;
+    } else {
+      this._snackBar.open('Code Invalide', 'Fermer', {
+        duration: 3000
+      });
+    }
   }
 }
