@@ -22,6 +22,7 @@ import {ExecuteDto} from "../../../services/models/dto/execute.dto";
 })
 export class EventViewComponent implements OnInit {
 
+  loadingExec: boolean = false;
   indexExo = 0;
   event: Event;
   leaderboards: Leaderboard[] = [];
@@ -54,6 +55,7 @@ export class EventViewComponent implements OnInit {
     await this._eventService.isMember(id).subscribe({
       next: value => {
         this.event.isMember = value;
+        console.log( value)
       },
       error: err => {
         if (environment.production) {
@@ -85,11 +87,12 @@ export class EventViewComponent implements OnInit {
       });
       return;
     } else {
-      this.timerState = true;
-      this.event.isMember = true;
-      this.chronometer.start();
+
       this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
         next: () => {
+          this.timerState = true;
+          this.event.isMember = true;
+          this.chronometer.start();
           this.startExercise(this.event.exercises[0])
         },
         error: err => {
@@ -127,6 +130,7 @@ export class EventViewComponent implements OnInit {
   }
 
   executeCode() {
+    this.loadingExec = true;
     const exerciseRequest = new ExecuteDto(
       this.setLanguage(this.currentExercise.exerciseTemplate.language.name),
       this.eventIde.aceEditor.getValue(),
@@ -136,9 +140,11 @@ export class EventViewComponent implements OnInit {
     this._exerciseService.executeEventCode(exerciseRequest).subscribe({
       next: result => {
         if (!result.isGoToNextExercise) {
+          this.loadingExec = false;
+
           this.eventIde.setLog(result.log);
         } else {
-          console.log(result);
+          this.loadingExec = false;
           this.nextExercise();
         }
       },
@@ -149,6 +155,7 @@ export class EventViewComponent implements OnInit {
         this._snackBar.open('Une érreur à été rencontré lors de l\'envoie du code', 'Fermer', {
           duration: 3000
         });
+        this.loadingExec = false;
         return;
       }
     })

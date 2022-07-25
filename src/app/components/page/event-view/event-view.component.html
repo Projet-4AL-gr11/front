@@ -10,14 +10,14 @@
   </div>
 
 </div>
-
+<div class="loader" *ngIf="loadingExec"></div>
 <div *ngIf="timerState"  class="event__body ">
   <div class="event__exercise ">
     <app-event-exercise [description]="currentExercise?.exerciseTemplate?.description">
     </app-event-exercise>
   </div>
   <div class="event__ide ">
-    <app-event-ide (execCode)="executeCode()"></app-event-ide>
+    <app-event-ide (execCode)="executeCode()" [loadingExec]="loadingExec"></app-event-ide>
   </div>
   <div class="classement-part">
     <div class="event-ranking-div">
