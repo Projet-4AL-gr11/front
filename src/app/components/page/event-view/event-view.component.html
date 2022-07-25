@@ -4,34 +4,47 @@
   <h5 class="event__desc">{{event?.description}}</h5>
 
   <div class="event-part-one">
-    <div class="timer"><b [chronometer]="chronometer"></b></div>
-    <button *ngIf="!timerState" class="start__button" (click)="startEvent()">START TIMER
+    <div *ngIf="timerState"  class="timer"><b [chronometer]="chronometer"></b></div>
+    <button *ngIf="!event?.isMember" class="start__button" (click)="startEvent()">START TIMER
     </button>
   </div>
 
 </div>
-
+<div class="loader" *ngIf="loadingExec"></div>
 <div *ngIf="timerState"  class="event__body ">
   <div class="event__exercise ">
     <app-event-exercise [description]="currentExercise?.exerciseTemplate?.description">
     </app-event-exercise>
   </div>
   <div class="event__ide ">
-    <app-event-ide (execCode)="executeCode()"></app-event-ide>
+    <app-event-ide (execCode)="executeCode()" [loadingExec]="loadingExec"></app-event-ide>
   </div>
   <div class="classement-part">
     <div class="event-ranking-div">
       <H3 align="center">Classement - {{currentExercise?.exerciseTemplate?.name}}</H3>
 <!--      {{exercise?.name}}-->
-      <app-card-leaderbord [leaderboards]="this.leaderboards"></app-card-leaderbord>
+      <app-card-leaderbord [leaderboards]="this.currentExercise?.leaderboards"></app-card-leaderbord>
     </div>
   </div>
 </div>
 <div class="classement-part ">
   <div class="event-ranking-div">
-    <H3 align="center">Classement - {{event.name}}</H3>
+    <H3 align="center">Classement - {{event?.name}}</H3>
     <app-card-event-ranking [eventRankings]="event?.eventRanking"></app-card-event-ranking>
   </div>
+  <mat-accordion *ngIf="!timerState">
+    <mat-expansion-panel *ngFor="let exercise of event?.exercises" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Leaderboard de {{exercise?.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          Nombre d'entrée {{exercise?.leaderboards?.length}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-card-leaderbord [leaderboards]="this.exercise?.leaderboards"></app-card-leaderbord>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 
 

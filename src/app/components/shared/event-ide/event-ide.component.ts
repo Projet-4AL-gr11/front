@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as ace from "ace-builds";
 import {ExecuteService} from "../../../services/execute/execute.service";
 
@@ -12,6 +12,7 @@ export class EventIdeComponent implements OnInit {
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;
 
+  @Input('loadingExec') public loadingExec: boolean;
   @Output('execCode') execCode: EventEmitter<any> = new EventEmitter<any>()
   input: string;
   aceEditor;
@@ -54,5 +55,10 @@ export class EventIdeComponent implements OnInit {
 
   setLog(log) {
     this.log = log
+  }
+
+  clearIde() {
+    this.aceEditor.session.setValue("");
+    this.log = "";
   }
 }

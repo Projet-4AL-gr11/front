@@ -24,7 +24,13 @@
         </mat-form-field>
       </div>
       <div class="shadow">
+        <h3>Code de exerciseTemplate</h3>
         <app-admin-ide class="ide"></app-admin-ide>
+        <h3>Code de validation d'un bon code</h3>
+        <app-admin-ide-validate class="ide"></app-admin-ide-validate>
+        <h3>Code de validation d'un mauvais code</h3>
+        <app-admin-ide-validate-bad-code class="ide"></app-admin-ide-validate-bad-code>
+
       </div>
 
       <div class="ps-5">
@@ -41,6 +47,9 @@
 
     </div>
     <hr>
-    <button class="m-1" mat-raised-button (click)="onClickSubmit()">Créer</button>
+    <button class="m-1" mat-raised-button (click)="validateExec()">Valider l'exercise</button>
+    <button *ngIf="codeValidated" class="m-1" mat-raised-button (click)="onClickSubmit()">Créer</button>
+    <button *ngIf="!codeValidated" class="m-1" mat-raised-button disabled (click)="onClickSubmit()">Créer</button>
   </form>
+
 </div>

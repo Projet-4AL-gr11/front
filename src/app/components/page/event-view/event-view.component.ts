@@ -14,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../../services/auth/auth.service";
 import {EventIdeComponent} from "../../shared/event-ide/event-ide.component";
 import {ExecuteDto} from "../../../services/models/dto/execute.dto";
+import {ExecCodeEnum} from "../../../services/models/enum/execCode.enum";
 
 @Component({
   selector: 'app-page-event',
@@ -22,6 +23,7 @@ import {ExecuteDto} from "../../../services/models/dto/execute.dto";
 })
 export class EventViewComponent implements OnInit {
 
+  loadingExec: boolean = false;
   indexExo = 0;
   event: Event;
   leaderboards: Leaderboard[] = [];
@@ -51,6 +53,17 @@ export class EventViewComponent implements OnInit {
   async updateEvent(id: string): Promise<void> {
     this.event = await firstValueFrom(this._eventService.getEventById(id));
     this.event.exercises = [];
+    await this._eventService.isMember(id).subscribe({
+      next: value => {
+        this.event.isMember = value;
+        console.log( value)
+      },
+      error: err => {
+        if (environment.production) {
+          console.log(err)
+        }
+      }
+    })
     await firstValueFrom(this._exerciseService.getEventExercise(id)).then(exercises => this.event.exercises = exercises)
     await firstValueFrom(this._executionService.getEventRanking(id)).then(eventRanking => {
       this.event.eventRanking = eventRanking;
@@ -75,13 +88,13 @@ export class EventViewComponent implements OnInit {
       });
       return;
     } else {
-      this.timerState = true;
-      this.chronometer.start();
+
       this._eventService.addParticipant(this.event.id, this._authService.getCurrentUserId()).subscribe({
         next: () => {
+          this.timerState = true;
+          this.event.isMember = true;
+          this.chronometer.start();
           this.startExercise(this.event.exercises[0])
-          console.log("CURRENT EXO" + this.currentExercise.exerciseTemplate.language.abbreviation)
-          console.log(this.currentExercise)
         },
         error: err => {
           if (!environment.production) {
@@ -107,17 +120,26 @@ export class EventViewComponent implements OnInit {
       this._snackBar.open('Event terminé, regarder où vous êtes dans le classement :)', 'Fermer', {
         duration: 3000
       });
+      this.updateEvent(this.event.id).then();
       return;
     } else {
+      this.eventIde.clearIde();
       this.currentExercise = this.event.exercises[this.event.exercises.indexOf(this.currentExercise) + 1];
-      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.abbreviation);
+      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
       this.chronometer.restart()
     }
   }
 
   executeCode() {
-    console.log("BONJOUR")
-    console.log(this.currentExercise.exerciseTemplate.language.name)
+    this.loadingExec = true;
+    if (this.eventIde.aceEditor.getValue().includes(ExecCodeEnum.EXEC_PATTERN)) {
+      this.loadingExec = false;
+      this._snackBar.open('Vous ne pouvez pas envoyé du code avec le patern : \'' + ExecCodeEnum.EXEC_PATTERN + '\'' , 'Fermer', {
+        duration: 3000
+      });
+      this.updateEvent(this.event.id).then();
+      return;
+    }
     const exerciseRequest = new ExecuteDto(
       this.setLanguage(this.currentExercise.exerciseTemplate.language.name),
       this.eventIde.aceEditor.getValue(),
@@ -127,9 +149,11 @@ export class EventViewComponent implements OnInit {
     this._exerciseService.executeEventCode(exerciseRequest).subscribe({
       next: result => {
         if (!result.isGoToNextExercise) {
+          this.loadingExec = false;
+
           this.eventIde.setLog(result.log);
         } else {
-          console.log(result);
+          this.loadingExec = false;
           this.nextExercise();
         }
       },
@@ -140,6 +164,7 @@ export class EventViewComponent implements OnInit {
         this._snackBar.open('Une érreur à été rencontré lors de l\'envoie du code', 'Fermer', {
           duration: 3000
         });
+        this.loadingExec = false;
         return;
       }
     })
@@ -150,5 +175,6 @@ export class EventViewComponent implements OnInit {
     if(language == "JS") return "js";
     return "";
   }
+
 }
 

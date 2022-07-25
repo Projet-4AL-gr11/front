@@ -10,6 +10,7 @@ import {Language} from "../models/language.model";
 import {ExecuteDto} from "../models/dto/execute.dto";
 import {Observable} from "rxjs";
 import {ExecuteResponseDto} from "../models/dto/ExecuteResponseDto";
+import {ExecuteValidateDto} from "../models/dto/execute-validate.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +72,9 @@ export class ExerciseService {
 
   removeExerciseTemplate(id: string) {
     return this.http.delete<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/${id}`);
+  }
+
+  executeValidateCode(exerciseRequest: ExecuteValidateDto): Observable<ExecuteResponseDto> {
+    return this.http.post<ExecuteResponseDto>(`${environment.apiBaseUrl}/execution/execute/validate`, exerciseRequest)
   }
 }
