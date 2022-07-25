@@ -14,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../../services/auth/auth.service";
 import {EventIdeComponent} from "../../shared/event-ide/event-ide.component";
 import {ExecuteDto} from "../../../services/models/dto/execute.dto";
+import {ExecCodeEnum} from "../../../services/models/enum/execCode.enum";
 
 @Component({
   selector: 'app-page-event',
@@ -131,6 +132,14 @@ export class EventViewComponent implements OnInit {
 
   executeCode() {
     this.loadingExec = true;
+    if (this.eventIde.aceEditor.getValue().includes(ExecCodeEnum.EXEC_PATTERN)) {
+      this.loadingExec = false;
+      this._snackBar.open('Vous ne pouvez pas envoyé du code avec le patern : \'' + ExecCodeEnum.EXEC_PATTERN + '\'' , 'Fermer', {
+        duration: 3000
+      });
+      this.updateEvent(this.event.id).then();
+      return;
+    }
     const exerciseRequest = new ExecuteDto(
       this.setLanguage(this.currentExercise.exerciseTemplate.language.name),
       this.eventIde.aceEditor.getValue(),
