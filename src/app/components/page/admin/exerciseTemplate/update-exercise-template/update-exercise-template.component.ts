@@ -9,6 +9,12 @@ import {environment} from "../../../../../../environments/environment";
 import {ExerciseTemplate} from "../../../../../services/models/erxercise_template.model";
 import {Title} from "@angular/platform-browser";
 import {AdminIdeComponent} from "../../../../shared/admin-ide/admin-ide.component";
+import {AdminIdeValidateComponent} from "../../../../shared/admin-ide-validate/admin-ide-validate.component";
+import {
+  AdminIdeValidateBadCodeComponent
+} from "../../../../shared/admin-ide-validate-bad-code/admin-ide-validate-bad-code.component";
+import {ExecuteValidateDto} from "../../../../../services/models/dto/execute-validate.dto";
+import {ExecCodeEnum} from "../../../../../services/models/enum/execCode.enum";
 
 @Component({
   selector: 'app-update-create-exercise-template',
@@ -18,11 +24,18 @@ import {AdminIdeComponent} from "../../../../shared/admin-ide/admin-ide.componen
 export class UpdateExerciseTemplateComponent implements OnInit {
 
   @ViewChild(AdminIdeComponent) private editor: AdminIdeComponent;
+  @ViewChild(AdminIdeValidateComponent) private editorValidate: AdminIdeValidateComponent;
+  @ViewChild(AdminIdeValidateBadCodeComponent) private editorValidateBadCode: AdminIdeValidateComponent;
 
   exerciseTemplate: ExerciseTemplate = new ExerciseTemplate();
   languages: Language[];
   newExerciseTemplate: FormGroup;
   languageSelected: Language;
+  badCode: boolean;
+  goodCode: boolean;
+  codeValidated: boolean;
+  loadingExecBad: boolean;
+  loadingExecValid: boolean;
 
   constructor(
     private _languageService: LanguageService,
@@ -91,20 +104,22 @@ export class UpdateExerciseTemplateComponent implements OnInit {
       });
       return;
     } else {
-      this._exerciseService.updateExerciseTemplate(this.exerciseTemplate.id, this.newExerciseTemplate).subscribe({
-        next: () => {
-          this._router.navigateByUrl("/admin/listExerciseTemplate")
-        },
-        error: err => {
-          if (!environment.production) {
-            console.log(err)
+      if (this.codeValidated) {
+        this._exerciseService.updateExerciseTemplate(this.exerciseTemplate.id, this.newExerciseTemplate).subscribe({
+          next: () => {
+            this._router.navigateByUrl("/admin/listExerciseTemplate")
+          },
+          error: err => {
+            if (!environment.production) {
+              console.log(err)
+            }
+            this._snackBar.open('Une erreur a été rencontré', 'Fermer', {
+              duration: 3000
+            });
+            return;
           }
-          this._snackBar.open('Une erreur a été rencontré', 'Fermer', {
-            duration: 3000
-          });
-          return;
-        }
-      });
+        });
+      }
     }
   }
 
@@ -135,5 +150,95 @@ export class UpdateExerciseTemplateComponent implements OnInit {
     })
     this.languageSelected = this.exerciseTemplate.language;
     this.editor.setCode(this.exerciseTemplate.code);
+  }
+
+
+  async validateBadTest() {
+    const exerciseRequest = new ExecuteValidateDto(
+      this.setLanguage(this.languageSelected.name),
+      this.editor.getCode().replace(ExecCodeEnum.EXEC_PATTERN, this.editorValidateBadCode.getCode()),
+    );
+    return this._exerciseService.executeValidateCode(exerciseRequest).subscribe({
+      next: result => {
+        if (!result.isGoToNextExercise) {
+          this.loadingExecBad = false;
+          this.badCode = true
+        } else {
+          this.loadingExecBad = false;
+          this._snackBar.open('Le retour pour un code qui où les test ne passe pas n\'est pas bon', 'Fermer', {
+            duration: 3000
+          });
+          return true;
+        }
+      },
+      error: err => {
+        if (!environment.production) {
+          console.log(err)
+        }
+        this._snackBar.open('Une érreur à été rencontré lors de l\'envoie du code', 'Fermer', {
+          duration: 3000
+        });
+        this.loadingExecBad = false;
+        return;
+      }
+    })
+  }
+  async validateGoodCode() {
+    this.loadingExecValid = true;
+    const exerciseRequest = new ExecuteValidateDto(
+      this.setLanguage(this.languageSelected.name),
+      this.editor.getCode().replace(ExecCodeEnum.EXEC_PATTERN, this.editorValidate.getCode()),
+    );
+    return this._exerciseService.executeValidateCode(exerciseRequest).subscribe({
+      next: result => {
+        if (!result.isGoToNextExercise) {
+
+          this.loadingExecValid = false;
+          this.goodCode = true
+        } else {
+          this.loadingExecValid = false;
+          this._snackBar.open('Le retour pour un code qui devrait être bon est faux', 'Fermer', {
+            duration: 3000
+          });
+          return false;
+        }
+      },
+      error: err => {
+        if (!environment.production) {
+          console.log(err)
+        }
+        this._snackBar.open('Une érreur à été rencontré lors de l\'envoie du code', 'Fermer', {
+          duration: 3000
+        });
+        this.loadingExecBad = false;
+        return;
+      }
+    });
+  }
+  executeCode() {
+
+  }
+
+  setLanguage(language: string): string {
+    if(language == "Python") return "py";
+    if(language == "JS") return "js";
+    return "";
+  }
+
+  async validateExec() {
+
+    await this.validateBadTest();
+    await this.validateGoodCode();
+    console.log(this.badCode && this.goodCode)
+    if (this.badCode && this.goodCode) {
+      this._snackBar.open('Code Valide', 'Fermer', {
+        duration: 3000
+      });
+      this.codeValidated = true;
+    } else {
+      this._snackBar.open('Code Invalide', 'Fermer', {
+        duration: 3000
+      });
+    }
   }
 }
