@@ -16,6 +16,17 @@
   padding: 5px 10px;
 }
 
+.classement-exo {
+  margin-top: 30px;
+  width: 100%;
+  border-top: 3px solid #000000;
+  height: 400px;
+  box-shadow: black;
+  overflow: auto;
+  max-height: 50vh;
+}
+
+
 .classement-part {
   margin-top: 30px;
   width: 100%;

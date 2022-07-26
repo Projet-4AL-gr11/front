@@ -1,5 +1,5 @@
 .event-card-list {
-  width: 550px;
+  width: 400px;
   background: #F6F6F6;
   display: grid;
   grid-template-columns:  repeat(3, [col] auto);
