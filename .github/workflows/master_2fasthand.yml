@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: '2fasthand'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6AC75C4FD388460CB100875825419CFA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_553BA6A0D5AF44E5BC0673A6AD76DE2A }}
           package: .
