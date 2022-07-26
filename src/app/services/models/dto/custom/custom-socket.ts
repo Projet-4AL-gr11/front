@@ -117,7 +117,7 @@ export function tokenGetter() {
 
 function getCongig(cookieService: CookieService) {
   const config: ExtendedSocketIoConfig = {
-    url: 'http://localhost:3000', options: {
+    url: 'https://2fasthandapi.azurewebsites.net', options: {
       extraHeaders: {
         Authorization: tokenGetter()
       }
