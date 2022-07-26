@@ -27,11 +27,6 @@ export class HeaderComponent implements OnInit {
   ) {
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
-  //   firstValueFrom(this._groupService.getGroupRequestWhereAdmin()).then(groupRequest => this.notificationCount += groupRequest.length);
-  //   firstValueFrom(this._friendshipService.receivedFriendshipRequest()).then(friendshipRequest => this.notificationCount += friendshipRequest.length);
-  // }
 
   ngOnInit(): void {
     firstValueFrom(this._authService.getCurrentUser()).then(user => this.user = user);
