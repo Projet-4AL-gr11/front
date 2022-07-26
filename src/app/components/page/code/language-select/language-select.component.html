@@ -1,7 +1,7 @@
 <div class="select__page">
   <app-header class=""></app-header>
   <div>
-    <h2 class="ms-4 p-2">Choisis ton Language</h2>
+    <h2 class="ms-4 p-2">Entrainement</h2>
     <div class="select__card">
       <div class="card" (click)="goToSendBox()">
         <div class="additional">
@@ -23,30 +23,10 @@
           </div>
         </div>
       </div>
-      <div *ngFor="let language of languages" id="language_card" class="card" (click)="goToSendBox()">
-        <div class="additional">
-          <div class="user-card">
-            <div class="test__img">
-            </div>
-          </div>
-          <div class="more-info">
-            <h1>{{language}}</h1>
-            <p>test {{language}}</p>
-            <div class="coords">
-            </div>
-          </div>
-        </div>
-        <div class="general">
-          <h1>{{language}}</h1>
-          <div class="">
-            <p>test {{language}}</p>
-          </div>
-        </div>
-      </div>
     </div>
     <hr >
     <div class="select__event">
-        <h2 class="ms-4 p-2 ">Evenement</h2>
+        <h2 class="ms-4 p-2 pb-2 ">Evenement</h2>
 
 
       <div class="event__grid">

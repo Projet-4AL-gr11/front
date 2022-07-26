@@ -122,13 +122,6 @@ export class AuthService {
       username,
       password
     })
-      .pipe(map(user => {
-        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
-        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
-        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
-        this.updateUser();
-        return user;
-      }));
   }
 
   async logout() {

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as ace from "ace-builds";
 import {ExecuteService} from "../../../services/execute/execute.service";
 
@@ -12,10 +12,12 @@ export class EventIdeComponent implements OnInit {
   @ViewChild("editor") private editor: ElementRef<HTMLElement>;
   @ViewChild("output") private output: ElementRef<HTMLElement>;
 
+  @Input('loadingExec') public loadingExec: boolean;
+  @Output('execCode') execCode: EventEmitter<any> = new EventEmitter<any>()
   input: string;
   aceEditor;
   language: string;
-
+  log: string;
 
   constructor() { }
 
@@ -28,18 +30,15 @@ export class EventIdeComponent implements OnInit {
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
     this.aceEditor.setTheme("ace/theme/monokai");
 
-    this.changeLanguage();
   }
 
-  changeLanguage() {
+  changeLanguage(language: string) {
     const editor = ace.edit(this.editor.nativeElement);
 
-    if(this.language == 'Python'){
-      this.language  = 'py'
+    if(language == 'Python'){
       editor.session.setMode("ace/mode/python");
     }
-    else if(this.language  == 'JavaScript'){
-      this.language  = 'js'
+    else if(language  == 'JS'){
       editor.session.setMode("ace/mode/javascript");
     }
 
@@ -50,4 +49,16 @@ export class EventIdeComponent implements OnInit {
   }
 
 
+  executeCode() {
+    this.execCode.emit()
+  }
+
+  setLog(log) {
+    this.log = log
+  }
+
+  clearIde() {
+    this.aceEditor.session.setValue("");
+    this.log = "";
+  }
 }
