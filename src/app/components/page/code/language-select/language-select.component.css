@@ -84,5 +84,7 @@
 .event__grid {
   display: flex;
   flex-wrap: wrap;
+  overflow: auto;
+  max-height: 50vh;
 }
 
