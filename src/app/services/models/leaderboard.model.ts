@@ -9,5 +9,6 @@ export class Leaderboard {
   user: User;
   exercise: Exercise;
   language: Language;
+  timerScore: number;
   ranking: number;
 }

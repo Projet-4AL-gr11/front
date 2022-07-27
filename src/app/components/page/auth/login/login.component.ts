@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../../../../environments/environment";
 import {firstValueFrom} from "rxjs";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,11 @@ export class LoginComponent implements OnInit {
   error: boolean;
 
   constructor(private formBuilder: FormBuilder,
-              private _authService: AuthService,
+              private authService: AuthService,
               private router: Router,
-              private _titleService: Title) {
-    this._titleService.setTitle("Connexion - " + environment.name);
+              private cookieService: CookieService,
+              private titleService: Title) {
+    this.titleService.setTitle("Connexion - " + environment.name);
     this.error = false;
     this.submitted = false;
   }
@@ -31,21 +33,31 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitForm() {
+
     this.submitted = true;
     const formValue = this.loginForm.value;
-    firstValueFrom(this._authService.login(formValue.username, formValue.password))
-      .then().catch(error => {
-
-      this.submitted = false;
-      if (error.status === 400 || error.status === 0) {
-        this.error = true;
+    this.authService.login(formValue.username, formValue.password).subscribe({
+        next: (response) => {
+          {
+              this.cookieService.set('user', response.id),
+              this.cookieService.set('username', response.username),
+              localStorage.setItem('Refresh', response.currentHashedRefreshToken),
+              this.authService.updateUser()
+          }
+        },
+        error: (error) => {
+          this.submitted = false;
+          if (error.status === 400 || error.status === 0) {
+            this.error = true;
+          }
+        },
+        complete: () => {
+          if (!this.error) {
+            this.router.navigate(['/timeline']).then();
+          }
+        }
       }
-    }).finally(() => {
-
-      if (!this.error) {
-        this.router.navigate(['/timeline']).then();
-      }
-    });
+    )
   }
 
   private initForm() {

@@ -15,6 +15,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {EventIdeComponent} from './event-ide/event-ide.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {AdminIdeComponent} from "./admin-ide/admin-ide.component";
+import { AdminIdeValidateComponent } from './admin-ide-validate/admin-ide-validate.component';
+import { AdminIdeValidateBadCodeComponent } from './admin-ide-validate-bad-code/admin-ide-validate-bad-code.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import {AdminIdeComponent} from "./admin-ide/admin-ide.component";
     EventIdeComponent,
     AdminIdeComponent,
     SearchBarComponent,
+    AdminIdeValidateComponent,
+    AdminIdeValidateBadCodeComponent,
+    LoaderComponent,
   ],
   exports: [
     HeaderComponent,
@@ -45,6 +51,10 @@ import {AdminIdeComponent} from "./admin-ide/admin-ide.component";
     EventIdeComponent,
     AdminIdeComponent,
     SearchBarComponent,
+    AdminIdeValidateComponent,
+    AdminIdeValidateBadCodeComponent,
+    LoaderComponent,
+
   ],
 })
 

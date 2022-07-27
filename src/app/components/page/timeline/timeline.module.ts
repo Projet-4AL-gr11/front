@@ -5,18 +5,20 @@ import {TimelineComponent} from "./timeline.component";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
 import {TimelineRoutingModule} from "./timeline-routing.module";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     TimelineComponent,
   ],
-  imports: [
-    CommonModule,
-    VirtualScrollerModule,
-    SharedModule,
-    CardsModule,
-    TimelineRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        VirtualScrollerModule,
+        SharedModule,
+        CardsModule,
+        TimelineRoutingModule,
+        MatButtonModule
+    ],
   exports: [
     TimelineComponent,
   ]

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Socket, SocketIoConfig} from 'ngx-socket-io';
 import {CookieService} from "ngx-cookie-service";
+import {environment} from "../../../../../environments/environment";
 
 // Workaround till ngx-socket-io fixes the missing "extraHeaders", add extraHeaders to Options
 export interface ExtendedSocketIoConfig extends SocketIoConfig {
@@ -117,7 +118,7 @@ export function tokenGetter() {
 
 function getCongig(cookieService: CookieService) {
   const config: ExtendedSocketIoConfig = {
-    url: 'https://2fasthandapi.azurewebsites.net', options: {
+    url: environment.apiBaseUrl, options: {
       extraHeaders: {
         Authorization: tokenGetter()
       }

@@ -7,6 +7,10 @@ import {ExerciseTemplate} from "../models/erxercise_template.model";
 import {FormGroup} from "@angular/forms";
 import {ExerciseTemplateDto} from "../models/dto/exercise_template.dto";
 import {Language} from "../models/language.model";
+import {ExecuteDto} from "../models/dto/execute.dto";
+import {Observable} from "rxjs";
+import {ExecuteResponseDto} from "../models/dto/ExecuteResponseDto";
+import {ExecuteValidateDto} from "../models/dto/execute-validate.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +50,12 @@ export class ExerciseService {
     return this.http.post<any>(`${environment.apiBaseUrl}/exercise/exerciseTemplate`, formData);
   }
 
+  executeEventCode(executeDto: ExecuteDto): Observable<ExecuteResponseDto>{
+    executeDto.execution_id = Date.now()
+    return this.http.post<ExecuteResponseDto>(`${environment.apiBaseUrl}/execution/execute`, executeDto)
+  }
+
+
   updateExerciseTemplate(exerciseTemplateId: string, updatedExerciseTemplate: FormGroup) {
     const formData = new ExerciseTemplateDto();
     formData.id = exerciseTemplateId;
@@ -62,5 +72,9 @@ export class ExerciseService {
 
   removeExerciseTemplate(id: string) {
     return this.http.delete<ExerciseTemplate>(`${environment.apiBaseUrl}/exercise/exerciseTemplate/${id}`);
+  }
+
+  executeValidateCode(exerciseRequest: ExecuteValidateDto): Observable<ExecuteResponseDto> {
+    return this.http.post<ExecuteResponseDto>(`${environment.apiBaseUrl}/execution/execute/validate`, exerciseRequest)
   }
 }

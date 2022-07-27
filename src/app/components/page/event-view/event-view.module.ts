@@ -5,19 +5,21 @@ import {EventViewRoutingModule} from "./event-view-routing.module";
 import {CardsModule} from "../../card/cards.module";
 import {SharedModule} from "../../shared/shared.module";
 import {NgxChronometerModule} from "ngx-chronometer";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
   declarations: [
     EventViewComponent
   ],
-  imports: [
-    CommonModule,
-    EventViewRoutingModule,
-    SharedModule,
-    CardsModule,
-    NgxChronometerModule,
-  ],
+    imports: [
+        CommonModule,
+        EventViewRoutingModule,
+        SharedModule,
+        CardsModule,
+        NgxChronometerModule,
+        MatExpansionModule,
+    ],
   exports: [
     EventViewComponent
   ],

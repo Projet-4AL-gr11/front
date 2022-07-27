@@ -1,8 +1,9 @@
 <div>
   <div #editor id="editor" ></div>
   <div class="button-container">
-    <button class="btn" > Run </button>
+    <button *ngIf="!loadingExec" class="btn" (click)="executeCode()"> Run </button>
+    <button *ngIf="loadingExec" class="btn" disabled> Run </button>
   </div>
 
-  <div class="output shadow"></div>
+  <div class="output shadow">{{log}}</div>
 </div>

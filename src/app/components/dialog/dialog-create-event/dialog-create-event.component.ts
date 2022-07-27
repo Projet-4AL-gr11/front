@@ -105,8 +105,8 @@ export class DialogCreateEventComponent implements OnInit {
     this.newEventForm = this._formBuilder.group({
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(30)
+        Validators.minLength(5),
+        Validators.maxLength(50)
       ]),
       description: new FormControl('', []),
       picture: new FormControl(''),
