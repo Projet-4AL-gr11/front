@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(formValue.username, formValue.password).subscribe({
         next: (response) => {
           {
-              this.cookieService.set('user', response.id),
-              this.cookieService.set('username', response.username),
+              this.cookieService.set('user', response.id, {path: "/"}),
+              this.cookieService.set('username', response.username, {path: "/"}),
               localStorage.setItem('Refresh', response.currentHashedRefreshToken),
               this.authService.updateUser()
           }

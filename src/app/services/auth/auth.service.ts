@@ -109,9 +109,11 @@ export class AuthService {
       email
     })
       .pipe(map(user => {
-        this.cookieService.set('user', user.id, {path: '/', sameSite: "None"});
-        this.cookieService.set('username', user.username, {path: '/', sameSite: "None"});
-        localStorage.setItem('Refresh', user.currentHashedRefreshToken,)
+        this.cookieService.set('user', user.id, {path: '/'});
+        this.cookieService.set('username', user.username, {path: '/'});
+        this.cookieService.set('Refresh', user.currentHashedRefreshToken, {path: '/'})
+        localStorage.setItem('Refresh',user. currentHashedRefreshToken,)
+
         this.updateUser();
         return user;
       }));

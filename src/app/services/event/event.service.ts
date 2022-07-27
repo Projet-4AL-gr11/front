@@ -72,15 +72,17 @@ export class EventService {
     }
     return this.http.post<Event>(`${environment.apiBaseUrl}/event/`, formData).subscribe({
       next: createdEvent => {
-        this.mediaService.saveEventPicture(createdEvent.id, picture).subscribe({
-          next: () => {
-          },
-          error: err => {
-            if (!environment.production) {
-              console.log(err)
+        if (picture) {
+          this.mediaService.saveEventPicture(createdEvent.id, picture).subscribe({
+            next: () => {
+            },
+            error: err => {
+              if (!environment.production) {
+                console.log(err)
+              }
             }
-          }
-        });
+          });
+        }
         return createdEvent;
       },
       error: err => {

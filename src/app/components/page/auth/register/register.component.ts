@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         }
       })
       .finally(() => {
-        this.router.navigate(['/timeline']).then();
+        this.router.navigate(['/auth/login']).then();
       });
   }
 
