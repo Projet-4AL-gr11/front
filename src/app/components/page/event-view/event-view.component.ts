@@ -109,9 +109,12 @@ export class EventViewComponent implements OnInit {
   }
 
   startExercise(exercise: Exercise) {
-    this.currentExercise = exercise;
-    this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
-    console.log(this.currentExercise)
+    setTimeout(() => {
+      this.currentExercise = exercise;
+      this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
+    }, 1000)
+    // this.currentExercise = exercise;
+    // this.eventIde.changeLanguage(this.currentExercise.exerciseTemplate.language.name);
   }
 
   nextExercise() {

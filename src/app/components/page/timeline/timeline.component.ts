@@ -33,22 +33,27 @@ export class TimelineComponent implements OnInit {
     this.posts = this.posts.filter(post => post.id !== $event.id);
   }
 
-  triggerGetMore($event) {
-    if ($event.endIndex !== this.posts.length - 1 || this.loading) return;
+  async triggerGetMore($event) {
+    if ($event.endIndex !== this.posts.length - 1 ) return;
     this.getMorePosts();
   }
 
   getMorePosts() {
     this.loading = true;
-    firstValueFrom(this._postService.getTimeline(this.limit, this.offset))
-      .then(posts => {
+    console.log(this.offset)
+    this._postService.getTimeline(this.limit, this.offset).subscribe({
+      next: posts => {
         this.posts = this.posts.concat(posts);
         this.offset += this.limit;
-        if (posts.length > 0) {
-          this.loading = false;
+        this.loading = false;
+      },
+      error: err => {
+        this.loading = false;
+        if (!environment.production) {
+          console.log(err)
         }
-      });
-
+      }
+    })
   }
 
   updatePost() {
