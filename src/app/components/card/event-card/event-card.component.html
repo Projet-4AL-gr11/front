@@ -1,38 +1,12 @@
-<mat-card class="event-card-list">
+<mat-card [routerLink]="['/event/' + event?.id]" class="event-card-list">
   <div class="img-card-event">
-    <a [routerLink]="['/event/' + event?.id]">
       <img [src]=" (event?.picture?.id | imageUrl:1360:906) | async"
            alt=""
            class="rounded" style="object-fit: cover">
-    </a>
   </div>
   <div class="titre-card-event">
     <a [routerLink]="['/event/' + event?.id]">
       <p>{{event?.name}}</p>
     </a>
-  </div>
-  <div class="group-card-event">
-    <p *ngIf="event?.group !== null">
-      <fa-icon [icon]="faUser"></fa-icon>
-      {{event?.group?.name}}
-    </p>
-    <p *ngIf="event?.group === null">
-      <fa-icon [icon]="faUser"></fa-icon>
-      {{event?.user?.username}}
-    </p>
-  </div>
-  <div class="date-card-event">
-    <p style="font-size: 13px">
-      <fa-icon [icon]="faClock"></fa-icon>
-      {{event.startDate | date:"dd/MM/YYYY HH:MM"}}
-      -- {{event.endDate | date:"dd/MM/YYYY HH:MM"}}</p>
-  </div>
-  <div class="language-card-event">
-    <div>
-      <fa-icon [icon]="faTags"></fa-icon>
-      <p *ngFor="let language of event.languages">
-        {{language.name}}
-      </p>
-    </div>
   </div>
 </mat-card>

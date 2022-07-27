@@ -30,11 +30,13 @@
 
 
       <div class="event__grid">
+
         <div *ngFor="let event of events" class=""[routerLink]="'/event/'+event.id" >
-          <mat-card class="card__event d-flex flex-column align-items-center ">
-           <h4>{{event.name}}</h4>
-            Temps restant : 00:45:00
-          </mat-card>
+          <app-event-card [event]="event"></app-event-card>
+<!--          <mat-card class="card__event d-flex flex-column align-items-center ">-->
+<!--           <h4>{{event.name}}</h4>-->
+<!--            Temps restant : 00:45:00-->
+<!--          </mat-card>-->
         </div>
       </div>
 
