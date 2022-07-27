@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   name: "2FastHand",
-  domain: "localhost",
+  domain: "https://2fasthand.azurewebsites.net",
   // apiBaseUrl: "http://localhost:3000",
   apiBaseUrl: "https://2fasthandapi.azurewebsites.net",
 };
